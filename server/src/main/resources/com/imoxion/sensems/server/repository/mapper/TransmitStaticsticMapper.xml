@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.imoxion.sensems.server.repository.mapper.TransmitStaticsticMapper">
+
+    
+    <insert id="insertTransmitLogData" parameterType="com.imoxion.sensems.server.domain.TransmitStatisticsData">
+	    <choose>
+	    	<when test="_databaseId == 'oracle'">
+	    		MERGE INTO imb_transmit_data
+					USING dual 
+					ON ( traceid=#{traceid})
+					WHEN MATCHED THEN
+						UPDATE SET logdate=#{logdate},
+									result=#{result},
+									description=#{description},
+									errcode=#{errcode}, errmsg=#{errmsg}, group_key=#{groupkey}
+									<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(rcptkey)">
+										, rcpt_key=#{rcptkey}
+									</if>
+					WHEN NOT MATCHED THEN
+						INSERT (traceid,serverid,logdate,authid,group_key,rcpt_key,subject,mailfrom,from_domain,rcptto,rcpt_domain,ip,mailsize,transmit_fl,local_fl,result,description,errcode,errmsg,etc,org_traceid,send_type)
+						VALUES(#{traceid},#{serverid},#{logdate},#{authid},#{groupkey},#{rcptkey},#{subject},#{mailfrom},#{from_domain},#{rcptto},#{rcpt_domain},#{ip},#{mailsize},#{transmit_fl},#{local_fl},#{result},#{description},#{errcode},#{errmsg},#{etc},#{org_traceid},#{send_type})
+	    	</when>
+	    	<otherwise>
+		    	insert into imb_transmit_data(traceid,serverid,logdate,authid,group_key,rcpt_key,subject,mailfrom,from_domain,rcptto,rcpt_domain,ip,mailsize,transmit_fl,local_fl,result,description,errcode,errmsg,etc,org_traceid,send_type)
+		    	values(#{traceid},#{serverid},#{logdate},#{authid},#{groupkey},#{rcptkey},#{subject},#{mailfrom},#{from_domain},#{rcptto},#{rcpt_domain},#{ip},#{mailsize},#{transmit_fl},#{local_fl},#{result},#{description},#{errcode},#{errmsg},#{etc},#{org_traceid},#{send_type})
+					 	on duplicate key update
+				             logdate=#{logdate},
+				    		 result=#{result},
+				             description=#{description},
+				             errcode=#{errcode}, errmsg=#{errmsg}, group_key=#{groupkey}
+							<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(rcptkey)">
+								, rcpt_key=#{rcptkey}
+							</if>
+			</otherwise>
+	    </choose>
+    </insert>
+
+	<delete id="deleteTransmitLogData">
+		<choose>
+			<when test="_databaseId == 'oracle'">
+				<![CDATA[
+                    DELETE FROM imb_transmit_data where logdate < (sysdate - #{saveDate})
+		        ]]>
+			</when>
+			<otherwise>
+				<![CDATA[
+                    DELETE FROM imb_transmit_data where logdate < date_add(now(),INTERVAL - #{saveDate} DAY)
+		        ]]>
+			</otherwise>
+		</choose>
+	</delete>
+
+</mapper>

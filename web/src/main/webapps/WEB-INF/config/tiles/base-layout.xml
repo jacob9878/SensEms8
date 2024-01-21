@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+	
+	<!-- 단독(에러페이지) -->
+	<definition name="error/*" template="/WEB-INF/jsp/layout/error_layout.jsp">
+		<put-attribute name="body" value="/WEB-INF/jsp/error/{1}.jsp"/>
+	</definition>
+	
+	<definition name="guest/*" template="/WEB-INF/jsp/layout/guest_layout.jsp">
+		<put-attribute name="body" value="/WEB-INF/jsp/guest/{1}.jsp"/>
+	</definition>
+	
+	<definition name="base-layout" template="/WEB-INF/jsp/layout/base_layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/jsp/common/header.jsp" />
+		<put-attribute name="static"/>
+		<put-attribute name="menu" value="/WEB-INF/jsp/common/menu.jsp" />
+		<put-attribute name="body" />
+		<put-attribute name="footer" value="/WEB-INF/jsp/common/footer.jsp" />
+	</definition>
+
+	<definition name="result-layout" template="/WEB-INF/jsp/layout/result_layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/jsp/common/header.jsp" />
+		<put-attribute name="static"/>
+		<put-attribute name="menu" value="/WEB-INF/jsp/common/menu.jsp" />
+        <put-attribute name="composer_area" value="/WEB-INF/jsp/common/composer_area.jsp"/>
+		<put-attribute name="body" />
+		<put-attribute name="footer" value="/WEB-INF/jsp/common/footer.jsp" />
+	</definition>
+	
+	<definition name="popup-layout" template="/WEB-INF/jsp/layout/popup_layout.jsp">
+		<put-attribute name="static"/>
+		<put-attribute name="body" />
+	</definition>
+
+	<definition name="/result_send/*" extends="result-layout">
+		<put-attribute name="static" value="/WEB-INF/jsp/result/result_static.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/jsp/result/{1}.jsp"/>
+	</definition>
+
+
+	<definition name="/*/*" extends="base-layout">
+		<put-attribute name="static" value="/WEB-INF/jsp/{1}/{1}_static.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/jsp/{1}/{2}.jsp"/>
+	</definition>
+	
+				
+	<definition name="/popup/*/*" extends="popup-layout">
+		<put-attribute name="static" value="/WEB-INF/jsp/{1}/{1}_static.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/jsp/{1}/{2}.jsp"/>	
+	</definition>
+
+
+	
+
+</tiles-definitions>

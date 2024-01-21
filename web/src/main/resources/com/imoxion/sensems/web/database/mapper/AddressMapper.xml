@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imoxion.sensems.web.database.mapper.AddressMapper">
+
+	<insert id="createAddrTable">
+		<choose>
+			<when test="_databaseId == 'oracle'">
+
+			</when>
+			<otherwise>
+				CREATE TABLE imb_addr_${userid} (
+				ukey BIGINT AUTO_INCREMENT COMMENT '주소록 키',
+				gkey INT NOT NULL DEFAULT 0 COMMENT '그룹 키',
+				name VARCHAR(50) NOT NULL COMMENT '이름',
+				email VARCHAR(200) COMMENT '이메일',
+				company VARCHAR(80) COMMENT '회사',
+				dept VARCHAR(80) COMMENT '부서',
+				grade VARCHAR(80) COMMENT '직책',
+				office_tel VARCHAR(50) COMMENT '회사 전화번호',
+				mobile VARCHAR(50) COMMENT '휴대폰 번호',
+				etc1 VARCHAR(200) COMMENT '기타정보1',
+				etc2 VARCHAR(200) COMMENT '기타정보2',
+				regdate DATETIME COMMENT '등록일',
+				PRIMARY KEY (ukey),
+				INDEX `idx_gkey` (`gkey`)
+				) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='사용자별 주소록'
+			</otherwise>
+		</choose>
+	</insert>
+
+	<insert id="createAddrGrpTable">
+		<choose>
+			<when test="_databaseId == 'oracle'">
+
+			</when>
+			<otherwise>
+				CREATE TABLE imb_addrgrp_${userid} (
+				gkey INT AUTO_INCREMENT COMMENT '그룹키',
+				gname VARCHAR(100) COMMENT '그룹 명',
+				memo VARCHAR(255) COMMENT '메모(설명)',
+				grpcount INT DEFAULT 0 COMMENT '그룹 카운트',
+				PRIMARY KEY (gkey)
+				)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='사용자별 주소록 그룹'
+			</otherwise>
+		</choose>
+	</insert>
+	<insert id="insertAddressGrp" parameterType="addrgrp" useGeneratedKeys="true" keyColumn="addrGrp.gkey" keyProperty="addrGrp.gkey">
+		insert into imb_addrgrp_${userid}(gname, memo) values (#{addrGrp.gname}, #{addrGrp.memo})
+	</insert>
+	<insert id="insertAddress" parameterType="addr">
+		insert into imb_addr_${userid}(gkey, name, email, company, dept, grade, office_tel, mobile, etc1, etc2,regdate)
+		values (#{addr.gkey}, #{addr.name}, #{addr.email}, #{addr.company}, #{addr.dept}, #{addr.grade}, #{addr.office_tel}, #{addr.mobile},
+		#{addr.etc1}, #{addr.etc2}, #{addr.regdate})
+	</insert>
+
+	<update id="updateAddress">
+		update imb_addr_${userid}
+		<set>
+			<if test="addr.gkey != null">
+				gkey = #{addr.gkey},
+			</if>
+			<if test="addr.name != null">
+				name = #{addr.name},
+			</if>
+			<if test="addr.email != null">
+				email = #{addr.email},
+			</if>
+			<if test="addr.company != null">
+				company = #{addr.company},
+			</if>
+			<if test="addr.dept != null">
+				dept = #{addr.dept},
+			</if>
+			<if test="addr.grade != null">
+				grade = #{addr.grade},
+			</if>
+			<if test="addr.office_tel != null">
+				office_tel = #{addr.office_tel},
+			</if>
+			<if test="addr.mobile != null">
+				mobile = #{addr.mobile},
+			</if>
+			<if test="addr.etc1 != null">
+				etc1 = #{addr.etc1},
+			</if>
+			<if test="addr.etc2 != null">
+				etc2 = #{addr.etc2},
+			</if>
+			<if test="addr.regdate != null">
+				regdate = #{addr.regdate},
+			</if>
+		</set>
+		where ukey= #{addr.ukey}
+	</update>
+	<update id="updateAddressGrp" >
+		update imb_addrgrp_${userid}
+		<set>
+			<if test="addrgrp.gname != null">
+				gname = #{addrgrp.gname},
+			</if>
+			<if test="addrgrp.memo != null">
+				memo = #{addrgrp.memo},
+			</if>
+		</set>
+		where gkey=#{addrgrp.gkey}
+	</update>
+
+	<delete id="dropAddrTable">
+		DROP TABLE imb_addr_${userid}
+	</delete>
+	<delete id="dropAddrGrpTable">
+		DROP TABLE imb_addrgrp_${userid}
+	</delete>
+    <delete id="deleteCategory">
+        delete from imb_category where userid = #{userid}
+    </delete>
+    <delete id="deleteReceiver">
+        delete from imb_receiver where userid = #{userid}
+    </delete>
+    <delete id="deleteTestAccount">
+        delete from imb_test_account where userid = #{userid}
+    </delete>
+    <delete id="deleteDbinfo">
+        delete from imb_dbinfo where userid = #{userid}
+    </delete>
+    <delete id="deleteTemplate">
+        delete from imb_template where userid = #{userid} and flag ='02';
+    </delete>
+	<delete id="deleteAddrByGkey">
+		delete from imb_addr_${userid} where gkey=#{gkey}
+	</delete>
+	<delete id="deleteaddrByUkey">
+		delete from imb_addr_${userid} where ukey=#{ukey}
+	</delete>
+	<delete id="deleteAddrGrpByGkey">
+		delete from imb_addrgrp_${userid} where gkey=#{gkey}
+	</delete>
+
+
+	<select id="getAddressCountForSearch" resultType="int">
+		select count(*) from imb_addr_${userid}
+		<choose>
+			<when test="_databaseId == 'oracle'">
+				<where>
+					<if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+						<if test="srch_type == 'name'">
+							${srch_type} like '%'||#{srch_keyword}||'%'
+						</if>
+						<if test="srch_type == 'email'">
+							${srch_type} = #{srch_keyword}
+						</if>
+					</if>
+					<if test="gkey > -1">
+						and gkey = #{gkey}
+					</if>
+				</where>
+			</when>
+			<otherwise>
+				<where>
+					<if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+						<if test="srch_type == 'name'">
+							${srch_type} like concat('%',#{srch_keyword},'%')
+						</if>
+						<if test="srch_type == 'email'">
+							${srch_type} = #{srch_keyword}
+						</if>
+					</if>
+					<if test="gkey > -1">
+						and gkey = #{gkey}
+					</if>
+				</where>
+			</otherwise>
+		</choose>
+	</select>
+
+	<select id="getAddressListForPageing" resultType="addr">
+		<choose>
+			<when test="_databaseId == 'oracle'">
+				SELECT * FROM (
+				SELECT ROWNUM AS RNUM,a.* FROM(
+				select * from imb_addr_${userid}
+				<where>
+					<if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+						<if test="srch_type == 'name'">
+							${srch_type} like '%'||#{srch_keyword}||'%'
+						</if>
+						<if test="srch_type == 'email'">
+							${srch_type} = #{srch_keyword}
+						</if>
+					</if>
+					<if test="gkey > -1">
+						and gkey = #{gkey}
+					</if>
+				</where>
+				order by name asc
+				) a
+				) WHERE RNUM between #{start} and #{end}
+			</when>
+			<otherwise>
+				select * from imb_addr_${userid}
+				<where>
+					<if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+						<if test="srch_type == 'name'">
+							${srch_type} like concat('%',#{srch_keyword},'%')
+						</if>
+						<if test="srch_type == 'email'">
+							${srch_type} = #{srch_keyword}
+						</if>
+					</if>
+					<if test="gkey > -1">
+						and gkey = #{gkey}
+					</if>
+				</where>
+				order by name asc
+				limit #{start},#{end}
+			</otherwise>
+		</choose>
+	</select>
+
+	<select id="getAddressGroupList" resultType="addrgrp">
+		select * from imb_addrgrp_${userid} order by gname asc
+	</select>
+	<select id="getAddressGroupListForPaging" resultType="addrgrp">
+		<choose>
+			<when test="_databaseId == 'oracle'">
+				SELECT * FROM (
+				SELECT ROWNUM AS RNUM,a.* FROM(
+				select * from imb_addrgrp_${userid}
+				order by gkey desc
+				) a
+				) WHERE RNUM between #{start} and #{end}
+			</when>
+			<otherwise>
+				select * from imb_addrgrp_${userid}
+				order by gkey desc
+				limit #{start},#{end}
+			</otherwise>
+		</choose>
+	</select>
+	<select id="getAddressGroupListCount" resultType="int">
+		select count(*) from imb_addrgrp_${userid}
+	</select>
+	<select id="getAddressCountByGkey" resultType="int">
+		select count(*) from imb_addr_${userid}
+		<if test="gkey > -1">
+		where gkey = #{gkey}
+		</if>
+	</select>
+
+	<select id="getGname" resultType="String">
+		select gname from imb_addrgrp_${userid}
+			where gkey = #{gkey}
+	</select>
+
+	<select id="getAllAddressList" resultType="addr">
+		select * from imb_addr_${userid} order by name asc
+	</select>
+	<select id="getAddressListByGkey" resultType="addr">
+		select * from imb_addr_${userid} where gkey=#{gkey} order by ukey asc
+	</select>
+	<select id="getAddressListByGkey2" resultType="addr">
+		<choose>
+			<when test="_databaseId == 'oracle'">
+				SELECT * FROM (
+				SELECT ROWNUM AS RNUM,a.* FROM(
+				SELECT * FROM imb_addr_${userid} where gkey=#{gkey}
+				order by id desc
+				) a
+				) WHERE RNUM between #{start} and #{end}
+			</when>
+			<otherwise>
+				SELECT * FROM imb_addr_${userid} where gkey=#{gkey}
+				order by ukey asc
+				limit #{start},#{end}
+			</otherwise>
+		</choose>
+	</select>
+	<select id="getAddressGrpByGkey" resultType="addrgrp">
+		select * from imb_addrgrp_${userid} where gkey=#{gkey}
+	</select>
+	<select id="getAddressGrpByGname" resultType="addrgrp">
+		select * from imb_addrgrp_${userid} where gname=#{gname}
+	</select>
+	<select id="getAddressListByKeyword" resultType="addr">
+		select * from imb_addr_${userid}
+		<where>
+			<choose>
+			<when test="_databaseId == 'oracle'">
+				<if test="@org.apache.commons.lang.StringUtils@isNotEmpty( keyword )">
+					<if test="type == 'name'">
+						${type} like '%'||#{keyword}||'%'
+					</if>
+					<if test="type == 'email'">
+						${type} = #{keyword}
+					</if>
+				</if>
+			</when>
+			<otherwise>
+				<if test="@org.apache.commons.lang.StringUtils@isNotEmpty( keyword )">
+					<if test="type == 'name'">
+						${type} like concat('%',#{keyword},'%')
+					</if>
+					<if test="type == 'email'">
+						${type} = #{keyword}
+					</if>
+				</if>
+			</otherwise>
+			</choose>
+		</where>
+		order by name asc
+	</select>
+	<select id="getAddressByUkey" resultType="addr">
+		select * from imb_addr_${userid} where ukey=#{ukey}
+	</select>
+	<select id="isExistGname" resultType="int">
+		select count(*) from imb_addrgrp_${userid} where gname=#{gname}
+	</select>
+	<select id="getGkeyByuserid" resultType="com.imoxion.sensems.web.database.domain.ImbAddrGrp">
+		select gkey from imb_addrgrp_${userid}
+	</select>
+    <select id="getGkeyListByEmail" resultType="int">
+        select gkey from imb_addr_${userid} where email=#{email}
+    </select>
+
+	<select id="getGkeyListByGkey" resultType="int">
+		select gkey from imb_addr_${userid} where email=#{email} and gkey = #{gkey}
+	</select>
+
+	<select id="getGkeyListByGkeyForEdit" resultType="int">
+		select gkey from imb_addr_${userid} where email=#{email} and gkey = #{gkey} and ukey != #{ukey}
+	</select>
+	<select id="getEmailByGkey" resultType="String">
+		select email from imb_addr_${userid} where gkey=#{gkey}
+	</select>
+	<select id="getAddressCountByEmailAndGkey" resultType="int">
+		select count(*) from imb_addr_${userid} where email=#{email} and gkey=#{gkey}
+	</select>
+
+	<insert id="insertAddrSel">
+		insert into imb_addrsel(msgid,userid,gkey,gname) values(#{addrSelBean.msgid},#{addrSelBean.userid},#{addrSelBean.gkey},#{addrSelBean.gname})
+	</insert>
+
+    <insert id="createTagInsertTrigger" statementType="STATEMENT">
+        <choose>
+                <when test="_databaseId == 'oracle'">
+                <![CDATA[
+        CREATE OR REPLACE TRIGGER TRG_GRP_INSERT_${userid} AFTER INSERT ON imb_addr_${userid}
+            FOR EACH ROW
+        BEGIN
+            UPDATE imb_addrgrp_${userid} SET memo_cnt = memo_cnt - 1 WHERE gkey = :NEW.gkey;
+        END;
+                    ]]>
+                </when>
+            <otherwise>
+        CREATE TRIGGER TRG_GRP_INSERT_${userid} AFTER INSERT ON imb_addr_${userid}
+            FOR EACH ROW
+        BEGIN
+        update imb_addrgrp_${userid} set grpcount = grpcount + 1 where gkey = NEW.gkey;
+        END
+            </otherwise>
+        </choose>
+    </insert>
+
+    <insert id="createTagDeleteTrigger" statementType="STATEMENT">
+        <choose>
+        <when test="_databaseId == 'oracle'">
+            <![CDATA[
+        CREATE TRIGGER TRG_GRP_DELETE_${userid} AFTER DELETE ON imb_addr_${userid}
+            FOR EACH ROW
+        BEGIN
+            update imb_addrgrp_${userid} set grpcount = grpcount - 1 where gkey = :OLD.gkey;
+        END
+                    ]]>
+        </when>
+        <otherwise>
+        CREATE TRIGGER TRG_GRP_DELETE_${userid} AFTER DELETE ON imb_addr_${userid}
+            FOR EACH ROW
+        BEGIN
+            update imb_addrgrp_${userid} set grpcount = grpcount - 1 where gkey = OLD.gkey;
+        END
+        </otherwise>
+        </choose>
+    </insert>
+
+    <insert id="createTagUpdateTrigger" statementType="STATEMENT">
+        <choose>
+        <when test="_databaseId == 'oracle'">
+            <![CDATA[
+        CREATE TRIGGER TRG_GRP_UPDATE_${userid} AFTER UPDATE ON imb_addr_${userid}
+            FOR EACH ROW
+        BEGIN
+            IF :OLD.gkey != :NEW.gkey THEN
+            update imb_addrgrp_${userid} set grpcount = grpcount - 1 where gkey = :OLD.gkey;
+            update imb_addrgrp_${userid} set grpcount = grpcount - 1 where gkey = :NEW.gkey;
+            END IF;
+        END
+                    ]]>
+        </when>
+        <otherwise>
+       CREATE TRIGGER TRG_GRP_UPDATE_${userid} AFTER UPDATE ON imb_addr_${userid}
+        FOR EACH ROW
+       BEGIN
+        IF OLD.gkey != NEW.gkey THEN
+            update imb_addrgrp_${userid} set grpcount = grpcount - 1 where gkey = OLD.gkey;
+            update imb_addrgrp_${userid} set grpcount = grpcount + 1 where gkey = NEW.gkey;
+        END IF;
+       END
+        </otherwise>
+        </choose>
+    </insert>
+
+    <update id="updateAddressCount">
+        update imb_addrgrp_${userid}
+        <set>
+            <if test="grpcount != null">
+            grpcount = #{grpcount},
+            </if>
+        </set>
+        where gkey = #{gkey}
+    </update>
+
+    <select id ="getAddressCountAll" resultType="com.imoxion.sensems.web.database.domain.ImbAddrGrp">
+        select count(*) as grpcount, gkey from imb_addr_${userid} where gkey NOT IN('0', '-1') group by gkey
+    </select>
+</mapper>

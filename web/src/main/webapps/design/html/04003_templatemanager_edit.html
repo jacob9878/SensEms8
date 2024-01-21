@@ -1,0 +1,200 @@
+﻿<!DOCTYPE HTML>
+<html lang="ko-KR">
+<head>
+	<meta charset="UTF-8">
+	<title>SensEMS</title>
+	<link rel="stylesheet" href="../../sens-static/css/style.css" />
+	<link rel="stylesheet" href="../../sens-static/css/skin.css" />
+	
+</head>
+<body class="skin1">
+	<div class="wrap">
+		<!-- left area start -->
+		<div class="left_menu ">
+			<div class="left_logo ">
+				<a href=""><img src="../../sens-static/images/left_logo.png" alt="로고" /></a>
+			</div>
+			
+			<div class="profile ">
+				<div class="info">
+					<div class="info_box  ">
+						<a href="" class="user_name" >김효민</a> 
+						<a href="" class="user_membership">내정보</a>
+						<a href="" class="user_email over_text">khm@imoxion.com</a>
+					</div>
+					<a href="" class="btn_logout pd_r20"><img src="../../sens-static/images/logout.png" alt="" /></a>				
+				</div>
+				<p></p>
+				<div class="info_box2">
+					<div class="help"><a href="" ><span class="icon_public"></span>HELP</a></div>
+					<p></p>
+					<div class="language" >
+						<span class="icon_public"></span>
+						<select id="languageList"  onchange="change_language()">
+							<option value="ko">KOR</option>
+							<option value="en">ENG</option>
+							<option value="ja">JPN</option>
+						<!-- 	<option value="zh">CHN</option> -->
+						</select>			
+					</div>					
+				</div>				
+			</div>
+		
+			<div class="nav">
+				<ul>
+					<li class="menu_1depth">						
+						<a href="01001_composer.html"><span class="icon_public depth1_01"></span>메일쓰기</a>
+					</li>
+					<li class="menu_1depth">
+						<a href="02001_statistics.html"><span class="icon_public depth1_02"></span>메일발송 결과</a>
+					</li>
+					<li class="menu_1depth">
+						<a href=""><span class="icon_public depth1_03"></span>발송일정관리</a>
+					</li>
+					<li class="menu_1depth">
+						<a href="" class="folder_off"><span class="icon_public depth1_04"></span>수신그룹 관리</a>
+						<ul >
+							<li class="menu_2depth"><a href="">수신그룹 관리</a></li>
+							<li class="menu_2depth"><a href="">개인 주소록</a></li>
+						</ul>
+					</li>
+					<li class="menu_1depth">
+						<a href="" class="folder_off"><span class="icon_public depth1_05"></span>발송 관리</a>
+						<ul style="">
+							<li class="menu_2depth"><a href="">발송분류 관리</a></li>
+							<li class="menu_2depth"><a href="">이미지 관리</a></li>
+							<li class="menu_2depth"><a href="">템플릿 관리</a></li>
+							<li class="menu_2depth"><a href="">테스트 계정관리</a></li>
+							<li class="menu_2depth"><a href="">수신거부 관리</a></li>
+						</ul>
+					</li>
+					<li class="menu_1depth">
+						<a href="" class="folder_off"><span class="icon_public depth1_06"></span>시스템 관리자</a>
+						<ul style="">
+							<li class="menu_2depth"><a href="">사용자 관리</a></li>
+							<li class="menu_2depth"><a href="">정기예약발송 설정</a></li>
+							<li class="menu_2depth"><a href="">발송차단 설정</a></li>
+							<li class="menu_2depth"><a href="">데이터베이스 관리</a></li>
+							<li class="menu_2depth"><a href="">첨부파일 확장자 관리</a></li>
+							<li class="menu_2depth"><a href="">사용자 활동로그 조회</a></li>
+						</ul>
+					
+					</li>
+				</ul>
+			</div>
+			
+		</div>	
+		<!-- left area end -->
+
+<div class="template_edit">
+	<!-- top area start -->
+	<div class="title_box fixed ">
+		<div class="article top_area">
+			<div class="title">
+				<h1>템플릿 관리</h1>
+				<p>템플릿 수정</p>
+			</div>
+
+		</div>
+	</div>
+	<!-- top area end -->
+
+	<!-- content top start -->
+	<div class="content_top fixed">
+		<ul class="content_top_btn">
+			<li><a class="btn1" href="#" onclick="templateAdd.add()">저장</a></li>
+			<li><a class="btn2" href="#" onclick="templateAdd.templateList()">취소</a></li>
+		</ul>
+	</div>
+	<!-- content top end -->
+
+	<div class="section pd_l30">
+		<!-- content start -->
+
+		<div class="article content">
+
+			<!-- composer area start -->
+			<div class="composer_area">
+				<table width="100%" border="0" cellpadding="0" cellspacing="1" >
+					<colgroup>
+						<col style="width: 150px">
+						<col style="width: auto">
+					</colgroup>
+					<form id="TemplateForm" name="TemplateForm" action="edit.do?_csrf=8539b84a-9ca0-42ab-a420-041eaa068ccc" method="post" enctype="multipart/form-data">
+					<input id="ukey" name="ukey" type="hidden" value="60375b1b3fea9871be60002e"/>				
+					<tbody>
+					<tr>
+						<th style=""  >분류</th>
+						<td width="auto" >
+							<select id="flag" name="flag">
+								<option value="02" selected="selected">개인템플릿</option>
+								<option value="01">공용템플릿</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<th  >제목</th>
+						<td>
+							<input id="temp_name" name="temp_name" class="input" type="text" value="이미지 포함 템플릿" maxlength="50"/>
+						</td>
+					</tr>
+					<!-- 에디터 start-->
+					<tr class="composer_edit">
+						<td colspan="2">
+							<div id="div_Html" style="position:relative;margin:0;padding:10px 10px 0px 10px;height:100%;">
+								<textarea id="editHtml" name="editHtml" wrap="hard" style="width:100%;height:100%;margin:0;box-sizing:border-box; -moz-box-sizing:border-box; -webkit-box-sizing:border-box;"></textarea>
+							</div>
+							<div id="div_Text" style="display:none">
+								<textarea id="editText" name="editText" wrap="hard" style="width:100%;height:400px;margin:0;" ></textarea>
+								<label for="editText" class="blind">editText</label>
+							</div>
+						</td>
+					</tr>
+					<!-- 에디터 end-->
+                        <textarea id="contents" name="contents" style="display:none;" title="contents">
+&lt;div class=&quot;sensEdContentAreaCls&quot; style=&quot;margin: 0px; padding: 0px; color: rgb(0, 0, 0); line-height: 150%; font-family: 돋음 !important; font-size: 10pt;&quot; data-id=&quot;sensEdContentArea&quot;&gt;ㅁㄴㅇㄹㄴㅁㅇㄹㅁㄴㅇㄹㄴㅁㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹ&lt;/div&gt;
+
+</textarea>
+					<tr>
+						<th  >이미지</th>
+						<td>
+							<input type="file" id="file_upload" name="file_upload"  onchange="templateEdit.changeFile()" />
+							<button type="button" class="btn3" onclick="templateList.previewImage('60375b1b3fea9871be60002e')">기존 이미지 보기</button>
+						<!--	<span>
+								<input id="isDeleteImage1" name="isDeleteImage" type="checkbox" value="1"/>
+								<input type="hidden" name="_isDeleteImage" value="on"/>파일 삭제</span>
+							<span >-->
+										<strong class="care_txt txt red">※이미지파일은 JPG 또는 GIF 확장자만 등록가능합니다.</strong>
+									</span>
+						</td>
+					</tr>	
+					<div>
+<input type="hidden" name="_csrf" value="8539b84a-9ca0-42ab-a420-041eaa068ccc" />
+</div></form>
+					</tbody>
+				</table>
+
+			</div>
+			<!-- composer area end -->
+		</div>
+		<!-- content end -->
+
+	</div>
+	<!-- section end -->
+</div>
+
+         
+       
+ 	</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

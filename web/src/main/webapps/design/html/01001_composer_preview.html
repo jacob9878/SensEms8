@@ -1,0 +1,437 @@
+﻿<!DOCTYPE HTML>
+<html lang="ko-KR">
+<head>
+	<meta charset="UTF-8">
+	<title>SensEMS</title>
+	<link rel="stylesheet" href="../../sens-static/css/style.css" />
+	<link rel="stylesheet" href="../../sens-static/css/skin.css" />
+	
+</head>
+<body class="skin1">
+	<div class="wrap">
+		<!-- left area start -->
+		<div class="left_menu ">
+			<div class="left_logo ">
+				<a href=""><img src="../../sens-static/images/left_logo.png" alt="로고"></a>
+			</div>
+
+			<div class="profile ">
+				<div class="info">
+					<div class="info_box  ">
+						<a href="" class="user_name">김효민</a>
+						<a href="" class="user_membership">내정보</a>
+					</div>
+				</div>
+				<div class="info_box2">
+					<div class="help"><a href="">HELP</a></div>
+					<p></p>
+					<div class="logout"><a href="">LOGOUT</a></div>
+				</div>
+			</div>
+
+			<div class="nav">
+				<ul>
+					<li class="menu_1depth">
+						<a href="01001_composer.html"><span class="icon_public depth1_01"></span>메일쓰기</a>
+					</li>
+					<li class="menu_1depth">
+						<a href="02001_statistics.html"><span class="icon_public depth1_02"></span>메일발송 결과</a>
+					</li>
+					<li class="menu_1depth">
+						<a href="03001_schedule.html"><span class="icon_public depth1_03"></span>발송일정관리</a>
+					</li>
+					<li class="menu_1depth">
+						<a href="" class="folder_off"><span class="icon_public depth1_04"></span>수신그룹 관리</a>
+						<ul>
+							<li class="menu_2depth"><a href="">수신그룹 관리</a></li>
+							<li class="menu_2depth"><a href="address">개인 주소록</a></li>
+						</ul>
+					</li>
+					<li class="menu_1depth on">
+						<a href="" class="folder_off"><span class="icon_public depth1_05"></span>발송 관리</a>
+						<ul style="">
+							<li class="menu_2depth"><a href="">발송분류 관리</a></li>
+							<li class="menu_2depth"><a href="">이미지 관리</a></li>
+							<li class="menu_2depth"><a href="">템플릿 관리</a></li>
+							<li class="menu_2depth"><a href="">테스트 계정관리</a></li>
+							<li class="menu_2depth"><a href="">수신거부 관리</a></li>
+						</ul>
+					</li>
+					<li class="menu_1depth">
+						<a href="" class="folder_off"><span class="icon_public depth1_06"></span>시스템 관리자</a>
+						<ul style="">
+							<li class="menu_2depth"><a href="">사용자 관리</a></li>
+							<li class="menu_2depth"><a href="">정기예약발송 설정</a></li>
+							<li class="menu_2depth"><a href="">발송차단 설정</a></li>
+							<li class="menu_2depth"><a href="">데이터베이스 관리</a></li>
+							<li class="menu_2depth"><a href="06005_attach.html">첨부파일 확장자 관리</a></li>
+							<li class="menu_2depth"><a href="">사용자 활동로그 조회</a></li>
+						</ul>
+
+					</li>
+				</ul>
+			</div>
+
+		</div>	
+		<!-- left area end -->
+
+		<div class="composer">
+			<!-- section start -->
+				<!-- top area start -->
+				<div class="title_box fixed">
+					<div class="article top_area">
+						<div class="title">
+							<h1>메일쓰기</h1>
+							<p>보내실 메일을 작성해주세요.</p>
+						</div>			
+					</div>
+				</div>
+				<!-- top area end -->	
+
+				<!-- content top start -->	
+				<div class="content_top fixed">
+					<ul class="content_top_btn">
+						<li><a class="btn1" href="">발송</a></li>
+						<li><a class="btn2" href="">미리보기</a></li>
+						<li><a class="btn2" href="">임시보관</a></li>
+						<li><a class="btn2" href="">테스트발송</a></li>
+						<li><a class="btn2" href="">템플릿으로 저장</a></li>
+						<li><a class="btn2" href="">발송 및 사본저장</a></li>						
+					</ul>	
+				</div>
+			<!-- content top end -->
+				
+			
+			<div class="section pd_l30">
+				<!-- content start -->				
+				<div class="article content">		
+					<!-- composer area start -->				
+					<div class="composer_area">
+						<table width="100%" border="0" cellpadding="0" cellspacing="1" class="table">
+							<colgroup>
+								<col style="width: 150px">
+								<col style="width: auto">
+							</colgroup>
+							<tbody>
+							<tr>
+								<th>발송분류</th>
+								<td width="auto" >
+									<select >
+										<option value="분류없음" selected="">분류없음</option>
+										<option value="option1">option1</option>
+										<option value="option2">option2</option>
+										<option value="option3">option3</option>
+										<option value="option4">option4</option>							
+									</select> 								
+								</td>
+							</tr>
+							
+							<tr class="table_sender">
+								<th>보내는 사람</th>							
+								<td>	
+								
+								<input type="text" size="30" maxlength="100" class="w400" value="아이모션<webmaster@imoxion.com>">
+									<span class="care_txt">
+										<strong class="txt red">(주의)</strong>
+										<strong>홍길동&lt;master@mydomain.com&gt;</strong>과 같은 형식으로 입력해주세요.
+									</span>
+								</td>
+							</tr>
+							
+							<tr>
+								<th >회신 주소</th>	
+								<td  ><input type="text"  size="30" maxlength="100" class="w400" value="webmaster@imoxion.com"></td>
+							</tr>
+							
+							<tr class="table_recipient">
+								<th >수신그룹</th>
+								<td>
+									<label onclick="receiverEvent.getAddrGroupList();"><input id="rectype1" name="rectype" type="radio" value="1">주소록</label>
+									<label onclick="receiverEvent.getReceiverList('0');"><input id="rectype2" name="rectype" type="radio" value="3">수신그룹</label>
+									<input id="recname" name="recname" readonly="readonly" type="text" value="">
+									<button type="button" class="btn3" onclick="writeform.insertFieldTest();">필드삽입테스트</button>
+									<button type="button" class="btn3" onclick="writeform.insertFieldTest2();">필드삽입테스트2</button>
+								</td>
+							</tr>
+							
+							<tr class="table_subject">
+								<th>제목</th>
+								<td>
+									<input type="text"  size="50" maxlength="100" value="" class="w400">
+								<select class="w200">
+									<option selected="">필드삽입</option>
+								</select> 
+								<button class="btn3">삽입</button>
+								</td>
+							</tr>
+							
+							
+							<tr>
+								<th >Charset</th>	
+								<td>
+									<select>
+										<!-- 한국어 -->
+										<option value="euc-kr">Korean (EUC)</option>	     
+										<option value="ks_c_5601-1987">Korean (KS_C_5601-1987)</option>	
+										<option value="utf-8">Unicode(UTF-8)</option>	
+									</select>								
+									&nbsp;
+									Mail Type : 
+									<label ><input type="radio" name="ishtml" value="TEXT">TEXT</label>
+									<label ><input type="radio" name="ishtml" value="HTML" checked="" >HTML</label>
+								</td>
+							</tr>
+							<tr class="b_none bg_gray">
+								<td colspan="2">
+									<select class="w200">
+										<option selected="">필드삽입</option>
+									</select>			
+									<button class="btn2 f_none">수신거부코드삽입</button>
+								</td>
+							</tr>
+						<!-- 에디터 start-->
+							<tr class="composer_edit">
+								<td colspan="2">
+									<div id="send_image" class="write_image" >
+										<input type="hidden" name="image_cpage" id="image_cpage" value="1">
+										<div id="image_inner_div" class="image_inner_div">
+											<p class="image_inner_btn">
+												<button type="button" class="" onclick="EditorImagePlugin.imageRemove();">사용안함</button>
+												<button type="button" class="" onclick="EditorImagePlugin.close();">닫기</button>
+											</p>
+											<select name="selectImage" id="selectImage" class="write_image_select" onchange="EditorImagePlugin.change_categoryImage();" title="이미지 선택">
+												<option value="0">전체</option>
+												<option value="01">공용</option>
+												<option value="02">개인</option>
+											</select>
+												<div class="write_image_item" id="imageList">
+													<ul>
+														<li><span  onclick="EditorImagePlugin.apply('/send/image/view.do?ukey=604582303fe39148cf099379','340','82');"><img src="../../sens-static/images/noimg.png"  title="개인이미지테스트"></span>
+															<div class="image_name">템플릿이름 자리입니다.</div></li>
+														<li><span  onclick="EditorImagePlugin.apply('/send/image/view.do?ukey=603f5de03fbd326a6ae331e0','818','663');"><img src="../../sens-static/images/noimg.png"  title="test"></span>
+															<div class="image_name">템플릿이름 자리입니다.</div></li>
+														<li><span  onclick="EditorImagePlugin.apply('/send/image/view.do?ukey=60338b123fc397c4bec6811c','1258','813');"><img src="../../sens-static/images/noimg.png"  title="포인트컬러"></span>
+															<div class="image_name">템플릿이름 자리입니다.</div></li>
+														<li><span  onclick="EditorImagePlugin.apply('/send/image/view.do?ukey=603383de3febc74ef418b806','172','57');"><img src="../../sens-static/images/noimg.png"  title="zxcv"></span>
+															<div class="image_name">템플릿이름 자리입니다.</div></li>
+														<li><span  onclick="EditorImagePlugin.apply('/send/image/view.do?ukey=333','0','0');"><img src="../../sens-static/images/noimg.png"  title="iii"></span>
+															<div class="image_name">템플릿이름 자리입니다.</div></li>
+														<li><span  onclick="EditorImagePlugin.apply('/send/image/view.do?ukey=222','0','0');"><img src="../../sens-static/images/noimg.png"  title="테스트"></span>
+															<div class="image_name">템플릿이름 자리입니다.</div></li>
+													</ul>
+												</div>
+											<!-- 페이징영역 -->
+											<div class="list_nav_simple" id="imageInfo_image">
+												<a href="javascript:;" onclick="EditorImagePlugin.list('1')" class="arrow_prev_off">이전</a>
+												<a href="javascript:;" class="arrow_next_off">다음</a>
+											</div>
+										</div>
+									</div>									
+											
+									<div class="write_paper" id="send_template" style="display:none;">
+										<input name="paper_cpage" id="template_cpage" type="hidden" value="1">
+										<div class="template_inner_div" id="template_inner_div">
+											<p class="image_inner_btn">
+												<button onclick="EditorTemplatePlugin.close();" type="button">닫기</button>
+											</p>
+											<select name="selectTemplate" title="템플릿 선택" class="write_template_select" id="selectTemplate" onchange="EditorTemplatePlugin.category();">
+												<option value="0">전체</option>
+												<option value="01">공용</option>
+												<option value="02">개인</option>
+											</select>
+											<div class="write_paper_item" id="templateList"><ul><li><span  onclick="EditorTemplatePlugin.setContent('60418aaa3fe9ab04d31c4c54');"><img title="123"  src="/send/template/view.do?ukey=60418aaa3fe9ab04d31c4c54"></span></li><li><span  onclick="EditorTemplatePlugin.setContent('6040a4263fe1f56ab74bb264');"><img title="test"  src="/send/template/view.do?ukey=6040a4263fe1f56ab74bb264"></span></li><li><span  onclick="EditorTemplatePlugin.setContent('6040a1323fd8fc3332544000');"><img title="ㅅㄷㄴㅅ"  src="/send/template/view.do?ukey=6040a1323fd8fc3332544000"></span></li><li><span  onclick="EditorTemplatePlugin.setContent('604092e13fa8f5870e55d6d0');"><img title="11"  src="/send/template/view.do?ukey=604092e13fa8f5870e55d6d0"></span></li><li><span  onclick="EditorTemplatePlugin.setContent('604092db3fcbdf15723051b0');"><img title="11"  src="/send/template/view.do?ukey=604092db3fcbdf15723051b0"></span></li><li><span  onclick="EditorTemplatePlugin.setContent('604087873fe118d710fdd15c');"><img title="ㅅㅎㅎ"  src="/send/template/view.do?ukey=604087873fe118d710fdd15c"></span></li></ul></div>
+											<div class="list_nav_simple" id="pageInfo_template"><a class="arrow_prev_off" onclick="EditorTemplatePlugin.list('1')" href="javascript:;">이전</a>&nbsp;<img width="5" height="11" src="/sens-static/images/common/tit_bar.gif">&nbsp;<a class="arrow_next_on" onclick="EditorTemplatePlugin.list('2')" href="javascript:;">다음</a></div>
+										</div>
+									</div>						
+									
+								</td>
+							</tr>
+						<!-- 에디터 end-->	
+							<tr >
+								<th >반응분석 종료일</th>
+								<td>
+									<input id="resp_day" name="resp_day" class="hide_x_button hasDatepicker w100"  title="반응분석종료일" type="text" value="">
+									<select id="resp_hour" name="resp_hour" class="w100" title="시"><option value="00">00시</option><option value="01">01시</option><option value="02">02시</option><option value="03">03시</option><option value="04">04시</option><option value="05">05시</option><option value="06">06시</option><option value="07">07시</option><option value="08">08시</option><option value="09">09시</option><option value="10">10시</option><option value="11">11시</option><option value="12">12시</option><option value="13">13시</option><option value="14">14시</option><option value="15">15시</option><option value="16">16시</option><option value="17">17시</option><option value="18">18시</option><option value="19">19시</option><option value="20">20시</option><option value="21">21시</option><option value="22">22시</option><option value="23">23시</option></select>
+								</td>
+							</tr>
+							
+							<tr>
+								<th >발송 시간</th>
+								<td>
+									<label><input id="is_reserve1" name="is_reserve" onclick="writeform.change_sendmode(this.value)" type="radio" value="0" checked="checked">즉시발송</label>
+									<label><input id="is_reserve2" name="is_reserve" onclick="writeform.change_sendmode(this.value)" type="radio" value="1">예약발송</label>
+
+									<div id="reserv_time_area" style="display: inline-block;">
+										<input id="reserv_day" name="reserv_day" class="hide_x_button hasDatepicker w100" title="예약시간" type="text" value="">
+										<select id="reserv_hour" name="reserv_hour" class="w100" title="시"><option value="00">00시</option><option value="01">01시</option><option value="02">02시</option><option value="03">03시</option><option value="04">04시</option><option value="05">05시</option><option value="06">06시</option><option value="07">07시</option><option value="08">08시</option><option value="09">09시</option><option value="10">10시</option><option value="11">11시</option><option value="12">12시</option><option value="13">13시</option><option value="14">14시</option><option value="15">15시</option><option value="16">16시</option><option value="17">17시</option><option value="18">18시</option><option value="19">19시</option><option value="20">20시</option><option value="21">21시</option><option value="22">22시</option><option value="23">23시</option></select>
+										<select id="reserv_min" name="reserv_min" class="w100" title="분"><option value="00">00분</option><option value="05">05분</option><option value="10">10분</option><option value="15">15분</option><option value="20">20분</option><option value="25">25분</option><option value="30">30분</option><option value="35">35분</option><option value="40">40분</option><option value="45">45분</option><option value="50">50분</option><option value="55">55분</option></select>
+									</div>
+								</td>
+							</tr>										
+							
+							<tr>
+								<th >링크 추적</th>	
+								<td >
+									<label><input type="radio" name="islink" value="추적함" checked="">추적함</label>	
+									<label><input type="radio" name="islink" value="추적안함">추적안함</label>
+								</td>
+							</tr>
+							
+							<tr>
+								<th >이메일 중복 허용여부</th>	
+								<td  >
+									<label><input type="radio" name="is_same_email" value="중복허용" >중복허용</label>
+									<label><input type="radio" name="is_same_email" value="중복허용 안함" checked="">중복허용 안함</label>
+								</td>
+							</tr>
+							<tr>
+								<th><span>파일첨부</span></th>
+								<td>
+								<div class="uploadArea">
+								<ul class="btn_add_file">
+									<li class="f_lft">
+										<label for="file_upload" id="file_upload_">파일첨부</label><input type="file" multiple="multiple" name="attachment" id="file_upload" onchange="readFile();">
+										<input type="button" class="file_delete" value="삭제" onclick="chkDelFile();">
+									</li>
+									<li class="f_rt"><span>[파일 : <span id="curr_uploadfile_cnt">0</span> / <span id="max_uploadfile_cnt">5</span> ] [일반 : <span id="attach_size">0 KB</span> / <span id="max_attachfile_size">10 MB</span> ] </span></li>
+								</ul>
+									<div id="filelist" style="display: block;">
+										<table>
+											<colgroup>
+												<col style="width:35px">
+												<col style="width:auto">
+												<col style="width:100px">
+												<col style="width:100px">
+											</colgroup>
+											<thead>
+											<tr>
+												<th scope="col" class="check" style="text-align:center;"><input type="checkbox" id="chk_all" title="전체선택"></th>
+												<th scope="col" class="name"><span>파일이름</span></th>
+												<th scope="col" class="size"><span>크기</span></th>
+												<th scope="col" class="del"><span>삭제</span></th>
+											</tr>
+											</thead>
+											<tbody id="attach_file">
+											<tr id="attach_message"><td colspan="4">파일을 이곳으로 끌어오세요.</td></tr>
+											</tbody>
+										</table>
+
+									</div>
+							</div>
+								</td>
+							</tr>
+						<!--	<tr class="upload" >
+								<th  rowspan="3">첨부파일</th>	
+								<td  >
+									<button type="button"  >내 PC</button>
+									<button type="button"  >삭제
+									</button>
+									<button type="button"  >미리보기</button>
+									<span class="care_txt">
+										수신메일 시스템에 따라 ‘제한 초과’로 거부 또는 스팸판정 될 수 있습니다.
+										<strong class="txt red">(10MB 이내 파일 권장)</strong>
+										
+									</span>				
+								</td>
+							</tr>
+							<tr class="upload" >
+								<td class="upload_area" >						
+									<table>
+										<thead>
+										<tr>
+											<th scope="col" class="check" style="text-align:center;"><input type="checkbox" title="전체선택"></th>
+											<th scope="col" class="name"><span>파일이름</span></th>
+											<th scope="col" class="size"><span>크기</span></th>
+											<th scope="col" class="add"><span>첨부방식</span></th>
+											<th scope="col" class="del"><span>삭제</span></th>
+										</tr>								
+										</thead>
+										<tbody>
+											<tr >
+												<td colspan="5">파일을 이 곳으로 끌어오세요.</td>
+											</tr>
+										</tbody>
+									</table>						
+								</td>
+							</tr>	
+							<tr class="upload upload2" >
+								<td>
+								파일 : 0/10  |  일반 : <span class="txt red" >0KB</span>/10MB
+								</td>
+							</tr>		-->
+							</tbody>
+						</table>			
+					</div>
+					<!-- composer area end -->					
+					
+				</div>
+				<!-- content end -->
+
+			</div>
+			<!-- section end -->	  
+		</div>
+		<div id="previewLayer" style="" title="미리보기">
+			<div class="popup">
+				<div class="popup_content" style="height: auto;width: 800px;overflow:auto;">
+					<div class="popup_title">
+						<span class="close_button" onclick="writeform.previewClose();"></span>
+						<h3 class="title">미리보기</h3>
+					</div>
+					<div class="popup_body_wrap">
+						<div class="popup_body">
+							<table width="100%" border="0" cellpadding="0" cellspacing="1">
+								<colgroup>
+									<col style="width:150px;">
+									<col style="width:auto;">
+								</colgroup>
+								<tbody>
+								<tr>
+									<th style="width:80px; min-width:80px;">제목</th>
+									<td id="previewArea">
+										<div id="preview_subject" class="prev_subject"></div>
+									</td>
+								</tr>
+								</tbody>
+							</table>
+							<div class="prev_content" id="preview_content">
+								ddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqddddddddddddddddddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqddddddddddddddddddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqddddddddddddddddddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqddddddddddddddddddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasaaaaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqddddddddddddddddddddddddddddddddddddddddddddddd
+							</div>
+						</div>
+					</div>
+					<div class="pop_footer">
+						<div class="btn_div">
+							<button type="button" class="btn2" onclick="writeform.previewClose();">닫기</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

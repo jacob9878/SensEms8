@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imoxion.sensems.web.database.mapper.ReserveSendMapper">
+
+    <insert id="reserveRegist" parameterType="com.imoxion.sensems.web.beans.ReserveSendBean">
+		<choose>
+		<when test="_databaseId == 'oracle'">
+			INSERT INTO imb_rotmain (categoryid, charset, replyto, start_time, end_time, send_time, ishtml, islink, msgid, recid, mail_from, msg_name, userid, rot_flag, rot_point, regdate, extended)
+			VALUES
+			(
+			#{categoryid}, #{charset}, #{replyto}, #{start_time}, #{end_time},
+			#{send_time}, #{ishtml}, #{islink}, #{msgid}, #{recid}, #{mail_from}
+			,#{msg_name} , #{userid}, #{rot_flag}, #{rot_point}, #{regdate}, #{extended}
+			)
+		</when>
+			<otherwise>
+			INSERT INTO imb_rotmain (categoryid, charset, replyto, start_time, end_time, send_time, ishtml, islink, msgid, recid, mail_from, msg_name, userid, rot_flag, rot_point, regdate, extended)
+			VALUES
+			(
+			#{categoryid}, #{charset}, #{replyto}, #{start_time}, #{end_time},
+			 #{send_time}, #{ishtml}, #{islink}, #{msgid}, #{recid}, #{mail_from}
+			,#{msg_name} , #{userid}, #{rot_flag}, #{rot_point}, #{regdate}, #{extended}
+			)
+			</otherwise>
+		</choose>
+	</insert>
+
+	<insert id="reserveRegistMsg" parameterType="com.imoxion.sensems.web.database.domain.ImbMessage">
+	INSERT INTO imb_msg_info VALUES (#{msgid}, #{contents})
+
+	</insert>
+
+	<select id="getContent" resultType="string">
+		SELECT contents FROM imb_msg_info WHERE msgid = #{msgid}
+	</select>
+
+	<select id="getReserveSendList" resultType="com.imoxion.sensems.web.form.ReserveSendListForm">
+		<choose>
+			<when test="_databaseId == 'oracle'">
+				SELECT * FROM (
+				SELECT  ROWNUM AS RNUM,a.* FROM(
+				select msgid, rot_flag, msg_name, start_time, end_time from imb_rotmain
+				<where>
+					<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(userid)">
+					userid = #{userid}
+					</if>
+				</where>
+				ORDER BY regdate DESC
+				) a
+				) WHERE RNUM between #{start} and #{end}
+			</when>
+			<otherwise>
+				SELECT msgid, rot_flag, msg_name, start_time, end_time from imb_rotmain
+				<where>
+					<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(userid)">
+						userid = #{userid}
+					</if>
+				</where>
+				ORDER BY regdate DESC
+				limit #{start}, #{end}
+			</otherwise>
+		</choose>
+	</select>
+
+	<select id="reserveUserSendTotalCount" resultType="int">
+		SELECT count(*) FROM imb_rotmain
+		<where>
+			<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(userid)">
+				userid = #{userid}
+			</if>
+		</where>
+	</select>
+
+	<select id="getReserveInfo" resultType="com.imoxion.sensems.web.beans.ReserveSendBean">
+		SELECT * FROM imb_rotmain where msgid = #{msgid}
+	</select>
+
+	<delete id="deleteReserveSend">
+		DELETE FROM imb_msg_info WHERE msgid = #{msgid}
+	</delete>
+
+	<delete id="deleteReserveSendContent">
+		DELETE FROM imb_rotmain WHERE msgid = #{msgid}
+	</delete>
+	
+	<update id="modifyReserveSend" parameterType="com.imoxion.sensems.web.beans.ReserveSendBean">
+		UPDATE imb_rotmain
+		<set>
+			<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(categoryid)">
+				categoryid = #{categoryid},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(charset)">
+				charset= #{charset},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(replyto)">
+				replyto	= #{replyto},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(start_time)">
+				start_time= #{start_time},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(end_time)">
+				end_time= #{end_time},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(send_time)">
+				send_time= #{send_time},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(ishtml)">
+				ishtml= #{ishtml},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(islink)">
+				islink= #{islink},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(recid)">
+				recid= #{recid},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(mail_from)">
+				mail_from= #{mail_from},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(msg_name)">
+				msg_name= #{msg_name},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(userid)">
+				userid= #{userid},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(rot_flag)">
+				rot_flag= #{rot_flag},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(rot_point)">
+				rot_point= #{rot_point},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(extended)">
+				extended= #{extended},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(extended)">
+				extended= #{extended},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(regdate)">
+				extended= #{regdate},
+			</if>
+		</set>
+			WHERE msgid = #{msgid}
+	</update>
+
+	<update id="modifyReserveSendContent" parameterType="com.imoxion.sensems.web.database.domain.ImbMessage">
+		UPDATE imb_msg_info SET contents = #{contents} WHERE msgid = #{msgid}
+	</update>
+	
+	
+</mapper>

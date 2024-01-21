@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.imoxion.sensems.server.repository.mapper.SmtpAccountMapper">
+    <select id="getSmtpAccountList" resultType="com.imoxion.sensems.server.domain.SmtpAccount">
+        select * from imb_smtp_account
+    </select>
+
+    <select id="getSmtpAccount" resultType="com.imoxion.sensems.server.domain.SmtpAccount">
+        select * from imb_smtp_account where sid = #{userid}
+    </select>
+</mapper>

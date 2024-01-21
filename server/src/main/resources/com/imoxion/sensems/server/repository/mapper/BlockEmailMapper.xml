@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.imoxion.sensems.server.repository.mapper.BlockEmailMapper">
+    <select id="getBlockEmailList" resultType="com.imoxion.sensems.server.domain.BlockEmail">
+        select * from imb_block_email
+    </select>
+
+    <!-- 차단 이메일인지 확인한다. -->
+    <select id="getBlockEmailCount"  resultType="int">
+	    SELECT count(*) as cnt FROM imb_block_email WHERE email=#{email} or email=#{domain}
+	</select>
+
+    <!-- 수신자도 차단 이메일인지 확인한다. -->
+    <select id="getBlockEmailCountEx" resultType="int">
+	    SELECT count(*) as cnt FROM imb_block_email WHERE email=#{email} or email=#{domain} or email=#{toemail}
+	</select>
+
+</mapper>

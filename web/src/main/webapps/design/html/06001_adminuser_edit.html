@@ -1,0 +1,194 @@
+﻿<!DOCTYPE HTML>
+<html lang="ko-KR">
+<head>
+	<meta charset="UTF-8">
+	<title>SensEMS</title>
+	<link rel="stylesheet" href="../../sens-static/css/style.css" />
+	<link rel="stylesheet" href="../../sens-static/css/skin.css" />
+	
+</head>
+<body class="skin1">
+	<div class="wrap">
+		<!-- left area start -->
+		<div class="left_menu ">
+			<div class="left_logo ">
+				<a href=""><img src="../../sens-static/images/left_logo.png" alt="로고"></a>
+			</div>
+
+			<div class="profile ">
+				<div class="info">
+					<div class="info_box  ">
+						<a href="" class="user_name">김효민</a>
+						<a href="" class="user_membership">내정보</a>
+					</div>
+				</div>
+				<div class="info_box2">
+					<div class="help"><a href="">HELP</a></div>
+					<p></p>
+					<div class="logout"><a href="">LOGOUT</a></div>
+				</div>
+			</div>
+
+			<div class="nav">
+				<ul>
+					<li class="menu_1depth">
+						<a href="01001_composer.html"><span class="icon_public depth1_01"></span>메일쓰기</a>
+					</li>
+					<li class="menu_1depth">
+						<a href="02001_statistics.html"><span class="icon_public depth1_02"></span>메일발송 결과</a>
+					</li>
+					<li class="menu_1depth">
+						<a href="03001_schedule.html"><span class="icon_public depth1_03"></span>발송일정관리</a>
+					</li>
+					<li class="menu_1depth">
+						<a href="" class="folder_off"><span class="icon_public depth1_04"></span>수신그룹 관리</a>
+						<ul>
+							<li class="menu_2depth"><a href="">수신그룹 관리</a></li>
+							<li class="menu_2depth"><a href="address">개인 주소록</a></li>
+						</ul>
+					</li>
+					<li class="menu_1depth on">
+						<a href="" class="folder_off"><span class="icon_public depth1_05"></span>발송 관리</a>
+						<ul style="">
+							<li class="menu_2depth"><a href="">발송분류 관리</a></li>
+							<li class="menu_2depth"><a href="">이미지 관리</a></li>
+							<li class="menu_2depth"><a href="">템플릿 관리</a></li>
+							<li class="menu_2depth"><a href="">테스트 계정관리</a></li>
+							<li class="menu_2depth"><a href="">수신거부 관리</a></li>
+						</ul>
+					</li>
+					<li class="menu_1depth">
+						<a href="" class="folder_off"><span class="icon_public depth1_06"></span>시스템 관리자</a>
+						<ul style="">
+							<li class="menu_2depth"><a href="">사용자 관리</a></li>
+							<li class="menu_2depth"><a href="">정기예약발송 설정</a></li>
+							<li class="menu_2depth"><a href="">발송차단 설정</a></li>
+							<li class="menu_2depth"><a href="">데이터베이스 관리</a></li>
+							<li class="menu_2depth"><a href="06005_attach.html">첨부파일 확장자 관리</a></li>
+							<li class="menu_2depth"><a href="">사용자 활동로그 조회</a></li>
+						</ul>
+
+					</li>
+				</ul>
+			</div>
+
+		</div>	
+		<!-- left area end -->
+
+		<div class="adminuser_edit"> 
+			<!-- section start -->
+				<!-- top area start -->
+				<div class="title_box fixed">
+					<div class="article top_area">
+						<div class="title">
+							<h1>사용자 관리</h1>
+							<p>설명글을 적어주세요.</p>
+						</div>				
+					</div>
+				</div>
+				<!-- top area end -->	
+
+				<!-- content top start -->	
+					<div class="content_top fixed">
+						<ul class="content_top_btn">							
+								<li><a class="btn1" href="">저장</a></li>
+								<li><a class="btn2" href="06001_adminuser.html">취소</a></li>
+						</ul>	
+					</div>
+				<!-- content top end -->
+			<div class="section pd_l30">
+				<!-- content start -->			
+				<div class="article content">		
+					<!-- composer area start -->				
+					<div class="composer_area">
+						<table width="100%" border="0" cellpadding="0" cellspacing="1" >
+							<colgroup>
+								<col style="width: 150px">
+								<col style="width: auto">
+							</colgroup>
+							<tbody>	
+								<tr>
+									<th>아이디</th>						
+									<td><span class="txt mg_r10">admin</span><button class="btn3">아이디변경</button>									
+									</td>
+								</tr>	
+								<tr>
+									<th>비밀번호 확인</th>	
+									<td  ><button class="btn3">비밀번호 변경</button></td>
+								</tr>
+								<tr>
+									<th>이 름</th>	
+									<td  ><input type="text" class="input" size="15" maxlength="20" value=""></td>
+								</tr>
+								<tr>
+									<th>E-MAIL</th>	
+									<td  ><input type="text" class="input" size="15" maxlength="50" value=""></td>
+								</tr>								
+								<tr>
+									<th>소 속</th>	
+									<td  ><input type="text" class="input" size="15" maxlength="20" value=""></td>
+								</tr>
+								<tr>
+									<th>직 책</th>	
+									<td  ><input type="text" class="input" size="15" maxlength="20" value=""></td>
+								</tr>
+							
+								<tr>
+									<th>전화번호</th>	
+									<td  ><input type="text" class="input" size="15" maxlength="20" value=""></td>
+								</tr>
+								<tr>
+									<th>권 한</th>	
+									<td>
+									<select name="permission" onchange="doChange();">
+										<option value="A">관리자</option>
+										<option value="M">고급사용자</option>
+										<option value="U">일반사용자</option>
+									</select>
+								</td>
+								</tr>
+								<tr>
+									<th>접근 허용 IP</th>	
+									<td  ><input type="text" class="input" size="15" maxlength="20" value=""></td>
+								</tr>							
+								
+							</tbody>
+						</table>			
+					</div>
+					<!-- composer area end -->					
+					
+				</div>
+				<!-- content end -->
+			</div>
+			<!-- section end -->	  
+		</div>	
+
+	</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

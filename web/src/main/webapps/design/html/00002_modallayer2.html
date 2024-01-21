@@ -1,0 +1,226 @@
+﻿<!DOCTYPE HTML>
+<html lang="ko-KR">
+<head>
+	<meta charset="UTF-8">
+	<title>SensEMS</title>
+	<link rel="stylesheet" href="../../sens-static/css/style.css" />
+	<link rel="stylesheet" href="../../sens-static/css/skin.css" />
+	
+</head>
+<body class="skin1">
+	<div class="wrap">
+		<!-- left area start -->
+		<div class="left_menu ">
+			<div class="left_logo ">
+				<a href=""><img src="../../sens-static/images/left_logo.png" alt="로고"></a>
+			</div>
+
+			<div class="profile ">
+				<div class="info">
+					<div class="info_box  ">
+						<a href="" class="user_name">김효민</a>
+						<a href="" class="user_membership">내정보</a>
+					</div>
+				</div>
+				<div class="info_box2">
+					<div class="help"><a href="">HELP</a></div>
+					<p></p>
+					<div class="logout"><a href="">LOGOUT</a></div>
+				</div>
+			</div>
+
+			<div class="nav">
+				<ul>
+					<li class="menu_1depth">
+						<a href="01001_composer.html"><span class="icon_public depth1_01"></span>메일쓰기</a>
+					</li>
+					<li class="menu_1depth">
+						<a href="02001_statistics.html"><span class="icon_public depth1_02"></span>메일발송 결과</a>
+					</li>
+					<li class="menu_1depth">
+						<a href="03001_schedule.html"><span class="icon_public depth1_03"></span>발송일정관리</a>
+					</li>
+					<li class="menu_1depth">
+						<a href="" class="folder_off"><span class="icon_public depth1_04"></span>수신그룹 관리</a>
+						<ul>
+							<li class="menu_2depth"><a href="">수신그룹 관리</a></li>
+							<li class="menu_2depth"><a href="">개인 주소록</a></li>
+						</ul>
+					</li>
+					<li class="menu_1depth on">
+						<a href="" class="folder_off"><span class="icon_public depth1_05"></span>발송 관리</a>
+						<ul style="">
+							<li class="menu_2depth"><a href="">발송분류 관리</a></li>
+							<li class="menu_2depth"><a href="">이미지 관리</a></li>
+							<li class="menu_2depth"><a href="">템플릿 관리</a></li>
+							<li class="menu_2depth"><a href="">테스트 계정관리</a></li>
+							<li class="menu_2depth"><a href="">수신거부 관리</a></li>
+						</ul>
+					</li>
+					<li class="menu_1depth">
+						<a href="" class="folder_off"><span class="icon_public depth1_06"></span>시스템 관리자</a>
+						<ul style="">
+							<li class="menu_2depth"><a href="">사용자 관리</a></li>
+							<li class="menu_2depth"><a href="">정기예약발송 설정</a></li>
+							<li class="menu_2depth"><a href="">발송차단 설정</a></li>
+							<li class="menu_2depth"><a href="">데이터베이스 관리</a></li>
+							<li class="menu_2depth"><a href="06005_attach.html">첨부파일 확장자 관리</a></li>
+							<li class="menu_2depth"><a href="">사용자 활동로그 조회</a></li>
+						</ul>
+
+					</li>
+				</ul>
+			</div>
+
+		</div>	
+		<!-- left area end -->
+
+		<div class="modallayer"> 
+		<!-- section start -->		
+			<!-- top area start -->
+			<div class="title_box fixed">
+				<div class="article top_area">
+					<div class="title">
+						<h1>수신거부</h1>
+						<p>설명글을 적어주세요.</p>
+					</div>		
+					<div class="search_box">
+						<div class="inner">
+							<div class="select_box">
+								<select class="search_opt" id="" name="search_opt">
+									<option value="">전체</option>
+									<option value="">E-mail</option>
+								</select>
+							</div>
+							<input type="text" id="searchWord" name="searchWord" value="" placeholder="검색어를 입력하세요.">
+							<button class="search_btn btn1"><span>검색</span></button>
+						</div>
+					</div>					
+				</div>
+			</div>
+			<!-- top area end -->	
+			
+			<!-- content top start -->	
+			<div class="content_top fixed">
+				<ul class="content_top_btn">
+					<li><a class="btn2" href="05005_rejectlist_add.html">추가</a></li>
+					<li><a class="btn2" href="">삭제</a></li>
+					<li><a class="btn2" href="">목록저장</a></li>
+					<li><a class="btn2" href="">가져오기</a></li>
+				</ul>
+					<div class="content_top_opt">
+						<button ><img src="../../sens-static/images/top_opt_btn.png" alt="" /></button>
+						<div class="drop_menu" style="display:none;" >		
+							<table summary="목록화면입니다">
+								<caption>목록화면입니다</caption>
+								<tbody>
+									<tr height="30px">
+										<th scope="row"><span>목록 개수</span></th>
+										<td>
+											<select >
+												<option selected value="">10</option>
+												<option value="">15</option>
+												<option value="">20</option>
+												<option value="">30</option>
+												<option value="">50</option>
+											</select>
+										</td>
+									</tr>									
+									<tr height="30px">
+										<th scope="row"><span>목록 간격</span></th>
+										<td>
+											<select >
+												<option selected value="">보통</option>
+												<option value="">좁게</option>
+												<option value="">보통</option>
+												<option value="">넓게</option>
+											</select>
+										</td>
+									</tr>									
+								</tbody>
+							</table>
+						</div>
+					</div>			
+			</div>
+			<!-- content top end -->		
+			<div class="section pd_l30">
+
+				
+				<!-- popup start--> 
+				 <div class="popup"> 
+			 		<div class="popup_content" style=" height: 250px;">
+					<div class="popup_title">
+						<span class="close_button" ></span> 
+						<h3 class="title">팝업스타일2 - 쓰기 및 상세</h3>
+					</div>			 
+					<div class="popup_body_wrap">
+						<div class="popup_body">
+								<!-- <p> 설명 텍스트 </p> -->
+								<table width="100%" border="0" cellpadding="0" cellspacing="1" >
+									<colgroup>
+										<col style="width: 150px">
+										<col style="width: auto">
+									</colgroup>
+									<tbody>	
+										<tr >
+											<th >E-mail</th>						
+											<td  ><input type="text" class="input" ></td>
+										</tr>	
+										<tr >
+											<th>발송메세지</th>	
+											<td class="care_txtAdd">
+												<select name="" onchange="">
+												<option value="">선택</option>
+												<option value="">선택</option>
+											</select>
+											<span class="care_txt txt red block mg_t10">
+												<strong>(최근 30개까지 선택가능합니다.)</strong>
+											</span> 
+										</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="pop_footer">
+							<div class="btn_div">
+								<button class="btn2">확인</button>
+								<button class="btn2">취소</button>
+							</div>
+						</div>
+					</div>
+				 </div>
+				<!-- popup end--> 
+			</div>
+			<!-- section end -->	
+		</div>	
+
+	</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

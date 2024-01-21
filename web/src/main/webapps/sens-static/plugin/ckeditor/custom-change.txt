@@ -1,0 +1,32 @@
+﻿
+- images.js 에 "Lorem ipsum" 으로 시작하는 부분찾아서 제거
+
+- plugin 추가
+ paper, template, pastefromexcel(현재버전에서 빠졌지만 별도로 추가해줌: 크롬에서 붙여넣을때)
+
+- css 수정 
+  .cke_button__paper_label{display:inline !important}.cke_button__template_label{display:inline !important}
+
+- /skins/office2013/editor.css, dialog.css에서
+  #2b579a --> #cccccc 로 변경
+  .cke_chrome : box-shadow:0 0 6px 1px ===> box-shadow:0 0 0 0
+                border:1px solid #cccccc   ===> border:solid #cccccc;border-width:0 0 1px 0
+- skin이 moono-lisa인경우
+  .cke_chrome에서 border:1px solid #d1d1d1; ===> border:solid #d1d1d1;border-width:0 0 1px 0;
+
+- editor*.css
+  .cke_combo_text의 width를 40px로 변경
+  
+- /sens-static/css/editor/content.css 맨 아래 추가
+  /** ckeditor **/
+  .cke_notification_message{position:relative;margin:4px 23px 3px;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:18px;z-index:4;text-overflow:ellipsis;overflow:hidden}.cke_notification_close{background-image:url(images/close.png);background-repeat:no-repeat;background-position:50%;position:absolute;cursor:pointer;text-align:center;height:20px;width:20px;top:1px;right:1px;padding:0;margin:0;z-index:5;opacity:.6;filter:alpha(opacity = 60)}.cke_notification_close:hover{opacity:1;filter:alpha(opacity = 100)}.cke_notification_close span{display:none}.cke_notification_warning a.cke_notification_close{opacity:.8;filter:alpha(opacity = 80)}.cke_notification_warning a.cke_notification_close:hover{opacity:1;filter:alpha(opacity = 100)}
+
+- /sens-static/plugin/ckeditor/ckeditor.js 에서
+  this.pre.setAttribute("class",a.config.insertpre_class) ==> this.pre.setAttribute("style",a.config.insertpre_style) 로 변경
+
+- ckeditor.js 에서 앞에 clone() 이 있는 moveChildren 을 찾아서, append 뒤에 아래와 같이 덧붙임
+  : IE에서 엔터를 쳤을 때 현재의 서식이 유지되지 않는 현상 수정
+  m=m.clone(),d.moveChildren(m),d.append(m))}
+  -->
+  m=m.clone(),d.moveChildren(m),d.append(m),CKEDITOR.env.ie&&m.is("span")&&!m.getHtml()&&m.setHtml("\x26nbsp;"))}
+

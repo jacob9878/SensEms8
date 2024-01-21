@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.imoxion.sensems.server.repository.mapper.MsgidHostCountMapper">
+
+    <insert id="insertHostCount">
+       INSERT INTO ${tableName} (hostname,scount,ecount,eration) VALUES (#{hostname},#{scount},#{ecount},#{eration})
+    </insert>
+
+    <delete id="dropHostCount">
+        drop table if exists ${tableName}
+    </delete>
+
+    <insert id="createHostCount">
+        <choose>
+            <when test="_databaseId == 'oracle'">
+            </when>
+            <otherwise>
+                CREATE TABLE if not exists hc_${msgid} (
+                hostname varchar(100) COMMENT '도메인',
+                scount INT default 0 COMMENT '발송건수',
+                ecount INT default 0 COMMENT '실패건수',
+                eration INT default 0 COMMENT '실패비율',
+                PRIMARY KEY (hostname)
+                )ENGINE=MyISAM COMMENT='발송 도메인 통계'
+            </otherwise>
+        </choose>
+    </insert>
+
+
+</mapper>

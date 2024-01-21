@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imoxion.sensems.web.database.mapper.BlockMapper">
+
+
+    <select id="selectBlockCount" resultType="int">
+        select count(*) from imb_block_ip
+        <choose>
+            <when test="_databaseId == 'oracle'">
+                <where>
+                    <if test="srch_keyword != null">
+                    ip like '%'||#{srch_keyword}||'%'
+                    </if>
+                </where>
+            </when>
+            <otherwise>
+                <where>
+                    <if test="srch_keyword != null">
+                    ip like concat('%',#{srch_keyword},'%')
+
+                    </if>
+                </where>
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="selectAllBlock" resultType="blockInfo">
+        select * from imb_block_ip order by regdate
+    </select>
+
+
+
+    <select id="selectBlockList" resultType="blockInfo">
+        <choose>
+            <when test="_databaseId == 'oracle'">
+                SELECT * FROM (
+                SELECT  ROWNUM AS RNUM,a.* FROM(
+                select * from imb_block_ip
+
+                <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(srch_keyword)">
+                    where ip like '%'||  or memo like '%'||#{srch_keyword}||'%'
+                </if>
+
+                ORDER BY regdate DESC
+                ) a
+                ) WHERE RNUM between #{start} and #{end}
+            </when>
+            <otherwise>
+                SELECT * from imb_block_ip
+                <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(srch_keyword)">
+                    where ip like concat('%',#{srch_keyword},'%') or memo like concat('%',#{srch_keyword},'%')
+                </if>
+                ORDER BY regdate DESC
+                limit #{start}, #{end}
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="selectBlockByKey" resultType="blockInfo">
+    SELECT * FROM imb_block_ip WHERE ip = #{ip}
+    </select>
+
+
+
+    <select id="isExistBlock" resultType="int">
+		SELECT COUNT(*)
+		FROM imb_block_ip
+		WHERE ip = #{ip}
+	</select>
+
+
+    <insert id="insertBlock" parameterType="blockInfo" >
+        <choose>
+            <when test="_databaseId == 'oracle'">
+                INSERT INTO imb_block_ip(ip, memo, regdate)
+                VALUES ( #{ip}, #{memo}, sysdate )
+            </when>
+            <otherwise>
+                INSERT INTO imb_block_ip(ip, memo, regdate)
+                VALUES ( #{ip}, #{memo}, now() )
+            </otherwise>
+        </choose>
+    </insert>
+
+
+    <delete id="deleteBlockByKey">
+		DELETE FROM imb_block_ip where ip = #{ip}
+	</delete>
+
+    <select id="selectEditBlock" resultType="int">
+        select count(*) from imb_block_ip where ip=#{ip}
+    </select>
+
+    <update id="editBlock" parameterType="string">
+        update imb_block_ip set ip=#{ip}, memo=#{memo}  where ip=#{ori_ip}
+    </update>
+
+
+
+    <select id="getSearchBlockCount" resultType="int">
+        select count(*) from imb_block_ip
+        <choose>
+            <when test="_databaseId == 'oracle'">
+                <where>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+                        ${srch_type} like '%'||#{srch_keyword}||'%'
+                    </if>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty( ip )">
+                        and ip = #{ip}
+                    </if>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty( memo )">
+                        and memo = #{memo}
+                    </if>
+                </where>
+            </when>
+            <otherwise>
+                <where>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+                        ${srch_type} like concat('%',#{srch_keyword},'%')
+                    </if>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty( ip )">
+                        and ip = #{ip}
+                    </if>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty( memo )">
+                        and memo = #{memo}
+                    </if>
+
+
+                </where>
+            </otherwise>
+        </choose>
+    </select>
+
+
+    <select id="getBlockListForPageing" resultType="blockInfo">
+        <choose>
+            <when test="_databaseId == 'oracle'">
+                SELECT * FROM (
+                SELECT ROWNUM AS RNUM,a.* FROM(
+                select * from imb_block_ip
+                <where>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+                        and ${srch_type} like '%'||#{srch_keyword}||'%'
+                    </if>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty( ip )">
+                        and ip = #{ip}
+                    </if>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty( memo )">
+                        and memo = #{memo}
+                    </if>
+                </where>
+                order by regdate desc
+                ) a
+                ) WHERE RNUM between #{start} and #{end}
+            </when>
+            <otherwise>
+                select * from imb_block_ip
+                <where>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+                        and ${srch_type} like concat('%',#{srch_keyword},'%')
+                    </if>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty( ip )">
+                        and ip = #{ip}
+                    </if>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty( memo )">
+                        and memo = #{memo}
+                    </if>
+                </where>
+                order by regdate desc
+                limit #{start},#{end}
+            </otherwise>
+        </choose>
+    </select>
+
+</mapper>

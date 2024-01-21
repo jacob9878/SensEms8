@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imoxion.sensems.web.database.mapper.RejectMapper">
+
+
+    <select id="selectRejectCount" resultType="int">
+        select count(*) from imb_reject
+        <choose>
+			<when test="_databaseId == 'oracle'">
+				<where>
+	    		  <if test="srch_keyword != null">
+	              email like '%'||#{srch_keyword}||'%'
+	              </if>
+	    		</where>
+			</when>
+			<otherwise>
+     		    <where>
+		    		  <if test="srch_keyword != null">
+						  email like concat('%',#{srch_keyword},'%')
+		              </if>
+		    	</where>
+			</otherwise>
+		</choose>    		
+    </select>
+
+	<select id="selectTotalRejectCount" resultType="int">
+		select count(*) from imb_reject
+	</select>
+
+	<select id="selectAllReject" resultType="rejectInfo">
+        select * from imb_reject order by regdate
+    </select>
+
+	<select id="selectRecentRejectCount" resultType="int">
+		select count(*) from IMB_REJECT a, imb_emsmain b WHERE a.msgid = b.msgid;
+	</select>
+
+	<select id="selectRejectList" resultType="rejectInfo">
+    	<choose>
+			<when test="_databaseId == 'oracle'">
+				SELECT * FROM (
+					SELECT  ROWNUM AS RNUM,a.* FROM(
+						select * from imb_reject
+						
+		                <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(srch_keyword)">
+							  where email like '%'||#{srch_keyword}||'%'
+						</if>
+			
+					ORDER BY regdate DESC
+					) a
+				) WHERE RNUM between #{start} and #{end}
+			</when>
+			<otherwise>
+				SELECT * from imb_reject
+					    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(srch_keyword)">
+							where email like concat('%',#{srch_keyword},'%')
+						</if>
+				ORDER BY regdate DESC
+	        	limit #{start}, #{end}
+			</otherwise>
+		</choose>
+    </select>
+
+    <select id="selectRejectByKey" resultType="rejectInfo">
+    SELECT * FROM imb_reject WHERE email = #{email}
+    </select>
+
+
+
+	<select id="isExistReject" resultType="int">
+		SELECT COUNT(*)
+		FROM imb_reject
+		WHERE email = #{email}
+	</select>
+
+
+	<insert id="insertReject" parameterType="rejectInfo" >
+    	<choose>
+			<when test="_databaseId == 'oracle'">
+				INSERT INTO imb_reject(email, msgid, regdate)
+      			VALUES ( #{email}, #{msgid}, sysdate )
+			</when>
+			<otherwise>
+				INSERT INTO imb_reject(email, msgid, regdate)
+      			VALUES ( #{email}, #{msgid}, now() )
+			</otherwise>
+		</choose>
+  	</insert>
+
+
+	<delete id="deleteRejectByKey">
+		DELETE FROM imb_reject where email = #{email}
+	</delete>
+
+	<select id="selectEditReject" resultType="int">
+        select count(*) from imb_reject where email=#{email}
+    </select>
+
+	<update id="editReject" parameterType="string">
+        update imb_reject set email=#{email}  where email=#{ori_email}
+    </update>
+
+	<insert id="insertRejectList" parameterType="rejectInfo">
+		insert into imb_reject(email,regdate)
+		values (#{reject.email}, now())
+	</insert>
+
+</mapper>

@@ -1,0 +1,435 @@
+<html lang="" event-clipboard-installed="true">
+<head>
+    <meta charset="UTF-8">
+    <title>SensEMS</title>
+    <link rel="stylesheet" href="../../sens-static/css/style.css" />
+    <link rel="stylesheet" href="../../sens-static/css/skin.css" />
+
+</head>
+<body class="skin1">
+    <div class="wrap">
+        <!-- left area start -->
+        <div class="left_menu ">
+            <div class="left_logo ">
+                <a href=""><img src="../../sens-static/images/left_logo.png" alt="로고"></a>
+            </div>
+
+            <div class="profile ">
+                <div class="info">
+                    <div class="info_box  ">
+                        <a href="" class="user_name">김효민</a>
+                        <a href="" class="user_membership">내정보</a>
+                    </div>
+                </div>
+                <div class="info_box2">
+                    <div class="help"><a href="">HELP</a></div>
+                    <p></p>
+                    <div class="logout"><a href="">LOGOUT</a></div>
+                </div>
+            </div>
+
+            <div class="nav">
+                <ul>
+                    <li class="menu_1depth">
+                        <a href="01001_composer.html"><span class="icon_public depth1_01"></span>메일쓰기</a>
+                    </li>
+                    <li class="menu_1depth">
+                        <a href="02001_statistics.html"><span class="icon_public depth1_02"></span>메일발송 결과</a>
+                    </li>
+                    <li class="menu_1depth">
+                        <a href="03001_schedule.html"><span class="icon_public depth1_03"></span>발송일정관리</a>
+                    </li>
+                    <li class="menu_1depth">
+                        <a href="" class="folder_off"><span class="icon_public depth1_04"></span>수신그룹 관리</a>
+                        <ul>
+                            <li class="menu_2depth"><a href="">수신그룹 관리</a></li>
+                            <li class="menu_2depth"><a href="address">개인 주소록</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu_1depth on">
+                        <a href="" class="folder_off"><span class="icon_public depth1_05"></span>발송 관리</a>
+                        <ul style="">
+                            <li class="menu_2depth"><a href="">발송분류 관리</a></li>
+                            <li class="menu_2depth"><a href="">이미지 관리</a></li>
+                            <li class="menu_2depth"><a href="">템플릿 관리</a></li>
+                            <li class="menu_2depth"><a href="">테스트 계정관리</a></li>
+                            <li class="menu_2depth"><a href="">수신거부 관리</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu_1depth">
+                        <a href="" class="folder_off"><span class="icon_public depth1_06"></span>시스템 관리자</a>
+                        <ul style="">
+                            <li class="menu_2depth"><a href="">사용자 관리</a></li>
+                            <li class="menu_2depth"><a href="">정기예약발송 설정</a></li>
+                            <li class="menu_2depth"><a href="">발송차단 설정</a></li>
+                            <li class="menu_2depth"><a href="">데이터베이스 관리</a></li>
+                            <li class="menu_2depth"><a href="06005_attach.html">첨부파일 확장자 관리</a></li>
+                            <li class="menu_2depth"><a href="">사용자 활동로그 조회</a></li>
+                        </ul>
+
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        <!-- left area end -->
+<div class="address">
+<!-- section start -->
+<!-- top area start -->
+<form id="AddressListForm" name="AddressListForm" action="list.do" method="get">
+    <input id="cpage" name="cpage" value="1" type="hidden">
+    <input id="gkey" name="gkey" value="-1" type="hidden">
+<div class="title_box fixed">
+    <div class="article top_area">
+        <div class="title">
+            <h1>개인주소록 관리</h1>
+            <p>발송하는 메일에 포함될 주소록을 관리할 수 있습니다.</p>
+        </div>
+        <div class="search_box">
+            <div class="inner">
+                <div class="select_box">
+                    <select class="search_opt" id="" name="search_opt">
+                        <option value="">이름</option>
+                        <option value="">이메일</option>
+                        <option value="">회사</option>
+                    </select>
+                </div>
+                <input type="text" id="searchWord" name="searchWord" value="" placeholder="검색어를 입력하세요.">
+                <button class="search_btn btn1"><span>검색</span></button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- top area end -->
+    <!-- section -->
+    <div class="section top_nobtn">
+        <div class="content_top fixed2">
+            <ul class="content_top_btn">
+                <li><a class="btn2" href="#" onclick="addressList.addrGrpPopup();">그룹추가</a></li>
+            </ul>
+        </div>
+
+            <!-- content top start -->
+        <div class="content_top fixed">
+            <ul class="content_top_btn">
+                <li><a class="btn2" href="#" onclick="addressList.add()">추가</a></li>
+                <li><a class="btn2" href="#" onclick="addressDel.delete()">삭제</a></li>
+                <li><a class="btn2" href="#" onclick="addressList.moveAddr()">이동</a></li>
+                <li><a class="btn2" href="#" onclick="">목록저장</a></li>
+                <li><a class="btn2" href="#" onclick="">가져오기</a></li>
+            </ul>
+        </div>
+        <!-- content top end -->
+
+        <div class="address_left_menu">
+            <div class="article content add-menu-area">
+                <ul>
+                    <li ><a href="#" onclick="addressList.changeGkey('-1');" class="title">전체주소록<span class="txt blue strong">5</span></a></li>
+                    <li class="add_group ">
+                        <div class="group_txt">
+                            <span class="icon_public"></span>
+                            <a href="#" onclick="" class="group-name">미분류</a> <span class="btn_util"></span>
+                            </div>
+                            <span class="txt strong blue">0</span>
+                        <ul class="add_group_opt " id="grpOption1"  style="display: none">
+                            <li><a href="#" onclick="">수정</a></li>
+                            <li><a href="#" onclick="">삭제</a></li>
+                            <li><a href="">다운로드</a></li>
+                        </ul>
+                    </li>
+                    <li class="add_group ">
+                        <div class="group_txt">
+                            <span class="icon_public"></span>
+                            <a href="#" onclick="" class="group-name ">(재)광주구천주교회유지재단</a> <span class="btn_util"></span>
+                            </div>
+                            <span class="txt strong blue">20</span>
+                        <ul class="add_group_opt " id="grpOption1"  style="display: none">
+                            <li><a href="#" onclick="">수정</a></li>
+                            <li><a href="#" onclick="">삭제</a></li>
+                            <li><a href="">다운로드</a></li>
+                        </ul>
+                    </li>
+                     <li class="add_group ">
+                        <div class="group_txt">
+                            <span class="icon_public"></span>
+                            <a href="#" onclick="" class="group-name ">테스트이름</a> <span class="btn_util"></span>
+                            </div>
+                            <span class="txt blue strong">20</span>
+                        <ul class="add_group_opt " id="grpOption1"  style="display: none">
+                            <li><a href="#" onclick="">수정</a></li>
+                            <li><a href="#" onclick="">삭제</a></li>
+                            <li><a href="">다운로드</a></li>
+                        </ul>
+                    </li>
+                     <li class="add_group ">
+                        <div class="group_txt">
+                            <span class="icon_public"></span>
+                            <a href="#" onclick="" class="group-name ">테스트1</a> <span class="btn_util"></span>
+                            </div>
+                            <span class="txt blue strong">20</span>
+                        <ul class="add_group_opt " id="grpOption1"  style="display: none">
+                            <li><a href="#" onclick="">수정</a></li>
+                            <li><a href="#" onclick="">삭제</a></li>
+                            <li><a href="">다운로드</a></li>
+                        </ul>
+                    </li>
+                     <li class="add_group ">
+                        <div class="group_txt">
+                            <span class="icon_public"></span>
+                            <a href="#" onclick="" class="group-name ">ㅇㅇ</a> <span class="btn_util"></span>
+                            </div>
+                            <span class="txt blue strong">20</span>
+                        <ul class="add_group_opt " id="grpOption1"  style="display: none">
+                            <li><a href="#" onclick="">수정</a></li>
+                            <li><a href="#" onclick="">삭제</a></li>
+                            <li><a href="">다운로드</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+
+        <div class="address_body">
+        <!-- content start -->
+
+        <div class="article content">
+            <!-- content area start -->
+            <div class="content_area">
+                <table width="100%" height="auto">
+                    <colgroup>
+                        <col style="width:25px">
+                        <col style="width:auto">
+                        <col style="width:auto">
+                        <col style="width:auto">
+                        <col style="width:auto">
+                        <col style="width:auto">
+                        <col style="width:110px">
+                        <col style="width:110px">
+                        <col style="width:90px">
+                    </colgroup>
+                    <thead class="fixed">
+                    <tr>
+                        <th class="check_ico">
+                            <input id="all_check" type="checkbox" onclick="common.select_all('ukeys');">
+                        </th>
+                        <th>이름</th>
+                        <th>E-MAIL</th>
+                        <th>회사</th>
+                        <th>부서</th>
+                        <th>직책</th>
+                        <th>회사전화</th>
+                        <th>휴대폰번호</th>
+                        <th>기타정보1</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+
+                        <tr>
+                            <td class="check_ico">
+                                <input type="checkbox" name="ukeys" value="29">
+                            </td>
+                            <td>
+                                <a href="#" onclick="addressList.edit('29')">test</a>
+                            </td>
+                            <td>
+                               test@imoxion.com
+                            </td>
+                            <td>
+                               아이모션
+                            </td>
+                            <td>
+                               솔루션팀
+                            </td>
+                            <td>
+                               대리
+                            </td>
+                            <td>
+                               02-5555-4444
+                            </td>
+                            <td>
+                               010-0000-5555
+                            </td>
+                            <td>
+                               rtet
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="check_ico">
+                                <input type="checkbox" name="ukeys" value="37">
+                            </td>
+                            <td>
+                                <a href="#" onclick="addressList.edit('37')">zxcv</a>
+                            </td>
+                            <td>
+                               jhpark@imoxion.com
+                            </td>
+                            <td>
+                               아이모션
+                            </td>
+                            <td>
+                               솔루션팀
+                            </td>
+                            <td>
+                               연구원
+                            </td>
+                            <td>
+                               021544-9096
+                            </td>
+                            <td>
+                               02-7852
+                            </td>
+                            <td>
+                               test
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="check_ico">
+                                <input type="checkbox" name="ukeys" value="36">
+                            </td>
+                            <td>
+                                <a href="#" onclick="addressList.edit('36')">개발기주소록추가수정</a>
+                            </td>
+                            <td>
+                               jhpark@imoxion.com
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+                               02-7852
+                            </td>
+                            <td>
+                               test
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="check_ico">
+                                <input type="checkbox" name="ukeys" value="25">
+                            </td>
+                            <td>
+                                <a href="#" onclick="addressList.edit('25')">박준현2</a>
+                            </td>
+                            <td>
+                               jhpark@imoxion.com
+                            </td>
+                            <td>
+                               아이모션
+                            </td>
+                            <td>
+                               솔루션팀
+                            </td>
+                            <td>
+                               연구원
+                            </td>
+                            <td>
+                               021544-9096
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+                               기타1
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="check_ico">
+                                <input type="checkbox" name="ukeys" value="32">
+                            </td>
+                            <td>
+                                <a href="#" onclick="addressList.edit('32')">테스트계정</a>
+                            </td>
+                            <td>
+                               jhpark@imoxion.com
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <!-- content area end -->
+        </div>
+        <!-- content end -->
+            <div class="page_nav">
+                <ul>
+                    <li>
+                        <a href="" class="page_first icon_public" alt="첫 페이지로 이동">
+                            <span>맨앞으로</span></a>
+                    </li>
+                    <li>
+                        <a href="" class="page_prev icon_public" alt="이전첫 페이지로 이동">
+                            <span>이전으로</span></a>
+                    </li>
+                    <li class="on">
+                        <a>1</a>
+                    </li>
+                    <li>
+                        <a href="">2</a>
+                    </li>
+                    <li><a href="">3</a></li>
+                    <li><a href="">4</a></li>
+                    <li><a href="">5</a></li>
+                    <li><a href="" class="page_next icon_public" alt="다음 페이지로 이동">
+                        <span>다음으로</span>
+                    </a>
+                    </li>
+                    <li>
+                        <a href="" class="page_last icon_public" alt="마지막 페이지로 이동">
+                            <span>맨뒤로</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+
+
+
+
+            <ul>
+    <li class="on"><a>1</a></li>
+    </ul>
+        </div>
+
+
+    </div></form>
+    <!-- section end -->
+
+   <!-- section end-->
+</div>
+         
+       
+    </div>
+
+</body></html>

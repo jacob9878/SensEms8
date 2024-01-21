@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.imoxion.sensems.server.repository.mapper.SmtpTempMainMapper">
+    <select id="getTempMainList" resultType="com.imoxion.sensems.server.domain.SmtpTempMain">
+        <choose>
+            <when test="_databaseId == 'oracle'">
+                <![CDATA[
+                     select * from imb_smtp_temp_main where rownum <= 10
+		        ]]>
+            </when>
+            <otherwise>
+                select * from imb_smtp_temp_main limit 10
+            </otherwise>
+        </choose>
+
+    </select>
+
+    <select id="getTempRcptList" resultType="com.imoxion.sensems.server.domain.SmtpTempRcpt">
+        <choose>
+            <when test="_databaseId == 'oracle'">
+                <![CDATA[
+                     select * from imb_smtp_temp_rcpt where mainkey=#{mainkey} and rownum <= 500
+		        ]]>
+            </when>
+            <otherwise>
+                select * from imb_smtp_temp_rcpt where mainkey=#{mainkey} limit 500
+            </otherwise>
+        </choose>
+
+    </select>
+
+    <delete id="deleteTempRcptByIdx">
+        delete from imb_smtp_temp_rcpt where idx=#{idx}
+    </delete>
+
+    <delete id="deleteTempRcptByIdxList" parameterType="java.util.List">
+        delete from imb_smtp_temp_rcpt where
+        <foreach collection="list" item="item" open="" close="" separator="OR">
+            (idx = #{item.idx})
+        </foreach>
+    </delete>
+
+    <delete id="deleteTempRcptByMainkey" >
+        delete from imb_smtp_temp_rcpt where mainkey=#{mainkey}
+    </delete>
+
+    <delete id="deleteTempMainByMainkey" >
+        delete from imb_smtp_temp_main where mainkey=#{mainkey}
+    </delete>
+
+
+</mapper>

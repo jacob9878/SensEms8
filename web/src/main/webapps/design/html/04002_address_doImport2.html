@@ -1,0 +1,201 @@
+<html lang="" event-clipboard-installed="true"><head><script>Function.prototype.clone=function(){var a=this,c=function(){return a.apply(this,arguments)},b;for(b in this)this.hasOwnProperty(b)&&(c[b]=this[b]);return c};Event.prototype.oldPreventDefault=Event.prototype.preventDefault.clone();Event.prototype.preventDefault=function(){window.detectedPreventDefault=!0;window.enablePreventDefault&&this.oldPreventDefault()};Event.prototype.oldStopPropagation=Event.prototype.stopPropagation.clone();Event.prototype.stopPropagation=
+function(){window.detectedStopPropagation=!0;window.enableStopPropagation&&this.oldStopPropagation()};Event.prototype.oldStopImmediatePropagation=Event.prototype.stopImmediatePropagation.clone();Event.prototype.stopImmediatePropagation=function(){window.detectedImmediateStopPropagation=!0;window.enableImmediateStopPropagation&&this.oldStopImmediatePropagation()};window.addEventListener("message",function(a){void 0!==a.data&&null!==a.data&&void 0!==a.data.enablePreventDefault&&(a=a.data,window.enablePreventDefault=
+a.enablePreventDefault,window.enableStopPropagation=a.enableStopPropagation,window.enableImmediateStopPropagation=a.enableStopImmediatePropagation)},!1)</script>
+    <title>SensEMS 8.0</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta id="_csrf" name="_csrf" content="21a71b4b-6505-40b8-ab39-98ef31feedac">
+    <meta id="_csrf_header" name="_csrf_header" content="X-CSRF-TOKEN">
+
+    <link rel="stylesheet" type="text/css" href="../../sens-static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../../sens-static/css/skin.css">
+     <link rel="stylesheet" type="text/css" href="../../sens-static/plugin/jquery/ui/theme/black/jquery.ui.all.css">
+
+    <script type="text/javascript" src="/sens-static/js/bundle/ko.js"></script>
+    <script type="text/javascript" src="/sens-static/plugin/jquery/jquery-2.2.2.min.js"></script>
+    <script type="text/javascript" src="/sens-static/plugin/jquery/jquery.json-2.4.js"></script>
+    <script type="text/javascript" src="/sens-static/plugin/jquery/ui/jquery-ui-1.9.1.custom.min.js"></script>
+    <script type="text/javascript" src="/sens-static/plugin/jquery/jquery.fileDownload.js"></script>
+    <script type="text/javascript" src="/sens-static/plugin/jquery/jquery.formatdate.js"></script>
+    <script type="text/javascript" src="/sens-static/js/common/common.js"></script>
+    <script type="text/javascript" src="/sens-static/js/common/browsercheck.js"></script>
+    <script type="text/javascript" src="/sens-static/js/common/imutil.js"></script>
+    <script type="text/javascript" src="/sens-static/js/common/imoxion.js"></script>
+    
+
+<script type="text/javascript" src="/sens-static/js/messages/sendmanage_ko.js"></script>
+<script type="text/javascript" src="/sens-static/js/messages/group_ko.js"></script>
+<script type="text/javascript" src="/sens-static/js/reserve/reserve.js"></script>
+<script type="text/javascript" src="/sens-static/js/util/page.js"></script>
+
+<link rel="stylesheet" type="text/css" href="chrome-extension://ikebmfjkmpkaacjablfdfdkonamgijdg/css/contents.css"></head>
+<body class="skin1">
+	<div class="w_pop wrap">
+        <div class="w_content">
+            <meta http-equiv="X-UA-Compatible" content="IE=10">
+
+
+<script type="text/javascript" src="/sens-static/js/receiver/address.js"></script>
+<script>
+    $(document).ready(function(){
+        window.resizeTo( 900 , 650 );
+        addressList.doPreview();
+    });
+</script>
+
+<!-- popup start-->
+<div class="popup_title over_text">
+    <div>
+        <h3 class="title">주소록 가져오기 2단계</h3>
+    </div>
+</div>
+
+	<!-- content top start -->	
+
+	<!-- content top end -->
+
+<div class="section">
+    <!-- content start -->
+    <div class="article content">
+        <!-- content area start -->
+        <div class="composer_area">
+            <form id="importForm" name="importForm" action="doImport3.do" method="post">
+
+                <input type="hidden" name="fileKey" value="6057ee0a3fd648b68ec73952">
+                <input type="hidden" name="header" value="0">
+                <input type="hidden" name="divMethod" value="-1">
+                <table width="100%" height="auto">
+                    <colgroup>
+                        <col style="width:150px">
+                        <col style="width:auto">
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <th>
+                                구분자
+                            </th>
+                            <td>
+                                <input type="radio" name="div" value="0" onclick="addressList.doPreview();" checked="">콤마(,)로 구분
+                                <input type="radio" name="div" value="1" onclick="addressList.doPreview();">세미콜론(;)으로 구분
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                첫행의 헤더 여부
+                            </th>
+                            <td>
+                                <span><input type="checkbox" name="isheader" value="true" onclick="addressList.doPreview();">첫행이 헤더</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                필드값
+                            </th>
+                            <td class="graph ">
+								<span class="care_txt txt red">※ 미리보기 화면은 실제 파일 내용의 10열까지만 보여줍니다.</span>
+                                <div id="frmPreview">
+										<table width="100%" border="0" cellpadding="0" cellspacing="1" class="table">
+											<colgroup>
+												<col style="width:120px">
+												<col style="width:auto">
+												<col style="width:auto">
+												<col style="width:120px">
+											</colgroup>
+											<thead>
+												<th>이름</th>
+												<th>이메일</th>
+												<th>주소</th>
+												<th>전화번호</th>
+											</thead>
+											<tbody>												
+												<tr>
+													<td>박준현</td>
+													<td class="over_text">testtest.com</td>
+													<td>서울시마포구</td>
+													<td>010-2222-1111</td>
+												</tr>
+												<tr>
+													<td>박준현</td>
+													<td class="over_text">testtest.com</td>
+													<td>서울시마포구</td>
+													<td></td>
+												</tr>
+												<tr>
+													<td>박준현</td>
+													<td class="over_text">testtest.com</td>
+													<td>서울시마포구</td>
+													<td></td>
+												</tr>
+												<tr>
+													<td>박준현</td>
+													<td class="over_text">testtest.com</td>
+													<td>서울시마포구</td>
+													<td></td>
+												</tr>
+												<tr>
+													<td>박준현</td>
+													<td class="over_text">testtest.com</td>
+													<td>서울시마포구</td>
+													<td></td>
+												</tr>
+												<tr>
+													<td>박준현</td>
+													<td class="over_text">testtest.com</td>
+													<td>서울시마포구</td>
+													<td></td>
+												</tr>
+												<tr>
+													<td>박준현</td>
+													<td class="over_text">testtest.com</td>
+													<td>서울시마포구</td>
+													<td></td>
+												</tr>
+												<tr>
+													<td>박준현</td>
+													<td class="over_text">testtest.com</td>
+													<td>서울시마포구</td>
+													<td></td>
+												</tr>
+												<tr>
+													<td>박준현</td>
+													<td class="over_text">testtest.com</td>
+													<td>서울시마포구</td>
+													<td></td>
+												</tr>
+												<tr>
+													<td>박준현</td>
+													<td class="over_text">testtest.com</td>
+													<td>서울시마포구</td>
+													<td></td>
+												</tr>
+												
+											</tbody>
+										</table>
+									</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            <div>
+<input type="hidden" name="_csrf" value="21a71b4b-6505-40b8-ab39-98ef31feedac">
+</div></form>
+
+        </div>
+        <!-- content area end -->
+    </div>
+    <!-- content end -->
+
+</div>
+<!-- popup end-->
+        </div>
+		<div class="pop_footer">
+			<div class="btn_div">
+				<button class="btn2" onclick="addressList.doFileSubmit()">다음</button>
+				<button class="close_btn btn2">닫기</button>
+			</div>
+		</div>
+ 	</div>
+
+</body>
+</html>

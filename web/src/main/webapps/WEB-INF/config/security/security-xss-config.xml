@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config>
+    <xss>
+        <exception>
+            <url uri="*">
+                <param>returnURL</param>
+                <param>query</param>
+            </url>
+
+            <url uri="/sens-static/*" />
+
+            <!--메일 발송-->
+            <url uri="/mail/write/write.json">
+                <param>mail_from</param>
+                <param>msg_name</param>
+                <param>replyto</param>
+                <param>recname</param>
+                <param>to</param>
+                <param>content</param>
+            </url>
+
+            <!--메일쓰기 > 템플릿 저장-->
+            <url uri="/send/template/templateAdd.json">
+                <param>contents</param>
+            </url>
+
+            <!--테스트 발송-->
+            <url uri="/send/test/testSend.json">
+                <param>to_emails</param>
+                <param>from_email</param>
+                <param>subject</param>
+                <param>content</param>
+            </url>
+
+            <!--내정보 수정-->
+            <url uri="/account/infoedit.do">
+                <param>uname</param>
+                <param>dept</param>
+                <param>grade</param>
+            </url>
+
+            <!--사용자 추가-->
+            <url uri="/sysman/user/add.do">
+                <param>uname</param>
+                <param>dept</param>
+                <param>grade</param>
+            </url>
+
+            <!--사용자 수정-->
+            <url uri="/sysman/user/edit.do">
+                <param>uname</param>
+                <param>dept</param>
+                <param>grade</param>
+            </url>
+
+
+            <!--메일발송 결과 검색-->
+            <url uri="/mail/result/list.do">
+                <param>srch_keyword</param>
+            </url>
+
+            <!--개별발송 결과 검색-->
+            <url uri="/mail/result/sendList.do">
+                <param>srch_keyword</param>
+            </url>
+
+            <!--수신그룹 검색-->
+            <url uri="/receiver/group/list.do">
+                <param>srch_keyword</param>
+            </url>
+
+            <!--주소록 검색-->
+            <url uri="/receiver/address/list.do">
+                <param>srch_keyword</param>
+            </url>
+
+            <!--주소록 추가-->
+            <url uri="/receiver/address/add.do">
+                <param>name</param>
+                <param>company</param>
+                <param>dept</param>
+                <param>grade</param>
+                <param>office_tel</param>
+                <param>mobile</param>
+                <param>etc1</param>
+                <param>etc2</param>
+            </url>
+
+            <!--발송분류 검색-->
+            <url uri="/send/category/list.do">
+                <param>srch_keyword</param>
+            </url>
+
+            <!--이미지 검색-->
+            <url uri="/send/image/list.do">
+                <param>srch_keyword</param>
+            </url>
+
+            <!--템플릿 검색-->
+            <url uri="/send/template/list.do">
+                <param>srch_keyword</param>
+            </url>
+
+
+            <!--테스트계정 검색-->
+            <url uri="/send/demoaccount/list.do">
+                <param>srch_keyword</param>
+            </url>
+
+            <!--수신거부 검색-->
+            <url uri="/send/reject/list.do">
+                <param>srch_keyword</param>
+            </url>
+
+            <!--사용자관리 검색-->
+            <url uri="/sysman/user/list.do">
+                <param>srch_keyword</param>
+            </url>
+
+            <!--발송차단 검색-->
+            <url uri="/sysman/sendfilter/list.do">
+                <param>srch_keyword</param>
+            </url>
+
+            <!--연동IP 검색-->
+            <url uri="/sysman/relay/list.do">
+                <param>srch_keyword</param>
+            </url>
+
+            <!--차단IP 검색-->
+            <url uri="/sysman/block/list.do">
+                <param>srch_keyword</param>
+            </url>
+
+        </exception>
+    </xss>
+</config>

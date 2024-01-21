@@ -1,0 +1,341 @@
+﻿<!DOCTYPE HTML>
+<html lang="ko-KR">
+<head>
+	<meta charset="UTF-8">
+	<title>SensEMS</title>
+	<link rel="stylesheet" href="../../sens-static/css/style.css" />
+	<link rel="stylesheet" href="../../sens-static/css/skin.css" />
+	
+</head>
+<body class="skin1">
+	<div class="wrap">
+		<!-- left area start -->
+		<div class="left_menu ">
+			<div class="left_logo ">
+				<a href=""><img src="../../sens-static/images/left_logo.png" alt="로고"></a>
+			</div>
+
+			<div class="profile ">
+				<div class="info">
+					<div class="info_box  ">
+						<a href="" class="user_name">김효민</a>
+						<a href="" class="user_membership">내정보</a>
+					</div>
+				</div>
+				<div class="info_box2">
+					<div class="help"><a href="">HELP</a></div>
+					<p></p>
+					<div class="logout"><a href="">LOGOUT</a></div>
+				</div>
+			</div>
+
+			<div class="nav">
+				<ul>
+					<li class="menu_1depth">
+						<a href="01001_composer.html"><span class="icon_public depth1_01"></span>메일쓰기</a>
+					</li>
+					<li class="menu_1depth">
+						<a href="02001_statistics.html"><span class="icon_public depth1_02"></span>메일발송 결과</a>
+					</li>
+					<li class="menu_1depth">
+						<a href="03001_schedule.html"><span class="icon_public depth1_03"></span>발송일정관리</a>
+					</li>
+					<li class="menu_1depth">
+						<a href="" class="folder_off"><span class="icon_public depth1_04"></span>수신그룹 관리</a>
+						<ul>
+							<li class="menu_2depth"><a href="">수신그룹 관리</a></li>
+							<li class="menu_2depth"><a href="address">개인 주소록</a></li>
+						</ul>
+					</li>
+					<li class="menu_1depth on">
+						<a href="" class="folder_off"><span class="icon_public depth1_05"></span>발송 관리</a>
+						<ul style="">
+							<li class="menu_2depth"><a href="">발송분류 관리</a></li>
+							<li class="menu_2depth"><a href="">이미지 관리</a></li>
+							<li class="menu_2depth"><a href="">템플릿 관리</a></li>
+							<li class="menu_2depth"><a href="">테스트 계정관리</a></li>
+							<li class="menu_2depth"><a href="">수신거부 관리</a></li>
+						</ul>
+					</li>
+					<li class="menu_1depth">
+						<a href="" class="folder_off"><span class="icon_public depth1_06"></span>시스템 관리자</a>
+						<ul style="">
+							<li class="menu_2depth"><a href="">사용자 관리</a></li>
+							<li class="menu_2depth"><a href="">정기예약발송 설정</a></li>
+							<li class="menu_2depth"><a href="">발송차단 설정</a></li>
+							<li class="menu_2depth"><a href="">데이터베이스 관리</a></li>
+							<li class="menu_2depth"><a href="06005_attach.html">첨부파일 확장자 관리</a></li>
+							<li class="menu_2depth"><a href="">사용자 활동로그 조회</a></li>
+						</ul>
+
+					</li>
+				</ul>
+			</div>
+
+		</div>	
+		<!-- left area end -->
+
+		<div class="attach_list">
+		<!-- section start -->
+			<!-- top area start -->
+			<div class="title_box fixed">
+				<div class="article top_area">
+					<div class="title">
+						<h1>첨부파일 목록</h1>
+						<p>첨부파일을 관리할 수 있습니다.
+
+						</p>
+					</div>
+					<div class="search_box">
+						<div class="inner">
+							<div class="select_box">
+								<!-- <select class="search_opt" id="" name="search_opt">
+                                    <option value="">제목</option>
+                                </select> -->
+							</div>
+							<input id="srch_keyword" name="srch_keyword" placeholder="검색어를 입력하세요." type="text" value="">
+							<button type="button" class="btn1" onclick="resultList.search();">검색</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- top area end -->	
+			
+			<!-- content top start -->	
+				<div class="content_top fixed">
+					<ul class="content_top_btn">
+						<li><a class="btn2" href="">삭제</a></li>
+					</ul>
+					<div class="select_box">
+						<select id="permission" name="permission" class="w150" onchange="userList.changeOption();">
+							<option value="">권한</option>
+							<option value="A">관리자</option>
+							<option value="U">사용자</option>
+						</select>
+						<select id="isStop" name="isStop" class="w150" onchange="userList.changeOption();">
+							<option value="">상태</option>
+							<option value="0">정상</option>
+							<option value="1">사용정지</option>
+						</select>
+						<select class="list_select" onchange="common.change_pagesize(this.value)">
+							<option selected="" value="15">15</option>
+							<option value="30">30</option>
+							<option value="50">50</option>
+							<option value="100">100</option>
+						</select>
+					</div>
+				</div>
+			<!-- content top end -->
+				
+			
+			<div class="section pd_l30">
+				<!-- content start -->
+				<div class="article content">
+					<!-- content area start -->
+					<div class="content_area">
+						<table width="100%" height="auto" id="list" summary="WEBLINK 파일 목록입니다.">
+							<colgroup>
+								<col style="width:35px;">
+								<col style="width:auto;">
+								<col style="width:130px;">
+								<col style="width:110px;">
+								<col style="width:110px;">
+								<col style="width:110px;">
+								<col style="width:80px;">
+							</colgroup>
+							<thead>
+							<tr>
+								<th class="check_ico"><input type="checkbox" name="allCheck" id="allCheck" onclick="selectAllChk('allCheck')" title="전체선택"></th>
+								<th><span >파일명</span></th>
+								<th><span >파일크기</span></th>
+								<th><span >시작일</span></th>
+								<th><span >만료일</span></th>
+								<th><span >다운횟수</span></th>
+								<th class="txt center"><span >삭제</span></th>
+							</tr>
+							</thead>
+							<tbody>
+							<tr>
+								<td class="check_ico">
+									<input type="checkbox" name="ekey[]" value="161647807196814212231127" title="선택">
+								</td>
+								<td><span class="txt">phantomjs_주의사항.txt</span></td>
+
+								<td>1.03 KB</td>
+								<td>2021-03-23</td>
+								<td>2021-04-07</td>
+								<td>0</td>
+								<td class="txt center">
+									<button type="button" class="btn3 trash" title="삭제" onclick="attachList.deleteClick('161647807196814212231127')"><span class="blind">삭제</span></button>
+								</td>
+							</tr>
+							<tr>
+								<td class="check_ico">
+									<input type="checkbox" name="ekey[]" value="161647807196814212231127" title="선택">
+								</td>
+								<td><span class="txt">phantomjs_주의사항.txt</span></td>
+
+								<td>1.03 KB</td>
+								<td>2021-03-23</td>
+								<td>2021-04-07</td>
+								<td>0</td>
+								<td class="txt center">
+									<button type="button" class="btn3 trash" title="삭제" onclick="attachList.deleteClick('161647807196814212231127')"><span class="blind">삭제</span></button>
+								</td>
+							</tr>
+							<tr>
+								<td class="check_ico">
+									<input type="checkbox" name="ekey[]" value="161647807196814212231127" title="선택">
+								</td>
+								<td><span class="txt">phantomjs_주의사항.txt</span></td>
+
+								<td>1.03 KB</td>
+								<td>2021-03-23</td>
+								<td>2021-04-07</td>
+								<td>0</td>
+								<td class="txt center">
+									<button type="button" class="btn3 trash" title="삭제" onclick="attachList.deleteClick('161647807196814212231127')"><span class="blind">삭제</span></button>
+								</td>
+							</tr>
+							<tr>
+								<td class="check_ico">
+									<input type="checkbox" name="ekey[]" value="161647807196814212231127" title="선택">
+								</td>
+								<td><span class="txt">phantomjs_주의사항.txt</span></td>
+
+								<td>1.03 KB</td>
+								<td>2021-03-23</td>
+								<td>2021-04-07</td>
+								<td>0</td>
+								<td class="txt center">
+									<button type="button" class="btn3 trash" title="삭제" onclick="attachList.deleteClick('161647807196814212231127')"><span class="blind">삭제</span></button>
+								</td>
+							</tr>
+							<tr>
+								<td class="check_ico">
+									<input type="checkbox" name="ekey[]" value="161647807196814212231127" title="선택">
+								</td>
+								<td><span class="txt">phantomjs_주의사항.txt</span></td>
+
+								<td>1.03 KB</td>
+								<td>2021-03-23</td>
+								<td>2021-04-07</td>
+								<td>0</td>
+								<td class="txt center">
+									<button type="button" class="btn3 trash" title="삭제" onclick="attachList.deleteClick('161647807196814212231127')"><span class="blind">삭제</span></button>
+								</td>
+							</tr>
+							<tr>
+								<td class="check_ico">
+									<input type="checkbox" name="ekey[]" value="161647807196814212231127" title="선택">
+								</td>
+								<td><span class="txt">phantomjs_주의사항.txt</span></td>
+
+								<td>1.03 KB</td>
+								<td>2021-03-23</td>
+								<td>2021-04-07</td>
+								<td>0</td>
+								<td class="txt center">
+									<button type="button" class="btn3 trash" title="삭제" onclick="attachList.deleteClick('161647807196814212231127')"><span class="blind">삭제</span></button>
+								</td>
+							</tr>
+							<tr>
+								<td class="check_ico">
+									<input type="checkbox" name="ekey[]" value="161647807196814212231127" title="선택">
+								</td>
+								<td><span class="txt">phantomjs_주의사항.txt</span></td>
+
+								<td>1.03 KB</td>
+								<td>2021-03-23</td>
+								<td>2021-04-07</td>
+								<td>0</td>
+								<td class="txt center">
+									<button type="button" class="btn3 trash" title="삭제" onclick="attachList.deleteClick('161647807196814212231127')"><span class="blind">삭제</span></button>
+								</td>
+							</tr>
+							<tr>
+								<td class="check_ico">
+									<input type="checkbox" name="ekey[]" value="161647807196814212231127" title="선택">
+								</td>
+								<td><span class="txt">phantomjs_주의사항.txt</span></td>
+
+								<td>1.03 KB</td>
+								<td>2021-03-23</td>
+								<td>2021-04-07</td>
+								<td>0</td>
+								<td class="txt center">
+									<button type="button" class="btn3 trash" title="삭제" onclick="attachList.deleteClick('161647807196814212231127')"><span class="blind">삭제</span></button>
+								</td>
+							</tr>
+
+							</tbody>
+						</table>
+					</div>
+					<!-- content area end -->					
+				</div>
+				<!-- content end -->
+				<!-- nav start -->
+						<div class="page_nav">
+							<ul>
+								<li>
+									<a href="" class="page_first icon_public" alt="첫 페이지로 이동">
+									<span>맨앞으로</span></a>
+								</li>
+								<li>
+									<a href="" class="page_prev icon_public" alt="이전첫 페이지로 이동">
+									<span>이전으로</span></a>
+								</li>	
+								<li class="on">
+									<a>1</a>
+								</li>  
+								<li>
+									<a href="">2</a>
+								</li>  
+								<li><a href="">3</a></li>  
+								<li><a href="">4</a></li>  
+								<li><a href="">5</a></li>  
+								<li><a href="" class="page_next icon_public" alt="다음 페이지로 이동">
+									<span>다음으로</span>
+									</a>
+								</li>
+								<li>
+									<a href="" class="page_last icon_public" alt="마지막 페이지로 이동">
+									<span>맨뒤로</span>
+									</a>
+								</li>		  
+							</ul>
+						</div>	
+				<!-- nav end -->
+						
+			</div>
+			<!-- section end -->	
+		</div>
+	</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

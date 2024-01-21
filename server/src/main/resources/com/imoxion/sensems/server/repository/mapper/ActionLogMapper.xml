@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.imoxion.sensems.server.repository.mapper.ActionLogMapper">
+
+    <delete id="deleteLog">
+        <![CDATA[
+        delete from imb_user_action_log where log_date < date_sub(now(), interval #{delayDays} day)
+        ]]>
+    </delete>
+
+</mapper>

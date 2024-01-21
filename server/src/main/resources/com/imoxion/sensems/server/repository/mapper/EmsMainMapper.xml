@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.imoxion.sensems.server.repository.mapper.EmsMainMapper">
+
+    <select id="getListToSend" resultType="com.imoxion.sensems.server.domain.ImbEmsMain">
+        <!-- SELECT a.*, b.contents FROM imb_emsmain a, imb_msg_info b  WHERE a.msgid = b.msgid AND (reserv_time <=#{reserv_time} OR (reserv_time is null OR reserv_time =''))
+        AND (state='000' or state='' or state='010' or state = '+10' or state='030' or state='032') AND isstop = '0' -->
+        <![CDATA[
+        SELECT * FROM imb_emsmain  WHERE (state='000' or state='' or state='010' or state = '+10' or state='030' or state='032')
+        AND isstop = '0' AND (reserv_time <=#{reserv_time} OR (reserv_time is null OR reserv_time =''))
+        ]]>
+    </select>
+
+    <select id="getListSending" resultType="com.imoxion.sensems.server.domain.ImbEmsMain">
+        <![CDATA[
+        select * FROM imb_emsmain where (state='000' or state='010' or state='+10' or state='030' or state='032' or state='040')
+        and (isstop='0' or isstop='2') AND (reserv_time <=#{reserv_time} OR (reserv_time is null OR reserv_time =''))
+        ]]>
+    </select>
+
+    <select id="getListSendingToStop" resultType="com.imoxion.sensems.server.domain.ImbEmsMain">
+         <![CDATA[
+        select * FROM imb_emsmain where (state='000' or state='010' or state='+10' or state='030' or state='032')
+        and (isstop='0' or isstop='2') AND (reserv_time <=#{reserv_time} OR (reserv_time is null OR reserv_time =''))
+        ]]>
+    </select>
+
+    <select id="getListToDelete" resultType="com.imoxion.sensems.server.domain.ImbEmsMain">
+        <![CDATA[
+        SELECT * from imb_emsmain where (state <> '000' or isstop = '1') and regdate < #{regdate}
+        ]]>
+    </select>
+
+    <select id="getListToStop" resultType="com.imoxion.sensems.server.domain.ImbEmsMain">
+        SELECT * from imb_emsmain where isstop = '2'
+    </select>
+
+    <select id="getListRecentSendingMail" resultType="com.imoxion.sensems.server.domain.ImbEmsMain">
+        <![CDATA[
+            select msgid, state, start_time, send_start_time from imb_emsmain where  (state = '+30' and end_time > date_format(date_sub(now(), INTERVAL 30 DAY), '%Y%m%d%H%i%s') )
+            or (state <> '+30' and (end_time = '' or end_time is null))
+        ]]>
+    </select>
+
+    <select id="getListToResend" resultType="com.imoxion.sensems.server.domain.ImbEmsMain">
+        <![CDATA[
+        SELECT * FROM imb_emsmain WHERE state='+30' and (error_resend - cur_resend) > 0 and (end_time <= date_format(date_sub(now(),INTERVAL ${interval} MINUTE), '%Y%m%d%H%i') and end_time > date_format(date_sub(now(),INTERVAL 3 DAY), '%Y%m%d%H%i'))
+        ]]>
+    </select>
+
+    <select id="getEmsInfo" resultType="com.imoxion.sensems.server.domain.ImbEmsMain">
+        select * from imb_emsmain where msgid=#{msgid}
+    </select>
+
+    <select id="getContents" resultType="com.imoxion.sensems.server.domain.ImbEmsContents">
+        select * from imb_msg_info where msgid=#{msgid}
+    </select>
+
+    <update id="updateToStop">
+        update imb_emsmain set isstop = '1', state=#{state}, stop_time=#{stop_time} where msgid=#{msgid}
+    </update>
+
+    <update id="updateStateStartTime">
+        UPDATE imb_emsmain SET state='010', start_time=#{start_time} WHERE msgid=#{msgid}
+    </update>
+
+    <update id="updateState">
+        UPDATE imb_emsmain SET state=#{state} WHERE msgid=#{msgid}
+    </update>
+
+    <update id="updateStateSendStartTime">
+        UPDATE imb_emsmain SET state='030', send_start_time=#{send_start_time} WHERE msgid=#{msgid}
+    </update>
+
+    <update id="updateStateAndCount">
+        UPDATE imb_emsmain SET state=#{state}, total_send=#{total_send} WHERE msgid=#{msgid}
+    </update>
+
+    <update id="updateCurSend">
+        UPDATE imb_emsmain SET cur_send=#{cur_send} WHERE msgid=#{msgid}
+    </update>
+
+    <update id="updateToLoggingState">
+        UPDATE imb_emsmain SET cur_send=total_send, state='040' WHERE msgid=#{msgid}
+    </update>
+
+    <update id="updateMainEndEx">
+        UPDATE imb_emsmain
+        <set>
+            <if test="currState == '-00'">
+                total_send=cur_send, state='+00', end_time=#{currDate}
+            </if>
+            <if test="currState != '-00'">
+                total_send=cur_send, state='+30', end_time=#{currDate}
+            </if>
+        </set>
+        WHERE msgid=#{msgid}
+    </update>
+
+    <update id="updateMailResend">
+        update imb_emsmain set extended='888',cur_resend=error_resend where msgid = #{msgid}
+    </update>
+
+    <update id="updateMailResendNum">
+        update imb_emsmain set resend_num = resend_num+1 where parentid = #{msgid} and resend_num > #{resend_num}
+    </update>
+
+    <delete id="deleteEmsMain">
+        delete from imb_emsmain where msgid=#{msgid}
+    </delete>
+
+    <delete id="deleteMsgInfo">
+        delete from imb_msg_info where msgid=#{msgid}
+    </delete>
+
+    <insert id="insertMsgInfo">
+        INSERT INTO imb_msg_info (msgid, contents) VALUES (#{msgid}, #{contents})
+    </insert>
+
+    <insert id="insertMailData" parameterType="com.imoxion.sensems.server.domain.ImbEmsMain">
+        INSERT INTO imb_emsmain (categoryid,msgid,userid,mail_from,replyto,rectype,dbkey,recid,recname,query,msg_name,regdate,
+                                 reserv_time,resp_time,charset,ishtml,is_same_email,islink,`state`,parentid,resend_num,resend_step,isattach,msg_path,error_resend,cur_resend)
+        VALUES (#{categoryid},#{msgid},#{userid},#{mail_from},#{replyto},#{rectype},#{dbkey},#{recid},#{recname},#{query},#{msg_name},
+                #{regdate},#{reserv_time},#{resp_time},#{charset},#{ishtml},#{is_same_email},#{islink},#{state},#{parentid},#{resend_num},#{resend_step},#{isattach},#{msg_path}, #{error_resend}, #{cur_resend})
+    </insert>
+</mapper>

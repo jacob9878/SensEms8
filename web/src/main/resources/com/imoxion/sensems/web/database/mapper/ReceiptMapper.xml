@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imoxion.sensems.web.database.mapper.ReceiptMapper">
+    <select id="selectReceiptCount" resultType="int">
+        select count(*) from recv_${msgid} a
+        left join imb_emsmain b
+        on a.id = b.userid
+        where
+        <choose>
+            <when test="_databaseId == 'oracle'">
+                <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(searchKeywordMsgid)">
+                    and b.msgid = #{searchKeywordMsgid}
+                </if>
+                <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(searchKeywordRcode)">
+                    and a.id = #{searchKeywordRcode}
+                </if>
+            </when>
+            <otherwise>
+                <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(searchKeywordMsgid)">
+                    and b.msgid like concat('%', #{searchKeywordMsgid}, '%')
+                </if>
+                <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(searchKeywordRcode)">
+                    and a.id like concat('%', #{searchKeywordRcode}, '%')
+                </if>
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="selectReceiptRecvList" resultType="com.imoxion.sensems.web.beans.ReceiptBean">
+        select id, recv_time,field1,field2 from recv_${searchKeywordMsgid}
+        where
+        id = #{searchKeywordRcode}
+        group by id
+    </select>
+
+    <select id="getMsgName" resultType="String">
+		SELECT msg_name FROM imb_emsmain where msgid=#{msgid}
+	</select>
+    <select id="getMailFrom" resultType="String">
+        SELECT mail_from FROM imb_emsmain where msgid=#{msgid}
+    </select>
+</mapper>

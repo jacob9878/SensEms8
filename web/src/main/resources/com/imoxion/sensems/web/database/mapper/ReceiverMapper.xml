@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imoxion.sensems.web.database.mapper.ReceiverMapper">
+    <insert id="insertReceiver" parameterType="receiverInfo">
+        insert into imb_receiver(ukey, userid, recv_name, dbkey, query, regdate, extended)
+        values(#{ukey}, #{userid}, #{recv_name}, #{dbkey}, #{query}, #{regdate}, #{extended})
+    </insert>
+    <delete id="deleteReceiverGroup">
+        delete from imb_receiver where ukey = #{ukey}
+    </delete>
+
+    <select id="getReceiverList" resultType="receiverInfo">
+        SELECT * FROM imb_receiver
+    </select>
+
+    <select id="getReceiverGroupCount" resultType="int" >
+        select count(*) from imb_receiver
+        <choose>
+            <when test="_databaseId == 'oracle'">
+                <where>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+                        <choose>
+                            <when test="srch_type == 'recv_name'">
+                                ${srch_type} like '%'||#{srch_keyword}||'%'
+                            </when>
+                            <when test="srch_type == 'userid'">
+                                ${srch_type} like '%'||#{srch_keyword}||'%'
+                            </when>
+                        </choose>
+                    </if>
+                </where>
+            </when>
+            <otherwise>
+                <where>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+                        <choose>
+                            <when test="srch_type == 'recv_name'">
+                                ${srch_type} like concat('%',#{srch_keyword},'%')
+                            </when>
+                            <when test="srch_type == 'userid'">
+                                ${srch_type} like concat('%',#{srch_keyword},'%')
+                            </when>
+                        </choose>
+                    </if>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty( userid)">
+                        userid = #{userid}
+                    </if>
+                </where>
+            </otherwise>
+        </choose>
+    </select>
+    <select id="getReceiverGroupDetailCount" resultType="int" >
+        select count(*) from imb_receiver where ukey= #{recid}
+    </select>
+
+    <select id="getReceiverAddrDetailCount" resultType="int" >
+        select count(*) from imb_addr_#{userid} where gkey = #{gkey};
+    </select>
+
+    <select id="getReceiverGroupForPageing" resultType="receiverInfo">
+        <choose>
+            <when test="_databaseId == 'oracle'">
+                SELECT * FROM (
+                SELECT ROWNUM AS RNUM,a.* FROM(
+                select * from imb_receiver
+                <where>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+                        <choose>
+                            <when test="srch_type == 'recv_name'">
+                                ${srch_type} like '%'||#{srch_keyword}||'%'
+                            </when>
+                            <when test="srch_type == 'userid'">
+                                ${srch_type} like '%'||#{srch_keyword}||'%'
+                            </when>
+                        </choose>
+                    </if>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty( userid )">
+                        userid = #{userid}
+                    </if>
+                </where>
+                order by regdate desc
+                ) a
+                ) WHERE RNUM between #{start} and #{end}
+            </when>
+            <otherwise>
+                select * from imb_receiver
+                <where>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+                        <choose>
+                            <when test="srch_type == 'recv_name'">
+                                ${srch_type} like concat('%',#{srch_keyword},'%')
+                            </when>
+                            <when test="srch_type == 'userid'">
+                                ${srch_type} like concat('%',#{srch_keyword},'%')
+                            </when>
+                        </choose>
+                    </if>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty( userid )">
+                        userid = #{userid}
+                    </if>
+                </where>
+                order by regdate desc
+                limit #{start},#{end}
+            </otherwise>
+        </choose>
+    </select>
+    <select id="getReceiverGroup" resultType="receiverInfo">
+        select * from imb_receiver where ukey = #{ukey}
+    </select>
+
+    <select id="getReceiverUserinfo" resultType="userInfo">
+        select * from  imb_userinfo  where userid = #{userid}
+    </select>
+
+
+    <select id="getReceiverGroupRecid" resultType="receiverInfo">
+        select * from imb_receiver where ukey = #{recid}
+    </select>
+
+
+    <update id="updateReceiver" parameterType="receiverInfo">
+        update imb_receiver
+        <set>
+            <if test="userid != null">
+                userid = #{userid},
+            </if>
+            <if test="recv_name != null">
+                recv_name = #{recv_name},
+            </if>
+            <if test="dbkey != null">
+                dbkey = #{dbkey},
+            </if>
+            <if test="query != null">
+                query = #{query},
+            </if>
+            <if test="extended != null">
+                extended = #{extended},
+            </if>
+        </set>
+        where ukey = #{ukey}
+    </update>
+
+    <select id="getDbKey" resultType="String">
+    	select dbkey from imb_receiver where ukey=#{ukey}
+    </select>
+
+    <select id="getMsginfo" resultType="com.imoxion.sensems.web.beans.EmsBean">
+    	select * from imb_emsmain where msgid=#{msgid}
+    </select>
+
+</mapper>

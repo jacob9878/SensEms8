@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.imoxion.sensems.server.repository.mapper.AttachMapper">
+
+    <select id="getAttachList" resultType="com.imoxion.sensems.server.domain.ImbEmsAttach" fetchSize="100">
+        select * from imb_emsattach where msgid=#{msgid}
+    </select>
+
+    <select id="getAttachInfo" resultType="com.imoxion.sensems.server.domain.ImbEmsAttach">
+        SELECT * FROM imb_emsattach where ekey=#{ekey} and msgid=#{msgid}
+    </select>
+
+    <select id="getAttachListExpired" resultType="com.imoxion.sensems.server.domain.ImbEmsAttach" fetchSize="100">
+        <![CDATA[
+        select * from imb_emsattach where expire_date < date_sub(now(), interval #{delayDays} day)
+        ]]>
+    </select>
+
+    <delete id="deleteAttach">
+        delete from imb_emsattach where ekey = #{ekey}
+    </delete>
+
+    <delete id="deleteAttachByMsgid">
+        delete from imb_emsattach where msgid = #{msgid}
+    </delete>
+
+    <insert id="insertAttachInfo" parameterType="com.imoxion.sensems.server.domain.ImbEmsAttach">
+        INSERT INTO imb_emsattach (ekey,msgid,file_name,file_size,file_path,expire_date,regdate)
+        VALUES (#{ekey},#{msgid},#{file_name},#{file_size},#{file_path},#{expire_date},#{regdate})
+    </insert>
+
+</mapper>

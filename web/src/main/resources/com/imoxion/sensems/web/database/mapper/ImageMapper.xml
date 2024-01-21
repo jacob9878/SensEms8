@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imoxion.sensems.web.database.mapper.ImageMapper">
+    <insert id="insertImage" parameterType="imageInfo">
+		insert into imb_image(ukey, userid, image_name, image_path, regdate, flag, image_width, image_height)
+		values (#{ukey}, #{userid}, #{image_name}, #{image_path}, #{regdate}, #{flag}, #{image_width},#{image_height})
+	</insert>
+
+
+    <select id="getImageCount" resultType="int">
+		select count(*) from imb_image
+		<choose>
+			<when test="_databaseId == 'oracle'">
+				<where>
+					<if test="srch_type == 01">
+						and flag=#{srch_type}
+					</if>
+					<if test="srch_type == 02">
+						and flag=#{srch_type}	and userid=#{userid}
+					</if>
+					<if test="srch_type == 0">
+						and userid= #{userid} or flag ='01'
+					</if>
+					<if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+						and (image_name like '%'||#{srch_keyword}||'%' or userid like '%'||#{srch_keyword}||'%')
+					</if>
+				</where>
+			</when>
+			<otherwise>
+				<where>
+					<if test="srch_type == 01">
+						and flag=#{srch_type}
+					</if>
+					<if test="srch_type == 02">
+						and flag=#{srch_type}	and userid=#{userid}
+					</if>
+					<if test="srch_type == 0">
+						and userid= #{userid} or flag ='01'
+					</if>
+					<if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+						and (image_name like concat('%',#{srch_keyword},'%') or userid like concat('%',#{srch_keyword},'%'))
+					</if>
+				</where>
+			</otherwise>
+		</choose>
+	</select>
+
+	<select id="getImageListForPageing" resultType="com.imoxion.sensems.web.database.domain.ImbImage">
+
+		<choose>
+			<when test="_databaseId == 'oracle'">
+				SELECT * FROM (
+				SELECT ROWNUM AS RNUM,a.* FROM(
+				select * from imb_image
+				<where>
+					<if test="srch_type == 01">
+						and flag=#{srch_type}
+					</if>
+					<if test="srch_type == 02">
+						and flag=#{srch_type}	and userid=#{userid}
+					</if>
+					<if test="srch_type == 0">
+						and userid= #{userid} or flag ='01'
+					</if>
+					<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(srch_keyword )">
+						and (image_name like '%'||#{srch_keyword}||'%' or userid like '%'||#{srch_keyword}||'%')
+					</if>
+				</where>
+				order by regdate desc
+				) a
+				) WHERE RNUM between #{start} and #{end}
+			</when>
+			<otherwise>
+				select * from imb_image
+				<where>
+					<if test="srch_type == 01">
+						and flag=#{srch_type}
+					</if>
+					<if test="srch_type == 02">
+						and flag=#{srch_type}	and userid=#{userid}
+					</if>
+					<if test="srch_type == 0">
+						and userid= #{userid} or flag ='01'
+					</if>
+					<if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+						and (image_name like concat('%',#{srch_keyword},'%') or userid like concat('%',#{srch_keyword},'%'))
+					</if>
+				</where>
+				order by regdate desc
+				limit #{start},#{end}
+			</otherwise>
+		</choose>
+	</select>
+
+    <select id="deleteImageList" resultType="com.imoxion.sensems.web.database.domain.ImbImage">
+        select * from imb_image where userid=#{userid} and flag = '02'
+    </select>
+
+	<select id="getImage" resultType="imageInfo">
+		select * from imb_image where ukey = #{ukey}
+	</select>
+
+	<delete id="deleteImage">
+		delete from imb_image where ukey=#{ukey}
+	</delete>
+</mapper>

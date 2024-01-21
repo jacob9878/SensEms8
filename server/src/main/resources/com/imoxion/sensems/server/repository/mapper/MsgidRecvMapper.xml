@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.imoxion.sensems.server.repository.mapper.MsgidRecvMapper">
+
+    <select id="getMaxRecvCount" resultType="int">
+       select count(*) from ${tableName}
+    </select>
+
+    <select id="getResendTarget" resultType="string">
+        select field1 from recv_${msgid} where errcode IN ('902','903','904','906','910')
+    </select>
+
+    <select id="getRecvSendingCount" resultType="int">
+        <![CDATA[
+            SELECT count(*) FROM ${tableName} where success < 2
+        ]]>
+    </select>
+
+    <select id="getSendCountByDomain" resultType="com.imoxion.sensems.server.domain.ImbDomainCount" fetchSize="100">
+       select domain, count(case when success = '1' then domain end) as successCount, count(case when success = '0' then domain end) as failCount from ${tableName} group by domain
+    </select>
+
+    <select id="getErrorCountByErrorcode" resultType="hashmap">
+       <![CDATA[
+       select errcode, count(id) as cnt from ${tableName} where errcode > 0 group by errcode
+       ]]>
+    </select>
+
+    <select id="getRecvTransfer" resultType="map" fetchSize="100">
+        select * from ${tableName} where success=2 order by field1
+    </select>
+
+    <insert id="createMsgidRecvTable" statementType="STATEMENT">
+        ${extractRecvQuery}
+    </insert>
+
+    <delete id="dropRecvTable">
+        drop table if exists ${tableName}
+    </delete>
+
+
+
+
+</mapper>

@@ -1,0 +1,410 @@
+﻿<!DOCTYPE HTML>
+<html lang="ko-KR">
+<head>
+	<meta charset="UTF-8">
+	<title>SensEMS</title>
+	<link rel="stylesheet" href="../../sens-static/css/style.css" />
+	<link rel="stylesheet" href="../../sens-static/css/skin.css" />
+	
+</head>
+<body class="skin1">
+	<div class="wrap">
+		<!-- left area start -->
+		<div class="left_menu ">
+			<div class="left_logo ">
+				<a href=""><img src="../../sens-static/images/left_logo.png" alt="로고"></a>
+			</div>
+
+			<div class="profile ">
+				<div class="info">
+					<div class="info_box  ">
+						<a href="" class="user_name">김효민</a>
+						<a href="" class="user_membership">내정보</a>
+					</div>
+				</div>
+				<div class="info_box2">
+					<div class="help"><a href="">HELP</a></div>
+					<p></p>
+					<div class="logout"><a href="">LOGOUT</a></div>
+				</div>
+			</div>
+
+			<div class="nav">
+				<ul>
+					<li class="menu_1depth">
+						<a href="01001_composer.html"><span class="icon_public depth1_01"></span>메일쓰기</a>
+					</li>
+					<li class="menu_1depth">
+						<a href="02001_statistics.html"><span class="icon_public depth1_02"></span>메일발송 결과</a>
+					</li>
+					<li class="menu_1depth">
+						<a href="03001_schedule.html"><span class="icon_public depth1_03"></span>발송일정관리</a>
+					</li>
+					<li class="menu_1depth">
+						<a href="" class="folder_off"><span class="icon_public depth1_04"></span>수신그룹 관리</a>
+						<ul>
+							<li class="menu_2depth"><a href="">수신그룹 관리</a></li>
+							<li class="menu_2depth"><a href="address">개인 주소록</a></li>
+						</ul>
+					</li>
+					<li class="menu_1depth on">
+						<a href="" class="folder_off"><span class="icon_public depth1_05"></span>발송 관리</a>
+						<ul style="">
+							<li class="menu_2depth"><a href="">발송분류 관리</a></li>
+							<li class="menu_2depth"><a href="">이미지 관리</a></li>
+							<li class="menu_2depth"><a href="">템플릿 관리</a></li>
+							<li class="menu_2depth"><a href="">테스트 계정관리</a></li>
+							<li class="menu_2depth"><a href="">수신거부 관리</a></li>
+						</ul>
+					</li>
+					<li class="menu_1depth">
+						<a href="" class="folder_off"><span class="icon_public depth1_06"></span>시스템 관리자</a>
+						<ul style="">
+							<li class="menu_2depth"><a href="">사용자 관리</a></li>
+							<li class="menu_2depth"><a href="">정기예약발송 설정</a></li>
+							<li class="menu_2depth"><a href="">발송차단 설정</a></li>
+							<li class="menu_2depth"><a href="">데이터베이스 관리</a></li>
+							<li class="menu_2depth"><a href="06005_attach.html">첨부파일 확장자 관리</a></li>
+							<li class="menu_2depth"><a href="">사용자 활동로그 조회</a></li>
+						</ul>
+
+					</li>
+				</ul>
+			</div>
+
+		</div>
+		<!-- left area end -->
+
+		<div class="statisticsSend">
+		<!-- section start -->
+			<!-- top area start -->
+			<div class="title_box fixed">
+				<div class="article top_area">
+					<div class="title">
+						<h1>메일발송 결과</h1>
+						<p>메일발송 결과나 통계를 볼 수 있습니다.</p>
+					</div>									
+				</div>
+			</div>
+			<!-- top area end -->	
+		
+	
+			<!-- content top start -->	
+				<div class="content_top fixed">
+					<ul class="content_top_btn">
+						<li><a class="btn2" href="02001_statistics.html">목록으로</a></li>
+					</ul>			
+				</div>
+			<!-- content top end -->
+				
+
+		
+		<div class="section pd_l30">
+			<!-- content start -->
+
+			<div class="article content">
+				<!-- composer_area start -->
+				<div class="composer_area">
+					<div>
+						<table width="100%" border="0" cellpadding="0" cellspacing="1" class="b_b2" >
+							<colgroup>
+								<col style="width: 150px">
+								<col style="width: 300px">
+								<col style="width: 150px">
+								<col style="width: auto">
+							</colgroup>
+						<tbody>	
+							<tr>
+								<th>제목</th>
+								<td colspan="3" class="over_text"><span>[뉴스레터] 12월 아이모션 소식을 전달 드립니다~ (*퀴즈 이벤트_모바일 쿠폰 증정!)</span></td>
+							</tr>	
+							<tr>
+								<th>발송분류</th>
+								<td colspan="3"><span>[분류없음]</span></td>
+							</tr>
+							<tr>
+								<th>발송자 계정</th>						
+								<td><span>admin</span></td>
+								<th>수신자</th>
+								<td>
+									<span>주소록</span>
+									<button title="수신자 상세보기" class="btn3" onclick="window.open('02002_statisticsSend_address.html','에러통계 목록','width=1000px,height=550px,location=no,status=no,scrollbars=yes,menubar=no,resizable=yes');" type="button">
+										<span>상세보기</span>
+									</button>
+								</td>
+							</tr>
+							<tr>
+								<th>보낸사람</th>						
+								<td><span>아이모션<marketing@imoxion.com></span></td>
+								<th>발송일자</th>
+								<td><span>2020-12-29 12:53</span></td>
+							</tr>
+						</tbody>
+					</table>
+					</div>
+					<div class="tab_box">
+						<!-- tab wrap start -->
+						<div class="tab_area02">
+							<ul>
+								<li class="on"><a href="02002_statisticsSend.html">발송 통계</a></li>
+								<li class=""><a href="02003_statisticsError.html">에러 통계</a></li>
+								<li class=""><a href="02004_statisticsReceipt.html">수신확인 통계</a></li>
+								<li class=""><a href="02005_statisticsLink.html">링크 통계</a></li>
+								<li class=""><a href="02006_statisticsPage.html">페이지 보기</a></li>
+							</ul>
+						</div>
+						<!-- tab wrap end -->
+
+						<div class="graph">
+							<!-- content area start -->
+							<div class="composer_area ">
+								<table>
+									<tbody>
+									<tr>
+										<td class="graph_lft">
+											<table width="100%" border="0" cellpadding="0" cellspacing="1" >
+												<tbody>
+												<tr>
+													<td><img src="../../sens-static/images/graph_img.png" alt="그래프자리" /></td>
+												</tr>
+												</tbody>
+											</table>
+										</td>
+										<td class="mini_table" width="auto">
+											<table width="100%" border="0" cellpadding="0" cellspacing="1" >
+												<colgroup>
+													<col style="width:150px">
+													<col style="width:auto">
+												</colgroup>
+												<tbody>
+												<tr>
+													<th>발송메일수</th>
+													<td><span>400건</span></td>
+												</tr>
+												<tr>
+													<th>성 공</th>
+													<td><span>372건</span></td>
+												</tr>
+												<tr>
+													<th>실 패</th>
+													<td><span>28건</span></td>
+												</tr>
+												<tr>
+													<th>수신거부</th>
+													<td><span>현재 : 0건 / 전체: 142건</span></td>
+												</tr>
+												<tr>
+													<th>시작시간</th>
+													<td><span>2020-12-29 12:53</span></td>
+												</tr>
+												<tr>
+													<th>종료시간</th>
+													<td><span>2020-12-29 12:53</span></td>
+												</tr>
+												<tr class="">
+													<th>반응분석 종료일</th>
+													<td>
+														<input type="text" name="resp_date" id="resp_date" class="w100 hasDatepicker" size="10" value="2022-03-11" readonly="">
+														<select id="resp_hour" name="resp_time" value="resp_hour" class="w80"><option value="00">00시</option><option value="01">01시</option><option value="02">02시</option><option value="03">03시</option><option value="04">04시</option><option value="05">05시</option><option value="06">06시</option><option value="07">07시</option><option value="08">08시</option><option value="09">09시</option><option value="10">10시</option><option value="11">11시</option><option value="12">12시</option><option value="13">13시</option><option value="14">14시</option><option value="15">15시</option><option value="16">16시</option><option value="17">17시</option><option value="18">18시</option><option value="19">19시</option><option value="20">20시</option><option value="21">21시</option><option value="22">22시</option><option value="23">23시</option></select>
+														<select id="resp_min" name="resp_time" value="resp_min" class="w80"><option value="00">00분</option><option value="05">05분</option><option value="10">10분</option><option value="15">15분</option><option value="20">20분</option><option value="25">25분</option><option value="30">30분</option><option value="35">35분</option><option value="40">40분</option><option value="45">45분</option><option value="50">50분</option><option value="55">55분</option></select>
+														<button class="btn3 btn_small" onclick="staticsendHsList.editChanegResp_time()">수정</button>
+													</td>
+												</tr>
+
+												</tbody>
+											</table>
+										</td>
+									</tr>
+									</tbody>
+								</table>
+
+
+
+							</div>
+
+							<!-- content area end -->
+						</div>
+						<!-- content end -->
+
+						<!-- content start -->
+						<div class=" graph">
+							<!-- content area start -->
+							<div class="content_area ">
+								<table  width ="100%" height="auto">
+									<colgroup>
+										<col style="width:50px" />
+										<col style="width:auto" />
+										<col style="width:80px" />
+										<col style="width:80px" />
+										<col style="width:60px" />
+										<col style="width:400px" />
+									</colgroup>
+									<thead>
+									<tr>
+										<th class="txt center">순번</th>
+										<th class="txt">도메인명</th>
+										<th class="txt">발송건수</th>
+										<th class="txt">실패건수</th>
+										<th class="txt">성공율</th>
+										<th></th>
+									</tr>
+									</thead>
+									<tbody>
+									<tr>
+										<td class="txt center"><span>1</span></td>
+										<td class="over_text"><span>naver.com</span></td>
+										<td class="txt"><span>10</span>건</td>
+										<td class="txt"><span>5</span>건</td>
+										<td class="txt"><span >50%</span></td>
+										<td class="graph_Wlong"><span class="stick" style="width:50%"></span></td>
+									</tr>
+									<tr>
+										<td class="txt center"><span>2</span></td>
+										<td class="over_text"><span>naver.com</span></td>
+										<td class="txt"><span>10</span>건</td>
+										<td class="txt"><span>5</span>건</td>
+										<td class="txt"><span >100%</span></td>
+										<td class="graph_Wlong"><span class="stick" style="width:100%"></span></td>
+									</tr>
+									<tr>
+										<td class="txt center"><span>2</span></td>
+										<td class="over_text"><span>naver.com</span></td>
+										<td class="txt"><span>10</span>건</td>
+										<td class="txt"><span>5</span>건</td>
+										<td class="txt"><span >100%</span></td>
+										<td class="graph_Wlong"><span class="stick" style="width:100%"></span></td>
+									</tr>
+									<tr>
+										<td class="txt center"><span>2</span></td>
+										<td class="over_text"><span>naver.com</span></td>
+										<td class="txt"><span>10</span>건</td>
+										<td class="txt"><span>5</span>건</td>
+										<td class="txt"><span >100%</span></td>
+										<td class="graph_Wlong"><span class="stick" style="width:100%"></span></td>
+									</tr>
+									<tr>
+										<td class="txt center"><span>2</span></td>
+										<td class="over_text"><span>naver.com</span></td>
+										<td class="txt"><span>10</span>건</td>
+										<td class="txt"><span>5</span>건</td>
+										<td class="txt"><span >100%</span></td>
+										<td class="graph_Wlong"><span class="stick" style="width:100%"></span></td>
+									</tr>
+									<tr>
+										<td class="txt center"><span>2</span></td>
+										<td class="over_text"><span>naver.com</span></td>
+										<td class="txt"><span>10</span>건</td>
+										<td class="txt"><span>5</span>건</td>
+										<td class="txt"><span >100%</span></td>
+										<td class="graph_Wlong"><span class="stick" style="width:100%"></span></td>
+									</tr>
+									<tr>
+										<td class="txt center"><span>2</span></td>
+										<td class="over_text"><span>naver.com</span></td>
+										<td class="txt"><span>10</span>건</td>
+										<td class="txt"><span>5</span>건</td>
+										<td class="txt"><span >100%</span></td>
+										<td class="graph_Wlong"><span class="stick" style="width:100%"></span></td>
+									</tr>
+									<tr>
+										<td class="txt center"><span>2</span></td>
+										<td class="over_text"><span>naver.com</span></td>
+										<td class="txt"><span>10</span>건</td>
+										<td class="txt"><span>5</span>건</td>
+										<td class="txt"><span >100%</span></td>
+										<td class="graph_Wlong"><span class="stick" style="width:100%"></span></td>
+									</tr>
+									<tr>
+										<td class="txt center"><span>2</span></td>
+										<td class="over_text"><span>naver.com</span></td>
+										<td class="txt"><span>10</span>건</td>
+										<td class="txt"><span>5</span>건</td>
+										<td class="txt"><span >100%</span></td>
+										<td class="graph_Wlong"><span class="stick" style="width:100%"></span></td>
+									</tr>
+									<tr>
+										<td class="txt center"><span>2</span></td>
+										<td class="over_text"><span>naver.com</span></td>
+										<td class="txt"><span>10</span>건</td>
+										<td class="txt"><span>5</span>건</td>
+										<td class="txt"><span >100%</span></td>
+										<td class="graph_Wlong"><span class="stick" style="width:100%"></span></td>
+									</tr>
+
+									</tbody>
+								</table>
+							</div>
+							<!-- content area end -->
+							<!-- nav start -->
+							<div class="page_nav">
+								<ul>
+									<li>
+										<a href="" class="page_first icon_public" alt="첫 페이지로 이동">
+											<span>맨앞으로</span></a>
+									</li>
+									<li>
+										<a href="" class="page_prev icon_public" alt="이전첫 페이지로 이동">
+											<span>이전으로</span></a>
+									</li>
+									<li class="on">
+										<a>1</a>
+									</li>
+									<li>
+										<a href="">2</a>
+									</li>
+									<li><a href="">3</a></li>
+									<li><a href="">4</a></li>
+									<li><a href="">5</a></li>
+									<li><a href="" class="page_next icon_public" alt="다음 페이지로 이동">
+										<span>다음으로</span>
+									</a>
+									</li>
+									<li>
+										<a href="" class="page_last icon_public" alt="마지막 페이지로 이동">
+											<span>맨뒤로</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+							<!-- nav end -->
+						</div>
+						<!-- content end -->
+
+
+					</div>
+				</div>
+				<!-- composer_area end -->
+			</div>
+
+		</div>	
+		<!-- section end -->
+		</div>
+	</div>	
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

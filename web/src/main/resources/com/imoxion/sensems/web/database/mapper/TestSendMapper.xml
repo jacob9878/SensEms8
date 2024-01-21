@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imoxion.sensems.web.database.mapper.TestSendMapper">
+
+	<insert id="insertSmtpTempMain">
+        insert into imb_smtp_temp_main (mainkey, subject, mailfrom, group_key, regdate, body, ip)
+        values (#{mainkey}, #{subject}, #{mailfrom}, #{group_key}, #{regdate}, #{body}, #{ip})
+    </insert>
+
+	<insert id="insertSmtpTempRcpt">
+		<choose>
+			<when test="_databaseId == 'oracle'">
+				insert into imb_smtp_temp_rcpt (idx, mainkey, rcptto, rcpt_key)
+				values (IMP_TEMP_RCPT_SEQ.NEXTVAL, #{mainkey}, #{rcptto}, #{rcpt_key})
+			</when>
+			<otherwise>
+				insert into imb_smtp_temp_rcpt (mainkey, rcptto, rcpt_key)
+				values (#{mainkey}, #{rcptto}, #{rcpt_key})
+			</otherwise>
+		</choose>
+	</insert>
+
+
+	<delete id="TestSendDelete">
+    DELETE FROM imb_transmit_data WHERE traceid = #{ukey}
+    </delete>
+
+	<delete id="TestSendBodyDelete">
+    DELETE FROM imb_ext_mail_body WHERE ukey = #{ukey}
+    </delete>
+
+	<select id="getTestSendForUkey" resultType="com.imoxion.sensems.web.beans.TestSendBean">
+     SELECT * FROM imb_ext_mail WHERE ukey = #{ukey}
+    </select>
+
+	<insert id="insertTestSend" parameterType="com.imoxion.sensems.web.beans.TestSendBean" useGeneratedKeys="true" keyColumn="ukey" keyProperty="ukey">
+		<choose>
+			<when test="_databaseId == 'oracle'">
+				INSERT INTO imb_ext_mail (ukey, from_email , to_email, subject, charset, ishtml, isattach, regdate, userid, f_key )
+				VALUES (imb_ext_mail_seq.NEXTVAL ,#{from_email} , #{to_email}, #{subject}, #{charset}, #{ishtml}, #{isattach}, #{regdate}, #{userid}, #{f_key} )
+			</when>
+			<otherwise>
+				INSERT INTO imb_ext_mail (from_email , to_email, subject, charset, ishtml, isattach, regdate, userid, f_key )
+				VALUES (#{from_email} , #{to_email}, #{subject}, #{charset}, #{ishtml}, #{isattach}, #{regdate}, #{userid}, #{f_key} )
+			</otherwise>
+		</choose>
+	</insert>
+
+	<insert id="insertTestSendBody">
+		INSERT INTO IMB_EXT_MAIL_BODY (ukey, body) VALUES (#{ukey}, #{content})
+	</insert>
+
+	<select id="getTestSendList" resultType="transmitData">
+		<choose>
+			<when test="_databaseId == 'oracle'">
+				SELECT * FROM (
+				SELECT ROWNUM AS RNUM,a.* FROM(
+				SELECT * FROM imb_transmit_data
+				<where>
+					<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(srch_keyword)">
+						<choose>
+							<when test="srch_type == 'mailfrom'">
+								AND ${srch_type} LIKE '%'||#{srch_keyword}||'%'
+							</when>
+							<when test="srch_type == 'rcptto'">
+								AND ${srch_type} LIKE '%'||#{srch_keyword}||'%'
+							</when>
+							<when test="srch_type == 'errcode'">
+								AND ${srch_type} LIKE '%'||#{srch_keyword}||'%'
+							</when>
+						</choose>
+					</if>
+					<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(send_type)">
+						AND send_type =#{send_type}
+				    </if>
+				</where>
+				order by logdate desc
+				) a
+				) WHERE RNUM between #{start} and #{end}
+			</when>
+			<otherwise>
+				SELECT * FROM imb_transmit_data
+				<where>
+					<if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+						<choose>
+							<when test="srch_type == 'mailfrom'">
+								AND ${srch_type} LIKE concat('%',#{srch_keyword},'%')
+							</when>
+							<when test="srch_type == 'rcptto'">
+								AND ${srch_type} LIKE concat('%',#{srch_keyword},'%')
+							</when>
+							<when test="srch_type == 'errcode'">
+								AND ${srch_type} LIKE concat('%',#{srch_keyword},'%')
+							</when>
+						</choose>
+					</if>
+					<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(send_type)">
+						AND send_type =#{send_type}
+					</if>
+				</where>
+				order by logdate desc
+				limit #{start},#{end}
+			</otherwise>
+		</choose>
+	</select>
+
+	<select id="getTestSendListCount" resultType="int">
+		select count(*) from imb_transmit_data
+		<choose>
+			<when test="_databaseId == 'oracle'">
+				<where>
+					<if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+						<choose>
+							<when test="srch_type == 'mailfrom'">
+								AND ${srch_type} LIKE '%'||#{srch_keyword}||'%'
+							</when>
+							<when test="srch_type == 'rcptto'">
+								AND ${srch_type} LIKE '%'||#{srch_keyword}||'%'
+							</when>
+							<when test="srch_type == 'errcode'">
+								AND ${srch_type} LIKE '%'||#{srch_keyword}||'%'
+							</when>
+						</choose>
+					</if>
+					<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(send_type)">
+						AND send_type =#{send_type}
+					</if>
+				</where>
+			</when>
+			<otherwise>
+				<where>
+					<if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+						<choose>
+							<when test="srch_type == 'mailfrom'">
+								AND ${srch_type} LIKE concat('%',#{srch_keyword},'%')
+							</when>
+							<when test="srch_type == 'rcptto'">
+								AND ${srch_type} LIKE concat('%',#{srch_keyword},'%')
+							</when>
+							<when test="srch_type == 'errcode'">
+								AND ${srch_type} LIKE concat('%',#{srch_keyword},'%')
+							</when>
+						</choose>
+					</if>
+					<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(send_type)">
+						AND send_type =#{send_type}
+					</if>
+				</where>
+			</otherwise>
+		</choose>
+	</select>
+
+	<select id="getTransmitDataLog" resultType="transmitData" >
+		select * from imb_transmit_data
+		where traceid=#{traceid}
+		and serverid=#{serverid}
+		and rcptto=#{rcptto}
+	</select>
+
+	<select id="getSendType" resultType="transmitData">
+		select send_type from imb_transmit_data where subject=#{subject}
+	</select>
+
+</mapper>

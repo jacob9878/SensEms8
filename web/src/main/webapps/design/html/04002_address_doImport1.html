@@ -1,0 +1,96 @@
+<html lang="" event-clipboard-installed="true"><head><script>Function.prototype.clone=function(){var a=this,c=function(){return a.apply(this,arguments)},b;for(b in this)this.hasOwnProperty(b)&&(c[b]=this[b]);return c};Event.prototype.oldPreventDefault=Event.prototype.preventDefault.clone();Event.prototype.preventDefault=function(){window.detectedPreventDefault=!0;window.enablePreventDefault&&this.oldPreventDefault()};Event.prototype.oldStopPropagation=Event.prototype.stopPropagation.clone();Event.prototype.stopPropagation=
+function(){window.detectedStopPropagation=!0;window.enableStopPropagation&&this.oldStopPropagation()};Event.prototype.oldStopImmediatePropagation=Event.prototype.stopImmediatePropagation.clone();Event.prototype.stopImmediatePropagation=function(){window.detectedImmediateStopPropagation=!0;window.enableImmediateStopPropagation&&this.oldStopImmediatePropagation()};window.addEventListener("message",function(a){void 0!==a.data&&null!==a.data&&void 0!==a.data.enablePreventDefault&&(a=a.data,window.enablePreventDefault=
+a.enablePreventDefault,window.enableStopPropagation=a.enableStopPropagation,window.enableImmediateStopPropagation=a.enableStopImmediatePropagation)},!1)</script>
+    <title>SensEMS 8.0</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta id="_csrf" name="_csrf" content="21a71b4b-6505-40b8-ab39-98ef31feedac">
+    <meta id="_csrf_header" name="_csrf_header" content="X-CSRF-TOKEN">
+
+    <link rel="stylesheet" type="text/css" href="../../sens-static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../../sens-static/css/skin.css">
+     <link rel="stylesheet" type="text/css" href="../../sens-static/plugin/jquery/ui/theme/black/jquery.ui.all.css">
+
+    <script type="text/javascript" src="/sens-static/js/bundle/ko.js"></script>
+    <script type="text/javascript" src="/sens-static/plugin/jquery/jquery-2.2.2.min.js"></script>
+    <script type="text/javascript" src="/sens-static/plugin/jquery/jquery.json-2.4.js"></script>
+    <script type="text/javascript" src="/sens-static/plugin/jquery/ui/jquery-ui-1.9.1.custom.min.js"></script>
+    <script type="text/javascript" src="/sens-static/plugin/jquery/jquery.fileDownload.js"></script>
+    <script type="text/javascript" src="/sens-static/plugin/jquery/jquery.formatdate.js"></script>
+    <script type="text/javascript" src="/sens-static/js/common/common.js"></script>
+    <script type="text/javascript" src="/sens-static/js/common/browsercheck.js"></script>
+    <script type="text/javascript" src="/sens-static/js/common/imutil.js"></script>
+    <script type="text/javascript" src="/sens-static/js/common/imoxion.js"></script>
+    
+
+
+<script type="text/javascript" src="/sens-static/js/messages/sendmanage_ko.js"></script>
+<script type="text/javascript" src="/sens-static/js/messages/group_ko.js"></script>
+<script type="text/javascript" src="/sens-static/js/reserve/reserve.js"></script>
+<script type="text/javascript" src="/sens-static/js/util/page.js"></script>
+
+<link rel="stylesheet" type="text/css" href="chrome-extension://ikebmfjkmpkaacjablfdfdkonamgijdg/css/contents.css"></head>
+<body class="skin1">
+    <div class="w_pop wrap">
+        <div class="w_content">
+            <meta http-equiv="X-UA-Compatible" content="IE=10">
+
+
+<script type="text/javascript" src="/sens-static/js/receiver/address.js"></script>
+
+<!-- popup start-->
+<div class="popup_title over_text">
+    <div>
+        <h3 class="title">주소록 가져오기 1단계</h3>
+    </div>
+</div>
+
+<!-- content top start -->	
+<div class="content_top fixed">
+	<ul class="content_top_btn">
+		<li><a class="btn2" href="">샘플 다운로드</a></li>
+		<li><a class="btn2" href="" onclick="addressList.addrSampleDownload();">다음</a></li>
+	</ul>					
+</div>
+<!-- content top end -->
+
+<div class="section add_btn">
+    <!-- content start -->
+    <div class="article content">
+        <!-- content area start -->
+        <div class="composer_area">
+            <form name="importForm" id="importForm" method="post" action="/receiver/address/doImport2.do?_csrf=21a71b4b-6505-40b8-ab39-98ef31feedac" enctype="multipart/form-data" accept-charset="UTF-8">
+                <table width="100%" border="0" cellpadding="0" cellspacing="1" class="table">
+                    <colgroup>
+                        <col style="width:150px" />
+                        <col style="width:auto" />
+                    </colgroup>
+                    <tbody>
+                        <tr>
+								<th>파일첨부</th>
+                            <td >
+                                <input type="file" id="im_file" name="im_file" size="35" onkeydown="return false;">			
+									
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+				<span class="care_txt block mg_t10"><strong>CSV 파일 또는 쉼표나 세미콜론으로 구분된 TXT 파일만 가능합니다.</strong></span>
+            </form>            
+        </div>
+        <!-- content area end -->
+    </div>
+    <!-- content end -->
+
+</div>
+<!-- popup end-->
+        </div>
+        <div class="pop_footer">
+            <div class="btn_div">
+                <button class="close_btn btn2">닫기</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

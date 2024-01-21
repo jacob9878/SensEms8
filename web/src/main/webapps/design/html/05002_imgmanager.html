@@ -1,0 +1,333 @@
+﻿<!DOCTYPE HTML>
+<html lang="ko-KR">
+<head>
+	<meta charset="UTF-8">
+	<title>SensEMS</title>
+	<link rel="stylesheet" href="../../sens-static/css/style.css" />
+	<link rel="stylesheet" href="../../sens-static/css/skin.css" />
+	
+</head>
+<body class="skin1">
+	<div class="wrap">
+		<!-- left area start -->
+		<div class="left_menu ">
+			<div class="left_logo ">
+				<a href=""><img src="../../sens-static/images/left_logo.png" alt="로고"></a>
+			</div>
+
+			<div class="profile ">
+				<div class="info">
+					<div class="info_box  ">
+						<a href="" class="user_name">김효민</a>
+						<a href="" class="user_membership">내정보</a>
+					</div>
+				</div>
+				<div class="info_box2">
+					<div class="help"><a href="">HELP</a></div>
+					<p></p>
+					<div class="logout"><a href="">LOGOUT</a></div>
+				</div>
+			</div>
+
+			<div class="nav">
+				<ul>
+					<li class="menu_1depth">
+						<a href="01001_composer.html"><span class="icon_public depth1_01"></span>메일쓰기</a>
+					</li>
+					<li class="menu_1depth">
+						<a href="02001_statistics.html"><span class="icon_public depth1_02"></span>메일발송 결과</a>
+					</li>
+					<li class="menu_1depth">
+						<a href="03001_schedule.html"><span class="icon_public depth1_03"></span>발송일정관리</a>
+					</li>
+					<li class="menu_1depth">
+						<a href="" class="folder_off"><span class="icon_public depth1_04"></span>수신그룹 관리</a>
+						<ul>
+							<li class="menu_2depth"><a href="">수신그룹 관리</a></li>
+							<li class="menu_2depth"><a href="address">개인 주소록</a></li>
+						</ul>
+					</li>
+					<li class="menu_1depth on">
+						<a href="" class="folder_off"><span class="icon_public depth1_05"></span>발송 관리</a>
+						<ul style="">
+							<li class="menu_2depth"><a href="">발송분류 관리</a></li>
+							<li class="menu_2depth"><a href="">이미지 관리</a></li>
+							<li class="menu_2depth"><a href="">템플릿 관리</a></li>
+							<li class="menu_2depth"><a href="">테스트 계정관리</a></li>
+							<li class="menu_2depth"><a href="">수신거부 관리</a></li>
+						</ul>
+					</li>
+					<li class="menu_1depth">
+						<a href="" class="folder_off"><span class="icon_public depth1_06"></span>시스템 관리자</a>
+						<ul style="">
+							<li class="menu_2depth"><a href="">사용자 관리</a></li>
+							<li class="menu_2depth"><a href="">정기예약발송 설정</a></li>
+							<li class="menu_2depth"><a href="">발송차단 설정</a></li>
+							<li class="menu_2depth"><a href="">데이터베이스 관리</a></li>
+							<li class="menu_2depth"><a href="06005_attach.html">첨부파일 확장자 관리</a></li>
+							<li class="menu_2depth"><a href="">사용자 활동로그 조회</a></li>
+						</ul>
+
+					</li>
+				</ul>
+			</div>
+
+		</div>
+		<!-- left area end -->
+
+		<div class="imgmanager"> 
+		<!-- section start -->
+		<!-- top area start -->
+			<div class="title_box fixed">
+				<div class="article top_area">
+					<div class="title">
+						<h1>이미지 관리</h1>
+						<p>설명글을 적어주세요.</p>
+					</div>
+						
+				</div>
+			</div>
+			<!-- top area end -->	
+			
+			
+			<!-- tab wrap start -->		
+			<div class="tab_area">
+				<ul>
+					<li class="on"><a href="">개인이미지</a></li>
+					<li><a href="">공용이미지</a></li>
+				</ul>		
+			</div>
+			<!-- tab wrap end -->
+			
+			
+			<!-- content top start -->	
+			<div class="content_top fixed tab">
+				<ul class="content_top_btn">
+					<li><a class="btn2" href="">추가</a></li>
+					<li><a class="btn2" href="">삭제</a></li>
+				</ul>
+				<div class="select_box">
+					<select class="list_select" onchange="common.change_pagesize(this.value)">
+						<option selected="" value="15">15</option>
+						<option value="30">30</option>
+						<option value="50">50</option>
+						<option value="100">100</option>
+					</select>
+				</div>
+			</div>
+			<!-- content top end -->
+					
+
+			
+			<div class="section pd_l30 tab">
+			<!-- content start -->
+
+			<div class="article content">
+				<!-- content area start -->				
+				<div class="content_area">
+					<table width ="100%" height="auto" >
+						<colgroup>
+							<col style="width:25px" />
+							<col style="width:90px" />
+							<col style="width:80px" />
+							<col style="width:auto" />
+							<col style="width:130px" />
+							<col style="width:130px" />
+							<col style="width:95px" />						
+						</colgroup>					
+						<thead class="fixed">
+							<tr >
+								<th class="check_ico">
+									<input type="checkbox" title="전체선택">
+								</th>
+								<th>분류</th>
+								<th class="txt center">이미지</th>
+								<th>제목</th>
+								<th>작성자</th>
+								<th>등록일</th>
+								<th class="txt center" >미리보기</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr >
+								<td class="check_ico">
+									<input type="checkbox" title="선택">
+								</td>
+								<td>개인이미지</td>
+								<td><img src="../../sens-static/images/noimg.jpg" alt="" /></td>
+								<td>[광고][기프트콘] 아이모션 창립 20주년</td>
+								<td>admin</td>
+								<td>2022-03-10 17:59</td>
+								<td class="txt center" ><button class="btn3">미리보기</button></td>
+							</tr>
+							<tr >
+								<td class="check_ico">
+									<input type="checkbox" title="선택">
+								</td>
+								<td>개인이미지</td>
+								<td><img src="../../sens-static/images/noimg.jpg" alt="" /></td>
+								<td>[광고][기프트콘] 아이모션 창립 20주년</td>
+								<td>admin</td>
+								<td>2022-03-10 17:59</td>
+								<td class="txt center" ><button class="btn3">미리보기</button></td>
+							</tr>
+							<tr >
+								<td class="check_ico">
+									<input type="checkbox" title="선택">
+								</td>
+								<td>개인이미지</td>
+								<td><img src="../../sens-static/images/noimg.jpg" alt="" /></td>
+								<td>[광고][기프트콘] 아이모션 창립 20주년</td>
+								<td>admin</td>
+								<td>2022-03-10 17:59</td>
+								<td class="txt center" ><button class="btn3">미리보기</button></td>
+							</tr>
+							<tr >
+								<td class="check_ico">
+									<input type="checkbox" title="선택">
+								</td>
+								<td>개인이미지</td>
+								<td><img src="../../sens-static/images/noimg.jpg" alt="" /></td>
+								<td>[광고][기프트콘] 아이모션 창립 20주년</td>
+								<td>admin</td>
+								<td>2022-03-10 17:59</td>
+								<td class="txt center" ><button class="btn3">미리보기</button></td>
+							</tr>
+							<tr >
+								<td class="check_ico">
+									<input type="checkbox" title="선택">
+								</td>
+								<td>개인이미지</td>
+								<td><img src="../../sens-static/images/noimg.jpg" alt="" /></td>
+								<td>[광고][기프트콘] 아이모션 창립 20주년</td>
+								<td>admin</td>
+								<td>2022-03-10 17:59</td>
+								<td class="txt center" ><button class="btn3">미리보기</button></td>
+							</tr>
+							<tr >
+								<td class="check_ico">
+									<input type="checkbox" title="선택">
+								</td>
+								<td>개인이미지</td>
+								<td><img src="../../sens-static/images/noimg.jpg" alt="" /></td>
+								<td>[광고][기프트콘] 아이모션 창립 20주년</td>
+								<td>admin</td>
+								<td>2022-03-10 17:59</td>
+								<td class="txt center" ><button class="btn3">미리보기</button></td>
+							</tr>
+							<tr >
+								<td class="check_ico">
+									<input type="checkbox" title="선택">
+								</td>
+								<td>개인이미지</td>
+								<td><img src="../../sens-static/images/noimg.jpg" alt="" /></td>
+								<td>[광고][기프트콘] 아이모션 창립 20주년</td>
+								<td>admin</td>
+								<td>2022-03-10 17:59</td>
+								<td class="txt center" ><button class="btn3">미리보기</button></td>
+							</tr>
+							<tr >
+								<td class="check_ico">
+									<input type="checkbox" title="선택">
+								</td>
+								<td>개인이미지</td>
+								<td><img src="../../sens-static/images/noimg.jpg" alt="" /></td>
+								<td>[광고][기프트콘] 아이모션 창립 20주년</td>
+								<td>admin</td>
+								<td>2022-03-10 17:59</td>
+								<td class="txt center" ><button class="btn3">미리보기</button></td>
+							</tr>
+							<tr >
+								<td class="check_ico">
+									<input type="checkbox" title="선택">
+								</td>
+								<td>개인이미지</td>
+								<td><img src="../../sens-static/images/noimg.jpg" alt="" /></td>
+								<td>[광고][기프트콘] 아이모션 창립 20주년</td>
+								<td>admin</td>
+								<td>2022-03-10 17:59</td>
+								<td class="txt center" ><button class="btn3">미리보기</button></td>
+							</tr>
+							<tr >
+								<td class="check_ico">
+									<input type="checkbox" title="선택">
+								</td>
+								<td>개인이미지</td>
+								<td><img src="../../sens-static/images/noimg.jpg" alt="" /></td>
+								<td>[광고][기프트콘] 아이모션 창립 20주년</td>
+								<td>admin</td>
+								<td>2022-03-10 17:59</td>
+								<td class="txt center" ><button class="btn3">미리보기</button></td>
+							</tr>
+							
+						</tbody>
+					</table>			
+					
+				</div>
+				<!-- content area end -->					
+			</div>
+			<!-- content end -->
+			<!-- nav start -->
+					<div class="page_nav">
+						<ul>
+							<li>
+								<a href="" class="page_first icon_public" alt="첫 페이지로 이동">
+								<span>맨앞으로</span></a>
+							</li>
+							<li>
+								<a href="" class="page_prev icon_public" alt="이전첫 페이지로 이동">
+								<span>이전으로</span></a>
+							</li>	
+							<li class="on">
+								<a>1</a>
+							</li>  
+							<li>
+								<a href="">2</a>
+							</li>  
+							<li><a href="">3</a></li>  
+							<li><a href="">4</a></li>  
+							<li><a href="">5</a></li>  
+							<li><a href="" class="page_next icon_public" alt="다음 페이지로 이동">
+								<span>다음으로</span>
+								</a>
+							</li>
+							<li>
+								<a href="" class="page_last icon_public" alt="마지막 페이지로 이동">
+								<span>맨뒤로</span>
+								</a>
+							</li>		  
+						</ul>
+					</div>	
+			<!-- nav end -->					
+			</div>		
+		<!-- section end -->	
+		</div>
+	</div>	
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

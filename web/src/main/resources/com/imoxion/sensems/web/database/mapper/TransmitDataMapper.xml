@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imoxion.sensems.web.database.mapper.TransmitDataMapper">
+	<update id="updateTransmitDataReaddate">
+		UPDATE imb_transmit_data
+		SET readcount = 1 , readdate = #{readdate}
+		WHERE traceid = #{traceid} and serverid = #{serverid} and rcptto = #{rcptto} and readdate is null
+	</update>
+
+	<update id="updateTransmitCount">
+		UPDATE imb_transmit_data
+		SET readcount = readcount + 1
+		WHERE traceid = #{traceid} and serverid = #{serverid} and rcptto = #{rcptto}
+	</update>
+</mapper>

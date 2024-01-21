@@ -1,0 +1,488 @@
+﻿<!DOCTYPE HTML>
+<html lang=""><head>
+	<title>SensEMS 8.0</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta id="_csrf" name="_csrf" content="3f9ebe05-4d29-4362-b6cd-bbb287a001a1">
+	<meta id="_csrf_header" name="_csrf_header" content="X-CSRF-TOKEN">
+
+	<link rel="stylesheet" type="text/css" href="../../sens-static/css/style.css">
+	<link rel="stylesheet" type="text/css" href="../../sens-static/css/skin.css">
+	<link rel="stylesheet" type="text/css" href="../../sens-static/plugin/jquery/ui/theme/black/jquery.ui.all.css">
+
+	<script type="text/javascript" src="../../sens-static/js/messages/common_ko.js"></script>
+	<script type="text/javascript" src="../../sens-static/plugin/jquery/jquery-2.2.2.min.js"></script>
+	<script type="text/javascript" src="../../sens-static/plugin/jquery/jquery.json-2.4.js"></script>
+	<script type="text/javascript" src="../../sens-static/plugin/jquery/ui/jquery-ui-1.9.1.custom.min.js"></script>
+	<script type="text/javascript" src="../../sens-static/plugin/jquery/jquery.fileDownload.js"></script>
+	<script type="text/javascript" src="../../sens-static/plugin/jquery/jquery.formatdate.js"></script>
+	<script type="text/javascript" src="../../sens-static/js/common/common.js"></script>
+	<script type="text/javascript" src="../../sens-static/js/common/browsercheck.js"></script>
+	<script type="text/javascript" src="../../sens-static/js/common/imutil.js"></script>
+	<script type="text/javascript" src="../../sens-static/js/common/imoxion.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<script type="text/javascript" src="../../sens-static/js/util/page.js"></script>
+	<script type="text/javascript" src="../../sens-static/js/messages/sendmanage_ko.js"></script>
+	<!--[if lt IE 10]>
+	<link type="text/css" rel="stylesheet" href="../../sens-static/css/ie.css" />
+	<![endif]-->
+
+	<!--[if lt IE 9]>
+	<script src="../../sens-static/js/common/html5shiv.min.js"></script>
+	<script src="../../sens-static/js/common/ie9.min.js"></script>
+	<![endif]-->
+
+</head>
+<body class="skin1">
+<div class="wrap">
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<div class="wrap">
+		<div class="left_menu">
+			<div class="left_logo">
+				<a href="/mail/result/list.do"><img src="/sens-static/images/left_logo.png" alt="로고"></a>
+			</div>
+
+			<div class="profile ">
+				<div class="info">
+					<div class="info_box ">
+						<a href="" class="user_name">아이모션</a>
+						<a href="#" class="user_membership" onclick="common.myinfo();">내정보</a>
+
+					</div>
+
+				</div>
+				<div class="info_box2">
+					<div class="help"><a href="">HELP</a></div>
+					<p></p>
+					<div class="logout"><a href="/account/logout.do">LOGOUT</a></div>
+
+
+
+
+
+
+
+
+
+
+				</div>
+			</div>
+
+			<div class="nav">
+				<ul>
+					<li class="menu_1depth "><a href="/mail/write/form.do"><span class="icon_public depth1_01"></span>메일 쓰기</a></li>
+
+					<li class="menu_1depth ">
+						<a href="/mail/result/list.do" class="folder_off"><span class="icon_public depth1_02"></span>메일발송 결과</a>
+						<ul>
+							<li class="menu_2depth "><a href="/mail/result/list.do">메일발송 결과</a></li>
+							<li class="menu_2depth "><a href="/mail/result/sendList.do">개별발송 결과</a></li>
+						</ul>
+					</li>
+
+					<li class="menu_1depth ">
+						<a href="/receiver/group/list.do" class="folder_off"><span class="icon_public depth1_04"></span>수신자 관리</a>
+						<ul>
+							<li class="menu_2depth "><a href="/receiver/group/list.do">수신그룹 관리</a></li>
+							<li class="menu_2depth "><a href="/receiver/address/list.do">개인주소록 관리</a></li>
+						</ul>
+					</li>
+					<li class="menu_1depth on">
+						<a href="/send/category/list.do" class="folder_off"><span class="icon_public depth1_05"></span>발송 관리</a>
+						<ul>
+							<li class="menu_2depth "><a href="/send/category/list.do">발송분류 관리</a></li>
+							<li class="menu_2depth "><a href="/send/image/list.do">이미지 관리</a></li>
+							<li class="menu_2depth "><a href="/send/template/list.do">템플릿 관리</a></li>
+							<li class="menu_2depth on"><a href="/send/demoaccount/list.do">테스트 계정관리</a></li>
+
+							<li class="menu_2depth "><a href="/send/reject/list.do">수신거부 관리</a></li>
+						</ul>
+					</li>
+
+					<li class="menu_1depth ">
+						<a href="/sysman/user/list.do" class="folder_off"><span class="icon_public depth1_06"></span>시스템 관리자</a>
+						<ul>
+							<li class="menu_2depth "><a href="/sysman/user/list.do">사용자 관리</a></li>
+							<li class="menu_2depth "><a href="/sysman/sendfilter/list.do">발송차단 설정</a></li>
+							<li class="menu_2depth "><a href="/sysman/database/list.do">데이터베이스 관리</a></li>
+							<li class="menu_2depth "><a href="/sysman/attach/restrict.do">첨부파일 확장자 관리</a></li>
+							<li class="menu_2depth "><a href="/sysman/actionlog/list.do">사용자 활동로그 조회</a></li>
+							<li class="menu_2depth "><a href="/sysman/relay/list.do">연동 IP 관리</a></li>
+							<li class="menu_2depth "><a href="/sysman/attach/list.do">첨부파일 관리</a></li>
+							<li class="menu_2depth "><a href="/sysman/receipt/list.do"><span class="">수신확인 코드 조회</span></a></li>
+
+						</ul>
+					</li>
+
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<!-- left area end -->
+
+
+
+	<meta http-equiv="X-UA-Compatible" content="IE=10">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<script type="text/javascript" src="/sens-static/js/send/demoaccount.js"></script>
+	<!-- section start -->
+	<!-- top area start -->
+	<form id="demoAccount" name="demoAccountForm" action="list.do" method="get">
+		<input id="cpage" name="cpage" value="1" type="hidden">
+		<div class="title_box fixed">
+			<div class="article top_area">
+				<div class="title">
+					<h1>테스트 계정관리</h1>
+					<p>테스트 계정을 관리할 수 있습니다.</p>
+				</div>
+				<div class="search_box">
+					<div class="inner">
+						<input id="srch_keyword" name="srch_keyword" placeholder="검색어를 입력하세요." type="text" value="">
+						<button type="button" class="btn1" onclick="demoaccount_list.search()">검색</button>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- top area end -->
+
+		<!-- content top start -->
+		<div class="content_top fixed">
+			<ul class="content_top_btn">
+				<li><a class="btn2" href="#" onclick="demoaccount_list.open_addPopup()">추가</a></li>
+				<li><a class="btn2" href="#" onclick="demoaccount_list.delete()">삭제</a></li>
+			</ul>
+
+
+			<div class="select_box">
+				<select class="list_select" onchange="common.change_pagesize(this.value)">
+					<option selected="" value="15">15</option>
+					<option value="30">30</option>
+					<option value="50">50</option>
+					<option value="100">100</option>
+				</select>
+			</div>
+		</div>
+		<!-- content top end -->
+
+
+
+		<div class="section pd_l30">
+			<!-- content start -->
+			<div class="article content">
+				<!-- content area start -->
+				<div class="content_area">
+					<table width="100%" height="auto">
+						<colgroup>
+							<col style="width:35px">
+							<col style="width:auto">
+						</colgroup>
+						<thead>
+						<tr>
+							<th class="check_ico">
+								<input id="all_check" type="checkbox" title="전체선택" onclick="common.select_all('emails');">
+							</th>
+							<th>E-MAIL</th>
+						</tr>
+						</thead>
+						<tbody>
+
+
+
+
+						<tr>
+							<td class="check_ico">
+								<input type="checkbox" name="ukeys" value="161733798542676730180229">
+							</td>
+							<td style="cursor: pointer;" onclick="demoaccount_list.open_editPopup('161733798542676730180229',0,'testgddddgg@imoxion.com')">testgddddgg@imoxion.com</td>
+						</tr>
+
+						<tr>
+							<td class="check_ico">
+								<input type="checkbox" name="ukeys" value="164922253797358230121810">
+							</td>
+							<td style="cursor: pointer;" onclick="demoaccount_list.open_editPopup('164922253797358230121810',0,'rudghxodid@naver.com')">rudghxodid@naver.com</td>
+						</tr>
+
+						<tr>
+							<td class="check_ico">
+								<input type="checkbox" name="ukeys" value="164975098284063111860184">
+							</td>
+							<td style="cursor: pointer;" onclick="demoaccount_list.open_editPopup('164975098284063111860184',0,'rma7@naver.com')">rma7@naver.com</td>
+						</tr>
+
+						<tr>
+							<td class="check_ico">
+								<input type="checkbox" name="ukeys" value="164975099005691789951161">
+							</td>
+							<td style="cursor: pointer;" onclick="demoaccount_list.open_editPopup('164975099005691789951161',0,'rma7@imoxion.com')">rma7@imoxion.com</td>
+						</tr>
+
+						<tr>
+							<td class="check_ico">
+								<input type="checkbox" name="ukeys" value="6045b0983fcd5cbffcf9fbc0">
+							</td>
+							<td style="cursor: pointer;" onclick="demoaccount_list.open_editPopup('6045b0983fcd5cbffcf9fbc0',0,'test1010@imoxion.com')">test1010@imoxion.com</td>
+						</tr>
+
+						<tr>
+							<td class="check_ico">
+								<input type="checkbox" name="ukeys" value="6048653e3fe9d2981c6a42f3">
+							</td>
+							<td style="cursor: pointer;" onclick="demoaccount_list.open_editPopup('6048653e3fe9d2981c6a42f3',0,'test4@edu.sensmail.com')">test4@edu.sensmail.com</td>
+						</tr>
+
+						<tr>
+							<td class="check_ico">
+								<input type="checkbox" name="ukeys" value="604965103fec5a6c70e06d12">
+							</td>
+							<td style="cursor: pointer;" onclick="demoaccount_list.open_editPopup('604965103fec5a6c70e06d12',1,'chunsangu@naver.com')">chunsangu@naver.com</td>
+						</tr>
+
+						<tr>
+							<td class="check_ico">
+								<input type="checkbox" name="ukeys" value="6049797a3fdaa222aeb5cd56">
+							</td>
+							<td style="cursor: pointer;" onclick="demoaccount_list.open_editPopup('6049797a3fdaa222aeb5cd56',0,'zpqdnjs@imoxion.com')">zpqdnjs@imoxion.com</td>
+						</tr>
+
+						<tr>
+							<td class="check_ico">
+								<input type="checkbox" name="ukeys" value="604abd8c3fd9e80b60780f8c">
+							</td>
+							<td style="cursor: pointer;" onclick="demoaccount_list.open_editPopup('604abd8c3fd9e80b60780f8c',1,'ttt@kk.com')">ttt@kk.com</td>
+						</tr>
+
+						<tr>
+							<td class="check_ico">
+								<input type="checkbox" name="ukeys" value="604ac16f3fea790f7c44a460">
+							</td>
+							<td style="cursor: pointer;" onclick="demoaccount_list.open_editPopup('604ac16f3fea790f7c44a460',0,'insert@imoxion.com')">insert@imoxion.com</td>
+						</tr>
+
+						<tr>
+							<td class="check_ico">
+								<input type="checkbox" name="ukeys" value="test1">
+							</td>
+							<td style="cursor: pointer;" onclick="demoaccount_list.open_editPopup('test1',0,'test1@imoxion.com')">test1@imoxion.com</td>
+						</tr>
+
+						<tr>
+							<td class="check_ico">
+								<input type="checkbox" name="ukeys" value="test10">
+							</td>
+							<td style="cursor: pointer;" onclick="demoaccount_list.open_editPopup('test10',0,'test10@imoxion.com')">test10@imoxion.com</td>
+						</tr>
+
+						<tr>
+							<td class="check_ico">
+								<input type="checkbox" name="ukeys" value="test11">
+							</td>
+							<td style="cursor: pointer;" onclick="demoaccount_list.open_editPopup('test11',0,'test11@imoxion.com')">test11@imoxion.com</td>
+						</tr>
+
+						<tr>
+							<td class="check_ico">
+								<input type="checkbox" name="ukeys" value="test12">
+							</td>
+							<td style="cursor: pointer;" onclick="demoaccount_list.open_editPopup('test12',0,'test12@imoxion.com')">test12@imoxion.com</td>
+						</tr>
+
+						<tr>
+							<td class="check_ico">
+								<input type="checkbox" name="ukeys" value="test13">
+							</td>
+							<td style="cursor: pointer;" onclick="demoaccount_list.open_editPopup('test13',0,'test13@imoxion.com')">test13@imoxion.com</td>
+						</tr>
+
+						</tbody>
+					</table>
+				</div>
+				<!-- content area end -->
+			</div>
+			<!-- content end -->
+
+			<div class="page_nav">
+
+
+
+
+
+
+
+				<ul>
+					<li class="on"><a>1</a></li>
+					<li><a href="#" onclick="demoaccount_list.list('2')">2</a></li>
+					<li><a class="page_last icon_public" href="#" onclick="demoaccount_list.list('2')"></a></li>
+				</ul>
+
+			</div>
+
+
+		</div></form>
+	<!-- section end -->
+
+
+	<!-- popup start-->
+	<div id="addDemoAccountLayer" style="" title="테스트 계정관리 추가">
+		<form id="demoAccountForm" name="demoAccountForm" action="add.do" method="post">
+			<div class="popup">
+				<div class="popup_content" style="height: 240px">
+					<div class="popup_title">
+						<span class="close_button" onclick="demoaccount_list.close_popup('add');"></span>
+						<h3 class="title">테스트 계정관리 추가 </h3>
+					</div>
+					<div class="popup_body_wrap">
+						<div class="popup_body">
+							<table width="100%" border="0" cellpadding="0" cellspacing="1">
+								<colgroup>
+									<col style="width:150px;">
+									<col style="width:auto;">
+								</colgroup>
+								<tbody>
+								<tr>
+									<th>E-mail</th>
+									<td><input type="text" id="email"></td>
+								</tr>
+								<tr>
+									<th>기본 계정 설정</th>
+									<td><div><label><input type="radio" name="testAccount" value="1">예</label>
+										<label><input type="radio" name="testAccount" value="0" checked="checked">아니오</label></div>
+										<span class="care_txt"><strong class="txt red">테스트 메일 발송 시 테스트 발송 명단에 기본 선택됩니다.</strong></span>
+									</td>
+								</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="pop_footer">
+						<div class="btn_div">
+							<button type="button" class="btn4" onclick="demoaccount_list.add();">추가</button>
+							<button type="button" class="btn4" onclick="demoaccount_list.close_popup('add');">닫기</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div>
+				<input type="hidden" name="_csrf" value="3f9ebe05-4d29-4362-b6cd-bbb287a001a1">
+			</div></form>
+	</div>
+
+
+
+	<div id="editDemoAccountLayer" style="display:none;" title="테스트 계정관리 수정">
+
+		<div class="popup">
+			<div class="popup_content" style="height: 240px">
+				<div class="popup_title">
+					<span class="close_button" onclick="demoaccount_list.close_popup('edit');"></span>
+					<h3 class="title">테스트 계정관리 수정</h3>
+				</div>
+				<div class="popup_body_wrap">
+					<div class="popup_body">
+						<input type="hidden" id="edit_ukey">
+						<table width="100%" border="0" cellpadding="0" cellspacing="1">
+							<colgroup>
+								<col style="width:150px;">
+								<col style="width:auto;">
+							</colgroup>
+							<tbody>
+							<tr>
+								<th>E-MAIL</th>
+								<td><input type="text" id="edit_email" value=""></td>
+							</tr>
+							</tbody>
+						</table>
+						<div style="text-align:center; padding-top:15px;">
+							<p>기본 테스트 계정으로 설정하시겠습니까?</p>
+							<label><input type="radio" name="editTestAccount" value="1">예</label>
+							<label><input type="radio" name="editTestAccount" value="0">아니오</label>
+						</div>
+
+					</div>
+				</div>
+				<div class="pop_footer">
+					<div class="btn_div">
+						<button type="button" class="btn4" onclick="demoaccount_list.edit();">수정</button>
+						<button type="button" class="btn4" onclick="demoaccount_list.close_popup('edit');">닫기</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<!-- popup end-->
+
+
+
+</div>
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

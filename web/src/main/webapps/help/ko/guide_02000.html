@@ -1,0 +1,242 @@
+﻿<!DOCTYPE HTML>
+<html lang="ko-KR">
+<head>
+	<meta charset="UTF-8">
+	<title>SensEMS</title>
+	<link rel="stylesheet" href="../../sens-static/css/style.css" />
+	<link rel="stylesheet" href="../../sens-static/css/skin.css" />
+	
+</head>
+<body class="skin1">
+	<div class="wrap">
+		<!-- left area start -->
+		<div class="left_menu ">
+			<div class="left_logo ">
+				<a href=""><img src="../../sens-static/images/left_logo.png" alt="로고" /></a>
+			</div>			
+			<div class="profile ">
+				<div class="info">
+					<div class="info_box  ">
+						<a href="" class="user_name" >김효민</a> 
+						<a href="" class="user_membership">내정보</a>
+						<a href="" class="user_email over_text">khm@imoxion.com</a>
+					</div>
+					<a href="" class="btn_logout pd_r20"><img src="../../sens-static/images/logout.png" alt="" /></a>				
+				</div>
+				<p></p>
+				<div class="info_box2">
+					<div class="help"><a href="" ><span class="icon_public"></span>HELP</a></div>
+					<p></p>
+					<div class="language" >
+					
+						<span class="icon_public"></span>
+						<select id="languageList"  onchange="change_language()">
+							<option value="ko">KOR</option>
+							<option value="en">ENG</option>
+							<option value="ja">JPN</option>
+						<!-- 	<option value="zh">CHN</option> -->
+						</select>			
+					</div>					
+				</div>				
+			</div>
+		
+			<div class="nav">
+				<ul>
+					<li class="menu_1depth">						
+						<a href="01001_composer.html"><span class="icon_public depth1_01"></span>메일쓰기</a>
+					</li>
+					<li class="menu_1depth">
+						<a href="02001_statistics.html"><span class="icon_public depth1_02"></span>메일발송 결과</a>
+					</li>
+					<li class="menu_1depth">
+						<a href=""><span class="icon_public depth1_03"></span>발송일정관리</a>
+					</li>
+					<li class="menu_1depth">
+						<a href="" class="folder_off"><span class="icon_public depth1_04"></span>수신그룹 관리</a>
+						<ul >
+							<li class="menu_2depth"><a href="">수신그룹 관리</a></li>
+							<li class="menu_2depth"><a href="">개인 주소록</a></li>
+						</ul>
+					</li>
+					<li class="menu_1depth">
+						<a href="" class="folder_off"><span class="icon_public depth1_05"></span>발송 관리</a>
+						<ul >
+							<li class="menu_2depth"><a href="">발송분류 관리</a></li>
+							<li class="menu_2depth"><a href="">이미지 관리</a></li>
+							<li class="menu_2depth"><a href="">템플릿 관리</a></li>
+							<li class="menu_2depth"><a href="">테스트 계정관리</a></li>
+							<li class="menu_2depth"><a href="">수신거부 관리</a></li>
+						</ul>
+					</li>
+					<li class="menu_1depth">
+						<a href="" class="folder_off"><span class="icon_public depth1_06"></span>시스템 관리자</a>
+						<ul >
+							<li class="menu_2depth"><a href="">사용자 관리</a></li>
+							<li class="menu_2depth"><a href="">정기예약발송 설정</a></li>
+							<li class="menu_2depth"><a href="">발송차단 설정</a></li>
+							<li class="menu_2depth"><a href="">데이터베이스 관리</a></li>
+							<li class="menu_2depth"><a href="">첨부파일 확장자 관리</a></li>
+							<li class="menu_2depth"><a href="">사용자 활동로그 조회</a></li>
+						</ul>
+					
+					</li>
+				</ul>
+			</div>
+			
+		</div>	
+		<!-- left area end -->
+
+		<div class="guide"> 
+		<!-- section start -->
+			<!-- top area start -->
+			<div class="title_box fixed">
+				<div class="article top_area">
+					<div class="title">
+						<h1>도움말</h1>
+						<p>EMS에 대해 궁금하신점을 확인해보세요.</p>
+					</div>
+									
+				</div>
+			</div>
+			<!-- top area end -->	
+		
+			<!-- content top start -->	
+				<div class="content_top fixed">
+					<div>
+						<h2>메일 쓰기</h2>
+					</div>		
+				</div>
+			<!-- content top end -->
+			
+			<!-- add_menu start -->
+			<div class="section add_menu pd_l30">
+				<div class="content add-menu-area">
+					<ul class="guide-group">
+						<li class="guide-1depth">
+							<a href="guide_01000.html" onclick="" class="guide-name txt strong ">로그인 화면</a>	
+						</li>						
+					</ul>
+					<ul class="guide-group">
+						<li class="guide-1depth active">
+							<a href="guide_02000.html" onclick="" class="guide-name txt strong ">메일 쓰기</a>	
+						</li>						
+					</ul>
+					<ul class="guide-group">
+						<li class="guide-1depth">
+							<a href="guide_03000.html" onclick="" class="guide-name txt strong ">발송일정관리</a>	
+						</li>						
+					</ul>					
+					<ul class="guide-group">
+						<li class="guide-1depth">
+							<a href="guide_04000.html" onclick="" class="guide-name txt strong">수신자 관리</a>	
+							<ul>
+								<li class="guide-2depth"><a href="guide_04001.html" class="guide-name">수신그룹 관리</a></li>
+								<li class="guide-2depth"><a href="guide_04002.html" class="guide-name">개인 주소록</a></li>
+							</ul>
+						</li>						
+					</ul>
+					<ul class="guide-group">
+						<li class="guide-1depth">
+							<a href="guide_05000.html" onclick="" class="guide-name txt strong">발송 관리</a>	
+							<ul>
+								<li class="guide-2depth"><a href="guide_05001.html" class="guide-name">발송분류 관리</a></li>
+								<li class="guide-2depth"><a href="guide_05002.html" class="guide-name">이미지 관리</a></li>
+								<li class="guide-2depth"><a href="guide_05003.html" class="guide-name">템플릿 관리</a></li>
+								<li class="guide-2depth"><a href="guide_05004.html" class="guide-name">테스트 계정관리</a></li>
+								<li class="guide-2depth"><a href="guide_05005.html" class="guide-name">정기예약발송 관리</a></li>
+								<li class="guide-2depth"><a href="guide_05006.html" class="guide-name">수신거부 관리</a></li>
+							</ul>
+						</li>
+					</ul>
+					<ul class="guide-group">
+						<li class="guide-1depth">
+							<a href="guide_06000.html" onclick="" class="guide-name txt strong">시스템 관리자</a>	
+							<ul>
+								<li class="guide-2depth"><a href="guide_06001.html" class="guide-name">사용자 관리</a></li>
+								<li class="guide-2depth"><a href="guide_06002.html" class="guide-name">발송차단 설정</a></li>
+								<li class="guide-2depth"><a href="guide_06003.html" class="guide-name">데이터베이스 관리</a></li>
+								<li class="guide-2depth"><a href="guide_06004.html" class="guide-name">첨부파일 확장자 관리</a></li>
+								<li class="guide-2depth"><a href="guide_06005.html" class="guide-name">사용자 활동로그 조회</a></li>
+							</ul>
+						</li>						
+					</ul>
+					
+					
+				</div>
+			</div>	
+			<!-- add_menu end -->
+			
+			<!-- guide-area start -->
+			<div class="section pd_l30">
+				<div class="guide-area">
+					<h4>1. 발송 분류</h4>
+					<p>이전에 등록한 발송 분류 항목과 다른사람이 자신에게 공유한 발송 분류 항목이 보입니다. 바로 새 분류를 등록도 가능합니다.</p>
+					
+					<h4>2. 보내는 사람</h4>
+					<p>보내는 사람 이름과 이메일을 아이모션<master@imoxion.com>과 같은 형식으로 입력합니다.</p>
+					
+					<h4>3. 회신 주소</h4>
+					<p>회신 받을 주소를 입력합니다.</p>
+					
+					<h4>4. 수신그룹</h4>
+					<p>주소록 / 수신그룹을 선택합니다.</p>
+					
+					<h4>5. 제목</h4>
+					<p>제목을 입력해주세요. </p>
+					
+					<h4>6. Charset</h4>
+					<p>메일을 보낼 인코딩 방식을 선택합니다.</p>
+					
+					<h4>7. 에디터 작성</h4>
+					<h5>템플릿 선택</h5>
+					<ul>
+						<li>사용했던 횟수에 따라 나열됩니다.</li>
+						<li>템플릿 새로 작성하기를 선택하면 빈 문서로 시작됩니다.</li>
+						<li>미리보기 이미지를 클릭하면 해당 템플릿을 미리보기 하실 수 있습니다.</li>
+					</ul>
+					<h5>이미지삽입</h5>
+					<ul>
+						<li>이미지를 클릭하면 본문에 이미지가 들어갑니다.</li>
+						<li>이미지 이름을 입력하고 이미지 파일을 선택하면 바로 개인이미지로 등록되어서 바로 사용할 수 있습니다.</li>
+					</ul>
+					
+					<h4>반응분석 종료일</h4>
+					<p>수신확인, 본문 링크추적등의 수신자 반응분석에 대한 종료 날짜를 지정합니다.</p>
+					
+					<h4>첨부파일</h4>
+					<p>파일찾기를 클릭하여 첨부할 파일을 찾습니다. 여러 파일을 첨부하실때는 추가 버튼을 클릭하면 파일 찾기 폼이 생깁니다.(최대 5개)</p>
+					
+				</div>
+			</div>
+			<!-- guide-area end -->
+			
+		</div>
+	</div>	
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

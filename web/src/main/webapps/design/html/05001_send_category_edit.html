@@ -1,0 +1,514 @@
+﻿<!DOCTYPE HTML>
+<html lang=""><head>
+	<title>SensEMS 8.0</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta id="_csrf" name="_csrf" content="3f9ebe05-4d29-4362-b6cd-bbb287a001a1">
+	<meta id="_csrf_header" name="_csrf_header" content="X-CSRF-TOKEN">
+
+	<link rel="stylesheet" type="text/css" href="../../sens-static/css/style.css">
+	<link rel="stylesheet" type="text/css" href="../../sens-static/css/skin.css">
+	<link rel="stylesheet" type="text/css" href="../../sens-static/plugin/jquery/ui/theme/black/jquery.ui.all.css">
+
+	<script type="text/javascript" src="../../sens-static/js/messages/common_ko.js"></script>
+	<script type="text/javascript" src="../../sens-static/plugin/jquery/jquery-2.2.2.min.js"></script>
+	<script type="text/javascript" src="../../sens-static/plugin/jquery/jquery.json-2.4.js"></script>
+	<script type="text/javascript" src="../../sens-static/plugin/jquery/ui/jquery-ui-1.9.1.custom.min.js"></script>
+	<script type="text/javascript" src="../../sens-static/plugin/jquery/jquery.fileDownload.js"></script>
+	<script type="text/javascript" src="../../sens-static/plugin/jquery/jquery.formatdate.js"></script>
+	<script type="text/javascript" src="../../sens-static/js/common/common.js"></script>
+	<script type="text/javascript" src="../../sens-static/js/common/browsercheck.js"></script>
+	<script type="text/javascript" src="../../sens-static/js/common/imutil.js"></script>
+	<script type="text/javascript" src="../../sens-static/js/common/imoxion.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<script type="text/javascript" src="../../sens-static/js/util/page.js"></script>
+	<script type="text/javascript" src="../../sens-static/js/messages/sendmanage_ko.js"></script>
+	<!--[if lt IE 10]>
+	<link type="text/css" rel="stylesheet" href="../../sens-static/css/ie.css" />
+	<![endif]-->
+
+	<!--[if lt IE 9]>
+	<script src="../../sens-static/js/common/html5shiv.min.js"></script>
+	<script src="../../sens-static/js/common/ie9.min.js"></script>
+	<![endif]-->
+
+</head>
+<body class="skin1">
+<div class="wrap">
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<div class="wrap">
+		<div class="left_menu">
+			<div class="left_logo">
+				<a href="/mail/result/list.do"><img src="../../sens-static/images/left_logo.png" alt="로고"></a>
+			</div>
+
+			<div class="profile ">
+				<div class="info">
+					<div class="info_box ">
+						<a href="" class="user_name">아이모션</a>
+						<a href="#" class="user_membership" onclick="common.myinfo();">내정보</a>
+
+					</div>
+
+				</div>
+				<div class="info_box2">
+					<div class="help"><a href="">HELP</a></div>
+					<p></p>
+					<div class="logout"><a href="/account/logout.do">LOGOUT</a></div>
+
+
+
+
+
+
+
+
+
+
+				</div>
+			</div>
+
+			<div class="nav">
+				<ul>
+					<li class="menu_1depth "><a href="/mail/write/form.do"><span class="icon_public depth1_01"></span>메일 쓰기</a></li>
+
+					<li class="menu_1depth ">
+						<a href="/mail/result/list.do" class="folder_off"><span class="icon_public depth1_02"></span>메일발송 결과</a>
+						<ul>
+							<li class="menu_2depth "><a href="/mail/result/list.do">메일발송 결과</a></li>
+							<li class="menu_2depth "><a href="/mail/result/sendList.do">개별발송 결과</a></li>
+						</ul>
+					</li>
+
+					<li class="menu_1depth ">
+						<a href="/receiver/group/list.do" class="folder_off"><span class="icon_public depth1_04"></span>수신자 관리</a>
+						<ul>
+							<li class="menu_2depth "><a href="/receiver/group/list.do">수신그룹 관리</a></li>
+							<li class="menu_2depth "><a href="/receiver/address/list.do">개인주소록 관리</a></li>
+						</ul>
+					</li>
+					<li class="menu_1depth on">
+						<a href="/send/category/list.do" class="folder_off"><span class="icon_public depth1_05"></span>발송 관리</a>
+						<ul>
+							<li class="menu_2depth on"><a href="/send/category/list.do">발송분류 관리</a></li>
+							<li class="menu_2depth "><a href="/send/image/list.do">이미지 관리</a></li>
+							<li class="menu_2depth "><a href="/send/template/list.do">템플릿 관리</a></li>
+							<li class="menu_2depth "><a href="/send/demoaccount/list.do">테스트 계정관리</a></li>
+
+							<li class="menu_2depth "><a href="/send/reject/list.do">수신거부 관리</a></li>
+						</ul>
+					</li>
+
+					<li class="menu_1depth ">
+						<a href="/sysman/user/list.do" class="folder_off"><span class="icon_public depth1_06"></span>시스템 관리자</a>
+						<ul>
+							<li class="menu_2depth "><a href="/sysman/user/list.do">사용자 관리</a></li>
+							<li class="menu_2depth "><a href="/sysman/sendfilter/list.do">발송차단 설정</a></li>
+							<li class="menu_2depth "><a href="/sysman/database/list.do">데이터베이스 관리</a></li>
+							<li class="menu_2depth "><a href="/sysman/attach/restrict.do">첨부파일 확장자 관리</a></li>
+							<li class="menu_2depth "><a href="/sysman/actionlog/list.do">사용자 활동로그 조회</a></li>
+							<li class="menu_2depth "><a href="/sysman/relay/list.do">연동 IP 관리</a></li>
+							<li class="menu_2depth "><a href="/sysman/attach/list.do">첨부파일 관리</a></li>
+							<li class="menu_2depth "><a href="/sysman/receipt/list.do"><span class="">수신확인 코드 조회</span></a></li>
+
+						</ul>
+					</li>
+
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<!-- left area end -->
+
+
+
+	<meta http-equiv="X-UA-Compatible" content="IE=10">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<script type="text/javascript" src="../../sens-static/js/send/category.js"></script>
+	<script type="text/javascript" src="../../sens-static/js/messages/sendmanage_ko.js"></script>
+
+	<div class="categoryList">
+
+
+		<form id="categoryListForm" action="list.do" method="get">
+			<input id="cpage" name="cpage" value="1" type="hidden">
+			<div class="title_box fixed">
+				<div class="article top_area">
+					<div class="title">
+						<h1>발송분류 관리</h1>
+						<p>발송하는 메일에 대한 카테고리를 관리할 수 있습니다.</p>
+					</div>
+					<div class="search_box">
+						<div class="inner">
+							<div class="select_box">
+								<select id="srch_type" name="srch_type" class="search_opt">
+									<option value="name">카테고리</option>
+									<option value="userid">작성자</option>
+								</select>
+							</div>
+							<input id="srch_keyword" name="srch_keyword" placeholder="검색어를 입력하세요." type="text" value="">
+							<button type="button" class="btn1" onclick="category.search();">검색</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- top area end -->
+			<!-- content top start -->
+			<div class="content_top fixed">
+				<ul class="content_top_btn">
+					<li><a class="btn2" href="#" onclick="category.open_addPopup();">추가</a></li>
+					<li><a class="btn2" href="#" onclick="category.deleteClick();">삭제</a></li>
+				</ul>
+
+				<div class="select_box">
+					<select class="list_select" onchange="common.change_pagesize(this.value)">
+						<option selected="" value="15">15</option>
+						<option value="30">30</option>
+						<option value="50">50</option>
+						<option value="100">100</option>
+					</select>
+				</div>
+			</div>
+			<!-- content top end -->
+
+			<div class="section pd_l30">
+				<!-- content start -->
+				<div class="article content">
+					<!-- content area start -->
+					<div class="content_area">
+						<table width="100%" height="auto">
+							<colgroup>
+								<col style="width:35px">
+								<col style="width:auto">
+								<col style="width:120px">
+								<col style="width:150px">
+							</colgroup>
+							<thead>
+							<tr>
+								<th class="check_ico">
+									<input type="checkbox" id="all_check" onclick="common.select_all('ukeys')" title="전체선택">
+								</th>
+								<th>카테고리</th>
+								<th>작성자</th>
+								<th>등록일</th>
+							</tr>
+							</thead>
+							<tbody>
+
+
+
+
+
+
+							<tr>
+								<td class="check_ico"><input type="checkbox" name="ukeys" value="165336742673681060570814" title="선택"></td>
+								<td style="cursor: pointer;" onclick="category.open_editPopup('165336742673681060570814','카테고리ㅋㅋㅋㅋ','imoxion')">카테고리ㅋㅋㅋㅋ</td>
+								<td>imoxion</td>
+								<td>2022-05-24 13:43</td>
+							</tr>
+
+
+
+							<tr>
+								<td class="check_ico"><input type="checkbox" name="ukeys" value="165336741898432111101699" title="선택"></td>
+								<td style="cursor: pointer;" onclick="category.open_editPopup('165336741898432111101699','1111','imoxion')">1111</td>
+								<td>imoxion</td>
+								<td>2022-05-24 13:43</td>
+							</tr>
+
+
+
+							<tr>
+								<td class="check_ico"><input type="checkbox" name="ukeys" value="164636022822276919219360" title="선택"></td>
+								<td style="cursor: pointer;" onclick="category.open_editPopup('164636022822276919219360','발송테스트카테고리','imoxion')">발송테스트카테고리</td>
+								<td>imoxion</td>
+								<td>2022-03-04 11:17</td>
+							</tr>
+
+
+
+							<tr>
+								<td class="check_ico"><input type="checkbox" name="ukeys" value="164421227340293141654158" title="선택"></td>
+								<td style="cursor: pointer;" onclick="category.open_editPopup('164421227340293141654158','창의적인 무대기술 아이디어 발굴을 위한 컨퍼런스 참가자','imoxion')">창의적인 무대기술 아이디어 발굴을 위한 컨퍼런스 참가자</td>
+								<td>imoxion</td>
+								<td>2022-02-07 14:37</td>
+							</tr>
+
+
+
+							<tr>
+								<td class="check_ico"><input type="checkbox" name="ukeys" value="6045850b3fe7d236b2a4205f" title="선택"></td>
+								<td style="cursor: pointer;" onclick="category.open_editPopup('6045850b3fe7d236b2a4205f','넵넵넵','imoxion')">넵넵넵</td>
+								<td>imoxion</td>
+								<td>2021-03-08 10:59</td>
+							</tr>
+
+
+
+							<tr>
+								<td class="check_ico"><input type="checkbox" name="ukeys" value="604585033fe2f6d473afc78d" title="선택"></td>
+								<td style="cursor: pointer;" onclick="category.open_editPopup('604585033fe2f6d473afc78d','네네','imoxion')">네네</td>
+								<td>imoxion</td>
+								<td>2021-03-08 10:59</td>
+							</tr>
+
+
+
+							<tr>
+								<td class="check_ico"><input type="checkbox" name="ukeys" value="604584e93fbe6cf495fafd48" title="선택"></td>
+								<td style="cursor: pointer;" onclick="category.open_editPopup('604584e93fbe6cf495fafd48','나다라','imoxion')">나다라</td>
+								<td>imoxion</td>
+								<td>2021-03-08 10:59</td>
+							</tr>
+
+
+
+							<tr>
+								<td class="check_ico"><input type="checkbox" name="ukeys" value="604584e13feb3b44a64f2b3a" title="선택"></td>
+								<td style="cursor: pointer;" onclick="category.open_editPopup('604584e13feb3b44a64f2b3a','가가ㅁ1','imoxion')">가가ㅁ1</td>
+								<td>imoxion</td>
+								<td>2021-03-08 10:58</td>
+							</tr>
+
+
+
+							<tr>
+								<td class="check_ico"><input type="checkbox" name="ukeys" value="604584d73fed09ab5a279087" title="선택"></td>
+								<td style="cursor: pointer;" onclick="category.open_editPopup('604584d73fed09ab5a279087','가가','imoxion')">가가</td>
+								<td>imoxion</td>
+								<td>2021-03-08 10:58</td>
+							</tr>
+
+
+
+							<tr>
+								<td class="check_ico"><input type="checkbox" name="ukeys" value="604584cf3fe166f118f6cc81" title="선택"></td>
+								<td style="cursor: pointer;" onclick="category.open_editPopup('604584cf3fe166f118f6cc81','sdfas','imoxion')">sdfas</td>
+								<td>imoxion</td>
+								<td>2021-03-08 10:58</td>
+							</tr>
+
+
+
+							<tr>
+								<td class="check_ico"><input type="checkbox" name="ukeys" value="604584c83fa7e364bc7b4190" title="선택"></td>
+								<td style="cursor: pointer;" onclick="category.open_editPopup('604584c83fa7e364bc7b4190','123','imoxion')">123</td>
+								<td>imoxion</td>
+								<td>2021-03-08 10:58</td>
+							</tr>
+
+
+
+							<tr>
+								<td class="check_ico"><input type="checkbox" name="ukeys" value="602b4ca53feaca82d225bae6" title="선택"></td>
+								<td style="cursor: pointer;" onclick="category.open_editPopup('602b4ca53feaca82d225bae6','23423','imoxion')">23423</td>
+								<td>imoxion</td>
+								<td>2021-02-16 13:40</td>
+							</tr>
+
+
+
+							<tr>
+								<td class="check_ico"><input type="checkbox" name="ukeys" value="602229b03fa7a093c0251f00" title="선택"></td>
+								<td style="cursor: pointer;" onclick="category.open_editPopup('602229b03fa7a093c0251f00','띄 어 쓰 기 ','imoxion')">띄 어 쓰 기 </td>
+								<td>imoxion</td>
+								<td>2021-02-09 15:20</td>
+							</tr>
+
+
+
+							<tr>
+								<td class="check_ico"><input type="checkbox" name="ukeys" value="602229a13fd2ce4fec1c3f16" title="선택"></td>
+								<td style="cursor: pointer;" onclick="category.open_editPopup('602229a13fd2ce4fec1c3f16','언','imoxion')">언</td>
+								<td>imoxion</td>
+								<td>2021-02-09 15:20</td>
+							</tr>
+
+
+
+							<tr>
+								<td class="check_ico"><input type="checkbox" name="ukeys" value="6022298d3fe289d6757db8f9" title="선택"></td>
+								<td style="cursor: pointer;" onclick="category.open_editPopup('6022298d3fe289d6757db8f9','카테고리ㅋㅋㅋㅋ','test01')">카테고리ㅋㅋㅋㅋ</td>
+								<td>test01</td>
+								<td>2021-02-09 15:19</td>
+							</tr>
+
+
+
+							</tbody>
+						</table>
+					</div>
+					<!-- content area end -->
+				</div>
+
+				<div class="page_nav">
+					<ul>
+
+
+
+
+
+
+
+
+						<ul>
+							<li class="on"><a>1</a></li>
+							<li><a href="#" onclick="category.list('2')">2</a></li>
+							<li><a class="page_last icon_public" href="#" onclick="category.list('2')"></a></li>
+						</ul>
+
+					</ul>
+				</div>
+				<!-- popup start-->
+				<div class="popup" id="add_popup" style="display: none;">
+					<div class="popup_content" style="height:205px;">
+						<div class="popup_title">
+							<span class="close_button" onclick="category.close_popup('add');"></span>
+							<h3 class="title">발송분류 추가</h3>
+						</div>
+						<div class="popup_body_wrap">
+							<div class="popup_body">
+								<!-- <p> 설명 텍스트 </p> -->
+								<table width="100%" border="0" cellpadding="0" cellspacing="1">
+									<colgroup>
+										<col style="width:150px;">
+										<col style="width:auto;">
+									</colgroup>
+									<tbody>
+									<tr>
+										<th>카테고리</th>
+										<td>
+											<input type="text" id="add_name" maxlength="30">
+											<div class="care_txt"><span class="txt strong red">&nbsp; ※ '-', '_', '.', ','를 제외한 특수문자는 사용할 수 없습니다.</span></div>
+										</td>
+									</tr>
+									</tbody>
+								</table>
+
+							</div>
+						</div>
+						<div class="pop_footer">
+							<div class="btn_div">
+								<button type="button" class="btn2" onclick="category.add();" )="">확인</button>
+								<button type="button" class="btn2" onclick="category.close_popup('add');">취소</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="popup" id="edit_popup" style="display: block;">
+					<div class="popup_content" style="height:245px;">
+						<div class="popup_title">
+							<span class="close_button" onclick="category.close_popup('edit');"></span>
+							<h3 class="title">발송분류 수정</h3>
+						</div>
+						<div class="popup_body_wrap">
+							<div class="popup_body">
+								<!-- <p> 설명 텍스트 </p> -->
+								<input type="hidden" id="edit_ukey" value="165336742673681060570814">
+								<table width="100%" border="0" cellpadding="0" cellspacing="1">
+									<colgroup>
+										<col style="width:150px;">
+										<col style="width:auto;">
+									</colgroup>
+									<tbody>
+									<tr>
+										<th>작성자</th>
+										<td><span id="reg_userid">imoxion</span></td>
+									</tr>
+									<tr>
+										<th>카테고리</th>
+										<td>
+											<input type="text" id="edit_name" maxlength="30">
+											<div class="care_txt"><span class="txt strong red">&nbsp; ※ '-', '_', '.', ','를 제외한 특수문자는 사용할 수 없습니다.</span></div>
+										</td>
+									</tr>
+									</tbody>
+								</table>
+							</div>
+
+
+						</div>
+						<div class="pop_footer">
+							<div class="btn_div">
+								<button type="button" class="btn2" onclick="category.edit();">확인</button>
+								<button type="button" class="btn2" onclick="category.close_popup('edit');">취소</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- popup end-->
+			</div>
+		</form>
+
+	</div>
+
+
+</div>
+
+</body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/tx
+	    http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!-- 권한에 따른 접근 가능 페이지 처리 START -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/mail/write/**"/>
+            <bean class="com.imoxion.sensems.web.preparer.MailWritePreparer"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/mail/result/**"/>
+            <bean class="com.imoxion.sensems.web.preparer.SendResultPreparer"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/calendar/**"/>
+            <bean class="com.imoxion.sensems.web.preparer.CalendarPreparer"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/receiver/**"/>
+            <bean class="com.imoxion.sensems.web.preparer.ReceiverPreparer"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/send/**"/>
+            <bean class="com.imoxion.sensems.web.preparer.SendPreparer"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/sysman/**"/>
+            <bean class="com.imoxion.sensems.web.preparer.SysmanPreparer"/>
+        </mvc:interceptor>
+
+		<!-- session이 없고 role만 있는 경우에 대한 처리 -->
+		<mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/help/**"/>
+            <mvc:exclude-mapping path="/error/**"/>
+            <mvc:exclude-mapping path="/sens-static/**"/>
+            <mvc:exclude-mapping path="/favicon.ico"/>
+            <bean class="com.imoxion.sensems.web.authentication.UserAuthentication" />
+        </mvc:interceptor>
+
+    </mvc:interceptors>
+
+    <!--Hadler Mapping -->
+    <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping">
+        <property name="order" value="0" />
+    </bean>
+
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+        <property name="order" value="1" />
+    </bean>
+
+    <!-- 서비스가 실행되면 처음에 한번 실행되는 클래스 -->
+    <bean class="com.imoxion.sensems.web.listener.SensEmsStartupListener">
+        <constructor-arg index="0">
+            <list>
+                <bean class="com.imoxion.sensems.web.listener.ServiceInitialListener"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <context:component-scan base-package="com.imoxion.sensems.web" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+    </context:component-scan>
+
+    <mvc:resources mapping="/sens-static/**" location="/sens-static/" cache-period="86400"/>
+    <mvc:resources mapping="/help/**" location="/help/" cache-period="86400"/>
+
+    <tx:annotation-driven transaction-manager="transactionManager" />
+</beans>

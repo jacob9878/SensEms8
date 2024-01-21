@@ -1,0 +1,47 @@
+﻿/* 글씨만 컬러 */
+.skin1 .tab_area ul li.on a,
+.skin1 .guide .add_menu .guide-group li.active > a,
+.skin1 .guide .add_menu .guide-group a:hover,
+.skin1 .section.add_menu li.add_group.active a.group-name,
+.skin1 .section.add_menu li.add_group:hover a.group-name {color: #ffa018;}
+
+/* 테두리만 컬러 */
+.skin1 button:hover,
+.skin1 .btn2:hover,
+.skin1 .btn4:hover,
+input[type="text"]:hover,
+input[type="password"]:hover,
+select:hover,
+.write_paper .list_nav_simple a:hover,
+.write_image .list_nav_simple a:hover,
+.btn_add_file label:hover,
+.btn_add_file input[type="button"]:hover,
+.content > .composer_area #filelist input.file_delete:hover,
+.tab_area ul li.on a{border-color:#ffa018}
+
+/* 중간탭 */
+.skin1 .tab_area02 ul li a:hover{ border-color: #ffa018; color: #333333; z-index: 99}
+
+
+/* 테두리 + 배경 + 글씨흰색 */
+.skin1 .page_nav ul li.on a,
+.skin1 .page_nav ul li.on a:hover,
+.skin1 .schedule .content_top_btn li ul li.active a,
+.skin1 .schedule .content_top_btn li ul li:hover a,
+.skin1 .btn3:hover,
+.skin1 .tab_area02 ul li.on a{background-color: #ffa018; border-color: #ffa018; color: #ffffff}
+
+/* 버튼 컬러*/
+.skin1 .btn1{background-color: #ffa018; border-color: #ffa018;  }
+.skin1 .btn1:hover{background-color: #f8970d; border-color: #f8970d; }
+.btn1:disabled {opacity: 0.6; cursor: unset; border-color: #ffa018!important; background-color: #ffa018!important; color: #ffffff!important;}
+.skin1 .btn3{color: #ffa018; border-color:  #ffa018}
+
+/* 아래선 두껍운 경우
+input.loginId:hover,
+input.loginId:active,
+input.loginId:focus,
+input.loginPw:hover,
+input.loginPw:active,
+input.loginPw:focus,
+.skin1 .tab_area ul li.on{border-bottom: 3px solid #ffa018}*/

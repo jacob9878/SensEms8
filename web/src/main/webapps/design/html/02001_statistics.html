@@ -1,0 +1,576 @@
+﻿<!DOCTYPE HTML>
+<html lang="ko-KR">
+<head>
+	<meta charset="UTF-8">
+	<title>SensEMS</title>
+	<link rel="stylesheet" href="../../sens-static/css/style.css" />
+	<link rel="stylesheet" href="../../sens-static/css/skin.css" />
+	
+</head>
+<body class="skin1">
+	<div class="wrap">
+		<!-- left area start -->
+		<div class="left_menu ">
+			<div class="left_logo ">
+				<a href=""><img src="../../sens-static/images/left_logo.png" alt="로고"></a>
+			</div>
+
+			<div class="profile ">
+				<div class="info">
+					<div class="info_box  ">
+						<a href="" class="user_name">김효민</a>
+						<a href="" class="user_membership">내정보</a>
+					</div>
+				</div>
+				<div class="info_box2">
+					<div class="help"><a href="">HELP</a></div>
+					<p></p>
+					<div class="logout"><a href="">LOGOUT</a></div>
+				</div>
+			</div>
+
+			<div class="nav">
+				<ul>
+					<li class="menu_1depth">
+						<a href="01001_composer.html"><span class="icon_public depth1_01"></span>메일쓰기</a>
+					</li>
+					<li class="menu_1depth">
+						<a href="02001_statistics.html"><span class="icon_public depth1_02"></span>메일발송 결과</a>
+					</li>
+					<li class="menu_1depth">
+						<a href="03001_schedule.html"><span class="icon_public depth1_03"></span>발송일정관리</a>
+					</li>
+					<li class="menu_1depth">
+						<a href="" class="folder_off"><span class="icon_public depth1_04"></span>수신그룹 관리</a>
+						<ul>
+							<li class="menu_2depth"><a href="">수신그룹 관리</a></li>
+							<li class="menu_2depth"><a href="address">개인 주소록</a></li>
+						</ul>
+					</li>
+					<li class="menu_1depth on">
+						<a href="" class="folder_off"><span class="icon_public depth1_05"></span>발송 관리</a>
+						<ul style="">
+							<li class="menu_2depth"><a href="">발송분류 관리</a></li>
+							<li class="menu_2depth"><a href="">이미지 관리</a></li>
+							<li class="menu_2depth"><a href="">템플릿 관리</a></li>
+							<li class="menu_2depth"><a href="">테스트 계정관리</a></li>
+							<li class="menu_2depth"><a href="">수신거부 관리</a></li>
+						</ul>
+					</li>
+					<li class="menu_1depth">
+						<a href="" class="folder_off"><span class="icon_public depth1_06"></span>시스템 관리자</a>
+						<ul style="">
+							<li class="menu_2depth"><a href="">사용자 관리</a></li>
+							<li class="menu_2depth"><a href="">정기예약발송 설정</a></li>
+							<li class="menu_2depth"><a href="">발송차단 설정</a></li>
+							<li class="menu_2depth"><a href="">데이터베이스 관리</a></li>
+							<li class="menu_2depth"><a href="06005_attach.html">첨부파일 확장자 관리</a></li>
+							<li class="menu_2depth"><a href="">사용자 활동로그 조회</a></li>
+						</ul>
+
+					</li>
+				</ul>
+			</div>
+
+		</div>	
+		<!-- left area end -->
+
+		<div class="statistics">
+		<!-- section start -->
+			<!-- top area start -->
+			<div class="title_box fixed">
+				<div class="article top_area">
+					<div class="title">
+						<h1>메일발송 결과</h1>
+						<p>메일발송 결과나 통계를 볼 수 있습니다.</p>
+					</div>
+					<div class="search_box">
+						<div class="inner">
+							<div class="select_box">
+								<select class="search_opt" id="" name="search_opt">
+									<option value="">제목</option>
+								</select>
+							</div>
+							<input type="text" id="searchWord" name="searchWord" value="" class="w200" placeholder="검색어를 입력하세요.">
+							<button class="search_btn btn1"><span>검색</span></button>
+						</div>
+					</div>					
+				</div>
+			</div>
+			<!-- top area end -->	
+
+		<div class="body">
+				<!-- content top start -->
+					<div class="content_top fixed">
+						<ul class="content_top_btn">
+							<li><a class="btn2" href="">새로고침</a></li>
+							<li><a class="btn2" href="">이동</a></li>
+							<li><a class="btn2" href="">삭제</a></li>
+							<li><a class="btn2" href="">중지</a></li>
+							<li><a class="btn2" href="">재발신</a></li>
+						</ul>
+						<div class="select_box">
+							<select class="category w200" >
+								<option selected value="">발송분류(전체보기)</option>
+								<option value="">유지보수</option>
+								<option value="">데모</option>
+								<option value="">보도자료</option>
+							</select>
+							<select class="state w200" >
+								<option selected value="">발송상태(전체보기)</option>
+								<option value="">발송완료</option>
+								<option value="">대기중</option>
+								<option value="">발송중</option>
+							</select>
+							<select class="list_select" onchange="common.change_pagesize(this.value)">
+								<option selected="" value="15">15</option>
+								<option value="30">30</option>
+								<option value="50">50</option>
+								<option value="100">100</option>
+							</select>
+						</div>
+
+					</div>
+				<!-- content top end -->
+
+
+
+			<div class="section pd_l30">
+				<!-- content start -->
+
+				<div class="article content">
+					<!-- content area start -->
+					<div class="content_area">
+						<table  width ="100%" height="auto" >
+							<colgroup>
+								<col style="width:25px" />
+								<col style="width:auto" />
+								<col style="width:120px" />
+								<col style="width:120px" />
+								<col style="width:150px" />
+								<col style="width:130px" />
+								<col style="width:130px" />
+								<col style="width:65px" />
+							</colgroup>
+							<thead class="fixed">
+								<tr>
+									<th class="check_ico">
+										<input type="checkbox" title="전체선택">
+									</th>
+									<th>제목</th>
+									<th>작성자</th>
+									<th>발송상태</th>
+									<th>발송수</th>
+									<th>등록일</th>
+									<th>발송일</th>
+									<th class="txt center">리포팅</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="check_ico">
+										<input type="checkbox" title="선택">
+									</td>
+									<td >
+										<a href="02002_statisticsSend.html">[광고] [기프트콘] 아이모션 창립 20주년 [광고] [기프트콘] 아이모션 창립 20주년</a>
+									</td>
+									<td >admin</td>
+									<td >메일 전송 완료</td>
+									<td >100000/100000
+										<button title="발송수 목록" class="read " onclick="window.open('02001_statistics_list.html','발송수 목록 목록','width=860px,height=750px,location=no,status=no,scrollbars=yes,menubar=no,resizable=yes');" type="button">
+											<img src="../../sens-static/images/icon_read.png" alt="" />
+										</button>
+									</td>
+									<td>2021-01-22 <span>13:23</span></td>
+									<td>2021-01-22 <span>13:23</span></td>
+									<td class="txt center">
+										<button title="리포팅" class="btn3" onclick="window.open('02001_statistics_report.html','리포팅 ','width=800px,height=750px,location=no,status=no,scrollbars=yes,menubar=no,resizable=yes');" type="button">보기
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td class="check_ico">
+										<input type="checkbox" title="선택">
+									</td>
+									<td >
+										<a href="02002_statisticsSend.html">[광고] [기프트콘] 아이모션 창립 20주년 [광고] [기프트콘] 아이모션 창립 20주년</a>
+									</td>
+									<td >admin</td>
+									<td >메일 전송 완료</td>
+									<td >2/2
+										<button title="발송수 목록" class="read " onclick="window.open('02001_statistics_list.html','발송수 목록 목록','width=860px,height=750px,location=no,status=no,scrollbars=yes,menubar=no,resizable=yes');" type="button">
+											<img src="../../sens-static/images/icon_read.png" alt="" />
+										</button>
+									</td>
+									<td>2021-01-22 <span>13:23</span></td>
+									<td>2021-01-22 <span>13:23</span></td>
+									<td class="txt center">
+										<button title="리포팅" class="btn3" onclick="window.open('02001_statistics_report.html','리포팅 ','width=800px,height=750px,location=no,status=no,scrollbars=yes,menubar=no,resizable=yes');" type="button">보기
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td class="check_ico">
+										<input type="checkbox" title="선택">
+									</td>
+									<td >
+										<a href="02002_statisticsSend.html">[광고] [기프트콘] 아이모션 창립 20주년 [광고] [기프트콘] 아이모션 창립 20주년</a>
+									</td>
+									<td >admin</td>
+									<td >메일 전송 완료</td>
+									<td >2/2
+										<button title="발송수 목록" class="read " onclick="window.open('02001_statistics_list.html','발송수 목록 목록','width=860px,height=750px,location=no,status=no,scrollbars=yes,menubar=no,resizable=yes');" type="button">
+											<img src="../../sens-static/images/icon_read.png" alt="" />
+										</button>
+									</td>
+									<td>2021-01-22 <span>13:23</span></td>
+									<td>2021-01-22 <span>13:23</span></td>
+									<td class="txt center">
+										<button title="리포팅" class="btn3" onclick="window.open('02001_statistics_report.html','리포팅 ','width=800px,height=750px,location=no,status=no,scrollbars=yes,menubar=no,resizable=yes');" type="button">보기
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td class="check_ico">
+										<input type="checkbox" title="선택">
+									</td>
+									<td >
+										<a href="02002_statisticsSend.html">[광고] [기프트콘] 아이모션 창립 20주년 [광고] [기프트콘] 아이모션 창립 20주년</a>
+									</td>
+									<td >admin</td>
+									<td >메일 전송 완료</td>
+									<td >2/2
+										<button title="발송수 목록" class="read " onclick="window.open('02001_statistics_list.html','발송수 목록 목록','width=860px,height=750px,location=no,status=no,scrollbars=yes,menubar=no,resizable=yes');" type="button">
+											<img src="../../sens-static/images/icon_read.png" alt="" />
+										</button>
+									</td>
+									<td>2021-01-22 <span>13:23</span></td>
+									<td>2021-01-22 <span>13:23</span></td>
+									<td class="txt center">
+										<button title="리포팅" class="btn3" onclick="window.open('02001_statistics_report.html','리포팅 ','width=800px,height=750px,location=no,status=no,scrollbars=yes,menubar=no,resizable=yes');" type="button">보기
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td class="check_ico">
+										<input type="checkbox" title="선택">
+									</td>
+									<td >
+										<a href="02002_statisticsSend.html">[광고] [기프트콘] 아이모션 창립 20주년 [광고] [기프트콘] 아이모션 창립 20주년</a>
+									</td>
+									<td >admin</td>
+									<td >메일 전송 완료</td>
+									<td >2/2
+										<button title="발송수 목록" class="read " onclick="window.open('02001_statistics_list.html','발송수 목록 목록','width=860px,height=750px,location=no,status=no,scrollbars=yes,menubar=no,resizable=yes');" type="button">
+											<img src="../../sens-static/images/icon_read.png" alt="" />
+										</button>
+									</td>
+									<td>2021-01-22 <span>13:23</span></td>
+									<td>2021-01-22 <span>13:23</span></td>
+									<td class="txt center">
+										<button title="리포팅" class="btn3" onclick="window.open('02001_statistics_report.html','리포팅 ','width=800px,height=750px,location=no,status=no,scrollbars=yes,menubar=no,resizable=yes');" type="button">보기
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td class="check_ico">
+										<input type="checkbox" title="선택">
+									</td>
+									<td >
+										<a href="02002_statisticsSend.html">[광고] [기프트콘] 아이모션 창립 20주년 [광고] [기프트콘] 아이모션 창립 20주년</a>
+									</td>
+									<td >admin</td>
+									<td >메일 전송 완료</td>
+									<td >2/2
+										<button title="발송수 목록" class="read " onclick="window.open('02001_statistics_list.html','발송수 목록 목록','width=860px,height=750px,location=no,status=no,scrollbars=yes,menubar=no,resizable=yes');" type="button">
+											<img src="../../sens-static/images/icon_read.png" alt="" />
+										</button>
+									</td>
+									<td>2021-01-22 <span>13:23</span></td>
+									<td>2021-01-22 <span>13:23</span></td>
+									<td class="txt center">
+										<button title="리포팅" class="btn3" onclick="window.open('02001_statistics_report.html','리포팅 ','width=800px,height=750px,location=no,status=no,scrollbars=yes,menubar=no,resizable=yes');" type="button">보기
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td class="check_ico">
+										<input type="checkbox" title="선택">
+									</td>
+									<td >
+										<a href="02002_statisticsSend.html">[광고] [기프트콘] 아이모션 창립 20주년 [광고] [기프트콘] 아이모션 창립 20주년</a>
+									</td>
+									<td >admin</td>
+									<td >메일 전송 완료</td>
+									<td >2/2
+										<button title="발송수 목록" class="read " onclick="window.open('02001_statistics_list.html','발송수 목록 목록','width=860px,height=750px,location=no,status=no,scrollbars=yes,menubar=no,resizable=yes');" type="button">
+											<img src="../../sens-static/images/icon_read.png" alt="" />
+										</button>
+									</td>
+									<td>2021-01-22 <span>13:23</span></td>
+									<td>2021-01-22 <span>13:23</span></td>
+									<td class="txt center">
+										<button title="리포팅" class="btn3" onclick="window.open('02001_statistics_report.html','리포팅 ','width=800px,height=750px,location=no,status=no,scrollbars=yes,menubar=no,resizable=yes');" type="button">보기
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td class="check_ico">
+										<input type="checkbox" title="선택">
+									</td>
+									<td >
+										<a href="02002_statisticsSend.html">[광고] [기프트콘] 아이모션 창립 20주년 [광고] [기프트콘] 아이모션 창립 20주년</a>
+									</td>
+									<td >admin</td>
+									<td >메일 전송 완료</td>
+									<td >2/2
+										<button title="발송수 목록" class="read " onclick="window.open('02001_statistics_list.html','발송수 목록 목록','width=860px,height=750px,location=no,status=no,scrollbars=yes,menubar=no,resizable=yes');" type="button">
+											<img src="../../sens-static/images/icon_read.png" alt="" />
+										</button>
+									</td>
+									<td>2021-01-22 <span>13:23</span></td>
+									<td>2021-01-22 <span>13:23</span></td>
+									<td class="txt center">
+										<button title="리포팅" class="btn3" onclick="window.open('02001_statistics_report.html','리포팅 ','width=800px,height=750px,location=no,status=no,scrollbars=yes,menubar=no,resizable=yes');" type="button">보기
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td class="check_ico">
+										<input type="checkbox" title="선택">
+									</td>
+									<td >
+										<a href="02002_statisticsSend.html">[광고] [기프트콘] 아이모션 창립 20주년 [광고] [기프트콘] 아이모션 창립 20주년</a>
+									</td>
+									<td >admin</td>
+									<td >메일 전송 완료</td>
+									<td >2/2
+										<button title="발송수 목록" class="read " onclick="window.open('02001_statistics_list.html','발송수 목록 목록','width=860px,height=750px,location=no,status=no,scrollbars=yes,menubar=no,resizable=yes');" type="button">
+											<img src="../../sens-static/images/icon_read.png" alt="" />
+										</button>
+									</td>
+									<td>2021-01-22 <span>13:23</span></td>
+									<td>2021-01-22 <span>13:23</span></td>
+									<td class="txt center">
+										<button title="리포팅" class="btn3" onclick="window.open('02001_statistics_report.html','리포팅 ','width=800px,height=750px,location=no,status=no,scrollbars=yes,menubar=no,resizable=yes');" type="button">보기
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td class="check_ico">
+										<input type="checkbox" title="선택">
+									</td>
+									<td >
+										<a href="02002_statisticsSend.html">[광고] [기프트콘] 아이모션 창립 20주년 [광고] [기프트콘] 아이모션 창립 20주년</a>
+									</td>
+									<td >admin</td>
+									<td >메일 전송 완료</td>
+									<td >2/2
+										<button title="발송수 목록" class="read " onclick="window.open('02001_statistics_list.html','발송수 목록 목록','width=860px,height=750px,location=no,status=no,scrollbars=yes,menubar=no,resizable=yes');" type="button">
+											<img src="../../sens-static/images/icon_read.png" alt="" />
+										</button>
+									</td>
+									<td>2021-01-22 <span>13:23</span></td>
+									<td>2021-01-22 <span>13:23</span></td>
+									<td class="txt center">
+										<button title="리포팅" class="btn3" onclick="window.open('02001_statistics_report.html','리포팅 ','width=800px,height=750px,location=no,status=no,scrollbars=yes,menubar=no,resizable=yes');" type="button">보기
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td class="check_ico">
+										<input type="checkbox" title="선택">
+									</td>
+									<td >
+										<a href="02002_statisticsSend.html">[광고] [기프트콘] 아이모션 창립 20주년 [광고] [기프트콘] 아이모션 창립 20주년</a>
+									</td>
+									<td >admin</td>
+									<td >메일 전송 완료</td>
+									<td >2/2
+										<button title="발송수 목록" class="read " onclick="window.open('02001_statistics_list.html','발송수 목록 목록','width=860px,height=750px,location=no,status=no,scrollbars=yes,menubar=no,resizable=yes');" type="button">
+											<img src="../../sens-static/images/icon_read.png" alt="" />
+										</button>
+									</td>
+									<td>2021-01-22 <span>13:23</span></td>
+									<td>2021-01-22 <span>13:23</span></td>
+									<td class="txt center">
+										<button title="리포팅" class="btn3" onclick="window.open('02001_statistics_report.html','리포팅 ','width=800px,height=750px,location=no,status=no,scrollbars=yes,menubar=no,resizable=yes');" type="button">보기
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td class="check_ico">
+										<input type="checkbox" title="선택">
+									</td>
+									<td >
+										<a href="02002_statisticsSend.html">[광고] [기프트콘] 아이모션 창립 20주년 [광고] [기프트콘] 아이모션 창립 20주년</a>
+									</td>
+									<td >admin</td>
+									<td >메일 전송 완료</td>
+									<td >2/2
+										<button title="발송수 목록" class="read " onclick="window.open('02001_statistics_list.html','발송수 목록 목록','width=860px,height=750px,location=no,status=no,scrollbars=yes,menubar=no,resizable=yes');" type="button">
+											<img src="../../sens-static/images/icon_read.png" alt="" />
+										</button>
+									</td>
+									<td>2021-01-22 <span>13:23</span></td>
+									<td>2021-01-22 <span>13:23</span></td>
+									<td class="txt center">
+										<button title="리포팅" class="btn3" onclick="window.open('02001_statistics_report.html','리포팅 ','width=800px,height=750px,location=no,status=no,scrollbars=yes,menubar=no,resizable=yes');" type="button">보기
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td class="check_ico">
+										<input type="checkbox" title="선택">
+									</td>
+									<td >
+										<a href="02002_statisticsSend.html">[광고] [기프트콘] 아이모션 창립 20주년 [광고] [기프트콘] 아이모션 창립 20주년</a>
+									</td>
+									<td >admin</td>
+									<td >메일 전송 완료</td>
+									<td >2/2
+										<button title="발송수 목록" class="read " onclick="window.open('02001_statistics_list.html','발송수 목록 목록','width=860px,height=750px,location=no,status=no,scrollbars=yes,menubar=no,resizable=yes');" type="button">
+											<img src="../../sens-static/images/icon_read.png" alt="" />
+										</button>
+									</td>
+									<td>2021-01-22 <span>13:23</span></td>
+									<td>2021-01-22 <span>13:23</span></td>
+									<td class="txt center">
+										<button title="리포팅" class="btn3" onclick="window.open('02001_statistics_report.html','리포팅 ','width=800px,height=750px,location=no,status=no,scrollbars=yes,menubar=no,resizable=yes');" type="button">보기
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td class="check_ico">
+										<input type="checkbox" title="선택">
+									</td>
+									<td >
+										<a href="02002_statisticsSend.html">[광고] [기프트콘] 아이모션 창립 20주년 [광고] [기프트콘] 아이모션 창립 20주년</a>
+									</td>
+									<td >admin</td>
+									<td >메일 전송 완료</td>
+									<td >2/2
+										<button title="발송수 목록" class="read " onclick="window.open('02001_statistics_list.html','발송수 목록 목록','width=860px,height=750px,location=no,status=no,scrollbars=yes,menubar=no,resizable=yes');" type="button">
+											<img src="../../sens-static/images/icon_read.png" alt="" />
+										</button>
+									</td>
+									<td>2021-01-22 <span>13:23</span></td>
+									<td>2021-01-22 <span>13:23</span></td>
+									<td class="txt center">
+										<button title="리포팅" class="btn3" onclick="window.open('02001_statistics_report.html','리포팅 ','width=800px,height=750px,location=no,status=no,scrollbars=yes,menubar=no,resizable=yes');" type="button">보기
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td class="check_ico">
+										<input type="checkbox" title="선택">
+									</td>
+									<td >
+										<a href="02002_statisticsSend.html">[광고] [기프트콘] 아이모션 창립 20주년 [광고] [기프트콘] 아이모션 창립 20주년</a>
+									</td>
+									<td >admin</td>
+									<td >메일 전송 완료</td>
+									<td >2/2
+										<button title="발송수 목록" class="read " onclick="window.open('02001_statistics_list.html','발송수 목록 목록','width=860px,height=750px,location=no,status=no,scrollbars=yes,menubar=no,resizable=yes');" type="button">
+											<img src="../../sens-static/images/icon_read.png" alt="" />
+										</button>
+									</td>
+									<td>2021-01-22 <span>13:23</span></td>
+									<td>2021-01-22 <span>13:23</span></td>
+									<td class="txt center">
+										<button title="리포팅" class="btn3" onclick="window.open('02001_statistics_report.html','리포팅 ','width=800px,height=750px,location=no,status=no,scrollbars=yes,menubar=no,resizable=yes');" type="button">보기
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td class="check_ico">
+										<input type="checkbox" title="선택">
+									</td>
+									<td >
+										<a href="02002_statisticsSend.html">[광고] [기프트콘] 아이모션 창립 20주년 [광고] [기프트콘] 아이모션 창립 20주년</a>
+									</td>
+									<td >admin</td>
+									<td >메일 전송 완료</td>
+									<td >2/2
+										<button title="발송수 목록" class="read " onclick="window.open('02001_statistics_list.html','발송수 목록 목록','width=860px,height=750px,location=no,status=no,scrollbars=yes,menubar=no,resizable=yes');" type="button">
+											<img src="../../sens-static/images/icon_read.png" alt="" />
+										</button>
+									</td>
+									<td>2021-01-22 <span>13:23</span></td>
+									<td>2021-01-22 <span>13:23</span></td>
+									<td class="txt center">
+										<button title="리포팅" class="btn3" onclick="window.open('02001_statistics_report.html','리포팅 ','width=800px,height=750px,location=no,status=no,scrollbars=yes,menubar=no,resizable=yes');" type="button">보기
+										</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<!-- content area end -->
+				</div>
+				<!-- content end -->
+				<!-- nav start -->
+				<div class="page_nav">
+					<ul>
+						<li>
+							<a href="" class="page_first icon_public" alt="첫 페이지로 이동">
+								<span>맨앞으로</span></a>
+						</li>
+						<li>
+							<a href="" class="page_prev icon_public" alt="이전첫 페이지로 이동">
+								<span>이전으로</span></a>
+						</li>
+						<li class="on">
+							<a>1</a>
+						</li>
+						<li>
+							<a href="">2</a>
+						</li>
+						<li><a href="">3</a></li>
+						<li><a href="">4</a></li>
+						<li><a href="">5</a></li>
+						<li><a href="" class="page_next icon_public" alt="다음 페이지로 이동">
+							<span>다음으로</span>
+						</a>
+						</li>
+						<li>
+							<a href="" class="page_last icon_public" alt="마지막 페이지로 이동">
+								<span>맨뒤로</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<!-- nav end -->
+			</div>
+			<!-- section end -->
+		</div>
+		</div>
+	</div>	
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

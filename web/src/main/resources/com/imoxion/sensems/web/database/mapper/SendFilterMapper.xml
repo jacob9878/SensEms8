@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imoxion.sensems.web.database.mapper.SendFilterMapper">
+
+    <select id="selectSendFilterList" resultType="sendfilterInfo">
+		<choose>
+			<when test="_databaseId == 'oracle'">
+				SELECT * FROM (
+					SELECT ROWNUM AS RNUM,a.* FROM(
+						SELECT * FROM imb_filterdomain
+						<where>
+							<if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+								hostname LIKE '%'||#{srch_keyword}||'%'
+							</if>
+						</where>
+				order by regdate desc
+					) a
+				) WHERE RNUM between #{start} and #{end}
+
+			</when>
+			<otherwise>
+				select * from imb_filterdomain
+				<where>
+					<if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+						hostname like concat('%',#{srch_keyword},'%')
+					</if>
+				</where>
+				order by regdate desc
+				limit #{start},#{end}
+
+			</otherwise>
+		</choose>
+	</select>
+
+	<select id="selectSendFilterCount" resultType="int">
+		select count(*) from imb_filterdomain
+		<choose>
+			<when test="_databaseId == 'oracle'">
+				<where>
+					<if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+						hostname LIKE '%'||#{srch_keyword}||'%'
+					</if>
+				</where>
+			</when>
+			<otherwise>
+				<where>
+					<if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+						hostname like concat('%',#{srch_keyword},'%')
+					</if>
+				</where>
+			</otherwise>
+		</choose>
+	</select>
+
+    <select id="isExistSendFilter" resultType="int">
+		select count(*) from imb_filterdomain where hostname=#{hostname}
+	</select>
+
+	<insert id="insertSendFilter" parameterType="sendfilterInfo">
+		INSERT INTO imb_filterdomain(hostname, regdate) VALUES(#{hostname}, #{regdate});
+	</insert>
+
+	<delete id="deleteSendFilter">
+		delete from imb_filterdomain where hostname=#{hostname}
+	</delete>
+
+</mapper>

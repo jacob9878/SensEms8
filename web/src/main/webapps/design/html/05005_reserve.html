@@ -1,0 +1,265 @@
+﻿<!DOCTYPE HTML>
+<html lang="ko-KR">
+<head>
+	<meta charset="UTF-8">
+	<title>SensEMS</title>
+	<link rel="stylesheet" href="../../sens-static/css/style.css" />
+	<link rel="stylesheet" href="../../sens-static/css/skin.css" />
+	
+</head>
+<body class="skin1">
+	<div class="wrap">
+		<div class="left_menu ">
+			<div class="left_logo ">
+				<a href=""><img src="../../sens-static/images/left_logo.png" alt="로고"></a>
+			</div>
+
+			<div class="profile ">
+				<div class="info">
+					<div class="info_box ">
+						<a href="" class="user_name">아이모션</a>
+						<a href="" class="user_membership">내정보</a>
+						<a href="" class="user_email over_text">imoxion@sensmail.com</a>
+					</div>
+					<a href="/account/logout.do" class="btn_logout pd_r20"><img src="/sens-static/images/logout.png" alt=""></a>
+				</div>
+				<p></p>
+				<ul class="info_box2">
+					<div class="help"><a href=""><span class="icon_public"></span>HELP</a></div>
+						<p></p>
+					<div class="language">
+						<span class="icon_public"></span>
+						<select class="languageList" onclick="">
+							<option selected="" value="ko">KOR</option>
+							<option value="en">ENG</option>
+							<option value="ja">JPN</option>
+							<option value="zh">CHN</option>
+						</select>
+					</div>
+				</ul>
+			</div>
+
+			<div class="nav">
+				<ul>
+					<li class="menu_1depth "><a href="/mail/write/form.do"><span class="icon_public depth1_01"></span>메일쓰기</a></li>
+					<li class="menu_1depth "><a href=""><span class="icon_public depth1_02"></span>메일발송 결과</a></li>
+					<li class="menu_1depth "><a href=""><span class="icon_public depth1_03"></span>발송일정관리</a></li>
+					<li class="menu_1depth ">
+						<a href="/receiver/group/list.do"><span class="icon_public depth1_04"></span>수신자 관리</a>
+						<ul>
+							<li class="menu_2depth "><a href="/receiver/group/list.do">수신그룹 관리</a></li>
+							<li class="menu_2depth "><a href="/receiver/address/list.do">개인 주소록</a></li>
+						</ul>
+					</li>
+					<li class="menu_1depth on">
+						<a href="/send/category/list.do"><span class="icon_public depth1_05"></span>발송 관리</a>
+						<ul>
+							<li class="menu_2depth "><a href="/send/category/list.do">발송분류 관리</a></li>
+							<li class="menu_2depth "><a href="/send/image/list.do">이미지 관리</a></li>
+							<li class="menu_2depth "><a href="/send/template/list.do">템플릿 관리</a></li>
+							<li class="menu_2depth "><a href="/send/demoaccount/list.do">테스트 계정관리</a></li>
+							<li class="menu_2depth on"><a href="/send/reserve/list.do">정기예약발송 관리</a></li>
+							<li class="menu_2depth "><a href="/send/reject/list.do">수신거부 관리</a></li>
+						</ul>
+					</li>
+					
+						<li class="menu_1depth ">
+							<a href="/sysman/user/list.do"><span class="icon_public depth1_06"></span>시스템 관리자</a>
+							<ul>
+								<li class="menu_2depth "><a href="/sysman/user/list.do">사용자 관리</a></li>
+								<li class="menu_2depth "><a href="/sysman/sendfilter/list.do">발송차단 설정</a></li>
+								<li class="menu_2depth "><a href="/sysman/database/list.do">데이터베이스 관리</a></li>
+								<li class="menu_2depth "><a href="/sysman/attach/restrict.do">첨부파일 확장자 관리</a></li>
+								<li class="menu_2depth "><a href="">사용자 활동로그 조회</a></li>
+							</ul>
+						</li>
+					
+				</ul>
+			</div>
+
+		</div>
+		<!-- left area end -->
+        
+        
+
+<meta http-equiv="X-UA-Compatible" content="IE=10">
+	<!-- section start -->
+	<!-- top area start -->
+	<form id="reserveSendListForm" name="reserveSendListForm" action="list.do" method="get">
+	<input id="cpage" name="cpage" value="1" type="hidden">
+	<div class="title_box fixed">
+		<div class="article top_area">
+			<div class="title">
+				<h1>정기예약발송 관리</h1>
+				<p>정기예약발송관리를 관리 할 수 있습니다.</p>
+			</div>
+		</div>
+	</div>
+	<!-- top area end -->
+	<!-- content top start -->
+	<div class="content_top fixed">
+		<ul class="content_top_btn">
+			<li><a class="btn2" href="#" onclick="location.href='/send/reserve/write.do'">추가</a></li>
+			<li><a class="btn2" href="#" onclick="reserveList.reserveDel();">삭제</a></li>
+		</ul>
+	</div>
+	<!-- content top end -->
+
+
+
+	<div class="section pd_l30">
+		<!-- content start -->
+
+		<div class="article content">
+			<!-- content area start -->
+			<div class="content_area">
+				<table width="100%" height="auto">
+					<colgroup>
+						<col style="width:35px">
+						<col style="width:auto">
+						<col style="width:200px">
+						<col style="width:100px">
+						<col style="width:100px">
+					</colgroup>
+					<thead>
+					<tr>
+						<th class="txt center">
+							<input id="all_check" type="checkbox" onclick="common.select_all('ukeys');">
+						</th>
+						<th >제목</th>
+						<th >발송기간</th>
+						<th >발송주기</th>
+						<th >발송시간</th>
+					</tr>
+					</thead>
+					<tbody>
+					
+					
+						<tr>
+							<td class="txt center">
+								<input type="checkbox" name="ukeys" value="604ec6513fe88179354975c7">
+							</td>
+							<td ><a href="#" onclick="reserveList.view('604ec6513fe88179354975c7')">11</a></td>
+							<td  class="list_2line">20210317&nbsp;~&nbsp;20210318</td>
+							
+							<td >매일</td>
+							
+							
+							
+							
+							<td ></td>
+						</tr>
+					
+						<tr>
+							<td class="txt center">
+								<input type="checkbox" name="ukeys" value="604ec49b3fe35420e33de612">
+							</td>
+							<td ><a href="#" onclick="reserveList.view('604ec49b3fe35420e33de612')">테스트 정기발송</a></td>
+							<td  class="list_2line">20210316&nbsp;~&nbsp;20210317</td>
+							
+							
+							<td >매주</td>
+							
+							
+							
+							<td ></td>
+						</tr>
+					
+						<tr>
+							<td class="txt center">
+								<input type="checkbox" name="ukeys" value="604ac3893fee05dc646e45b7">
+							</td>
+							<td ><a href="#" onclick="reserveList.view('604ac3893fee05dc646e45b7')">asdasdsad[#FIELD1#]</a></td>
+							<td  class="list_2line">20210313&nbsp;~&nbsp;20210315</td>
+							
+							
+							<td >매주</td>
+							
+							
+							
+							<td ></td>
+						</tr>
+					
+						<tr>
+							<td class="txt center">
+								<input type="checkbox" name="ukeys" value="604abd663fc45257dd5587d4">
+							</td>
+							<td ><a href="#" onclick="reserveList.view('604abd663fc45257dd5587d4')">asdsad[#FIELD1#]</a></td>
+							<td  class="list_2line">20210313&nbsp;~&nbsp;20210314</td>
+							
+							
+							<td >매주</td>
+							
+							
+							
+							<td ></td>
+						</tr>
+					
+						<tr>
+							<td class="txt center">
+								<input type="checkbox" name="ukeys" value="60486f983fd15948c9ecb896">
+							</td>
+							<td ><a href="#" onclick="reserveList.view('60486f983fd15948c9ecb896')">asdsad</a></td>
+							<td  class="list_2line">20210330&nbsp;~&nbsp;20210430</td>
+							
+							
+							<td >매주</td>
+							
+							
+							
+							<td ></td>
+						</tr>
+					
+					</tbody>
+				</table>
+
+			</div>
+			<!-- content area end -->
+		</div>
+		<!-- content end -->
+		<!-- nav start -->
+		<div class="page_nav">
+			
+				
+				
+				
+				
+			<ul>
+<li class="on"><a>1</a></li>
+</ul>
+		</div>
+		<!-- nav end -->
+	
+	</div></form>
+	<!-- section end -->
+         
+       
+ 	</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

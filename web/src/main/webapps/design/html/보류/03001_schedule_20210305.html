@@ -1,0 +1,730 @@
+﻿<!DOCTYPE HTML>
+<html lang="ko-KR">
+<head>
+	<meta charset="UTF-8">
+	<title>SensEMS</title>
+	<link rel="stylesheet" href="../../sens-static/css/style.css" />
+	<link rel="stylesheet" href="../../sens-static/css/skin.css" />
+	
+</head>
+<body class="skin1">
+	<div class="wrap">
+		<!-- left area start -->
+		<div class="left_menu ">
+			<div class="left_logo ">
+				<a href=""><img src="../../sens-static/images/left_logo.png" alt="로고" /></a>
+			</div>			
+			<div class="profile ">
+				<div class="info">
+					<div class="info_box  ">
+						<a href="" class="user_name" >김효민</a> 
+						<a href="" class="user_membership">내정보</a>
+						<a href="" class="user_email over_text">khm@imoxion.com</a>
+					</div>
+					<a href="" class="btn_logout pd_r20"><img src="../../sens-static/images/logout.png" alt="" /></a>				
+				</div>
+				<p></p>
+				<div class="info_box2">
+					<div class="help"><a href="" ><span class="icon_public"></span>HELP</a></div>
+					<p></p>
+					<div class="language" >
+					
+						<span class="icon_public"></span>
+						<select id="languageList"  onchange="change_language()">
+							<option value="ko">KOR</option>
+							<option value="en">ENG</option>
+							<option value="ja">JPN</option>
+						<!-- 	<option value="zh">CHN</option> -->
+						</select>			
+					</div>					
+				</div>				
+			</div>
+		
+			<div class="nav">
+				<ul>
+					<li class="menu_1depth">						
+						<a href="01001_composer.html"><span class="icon_public depth1_01"></span>메일쓰기</a>
+					</li>
+					<li class="menu_1depth">
+						<a href="02001_statistics.html"><span class="icon_public depth1_02"></span>메일발송 결과</a>
+					</li>
+					<li class="menu_1depth">
+						<a href="03001_schedule.html"><span class="icon_public depth1_03"></span>발송일정관리</a>
+					</li>
+					<li class="menu_1depth">
+						<a href="" class="folder_off"><span class="icon_public depth1_04"></span>수신그룹 관리</a>
+						<ul >
+							<li class="menu_2depth"><a href="">수신그룹 관리</a></li>
+							<li class="menu_2depth"><a href="">개인 주소록</a></li>
+						</ul>
+					</li>
+					<li class="menu_1depth">
+						<a href="" class="folder_off"><span class="icon_public depth1_05"></span>발송 관리</a>
+						<ul style="">
+							<li class="menu_2depth"><a href="">발송분류 관리</a></li>
+							<li class="menu_2depth"><a href="">이미지 관리</a></li>
+							<li class="menu_2depth"><a href="">템플릿 관리</a></li>
+							<li class="menu_2depth"><a href="">테스트 계정관리</a></li>
+							<li class="menu_2depth"><a href="">수신거부 관리</a></li>
+						</ul>
+					</li>
+					<li class="menu_1depth">
+						<a href="" class="folder_off"><span class="icon_public depth1_06"></span>시스템 관리자</a>
+						<ul style="">
+							<li class="menu_2depth"><a href="">사용자 관리</a></li>
+							<li class="menu_2depth"><a href="">정기예약발송 설정</a></li>
+							<li class="menu_2depth"><a href="">발송차단 설정</a></li>
+							<li class="menu_2depth"><a href="">데이터베이스 관리</a></li>
+							<li class="menu_2depth"><a href="">첨부파일 확장자 관리</a></li>
+							<li class="menu_2depth"><a href="">사용자 활동로그 조회</a></li>
+						</ul>
+					
+					</li>
+				</ul>
+			</div>
+			
+		</div>	
+		<!-- left area end -->
+
+		<div class="schedule"> 
+		<!-- section start -->
+			<!-- top area start -->
+			<div class="title_box fixed">
+				<div class="article top_area">
+					<div class="title">
+						<h1>발송일정관리</h1>
+						<p>설명글을 적어주세요.</p>
+					</div>			
+				</div>
+			</div>
+			<!-- top area end -->	
+		
+	
+			<!-- content top start -->	
+				<div class="content_top fixed">
+					<ul class="content_top_btn">
+						<li>
+							<ul>
+								<li class="active"><a class="" href="03001_schedule.html">월</a></li>
+								<li><a class="" href="03001_schedule_week.html">주</a></li>
+								<li><a class="" href="03001_schedule_day.html">일</a></li>
+							</ul>						
+						</li>
+						<li><a class="btn2" href="">오늘</a></li>
+						<li><a class="btn2" href="">일정등록</a></li>
+					</ul>					
+					<div class="move_month">
+						<div>
+							<button class="icon_public prev"></button>
+							<div>
+								<a href="">
+									2021.03
+									<span class="icon_public"></span>
+								</a>
+							</div>
+							<button class="icon_public next"></button>
+						</div>
+					</div>
+				</div>
+			<!-- content top end -->
+				
+
+		
+		<div class="section pd_l30">
+			<!-- content start -->
+
+			<div class="article content">
+				<!-- content area start -->				
+				<div class="composer_area">
+					<table class="sd_table" width ="100%" height="auto" >
+						<thead >
+							<tr>
+								<th class="txt red">일</th>
+								<th>월</th>
+								<th>화</th>
+								<th>수</th>
+								<th>목</th>
+								<th>금</th>
+								<th>토</th>								
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="last_month sun"> 
+									<table class="sd_tb_day">
+										<tr>
+											<td class="day_txt">
+												<a href="">28</a>
+												<span class="txt red"></span>
+											</td>
+										</tr>
+										<tr class="com">
+											<td>
+												
+											</td>
+										</tr>
+									</table>								
+								</td>
+								<td>
+									<table class="sd_tb_day">
+										<tr>
+											<td class="day_txt">
+												<a href="">1</a>
+												<span class="txt red">삼일절</span>
+											</td>
+										</tr>
+										<tr class="com">
+											<td>
+												
+											</td>
+										</tr>
+									</table>								
+								</td>
+								<td>
+									<table class="sd_tb_day">
+										<tr>
+											<td class="day_txt">
+												<a href="">2</a>
+												<span class="txt red"></span>
+											</td>
+										</tr>
+										<tr class="com">
+											<td>
+												
+											</td>
+										</tr>
+									</table>								
+								</td>
+								<td>
+									<table class="sd_tb_day">
+										<tr>
+											<td class="day_txt">
+												<a href="">3</a>
+												<span class="txt red"></span>
+											</td>
+										</tr>
+										<tr class="com">
+											<td>
+												<a href="" class="mini_btn" >발송완료<span class="txt white strong">(2)</span></a>
+											</td>
+										</tr>
+									</table>								
+								</td>
+								<td>
+									<table class="sd_tb_day">
+										<tr>
+											<td class="day_txt">
+												<a href="">4</a>
+												<span class="txt red"></span>
+											</td>
+										</tr>
+										<tr class="com">
+											<td>
+												
+											</td>
+										</tr>
+									</table>								
+								</td>			
+								<td class="today">
+									<table class="sd_tb_day">
+										<tr>
+											<td class="day_txt">
+												<a href="">5</a>
+												<span class="txt red"></span>
+											</td>
+										</tr>
+										<tr class="com">
+											<td>
+												
+											</td>
+										</tr>
+									</table>								
+								</td>
+								<td>
+									<table class="sd_tb_day">
+										<tr>
+											<td class="day_txt">
+												<a href="">6</a>
+												<span class="txt red"></span>
+											</td>
+										</tr>
+										<tr class="com">
+											<td>
+												
+											</td>
+										</tr>
+									</table>								
+								</td>			
+							</tr>
+							
+							<tr>
+								<td class="sun"> 
+									<table class="sd_tb_day">
+										<tr>
+											<td class="day_txt">
+												<a href="">7</a>
+												<span class="txt red"></span>
+											</td>
+										</tr>
+										<tr class="com">
+											<td>
+												
+											</td>
+										</tr>
+									</table>								
+								</td>
+								<td>
+									<table class="sd_tb_day">
+										<tr>
+											<td class="day_txt">
+												<a href="">8</a>
+												<span class="txt red"></span>
+											</td>
+										</tr>
+										<tr class="com">
+											<td>
+												
+											</td>
+										</tr>
+									</table>								
+								</td>
+								<td>
+									<table class="sd_tb_day">
+										<tr>
+											<td class="day_txt">
+												<a href="">9</a>
+												<span class="txt red"></span>
+											</td>
+										</tr>
+										<tr class="com">
+											<td>
+												
+											</td>
+										</tr>
+									</table>								
+								</td>
+								<td>
+									<table class="sd_tb_day">
+										<tr>
+											<td class="day_txt">
+												<a href="">10</a>
+												<span class="txt red"></span>
+											</td>
+										</tr>
+										<tr class="com">
+											<td>
+												
+											</td>
+										</tr>
+									</table>								
+								</td>
+								<td>
+									<table class="sd_tb_day">
+										<tr>
+											<td class="day_txt">
+												<a href="">11</a>
+												<span class="txt red"></span>
+											</td>
+										</tr>
+										<tr class="com">
+											<td>
+												
+											</td>
+										</tr>
+									</table>								
+								</td>			
+								<td>
+									<table class="sd_tb_day">
+										<tr>
+											<td class="day_txt">
+												<a href="">12</a>
+												<span class="txt red"></span>
+											</td>
+										</tr>
+										<tr class="com">
+											<td>
+												
+											</td>
+										</tr>
+									</table>								
+								</td>
+								<td>
+									<table class="sd_tb_day">
+										<tr>
+											<td class="day_txt">
+												<a href="">13</a>
+												<span class="txt red"></span>
+											</td>
+										</tr>
+										<tr class="com">
+											<td>
+												
+											</td>
+										</tr>
+									</table>								
+								</td>								
+							</tr>
+							
+							<tr>
+								<td class="sun"> 
+									<table class="sd_tb_day">
+										<tr>
+											<td class="day_txt">
+												<a href="">14</a>
+												<span class="txt red"></span>
+											</td>
+										</tr>
+										<tr class="com">
+											<td>
+												
+											</td>
+										</tr>
+									</table>								
+								</td>
+								<td>
+									<table class="sd_tb_day">
+										<tr>
+											<td class="day_txt">
+												<a href="">15</a>
+												<span class="txt red"></span>
+											</td>
+										</tr>
+										<tr class="com">
+											<td>
+												
+											</td>
+										</tr>
+									</table>								
+								</td>
+								<td>
+									<table class="sd_tb_day">
+										<tr>
+											<td class="day_txt">
+												<a href="">16</a>
+												<span class="txt red"></span>
+											</td>
+										</tr>
+										<tr class="com">
+											<td>
+												
+											</td>
+										</tr>
+									</table>								
+								</td>
+								<td>
+									<table class="sd_tb_day">
+										<tr>
+											<td class="day_txt">
+												<a href="">17</a>
+												<span class="txt red"></span>
+											</td>
+										</tr>
+										<tr class="com">
+											<td>
+												
+											</td>
+										</tr>
+									</table>								
+								</td>
+								<td>
+									<table class="sd_tb_day">
+										<tr>
+											<td class="day_txt">
+												<a href="">18</a>
+												<span class="txt red"></span>
+											</td>
+										</tr>
+										<tr class="com">
+											<td>
+												
+											</td>
+										</tr>
+									</table>								
+								</td>			
+								<td>
+									<table class="sd_tb_day">
+										<tr>
+											<td class="day_txt">
+												<a href="">19</a>
+												<span class="txt red"></span>
+											</td>
+										</tr>
+										<tr class="com">
+											<td>
+												
+											</td>
+										</tr>
+									</table>								
+								</td>
+								<td>
+									<table class="sd_tb_day">
+										<tr>
+											<td class="day_txt">
+												<a href="">20</a>
+												<span class="txt red"></span>
+											</td>
+										</tr>
+										<tr class="com">
+											<td>
+												
+											</td>
+										</tr>
+									</table>								
+								</td>								
+							</tr>
+							
+							<tr>
+								<td class="sun"> 
+									<table class="sd_tb_day">
+										<tr>
+											<td class="day_txt">
+												<a href="">21</a>
+												<span class="txt red"></span>
+											</td>
+										</tr>
+										<tr class="com">
+											<td>
+												
+											</td>
+										</tr>
+									</table>								
+								</td>
+								<td>
+									<table class="sd_tb_day">
+										<tr>
+											<td class="day_txt">
+												<a href="">22</a>
+												<span class="txt red"></span>
+											</td>
+										</tr>
+										<tr class="com">
+											<td>
+												
+											</td>
+										</tr>
+									</table>								
+								</td>
+								<td>
+									<table class="sd_tb_day">
+										<tr>
+											<td class="day_txt">
+												<a href="">23</a>
+												<span class="txt red"></span>
+											</td>
+										</tr>
+										<tr class="com">
+											<td>
+												
+											</td>
+										</tr>
+									</table>								
+								</td>
+								<td>
+									<table class="sd_tb_day">
+										<tr>
+											<td class="day_txt">
+												<a href="">24</a>
+												<span class="txt red"></span>
+											</td>
+										</tr>
+										<tr class="com">
+											<td>
+												
+											</td>
+										</tr>
+									</table>								
+								</td>
+								<td>
+									<table class="sd_tb_day">
+										<tr>
+											<td class="day_txt">
+												<a href="">25</a>
+												<span class="txt red"></span>
+											</td>
+										</tr>
+										<tr class="com">
+											<td>
+												<a href="" class="mini_btn" >발송완료<span class="txt white strong">(2)</span></a>
+											</td>
+										</tr>
+									</table>								
+								</td>			
+								<td>
+									<table class="sd_tb_day">
+										<tr>
+											<td class="day_txt">
+												<a href="">26</a>
+												<span class="txt red"></span>
+											</td>
+										</tr>
+										<tr class="com">
+											<td>
+												
+											</td>
+										</tr>
+									</table>								
+								</td>
+								<td>
+									<table class="sd_tb_day">
+										<tr>
+											<td class="day_txt">
+												<a href="">27</a>
+												<span class="txt red"></span>
+											</td>
+										</tr>
+										<tr class="com">
+											<td>
+												
+											</td>
+										</tr>
+									</table>								
+								</td>								
+							</tr>
+							
+							<tr>
+								<td class="sun"> 
+									<table class="sd_tb_day">
+										<tr>
+											<td class="day_txt">
+												<a href="">28</a>
+												<span class="txt red"></span>
+											</td>
+										</tr>
+										<tr class="com">
+											<td>
+												
+											</td>
+										</tr>
+									</table>								
+								</td>
+								<td>
+									<table class="sd_tb_day">
+										<tr>
+											<td class="day_txt">
+												<a href="">29</a>
+												<span class="txt red"></span>
+											</td>
+										</tr>
+										<tr class="com">
+											<td>
+												
+											</td>
+										</tr>
+									</table>								
+								</td>
+								<td>
+									<table class="sd_tb_day">
+										<tr>
+											<td class="day_txt">
+												<a href="">30</a>
+												<span class="txt red"></span>
+											</td>
+										</tr>
+										<tr class="com">
+											<td>
+												
+											</td>
+										</tr>
+									</table>								
+								</td>
+								<td>
+									<table class="sd_tb_day">
+										<tr>
+											<td class="day_txt">
+												<a href="">31</a>
+												<span class="txt red"></span>
+											</td>
+										</tr>
+										<tr class="com">
+											<td>
+												
+											</td>
+										</tr>
+									</table>								
+								</td>
+								<td class="last_month">
+									<table class="sd_tb_day">
+										<tr>
+											<td class="day_txt">
+												<a href="">1</a>
+												<span class="txt red"></span>
+											</td>
+										</tr>
+										<tr class="com">
+											<td>
+												
+											</td>
+										</tr>
+									</table>								
+								</td>			
+								<td class="last_month">
+									<table class="sd_tb_day">
+										<tr>
+											<td class="day_txt">
+												<a href="">2</a>
+												<span class="txt red"></span>
+											</td>
+										</tr>
+										<tr class="com">
+											<td>
+												
+											</td>
+										</tr>
+									</table>								
+								</td>
+								<td class="last_month">
+									<table class="sd_tb_day">
+										<tr>
+											<td class="day_txt">
+												<a href="">3</a>
+												<span class="txt red"></span>
+											</td>
+										</tr>
+										<tr class="com">
+											<td>
+												
+											</td>
+										</tr>
+									</table>								
+								</td>								
+							</tr>
+	
+						</tbody>													
+					</table>
+				</div>
+				<!-- content area end -->					
+			</div>
+			<!-- content end -->
+							
+		</div>
+		<!-- section end -->
+		</div>
+	</div>	
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,547 @@
+﻿<!DOCTYPE HTML>
+<html lang="ko-KR">
+<head>
+	<meta charset="UTF-8">
+	<title>SensEMS</title>
+	<link rel="stylesheet" href="../../sens-static/css/style.css" />
+	<link rel="stylesheet" href="../../sens-static/css/skin.css" />
+	
+</head>
+<body class="skin1">
+	<div class="wrap">
+		<!-- left area start -->
+		<div class="left_menu ">
+			<div class="left_logo ">
+				<a href=""><img src="../../sens-static/images/left_logo.png" alt="로고"></a>
+			</div>
+
+			<div class="profile ">
+				<div class="info">
+					<div class="info_box  ">
+						<a href="" class="user_name">김효민</a>
+						<a href="" class="user_membership">내정보</a>
+					</div>
+				</div>
+				<div class="info_box2">
+					<div class="help"><a href="">HELP</a></div>
+					<p></p>
+					<div class="logout"><a href="">LOGOUT</a></div>
+				</div>
+			</div>
+
+			<div class="nav">
+				<ul>
+					<li class="menu_1depth">
+						<a href="01001_composer.html"><span class="icon_public depth1_01"></span>메일쓰기</a>
+					</li>
+					<li class="menu_1depth">
+						<a href="02001_statistics.html"><span class="icon_public depth1_02"></span>메일발송 결과</a>
+					</li>
+					<li class="menu_1depth">
+						<a href="03001_schedule.html"><span class="icon_public depth1_03"></span>발송일정관리</a>
+					</li>
+					<li class="menu_1depth">
+						<a href="" class="folder_off"><span class="icon_public depth1_04"></span>수신그룹 관리</a>
+						<ul>
+							<li class="menu_2depth"><a href="">수신그룹 관리</a></li>
+							<li class="menu_2depth"><a href="address">개인 주소록</a></li>
+						</ul>
+					</li>
+					<li class="menu_1depth on">
+						<a href="" class="folder_off"><span class="icon_public depth1_05"></span>발송 관리</a>
+						<ul style="">
+							<li class="menu_2depth"><a href="">발송분류 관리</a></li>
+							<li class="menu_2depth"><a href="">이미지 관리</a></li>
+							<li class="menu_2depth"><a href="">템플릿 관리</a></li>
+							<li class="menu_2depth"><a href="">테스트 계정관리</a></li>
+							<li class="menu_2depth"><a href="">수신거부 관리</a></li>
+						</ul>
+					</li>
+					<li class="menu_1depth">
+						<a href="" class="folder_off"><span class="icon_public depth1_06"></span>시스템 관리자</a>
+						<ul style="">
+							<li class="menu_2depth"><a href="">사용자 관리</a></li>
+							<li class="menu_2depth"><a href="">정기예약발송 설정</a></li>
+							<li class="menu_2depth"><a href="">발송차단 설정</a></li>
+							<li class="menu_2depth"><a href="">데이터베이스 관리</a></li>
+							<li class="menu_2depth"><a href="06005_attach.html">첨부파일 확장자 관리</a></li>
+							<li class="menu_2depth"><a href="">사용자 활동로그 조회</a></li>
+						</ul>
+
+					</li>
+				</ul>
+			</div>
+
+		</div>	
+		<!-- left area end -->
+
+		<div class="address">
+		<!-- section start -->
+			<!-- top area start -->
+			<div class="title_box fixed">
+				<div class="article top_area">
+					<div class="title">
+						<h1>개인 주소록</h1>
+						<p>설명글을 적어주세요.</p>
+					</div>
+					<div class="search_box">
+						<div class="inner">
+							<div class="select_box">
+								<select class="search_opt" id="" name="search_opt">
+									<option value="">이름</option>
+									<option value="">이메일</option>
+									<option value="">회사</option>
+								</select>
+							</div>
+							<input type="text" id="searchWord" name="searchWord" value="" placeholder="검색어를 입력하세요.">
+							<button class="search_btn btn1"><span>검색</span></button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- top area end -->
+			<div class="section top_nobtn">
+				<!-- content top start -->
+					<div class="content_top fixed2">
+						<ul class="content_top_btn">
+							<li><a class="btn2" href="">그룹추가</a></li>
+						</ul>
+					</div>
+					<div class="content_top fixed">
+						<ul class="content_top_btn">
+							<li><a class="btn2" href="">추가</a></li>
+							<li><a class="btn2" href="">수정</a></li>
+							<li><a class="btn2" href="">삭제</a></li>
+							<li><a class="btn2" href="">다운로드</a></li>
+							<li><a class="btn2" href="">가져오기</a></li>
+						</ul>
+					</div>
+				<!-- content top end -->
+
+				<div class="address_left_menu">
+					<div class="article content add-menu-area">
+						<ul>
+							<li class="add_group">
+								<a href="#" onclick="" class="group-name txt strong">전체주소록<span class="txt strong blue">0</span></a>
+							</li>
+							<li class="add_group active">
+								<div class="group_txt">
+									<span class="icon_public"></span>
+									<a href="#" onclick="" class="group-name">미분류</a>
+									<span class="btn_util"></span>
+								</div>
+								<span class="txt strong blue">0</span>
+								<ul class="add_group_opt " id="grpOption1"  style="display: none;">
+									<li><a href="#" onclick="">수정</a></li>
+									<li><a href="#" onclick="">삭제</a></li>
+									<li><a href="#">저장</a></li>
+								</ul>
+							</li>
+							<li class="add_group">
+								<div class="group_txt">
+									<span class="icon_public"></span>
+									<a href="#" onclick="" class="group-name">미분류</a>
+									<span class="btn_util"></span>
+								</div>
+								<span class="txt strong blue">0</span>
+								<ul class="add_group_opt " id="grpOption1"  style="display: none;">
+									<li><a href="#" onclick="">수정</a></li>
+									<li><a href="#" onclick="">삭제</a></li>
+									<li><a href="#">저장</a></li>
+								</ul>
+							</li>
+							<li class="add_group">
+								<div class="group_txt">
+									<span class="icon_public"></span>
+									<a href="#" onclick="" class="group-name">테스트 그룹 이름 길게 들어가는 경우우</a>
+									<span class="btn_util"></span>
+								</div>
+								<span class="txt strong blue">10</span>
+								<ul class="add_group_opt " id="grpOption1"  style="display: none;">
+									<li><a href="#" onclick="">수정</a></li>
+									<li><a href="#" onclick="">삭제</a></li>
+									<li><a href="#">저장</a></li>
+								</ul>
+							</li>
+							<li class="add_group">
+								<div class="group_txt">
+									<span class="icon_public"></span>
+									<a href="#" onclick="" class="group-name">미분류</a>
+									<span class="btn_util"></span>
+								</div>
+								<span class="txt strong blue">0</span>
+								<ul class="add_group_opt " id="grpOption1"  style="display: none;">
+									<li><a href="#" onclick="">수정</a></li>
+									<li><a href="#" onclick="">삭제</a></li>
+									<li><a href="#">저장</a></li>
+								</ul>
+							</li>
+							<li class="add_group">
+								<div class="group_txt">
+									<span class="icon_public"></span>
+									<a href="#" onclick="" class="group-name">미분류</a>
+									<span class="btn_util"></span>
+								</div>
+								<span class="txt strong blue">0</span>
+								<ul class="add_group_opt " id="grpOption1"  style="display: none;">
+									<li><a href="#" onclick="">수정</a></li>
+									<li><a href="#" onclick="">삭제</a></li>
+									<li><a href="#">저장</a></li>
+								</ul>
+							</li>
+							<li class="add_group">
+								<div class="group_txt">
+									<span class="icon_public"></span>
+									<a href="#" onclick="" class="group-name">미분류</a>
+									<span class="btn_util"></span>
+								</div>
+								<span class="txt strong blue">0</span>
+								<ul class="add_group_opt " id="grpOption1"  style="display: none;">
+									<li><a href="#" onclick="">수정</a></li>
+									<li><a href="#" onclick="">삭제</a></li>
+									<li><a href="#">저장</a></li>
+								</ul>
+							</li>
+							<li class="add_group">
+								<div class="group_txt">
+									<span class="icon_public"></span>
+									<a href="#" onclick="" class="group-name">미분류</a>
+									<span class="btn_util"></span>
+								</div>
+								<span class="txt strong blue">0</span>
+								<ul class="add_group_opt " id="grpOption1"  style="display: none;">
+									<li><a href="#" onclick="">수정</a></li>
+									<li><a href="#" onclick="">삭제</a></li>
+									<li><a href="#">저장</a></li>
+								</ul>
+							</li>
+							<li class="add_group">
+								<div class="group_txt">
+									<span class="icon_public"></span>
+									<a href="#" onclick="" class="group-name">미분류</a>
+									<span class="btn_util"></span>
+								</div>
+								<span class="txt strong blue">0</span>
+								<ul class="add_group_opt " id="grpOption1"  style="display: none;">
+									<li><a href="#" onclick="">수정</a></li>
+									<li><a href="#" onclick="">삭제</a></li>
+									<li><a href="#">저장</a></li>
+								</ul>
+							</li>
+							<li class="add_group">
+								<div class="group_txt">
+									<span class="icon_public"></span>
+									<a href="#" onclick="" class="group-name">미분류</a>
+									<span class="btn_util"></span>
+								</div>
+								<span class="txt strong blue">0</span>
+								<ul class="add_group_opt " id="grpOption1"  style="display: none;">
+									<li><a href="#" onclick="">수정</a></li>
+									<li><a href="#" onclick="">삭제</a></li>
+									<li><a href="#">저장</a></li>
+								</ul>
+							</li>
+							<li class="add_group">
+								<div class="group_txt">
+									<span class="icon_public"></span>
+									<a href="#" onclick="" class="group-name">미분류</a>
+									<span class="btn_util"></span>
+								</div>
+								<span class="txt strong blue">0</span>
+								<ul class="add_group_opt " id="grpOption1"  style="display: none;">
+									<li><a href="#" onclick="">수정</a></li>
+									<li><a href="#" onclick="">삭제</a></li>
+									<li><a href="#">저장</a></li>
+								</ul>
+							</li>
+							<li class="add_group">
+								<div class="group_txt">
+									<span class="icon_public"></span>
+									<a href="#" onclick="" class="group-name">미분류</a>
+									<span class="btn_util"></span>
+								</div>
+								<span class="txt strong blue">0</span>
+								<ul class="add_group_opt " id="grpOption1"  style="display: none;">
+									<li><a href="#" onclick="">수정</a></li>
+									<li><a href="#" onclick="">삭제</a></li>
+									<li><a href="#">저장</a></li>
+								</ul>
+							</li>
+							<li class="add_group">
+								<div class="group_txt">
+									<span class="icon_public"></span>
+									<a href="#" onclick="" class="group-name">미분류</a>
+									<span class="btn_util"></span>
+								</div>
+								<span class="txt strong blue">0</span>
+								<ul class="add_group_opt " id="grpOption1"  style="display: none;">
+									<li><a href="#" onclick="">수정</a></li>
+									<li><a href="#" onclick="">삭제</a></li>
+									<li><a href="#">저장</a></li>
+								</ul>
+							</li>
+							<li class="add_group">
+								<div class="group_txt">
+									<span class="icon_public"></span>
+									<a href="#" onclick="" class="group-name">미분류</a>
+									<span class="btn_util"></span>
+								</div>
+								<span class="txt strong blue">0</span>
+								<ul class="add_group_opt " id="grpOption1"  style="display: none;">
+									<li><a href="#" onclick="">수정</a></li>
+									<li><a href="#" onclick="">삭제</a></li>
+									<li><a href="#">저장</a></li>
+								</ul>
+							</li>
+							<li class="add_group">
+								<div class="group_txt">
+									<span class="icon_public"></span>
+									<a href="#" onclick="" class="group-name">미분류</a>
+									<span class="btn_util"></span>
+								</div>
+								<span class="txt strong blue">0</span>
+								<ul class="add_group_opt " id="grpOption1"  style="display: none;">
+									<li><a href="#" onclick="">수정</a></li>
+									<li><a href="#" onclick="">삭제</a></li>
+									<li><a href="#">저장</a></li>
+								</ul>
+							</li>
+							<li class="add_group">
+								<div class="group_txt">
+									<span class="icon_public"></span>
+									<a href="#" onclick="" class="group-name">미분류</a>
+									<span class="btn_util"></span>
+								</div>
+								<span class="txt strong blue">0</span>
+								<ul class="add_group_opt " id="grpOption1"  style="display: none;">
+									<li><a href="#" onclick="">수정</a></li>
+									<li><a href="#" onclick="">삭제</a></li>
+									<li><a href="#">저장</a></li>
+								</ul>
+							</li>
+
+						</ul>
+					</div>
+				</div>
+
+				<div class="address_body">
+					<!-- content start -->
+					<div class="article content">
+						<!-- content area start -->
+						<div class="content_area">
+							<table  width ="100%" height="auto" >
+								<colgroup>
+									<col style="width:25px" />
+									<col style="width:120px" />
+									<col style="width:auto" />
+									<col style="width:120px" />
+									<col style="width:120px" />
+									<col style="width:80px" />
+								</colgroup>
+								<thead class="fixed">
+									<tr >
+										<th class="check_ico" >
+											<input type="checkbox" title="전체선택">
+										</th>
+										<th>이름</th>
+										<th>이메일</th>
+										<th>연락처</th>
+										<th>회사</th>
+										<th>기타</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr >
+										<td class="check_ico" >
+											<input type="checkbox" title="선택">
+										</td>
+										<td >
+											<a href="">홍길동</a>
+										</td>
+										<td >khm@imoxion.com</td>
+										<td >010-0000-0000</td>
+										<td >아이모션</td>
+										<td >메모</td>
+									</tr>
+									<tr >
+										<td class="check_ico" >
+											<input type="checkbox" title="선택">
+										</td>
+										<td >
+											<a href="">홍길동</a>
+										</td>
+										<td >khm@imoxion.com</td>
+										<td >010-0000-0000</td>
+										<td >아이모션</td>
+										<td >메모</td>
+									</tr>
+									<tr >
+										<td class="check_ico" >
+											<input type="checkbox" title="선택">
+										</td>
+										<td >
+											<a href="">홍길동</a>
+										</td>
+										<td >khm@imoxion.com</td>
+										<td >010-0000-0000</td>
+										<td >아이모션</td>
+										<td >메모</td>
+									</tr>
+									<tr >
+										<td class="check_ico" >
+											<input type="checkbox" title="선택">
+										</td>
+										<td >
+											<a href="">홍길동</a>
+										</td>
+										<td >khm@imoxion.com</td>
+										<td >010-0000-0000</td>
+										<td >아이모션</td>
+										<td >메모</td>
+									</tr>
+									<tr >
+										<td class="check_ico" >
+											<input type="checkbox" title="선택">
+										</td>
+										<td >
+											<a href="">홍길동</a>
+										</td>
+										<td >khm@imoxion.com</td>
+										<td >010-0000-0000</td>
+										<td >아이모션</td>
+										<td >메모</td>
+									</tr>
+									<tr >
+										<td class="check_ico" >
+											<input type="checkbox" title="선택">
+										</td>
+										<td >
+											<a href="">홍길동</a>
+										</td>
+										<td >khm@imoxion.com</td>
+										<td >010-0000-0000</td>
+										<td >아이모션</td>
+										<td >메모</td>
+									</tr>
+									<tr >
+										<td class="check_ico" >
+											<input type="checkbox" title="선택">
+										</td>
+										<td >
+											<a href="">홍길동</a>
+										</td>
+										<td >khm@imoxion.com</td>
+										<td >010-0000-0000</td>
+										<td >아이모션</td>
+										<td >메모</td>
+									</tr>
+									<tr >
+										<td class="check_ico" >
+											<input type="checkbox" title="선택">
+										</td>
+										<td >
+											<a href="">홍길동</a>
+										</td>
+										<td >khm@imoxion.com</td>
+										<td >010-0000-0000</td>
+										<td >아이모션</td>
+										<td >메모</td>
+									</tr>
+									<tr >
+										<td class="check_ico" >
+											<input type="checkbox" title="선택">
+										</td>
+										<td >
+											<a href="">홍길동</a>
+										</td>
+										<td >khm@imoxion.com</td>
+										<td >010-0000-0000</td>
+										<td >아이모션</td>
+										<td >메모</td>
+									</tr>
+									<tr >
+										<td class="check_ico" >
+											<input type="checkbox" title="선택">
+										</td>
+										<td >
+											<a href="">홍길동</a>
+										</td>
+										<td >khm@imoxion.com</td>
+										<td >010-0000-0000</td>
+										<td >아이모션</td>
+										<td >메모</td>
+									</tr>
+
+
+								</tbody>
+							</table>
+						</div>
+						<!-- content area end -->
+					</div>
+					<!-- content end -->
+					<!-- nav start -->
+							<div class="page_nav">
+								<ul>
+									<li>
+										<a href="" class="page_first icon_public" alt="첫 페이지로 이동">
+										<span>맨앞으로</span></a>
+									</li>
+									<li>
+										<a href="" class="page_prev icon_public" alt="이전첫 페이지로 이동">
+										<span>이전으로</span></a>
+									</li>
+									<li class="on">
+										<a>1</a>
+									</li>
+									<li>
+										<a href="">2</a>
+									</li>
+									<li><a href="">3</a></li>
+									<li><a href="">4</a></li>
+									<li><a href="">5</a></li>
+									<li><a href="" class="page_next icon_public" alt="다음 페이지로 이동">
+										<span>다음으로</span>
+										</a>
+									</li>
+									<li>
+										<a href="" class="page_last icon_public" alt="마지막 페이지로 이동">
+										<span>맨뒤로</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+					<!-- nav end -->
+
+				</div>
+				<!-- section end -->
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

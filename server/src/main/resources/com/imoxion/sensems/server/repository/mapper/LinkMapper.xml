@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.imoxion.sensems.server.repository.mapper.LinkMapper">
+
+    <insert id="createLinkLogTable">
+        <choose>
+            <when test="_databaseId == 'oracle'">
+            </when>
+            <otherwise>
+                CREATE TABLE if not exists linklog_${msgid} (
+                adid INT COMMENT '링크아이디',
+                userid INT COMMENT 'recv_msgid의 id값',
+                click_count INT default 0 COMMENT '클릭 횟수',
+                click_time varchar(12) COMMENT '클릭 시간 yyyymmddhhmm',
+                extended varchar(100) COMMENT '기타',
+                click_date varchar(8) COMMENT '클릭일자 yyyymmdd',
+                click_hour varchar(2) COMMENT '클릭시간 hh',
+                click_week INT COMMENT '클릭 주차 (52주중 몇주차)',
+                PRIMARY KEY (adid, userid)
+                )ENGINE=MyISAM COMMENT='메세지별 링크 기록'
+            </otherwise>
+        </choose>
+    </insert>
+
+    <insert id="insertLinkInfo">
+        INSERT INTO imb_link_info (msgid, linkid, link_name, link_url, link_img)
+        VALUES (#{linkInfo.msgid}, #{linkInfo.linkid}, #{linkInfo.link_name}, #{linkInfo.link_url}, #{linkInfo.link_img})
+    </insert>
+
+    <insert id="insertLinkCountInfo">
+        INSERT INTO imb_link_count(msgid,linkid,link_count) VALUES (#{msgid},#{linkid},#{link_count})
+    </insert>
+
+    <delete id="deleteLinkCount">
+        delete from imb_link_count where ekey = #{ekey}
+    </delete>
+
+    <delete id="deleteLinkInfo">
+        delete from imb_link_info where msgid = #{msgid}
+    </delete>
+
+    <delete id="dropLinkLogTable">
+        drop table if exists ${tableName}
+    </delete>
+
+    <select id="getLinkList" resultType="com.imoxion.sensems.server.domain.ImbLinkInfo">
+        select * from imb_link_info where msgid=#{msgid}
+    </select>
+
+</mapper>

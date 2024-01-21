@@ -1,0 +1,304 @@
+﻿<!DOCTYPE HTML>
+<html lang="ko-KR">
+<head>
+	<meta charset="UTF-8">
+	<title>SensEMS</title>
+	<link rel="stylesheet" href="../../../sens-static/css/style_no.css" />
+	<link rel="stylesheet" href="../../../sens-static/css/skin.css" />
+	
+</head>
+<body class="rejectlist skin1">
+	<div class="wrap">
+		<!-- left area start -->
+		<div class="left_menu ">
+			<div class="left_logo ">
+				<a href=""><img src="../../sens-static/images/left_logo.png" alt="로고"></a>
+			</div>
+
+			<div class="profile ">
+				<div class="info">
+					<div class="info_box  ">
+						<a href="" class="user_name">김효민</a>
+						<a href="" class="user_membership">내정보</a>
+					</div>
+				</div>
+				<div class="info_box2">
+					<div class="help"><a href="">HELP</a></div>
+					<p></p>
+					<div class="logout"><a href="">LOGOUT</a></div>
+				</div>
+			</div>
+
+			<div class="nav">
+				<ul>
+					<li class="menu_1depth">
+						<a href="01001_composer.html"><span class="icon_public depth1_01"></span>메일쓰기</a>
+					</li>
+					<li class="menu_1depth">
+						<a href="02001_statistics.html"><span class="icon_public depth1_02"></span>메일발송 결과</a>
+					</li>
+					<li class="menu_1depth">
+						<a href="03001_schedule.html"><span class="icon_public depth1_03"></span>발송일정관리</a>
+					</li>
+					<li class="menu_1depth">
+						<a href="" class="folder_off"><span class="icon_public depth1_04"></span>수신그룹 관리</a>
+						<ul>
+							<li class="menu_2depth"><a href="">수신그룹 관리</a></li>
+							<li class="menu_2depth"><a href="address">개인 주소록</a></li>
+						</ul>
+					</li>
+					<li class="menu_1depth on">
+						<a href="" class="folder_off"><span class="icon_public depth1_05"></span>발송 관리</a>
+						<ul style="">
+							<li class="menu_2depth"><a href="">발송분류 관리</a></li>
+							<li class="menu_2depth"><a href="">이미지 관리</a></li>
+							<li class="menu_2depth"><a href="">템플릿 관리</a></li>
+							<li class="menu_2depth"><a href="">테스트 계정관리</a></li>
+							<li class="menu_2depth"><a href="">수신거부 관리</a></li>
+						</ul>
+					</li>
+					<li class="menu_1depth">
+						<a href="" class="folder_off"><span class="icon_public depth1_06"></span>시스템 관리자</a>
+						<ul style="">
+							<li class="menu_2depth"><a href="">사용자 관리</a></li>
+							<li class="menu_2depth"><a href="">정기예약발송 설정</a></li>
+							<li class="menu_2depth"><a href="">발송차단 설정</a></li>
+							<li class="menu_2depth"><a href="">데이터베이스 관리</a></li>
+							<li class="menu_2depth"><a href="06005_attach.html">첨부파일 확장자 관리</a></li>
+							<li class="menu_2depth"><a href="">사용자 활동로그 조회</a></li>
+						</ul>
+
+					</li>
+				</ul>
+			</div>
+
+		</div>	
+		<!-- left area end -->
+
+		<!-- section start -->
+		<!-- top area start -->
+		<div class="title_box fixed">
+			<div class="article top_area">
+				<div class="title">
+					<h1>수신거부</h1>
+					<p>설명글을 적어주세요.</p>
+				</div>		
+				<div class="search_box">
+					<div class="inner">
+						<div class="select_box">
+							<select class="search_opt" id="" name="search_opt">
+								<option value="">전체</option>
+								<option value="">E-mail</option>
+							</select>
+						</div>
+						<p></p>
+						<input type="text" id="searchWord" name="searchWord" value="" placeholder="검색어를 입력하세요.">
+						<button class="search_btn btn1"><span>검색</span></button>
+					</div>
+				</div>					
+			</div>
+		</div>
+		<!-- top area end -->	
+		
+	
+			<!-- content top start -->	
+				<div class="content_top fixed">
+					<ul class="content_top_btn">
+						<li><a class="btn2" href="05005_rejectlist_add.html">추가</a></li>
+						<li><a class="btn2" href="">삭제</a></li>
+						<li><a class="btn2" href="">목록저장</a></li>
+						<li><a class="btn2" href="">가져오기</a></li>
+					</ul>
+					<div class="content_top_opt">
+						<button ><img src="../../sens-static/images/top_opt_btn.png" alt="" /></button>
+						<div class="drop_menu" style="display:none;" >		
+							<table summary="목록화면입니다">
+								<caption>목록화면입니다</caption>
+								<tbody>
+									<tr>
+										<th scope="row"><span>목록 개수</span></th>
+										<td>
+											<a href="" class="selected"><span>10</span></a>
+											<ul class="select_list" style="display:none;" >									
+												<li class="active"><a href=""><span>10</span></a></li>												
+												<li><a href=""><span>15</span></a></li>												
+												<li><a href=""><span>20</span></a></li>												
+												<li><a href=""><span>30</span></a></li>												
+												<li><a href=""><span>50</span></a></li>												
+											</ul>
+										</td>
+									</tr>									
+									<tr>
+										<th scope="row"><span>목록 간격</span></th>
+										<td>
+											<a href="" class="selected"><span>보통</span></a>
+											<ul  class="select_list"style="display:none;" >										
+												<li><a href=""><span>좁게</span></a></li>												
+												<li><a href=""><span>보통</span></a></li>												
+												<li><a href=""><span>넓게</span></a></li>				
+											</ul>
+										</td>
+									</tr>									
+								</tbody>
+
+							</table>
+						</div>
+					</div>			
+				</div>
+			<!-- content top end -->
+				
+
+		
+		<div class="section pd_l30">
+			<!-- content start -->
+
+			<div class="article content">
+				<!-- content area start -->				
+				<div class="content_area">
+					<ul class="list_head">
+						<li>
+							<input type="checkbox" title="전체선택">
+						</li>
+						<li>E-mail</li>
+						<li>등록일자</li>
+					</ul>
+					<ul class="list_item">
+						<li>
+							<ul>
+								<li>
+									<input type="checkbox" title="선택">
+								</li>								
+								<li>khm@imoxion.com</li>
+								<li class="list_2line">2021-01-22 <br />13:23</li>
+							</ul>							
+							<ul>
+								<li>
+									<input type="checkbox" title="선택">
+								</li>								
+								<li>khm@imoxion.com</li>
+								<li class="list_2line">2021-01-22 <br />13:23</li>
+							</ul>							
+							<ul>
+								<li>
+									<input type="checkbox" title="선택">
+								</li>								
+								<li>khm@imoxion.com</li>
+								<li class="list_2line">2021-01-22 <br />13:23</li>
+							</ul>							
+							<ul>
+								<li>
+									<input type="checkbox" title="선택">
+								</li>								
+								<li>khm@imoxion.com</li>
+								<li class="list_2line">2021-01-22 <br />13:23</li>
+							</ul>							
+							<ul>
+								<li>
+									<input type="checkbox" title="선택">
+								</li>								
+								<li>khm@imoxion.com</li>
+								<li class="list_2line">2021-01-22 <br />13:23</li>
+							</ul>							
+							<ul>
+								<li>
+									<input type="checkbox" title="선택">
+								</li>								
+								<li>khm@imoxion.com</li>
+								<li class="list_2line">2021-01-22 <br />13:23</li>
+							</ul>							
+							<ul>
+								<li>
+									<input type="checkbox" title="선택">
+								</li>								
+								<li>khm@imoxion.com</li>
+								<li class="list_2line">2021-01-22 <br />13:23</li>
+							</ul>							
+							<ul>
+								<li>
+									<input type="checkbox" title="선택">
+								</li>								
+								<li>khm@imoxion.com</li>
+								<li class="list_2line">2021-01-22 <br />13:23</li>
+							</ul>							
+							<ul>
+								<li>
+									<input type="checkbox" title="선택">
+								</li>								
+								<li>khm@imoxion.com</li>
+								<li class="list_2line">2021-01-22 <br />13:23</li>
+							</ul>							
+							<ul>
+								<li>
+									<input type="checkbox" title="선택">
+								</li>								
+								<li>khm@imoxion.com</li>
+								<li class="list_2line">2021-01-22 <br />13:23</li>
+							</ul>							
+													
+							
+				</div>
+				<!-- content area end -->					
+			</div>
+			<!-- content end -->
+			<!-- nav start -->
+					<div class="page_nav">
+						<ul>
+							<li>
+								<a href="" class="page_first icon_public" alt="첫 페이지로 이동">
+								<span>맨앞으로</span></a>
+							</li>
+							<li>
+								<a href="" class="page_prev icon_public" alt="이전첫 페이지로 이동">
+								<span>이전으로</span></a>
+							</li>	
+							<li class="on">
+								<a>1</a>
+							</li>  
+							<li>
+								<a href="">2</a>
+							</li>  
+							<li><a href="">3</a></li>  
+							<li><a href="">4</a></li>  
+							<li><a href="">5</a></li>  
+							<li><a href="" class="page_next icon_public" alt="다음 페이지로 이동">
+								<span>다음으로</span>
+								</a>
+							</li>
+							<li>
+								<a href="" class="page_last icon_public" alt="마지막 페이지로 이동">
+								<span>맨뒤로</span>
+								</a>
+							</li>		  
+						</ul>
+					</div>	
+			<!-- nav end -->
+		</div>
+	<!-- section end -->	
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

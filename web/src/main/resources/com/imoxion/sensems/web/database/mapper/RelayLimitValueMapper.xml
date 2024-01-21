@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imoxion.sensems.web.database.mapper.RelayLimitValueMapper">
+
+    <select id="getLimitValueList" resultType="com.imoxion.sensems.web.database.domain.RelayLimitValue">
+        SELECT * FROM imb_limit_info order by limit_type
+    </select>
+
+    <select id="getLimitValue" resultType="com.imoxion.sensems.web.database.domain.RelayLimitValue">
+        SELECT * FROM imb_limit_info where limit_type = #{limit_type}
+    </select>
+
+    <update id="updateLimitValue">
+        update imb_limit_info set limit_value =#{limit.limit_value} where limit_type = #{limit.limit_type}
+    </update>
+
+</mapper>

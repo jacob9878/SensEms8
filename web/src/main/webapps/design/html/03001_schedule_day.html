@@ -1,0 +1,470 @@
+﻿<!DOCTYPE HTML>
+<html lang="ko-KR">
+<head>
+	<meta charset="UTF-8">
+	<title>SensEMS</title>
+	<link rel="stylesheet" href="../../sens-static/css/style.css" />
+	<link rel="stylesheet" href="../../sens-static/css/skin.css" />
+	<link rel="stylesheet" href="../../sens-static/css/schedule.css" />
+	
+</head>
+<body class="skin1">
+	<div class="wrap">
+		<!-- left area start -->
+		<div class="left_menu ">
+			<div class="left_logo ">
+				<a href=""><img src="../../sens-static/images/left_logo.png" alt="로고" /></a>
+			</div>			
+			<div class="profile ">
+				<div class="info">
+					<div class="info_box  ">
+						<a href="" class="user_name" >김효민</a> 
+						<a href="" class="user_membership">내정보</a>
+						<a href="" class="user_email over_text">khm@imoxion.com</a>
+					</div>
+					<a href="" class="btn_logout pd_r20"><img src="../../sens-static/images/logout.png" alt="" /></a>				
+				</div>
+				<p></p>
+				<div class="info_box2">
+					<div class="help"><a href="" ><span class="icon_public"></span>HELP</a></div>
+					<p></p>
+					<div class="language" >
+					
+						<span class="icon_public"></span>
+						<select id="languageList"  onchange="change_language()">
+							<option value="ko">KOR</option>
+							<option value="en">ENG</option>
+							<option value="ja">JPN</option>
+						<!-- 	<option value="zh">CHN</option> -->
+						</select>			
+					</div>					
+				</div>				
+			</div>
+		
+			<div class="nav">
+				<ul>
+					<li class="menu_1depth">						
+						<a href="01001_composer.html"><span class="icon_public depth1_01"></span>메일쓰기</a>
+					</li>
+					<li class="menu_1depth">
+						<a href="02001_statistics.html"><span class="icon_public depth1_02"></span>메일발송 결과</a>
+					</li>
+					<li class="menu_1depth">
+						<a href="03001_schedule.html"><span class="icon_public depth1_03"></span>발송일정관리</a>
+					</li>
+					<li class="menu_1depth">
+						<a href="" class="folder_off"><span class="icon_public depth1_04"></span>수신그룹 관리</a>
+						<ul >
+							<li class="menu_2depth"><a href="">수신그룹 관리</a></li>
+							<li class="menu_2depth"><a href="">개인 주소록</a></li>
+						</ul>
+					</li>
+					<li class="menu_1depth">
+						<a href="" class="folder_off"><span class="icon_public depth1_05"></span>발송 관리</a>
+						<ul style="">
+							<li class="menu_2depth"><a href="">발송분류 관리</a></li>
+							<li class="menu_2depth"><a href="">이미지 관리</a></li>
+							<li class="menu_2depth"><a href="">템플릿 관리</a></li>
+							<li class="menu_2depth"><a href="">테스트 계정관리</a></li>
+							<li class="menu_2depth"><a href="">수신거부 관리</a></li>
+						</ul>
+					</li>
+					<li class="menu_1depth">
+						<a href="" class="folder_off"><span class="icon_public depth1_06"></span>시스템 관리자</a>
+						<ul style="">
+							<li class="menu_2depth"><a href="">사용자 관리</a></li>
+							<li class="menu_2depth"><a href="">정기예약발송 설정</a></li>
+							<li class="menu_2depth"><a href="">발송차단 설정</a></li>
+							<li class="menu_2depth"><a href="">데이터베이스 관리</a></li>
+							<li class="menu_2depth"><a href="">첨부파일 확장자 관리</a></li>
+							<li class="menu_2depth"><a href="">사용자 활동로그 조회</a></li>
+						</ul>
+					
+					</li>
+				</ul>
+			</div>
+			
+		</div>	
+		<!-- left area end -->
+
+		<div class="schedule"> 
+		<!-- section start -->
+			<!-- top area start -->
+			<div class="title_box fixed">
+				<div class="article top_area">
+					<div class="title">
+						<h1>발송일정관리</h1>
+						<p>설명글을 적어주세요.</p>
+					</div>			
+				</div>
+			</div>
+			<!-- top area end -->	
+		
+	
+			<!-- content top start -->	
+				<div class="content_top fixed">
+					<ul class="content_top_btn">
+						<li>
+							<ul>
+								<li><a class="" href="03001_schedule.html">월</a></li>
+								<li><a class="" href="03001_schedule_week.html">주</a></li>
+								<li class="active"><a class="" href="03001_schedule_day.html">일</a></li>
+							</ul>						
+						</li>
+						<li><a class="btn2" href="">오늘</a></li>
+						<li><a class="btn2" href="">일정등록</a></li>
+					</ul>					
+					<div class="move_month">
+						<div>
+							<button class="icon_public prev"></button>
+							<div>
+								<a href="">								
+									2021.03.05 금
+									<span class="icon_public"></span>
+								</a>
+							</div>
+							<button class="icon_public next"></button>
+						</div>
+					</div>
+				</div>
+			<!-- content top end -->
+				
+
+		
+		<div class="section pd_l30">
+			<!-- content start -->
+
+			<div class="article content">
+				<!-- content area start -->				
+				<div class="">
+					<table class="sd_table" width ="100%" height="auto" >
+						<tbody>							
+							<tr class="sd_day_table">
+								<th class="">오전<span>12시</span></th>
+								<td width="auto">
+									<table >
+										<tbody>
+											<tr class="">																
+												<p><span class="mini_btn on">발송완료</span><a href="">아이모션 고객 만족도 조사입니다.<span class="txt strong">(2)</span></a></td></p>
+												<p><span class="mini_btn on">발송완료</span><a href="">아이모션 고객 만족도 조사입니다.<span class="txt strong">(2)</span></a></td></p>
+												<p><span class="mini_btn on">발송완료</span><a href="">아이모션 고객 만족도 조사입니다.<span class="txt strong">(2)</span></a></td></p>
+											</tr>											
+										</tbody>
+									</table>
+								</td>									
+							</tr>
+							<tr class="sd_day_table">
+								<th class=""><span>1시</span></th>
+								<td width="auto">
+									<table >
+										<tbody>
+											<tr class="">																
+												
+											</tr>											
+										</tbody>
+									</table>
+								</td>									
+							</tr>
+							<tr class="sd_day_table">
+								<th class=""><span>2시</span></th>
+								<td width="auto">
+									<table >
+										<tbody>
+											<tr class="">																
+												<p><span class="mini_btn on">발송완료</span><a href="">아이모션 고객 만족도 조사입니다.<span class="txt strong">(2)</span></a></td></p>
+											</tr>											
+										</tbody>
+									</table>
+								</td>									
+							</tr>
+							<tr class="sd_day_table">
+								<th class=""><span>3시</span></th>
+								<td width="auto">
+									<table >
+										<tbody>
+											<tr class="">																
+												
+											</tr>											
+										</tbody>
+									</table>
+								</td>									
+							</tr>
+							<tr class="sd_day_table">
+								<th class=""><span>4시</span></th>
+								<td width="auto">
+									<table >
+										<tbody>
+											<tr class="">																
+												
+											</tr>											
+										</tbody>
+									</table>
+								</td>									
+							</tr>
+							<tr class="sd_day_table">
+								<th class=""><span>5시</span></th>
+								<td width="auto">
+									<table >
+										<tbody>
+											<tr class="">																
+												
+											</tr>											
+										</tbody>
+									</table>
+								</td>									
+							</tr>
+							<tr class="sd_day_table">
+								<th class=""><span>6시</span></th>
+								<td width="auto">
+									<table >
+										<tbody>
+											<tr class="">																
+												
+											</tr>											
+										</tbody>
+									</table>
+								</td>									
+							</tr>
+							<tr class="sd_day_table">
+								<th class=""><span>7시</span></th>
+								<td width="auto">
+									<table >
+										<tbody>
+											<tr class="">																
+												
+											</tr>											
+										</tbody>
+									</table>
+								</td>									
+							</tr>
+							<tr class="sd_day_table">
+								<th class=""><span>8시</span></th>
+								<td width="auto">
+									<table >
+										<tbody>
+											<tr class="">																
+												
+											</tr>											
+										</tbody>
+									</table>
+								</td>									
+							</tr>
+							<tr class="sd_day_table">
+								<th class=""><span>9시</span></th>
+								<td width="auto">
+									<table >
+										<tbody>
+											<tr class="">																
+												
+											</tr>											
+										</tbody>
+									</table>
+								</td>									
+							</tr>
+							<tr class="sd_day_table">
+								<th class=""><span>10시</span></th>
+								<td width="auto">
+									<table >
+										<tbody>
+											<tr class="">																
+												
+											</tr>											
+										</tbody>
+									</table>
+								</td>									
+							</tr>
+							<tr class="sd_day_table">
+								<th class=""><span>11시</span></th>
+								<td width="auto">
+									<table >
+										<tbody>
+											<tr class="">																
+												
+											</tr>											
+										</tbody>
+									</table>
+								</td>									
+							</tr>
+							<tr class="sd_day_table border">
+								<th class="">오후<span>12시</span></th>
+								<td width="auto">
+									<table >
+										<tbody>
+											<tr class="">																
+												
+											</tr>											
+										</tbody>
+									</table>
+								</td>									
+							</tr>
+							<tr class="sd_day_table">
+								<th class=""><span>1시</span></th>
+								<td width="auto">
+									<table >
+										<tbody>
+											<tr class="">																
+												
+											</tr>											
+										</tbody>
+									</table>
+								</td>									
+							</tr>
+							<tr class="sd_day_table">
+								<th class=""><span>2시</span></th>
+								<td width="auto">
+									<table >
+										<tbody>
+											<tr class="">																
+												
+											</tr>											
+										</tbody>
+									</table>
+								</td>									
+							</tr>
+							<tr class="sd_day_table">
+								<th class=""><span>3시</span></th>
+								<td width="auto">
+									<table >
+										<tbody>
+											<tr class="">																
+												
+											</tr>											
+										</tbody>
+									</table>
+								</td>									
+							</tr>
+							<tr class="sd_day_table">
+								<th class=""><span>4시</span></th>
+								<td width="auto">
+									<table >
+										<tbody>
+											<tr class="">																
+												
+											</tr>											
+										</tbody>
+									</table>
+								</td>									
+							</tr>
+							<tr class="sd_day_table">
+								<th class=""><span>5시</span></th>
+								<td width="auto">
+									<table >
+										<tbody>
+											<tr class="">																
+												
+											</tr>											
+										</tbody>
+									</table>
+								</td>									
+							</tr>
+							<tr class="sd_day_table">
+								<th class=""><span>6시</span></th>
+								<td width="auto">
+									<table >
+										<tbody>
+											<tr class="">																
+												
+											</tr>											
+										</tbody>
+									</table>
+								</td>									
+							</tr>
+							<tr class="sd_day_table">
+								<th class=""><span>7시</span></th>
+								<td width="auto">
+									<table >
+										<tbody>
+											<tr class="">																
+												
+											</tr>											
+										</tbody>
+									</table>
+								</td>									
+							</tr>
+							<tr class="sd_day_table">
+								<th class=""><span>8시</span></th>
+								<td width="auto">
+									<table >
+										<tbody>
+											<tr class="">																
+												
+											</tr>											
+										</tbody>
+									</table>
+								</td>									
+							</tr>
+							<tr class="sd_day_table">
+								<th class=""><span>9시</span></th>
+								<td width="auto">
+									<table >
+										<tbody>
+											<tr class="">																
+												
+											</tr>											
+										</tbody>
+									</table>
+								</td>									
+							</tr>
+							<tr class="sd_day_table">
+								<th class=""><span>10시</span></th>
+								<td width="auto">
+									<table >
+										<tbody>
+											<tr class="">																
+												
+											</tr>											
+										</tbody>
+									</table>
+								</td>									
+							</tr>
+							<tr class="sd_day_table">
+								<th class=""><span>11시</span></th>
+								<td width="auto">
+									<table >
+										<tbody>
+											<tr class="">																
+												
+											</tr>											
+										</tbody>
+									</table>
+								</td>									
+							</tr>
+						</tbody>													
+					</table>
+				</div>
+				<!-- content area end -->					
+			</div>
+			<!-- content end -->
+							
+		</div>
+		<!-- section end -->
+		</div>
+	</div>	
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

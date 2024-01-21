@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="20 seconds">
+
+	<!-- MAX_HISTORY -->
+	<property name="MAX_HISTORY" value="60" />
+	<property name="MAX_CAPSIZE" value="10GB" />
+
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<Pattern>[%d{yyyy-MM-dd HH:mm:ss}] %-5level [%thread] %class{0}.%method:%line - %m%n</Pattern>
+		</encoder>
+	</appender>
+
+	<!-- Appenders -->
+	<appender name="WEB_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<file>${sensems.home}/log/webmail.log</file>-->
+		<encoder>
+			<Pattern>[%d{yyyy-MM-dd HH:mm:ss}] %-5level %class{16}:%line - %m%n</Pattern>
+			<!--<Pattern>[%d{yyyy-MM-dd HH:mm:ss}] %-5level [%thread] %class{16}:%line - %m%n</Pattern>-->
+		</encoder>
+		<rollingPolicy class="com.imoxion.sensems.common.logger.logback.ImTimeBasedRollingPolicy">
+			<fileNamePattern>${sensems.home}/log/web.log.%d{yyyy-MM-dd}</fileNamePattern>
+			<maxHistory>${MAX_HISTORY}</maxHistory>
+		</rollingPolicy>
+	</appender>
+
+	<appender name="ERRORTRACE_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<encoder>
+			<Pattern>[%d{yyyy-MM-dd HH:mm:ss}] %-5level [%thread] %class{16}.%method:%line - %m%n</Pattern>
+		</encoder>
+		<rollingPolicy class="com.imoxion.sensems.common.logger.logback.ImTimeBasedRollingPolicy">
+			<fileNamePattern>${sensems.home}/log/web_error.log.%d{yyyy-MM-dd}</fileNamePattern>
+			<maxHistory>${MAX_HISTORY}</maxHistory>
+		</rollingPolicy>
+	</appender>
+	
+	<!-- ERROR TRACE LOGGER -->
+<!--	<logger name="ERRORTRACE" additivity="false" level="ERROR">
+		<appender-ref ref="ERRORTRACE_APPENDER"/>
+		<appender-ref ref="CONSOLE"/>
+	</logger>-->
+
+	<logger name="ERRORTRACE" additivity="false" level="ERROR">
+		<appender-ref ref="ERRORTRACE_APPENDER"/>
+	</logger>
+
+	
+	<!-- PACKAGE LOGGER -->
+	<logger name="com.imoxion" additivity="false" level="DEBUG">
+		<appender-ref ref="WEB_APPENDER"/>
+		<appender-ref ref="CONSOLE"/>
+	</logger>
+
+	<logger name="org.springframework" level="INFO">
+	</logger>
+	
+	<logger name="org.apache" level="INFO">
+	</logger>
+	
+	<logger name="org.mybatis" additivity="false" level="DEBUG">
+	</logger>
+
+	<root level="DEBUG">
+		<appender-ref ref="CONSOLE"/>
+		<appender-ref ref="WEB_APPENDER"/>
+	</root>
+		
+</configuration>

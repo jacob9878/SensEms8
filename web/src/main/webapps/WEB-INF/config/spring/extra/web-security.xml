@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+			 xmlns:beans="http://www.springframework.org/schema/beans"
+			 xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+			 xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+	    http://www.springframework.org/schema/security
+	    http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<!-- CSRF Hidden Data input -->
+	<beans:bean id="requestDataValueProcessor" class="org.springframework.security.web.servlet.support.csrf.CsrfRequestDataValueProcessor"/>
+
+	<http pattern="/sens-static/**" security="none"/>
+	<http pattern="/help/**" security="none" />
+	<http pattern="/favicon.ico" security="none"/>
+	<http pattern="/error/**" security="none"/>
+	<http pattern="/api/**" security="none" />
+	<http auto-config="true" use-expressions="true" create-session="never" entry-point-ref="sensEmsAuthenticationEntryPoint">
+		<intercept-url pattern="/index.jsp" access="permitAll"/>
+		<!--
+			특정 SSL 태울 URL 적용 : START
+			 - SSL 적용페이지를 추가한다.
+			※ 특정 SSL 이 아닌경우 아래를 주석처리한다.
+		-->
+		<!-- 로그인페이지를 http 로 구현하고 싶은 경우 아래를 주석 해제한다 -->
+		<!--<intercept-url pattern="/account/login.do" access="permitAll" method="GET" requires-channel="http"/>-->
+		<!--<intercept-url pattern="/account/**" requires-channel="https"/>-->
+		<!-- 특정 SSL 태울 URL 적용 : END-->
+
+		<intercept-url pattern="/account/login.do" access="permitAll"/>
+		<intercept-url pattern="/account/logout.do" access="permitAll"/>
+		<intercept-url pattern="/account/captcha.do" access="permitAll"/>
+
+		<intercept-url pattern="/send/image/view.do" access="permitAll"/>
+		<intercept-url pattern="/send/image/preview.do" access="permitAll"/>
+		<intercept-url pattern="/send/template/view.do" access="permitAll"/>
+		<intercept-url pattern="/send/template/contentsImage/view.do" access="permitAll"/>
+
+		<intercept-url pattern="/sens-static/**" access="permitAll"/>
+
+		<!-- 수신확인, 링크추적 등 -->
+		<intercept-url pattern="/check/**" access="permitAll"/>
+
+		<!-- 암호화 관련 -->
+		<intercept-url pattern="/jCrypt/json/makeKey.json" access="permitAll"/>
+
+		<!-- 시스템 관리 -->
+		<intercept-url pattern="/sysman/**" access="hasRole('ROLE_ADMIN')"/>
+
+		<!-- 일부 SSL 적용시(ssl.type=2) -->
+		<!--<intercept-url pattern="/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" requires-channel="http"/>-->
+		<!-- 모든 URL SSL 적용시 아래를 사용한다(ssl.type=1) -->
+		<!-- <intercept-url pattern="/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" requires-channel="https"/> -->
+		<!-- NON SSL 또는 https, http 모두사용((ssl.type=0,3) -->
+		<intercept-url pattern="/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/>
+
+		<access-denied-handler ref="sensMailAccessDeniedHandler"/>
+
+		<custom-filter ref="httpsCookieFilter" after="FORM_LOGIN_FILTER"/>
+
+		<!-- 보안 설정 -->
+		<csrf request-matcher-ref="csrfMatcher"/>
+
+		<headers>
+			<!-- Spring 3.2 이상에서는 기본적으로 iframe 을 사용하지 못하게 하는데 이를 비활성화 -->
+			<frame-options policy="SAMEORIGIN"/>
+			<!-- jsessionid 가 쿠키에 저장되지 못하는 현상 대응 -->
+			<header name="p3p" value="CP=DSP CUR OTPi IND OTRi L FIN"/>
+			<!--<header name="Accept-CH" value="Sec-CH-UA, Sec-CH-UA-Arch, Sec-CH-UA-Bitness, Sec-CH-UA-Full-Version, Sec-CH-UA-Full-Version-List, Sec-CH-UA-Mobile, Sec-CH-UA-Model, Sec-CH-UA-Platform, Sec-CH-UA-Platform-Version, Sec-CH-UA-WoW64" />-->
+
+		</headers>
+	</http>
+
+	<authentication-manager alias="authenticationManager"/>
+
+	<!-- Https 에서 로그인 후 Http 로 이동시에 세션 공유 안되는 현상을 해결하기 위한 설정 -->
+	<beans:bean id="httpsCookieFilter" class="com.imoxion.sensems.web.spring.filter.HttpsCookieFilter">
+		<!-- 어플리케이션 세션 아이디 키값 설정( 설정을 안하면 기본값 JSESSIONID 가 된다 -->
+		<beans:property name="sessionId" value="JSESSIONID"/>
+		<beans:property name="applyUrl">
+			<beans:list>
+				<!-- pattern 과 httpMethod 를 추가하면 해당 URL을 호출하면 세션아이디값이 secure=false 인채로 등록된다. -->
+				<beans:bean class="org.springframework.security.web.util.matcher.AntPathRequestMatcher">
+					<beans:constructor-arg name="pattern" value="/account/login.do"/>
+				</beans:bean>
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+
+	<!-- 사용자 인증이 되지 않은 상태에서 접근하는 경우에 대한 처리 -->
+	<beans:bean id="sensEmsAuthenticationEntryPoint" class="com.imoxion.sensems.web.authentication.SensEmsAuthenticationEntryPoint">
+		<beans:property name="loginPageUrl" value="/account/login.do"/>
+		<beans:property name="logoutUrl" value="/account/logout.do"/>
+		<beans:property name="sessionExpireInfoUrl" value="/error/session-expire.do"/>
+	</beans:bean>
+
+	<!-- 접근 권한이 없는 경우에 대한 처리 -->
+	<beans:bean id="sensMailAccessDeniedHandler" class="com.imoxion.sensems.web.authentication.SensEmsAccessDeniedHandler">
+		<beans:property name="notAllowPageUrl" value="/error/forbidden.do"/>
+	</beans:bean>
+
+	<beans:bean id="csrfMatcher" class="com.imoxion.sensems.web.spring.util.CsrfRequestMatcher">
+		<!-- CSRF 토큰 검사 예외처리 URL 을 등록 -->
+		<beans:constructor-arg name="ignoreUrlPattern">
+			<beans:list>
+                <beans:value>/account/login.do</beans:value>
+				<beans:value>/account/captcha.do</beans:value>
+				<beans:value>/api/**</beans:value>
+			</beans:list>
+		</beans:constructor-arg>
+	</beans:bean>
+
+</beans:beans>

@@ -1,0 +1,464 @@
+﻿<!DOCTYPE HTML>
+<html lang="ko-KR">
+<head>
+	<meta charset="UTF-8">
+	<title>SensEMS</title>
+	<link rel="stylesheet" href="../../sens-static/css/style.css" />
+	<link rel="stylesheet" href="../../sens-static/css/skin.css" />
+	
+</head>
+<body class="skin1">
+	<div class="wrap">
+		<!-- left area start -->
+		<div class="left_menu ">
+			<div class="left_logo ">
+				<a href=""><img src="../../sens-static/images/left_logo.png" alt="로고"></a>
+			</div>
+
+			<div class="profile ">
+				<div class="info">
+					<div class="info_box  ">
+						<a href="" class="user_name">김효민</a>
+						<a href="" class="user_membership">내정보</a>
+					</div>
+				</div>
+				<div class="info_box2">
+					<div class="help"><a href="">HELP</a></div>
+					<p></p>
+					<div class="logout"><a href="">LOGOUT</a></div>
+				</div>
+			</div>
+
+			<div class="nav">
+				<ul>
+					<li class="menu_1depth">
+						<a href="01001_composer.html"><span class="icon_public depth1_01"></span>메일쓰기</a>
+					</li>
+					<li class="menu_1depth">
+						<a href="02001_statistics.html"><span class="icon_public depth1_02"></span>메일발송 결과</a>
+					</li>
+					<li class="menu_1depth">
+						<a href="03001_schedule.html"><span class="icon_public depth1_03"></span>발송일정관리</a>
+					</li>
+					<li class="menu_1depth">
+						<a href="" class="folder_off"><span class="icon_public depth1_04"></span>수신그룹 관리</a>
+						<ul>
+							<li class="menu_2depth"><a href="">수신그룹 관리</a></li>
+							<li class="menu_2depth"><a href="address">개인 주소록</a></li>
+						</ul>
+					</li>
+					<li class="menu_1depth on">
+						<a href="" class="folder_off"><span class="icon_public depth1_05"></span>발송 관리</a>
+						<ul style="">
+							<li class="menu_2depth"><a href="">발송분류 관리</a></li>
+							<li class="menu_2depth"><a href="">이미지 관리</a></li>
+							<li class="menu_2depth"><a href="">템플릿 관리</a></li>
+							<li class="menu_2depth"><a href="">테스트 계정관리</a></li>
+							<li class="menu_2depth"><a href="">수신거부 관리</a></li>
+						</ul>
+					</li>
+					<li class="menu_1depth">
+						<a href="" class="folder_off"><span class="icon_public depth1_06"></span>시스템 관리자</a>
+						<ul style="">
+							<li class="menu_2depth"><a href="">사용자 관리</a></li>
+							<li class="menu_2depth"><a href="">정기예약발송 설정</a></li>
+							<li class="menu_2depth"><a href="">발송차단 설정</a></li>
+							<li class="menu_2depth"><a href="">데이터베이스 관리</a></li>
+							<li class="menu_2depth"><a href="06005_attach.html">첨부파일 확장자 관리</a></li>
+							<li class="menu_2depth"><a href="">사용자 활동로그 조회</a></li>
+						</ul>
+
+					</li>
+				</ul>
+			</div>
+
+		</div>	
+		<!-- left area end -->
+
+		<div class="composer">
+			<!-- section start -->
+				<!-- top area start -->
+				<div class="title_box fixed">
+					<div class="article top_area">
+						<div class="title">
+							<h1>메일쓰기</h1>
+							<p>보내실 메일을 작성해주세요.</p>
+						</div>			
+					</div>
+				</div>
+				<!-- top area end -->	
+
+				<!-- content top start -->	
+				<div class="content_top fixed">
+					<ul class="content_top_btn">
+						<li><a class="btn1" href="">발송</a></li>
+						<li><a class="btn2" href="">미리보기</a></li>
+						<li><a class="btn2" href="">임시보관</a></li>
+						<li><a class="btn2" href="">테스트발송</a></li>
+						<li><a class="btn2" href="">템플릿으로 저장</a></li>
+						<li><a class="btn2" href="">발송 및 사본저장</a></li>						
+					</ul>	
+				</div>
+			<!-- content top end -->
+				
+			
+			<div class="section pd_l30">
+				<!-- content start -->				
+				<div class="article content">		
+					<!-- composer area start -->				
+					<div class="composer_area">
+						<table width="100%" border="0" cellpadding="0" cellspacing="1" >
+							<tbody>
+							<tr>
+								<th style="width:150px; min-width:150px;" height="46px" align="left">발송분류</th>
+								<td width="auto" >
+									<select >
+										<option value="분류없음" selected="">분류없음</option>
+										<option value="option1">option1</option>
+										<option value="option2">option2</option>
+										<option value="option3">option3</option>
+										<option value="option4">option4</option>							
+									</select> 								
+								</td>
+							</tr>
+							
+							<tr>
+								<th height="46px" align="left">보내는 사람</th>							
+								<td><input type="text" class="input" size="30" maxlength="100"  value="아이모션<webmaster@imoxion.com>">
+									<span style="font-size:12px;">
+										<strong class="txt red">(주의)</strong>
+										<strong>홍길동&lt;master@mydomain.com&gt;</strong>과 같은 형식으로 입력해주세요.
+									</span>
+								</td>
+							</tr>
+							
+							<tr>
+								<th height="46px" align="left">회신 주소</th>	
+								<td  ><input type="text" class="input" size="30" maxlength="100" value="webmaster@imoxion.com"></td>
+							</tr>
+							
+							<tr>
+								<th height="46px" align="left">수신자</th>	
+								<td>
+									<label><input name="rectype_tmp" type="radio" value="주소록">주소록</label>
+									<label><input name="rectype_tmp" type="radio" value="DB에서 선택" >DB에서 선택</label>
+									<label><input name="rectype_tmp" type="radio" value="수신그룹" >수신그룹</label>
+									:&nbsp;<input type="text"class="input" size="40">
+								</td>
+							</tr>
+							
+							<tr>
+								<th height="46px" align="left">제 목</th>	
+								<td  >	<input type="text" class="input" size="50" maxlength="100" value="">
+								<select >
+									<option selected="">필드삽입</option>
+								</select> 
+								<button>삽입</button>
+								</td>
+							</tr>
+							
+							
+							<tr>
+								<th height="46px" align="left">Charset</th>	
+								<td>
+									<select>
+										<!-- 한국어 -->
+										<option value="euc-kr">Korean (EUC)</option>	     
+										<option value="ks_c_5601-1987">Korean (KS_C_5601-1987)</option>	
+										<option value="utf-8">Unicode(UTF-8)</option>	
+									</select>								
+									&nbsp;
+									Mail Type : 
+									<label ><input type="radio" name="ishtml" value="TEXT">TEXT</label>
+									<label ><input type="radio" name="ishtml" value="HTML" checked="" >HTML</label>
+								</td>
+							</tr>
+			
+						<!-- 에디터 start-->
+							<tr class="composer_edit">
+								<td colspan="2">
+								<textarea>
+								
+								</textarea>
+								</td>
+							</tr>
+						<!-- 에디터 end-->	
+							<tr>
+								<th height="46px" align="left">반응분석 종료일</th>	
+								<td  >
+									<select name="year" size="1" >
+										<option value="2021" selected="">2021년</option>
+										<option value="2022" selected="">2022년</option>
+									</select> 
+									
+									<select name="month" size="1" >
+										<option value="01" selected="">1월</option>
+										<option value="02" selected="">2월</option>
+										<option value="03" selected="">3월</option>
+										<option value="04" selected="">4월</option>
+										<option value="05" selected="">5월</option>
+										<option value="06" selected="">6월</option>
+										<option value="07" selected="">7월</option>
+										<option value="08" selected="">8월</option>
+										<option value="09" selected="">9월</option>
+										<option value="10" selected="">10월</option>
+										<option value="11" selected="">11월</option>
+										<option value="12" selected="">12월</option>
+									</select>  
+									<select name="day" size="1">							
+										<option value="01" selected="">1일</option>
+										<option value="02" selected="">2일</option>
+										<option value="03" selected="">3일</option>
+										<option value="04" selected="">4일</option>
+										<option value="05" selected="">5일</option>
+										<option value="06" selected="">6일</option>
+										<option value="07" selected="">7일</option>
+										<option value="08" selected="">8일</option>
+										<option value="09" selected="">9일</option>
+										<option value="10" selected="">10일</option>
+										<option value="11" selected="">11일</option>
+										<option value="12" selected="">12일</option>
+										<option value="13" selected="">13일</option>
+										<option value="14" selected="">14일</option>
+										<option value="15" selected="">15일</option>
+										<option value="16" selected="">16일</option>
+										<option value="17" selected="">17일</option>
+										<option value="18" selected="">18일</option>
+										<option value="19" selected="">19일</option>
+										<option value="20" selected="">20일</option>
+										<option value="21" selected="">21일</option>
+										<option value="22" selected="">22일</option>
+										<option value="23" selected="">23일</option>
+										<option value="24" selected="">24일</option>
+										<option value="25" selected="">25일</option>
+										<option value="26" selected="">26일</option>
+										<option value="27" selected="">27일</option>
+										<option value="28" selected="">28일</option>
+										<option value="29" selected="">29일</option>
+										<option value="30" selected="">30일</option>
+										<option value="31" selected="">31일</option>
+									</select>  
+									<select name="hour" size="1">							
+										<option value="00">0시</option>								
+										<option value="01">1시</option>								
+										<option value="02">2시</option>								
+										<option value="03">3시</option>								
+										<option value="04">4시</option>								
+										<option value="05">5시</option>								
+										<option value="06">6시</option>								
+										<option value="07">7시</option>								
+										<option value="08">8시</option>								
+										<option value="09">9시</option>								
+										<option value="10">10시</option>								
+										<option value="11">11시</option>								
+										<option value="12">12시</option>								
+										<option value="13">13시</option>								
+										<option value="14">14시</option>								
+										<option value="15">15시</option>								
+										<option value="16">16시</option>								
+										<option value="17">17시</option>								
+										<option value="18">18시</option>								
+										<option value="19">19시</option>								
+										<option value="20">20시</option>								
+										<option value="21">21시</option>								
+										<option value="22">22시</option>								
+										<option value="23">23시</option>								
+									</select> 
+								</td>
+							</tr>
+							
+							<tr>
+								<th height="46px" align="left">발송 시간</th>	
+								<td  >
+									<label><input type="radio" name="sendmode" value="즉시발송" checked="">즉시발송</label>
+									<label><input type="radio" name="sendmode" value="예약발송"  >예약발송</label>						
+						
+									<div style="display: none;">
+										<select name="year" size="1" >
+											<option value="2021" selected="">2021</option>
+											<option value="2022" selected="">2022</option>
+										</select> 년
+										
+										<select name="month" size="1" >
+											<option value="01" selected="">1</option>
+											<option value="02" selected="">2</option>
+											<option value="03" selected="">3</option>
+											<option value="04" selected="">4</option>
+											<option value="05" selected="">5</option>
+											<option value="06" selected="">6</option>
+											<option value="07" selected="">7</option>
+											<option value="08" selected="">8</option>
+											<option value="09" selected="">9</option>
+											<option value="10" selected="">10</option>
+											<option value="11" selected="">11</option>
+											<option value="12" selected="">12</option>
+										</select> 월
+										
+										<select name="day" size="1">
+											<option value="01" selected="">1</option>
+											<option value="02" selected="">2</option>
+											<option value="03" selected="">3</option>
+											<option value="04" selected="">4</option>
+											<option value="05" selected="">5</option>
+											<option value="06" selected="">6</option>
+											<option value="07" selected="">7</option>
+											<option value="08" selected="">8</option>
+											<option value="09" selected="">9</option>
+											<option value="10" selected="">10</option>
+											<option value="11" selected="">11</option>
+											<option value="12" selected="">12</option>
+											<option value="13" selected="">13</option>
+											<option value="14" selected="">14</option>
+											<option value="15" selected="">15</option>
+											<option value="16" selected="">16</option>
+											<option value="17" selected="">17</option>
+											<option value="18" selected="">18</option>
+											<option value="19" selected="">19</option>
+											<option value="20" selected="">20</option>
+											<option value="21" selected="">21</option>
+											<option value="22" selected="">22</option>
+											<option value="23" selected="">23</option>
+											<option value="24" selected="">24</option>
+											<option value="25" selected="">25</option>
+											<option value="26" selected="">26</option>
+											<option value="27" selected="">27</option>
+											<option value="28" selected="">28</option>
+											<option value="29" selected="">29</option>
+											<option value="30" selected="">30</option>
+											<option value="31" selected="">31</option>
+										</select> 일
+										
+										<select name="hour" size="1">
+											<option value="00">0</option>								
+											<option value="01">1</option>								
+											<option value="02">2</option>								
+											<option value="03">3</option>								
+											<option value="04">4</option>								
+											<option value="05">5</option>								
+											<option value="06">6</option>								
+											<option value="07">7</option>								
+											<option value="08">8</option>								
+											<option value="09">9</option>								
+											<option value="10">10</option>								
+											<option value="11">11</option>								
+											<option value="12">12</option>								
+											<option value="13">13</option>								
+											<option value="14">14</option>								
+											<option value="15">15</option>								
+											<option value="16">16</option>								
+											<option value="17">17</option>								
+											<option value="18">18</option>								
+											<option value="19">19</option>								
+											<option value="20">20</option>								
+											<option value="21">21</option>								
+											<option value="22">22</option>								
+											<option value="23">23</option>	
+										</select> 시
+										
+										<select name="minute" size="1">
+											<option value="00" selected="">00</option>
+											<option value="10" selected="">10</option>
+											<option value="20" selected="">20</option>
+											<option value="30" selected="">30</option>
+											<option value="40" selected="">40</option>
+											<option value="50" selected="">50</option>
+										</select> 분
+									</div>
+								</td>
+							</tr>										
+							
+							<tr>
+								<th height="46px" align="left">링크 추적</th>	
+								<td >
+									<label><input type="radio" name="islink" value="추적함" checked="">추적함</label>	
+									<label><input type="radio" name="islink" value="추적안함">추적안함</label>
+								</td>
+							</tr>
+							
+							<tr>
+								<th height="46px" align="left">이메일 중복 허용여부</th>	
+								<td  >
+									<label><input type="radio" name="is_same_email" value="중복허용" >중복허용</label>
+									<label><input type="radio" name="is_same_email" value="중복허용 안함" checked="">중복허용 안함</label>
+								</td>
+							</tr>
+
+							<tr class="upload" >
+								<th align="left" rowspan="3">첨부파일</th>	
+								<td  >
+									<button type="button"  >내 PC</button>
+									<button type="button"  >삭제</button>
+									<button type="button"  >미리보기</button>
+									<span style="font-size:12px;" class="txt">
+										수신메일 시스템에 따라 ‘제한 초과’로 거부 또는 스팸판정 될 수 있습니다.
+										<strong class="txt red">(10MB 이내 파일 권장)</strong>
+										
+									</span>				
+								</td>
+							</tr>						
+							<tr class="upload" >
+								<td class="upload_area" >						
+									<table>
+										<thead>
+										<tr>
+											<th scope="col" class="check" style="text-align:center;"><input type="checkbox" title="전체선택"></th>
+											<th scope="col" class="name"><span>파일이름</span></th>
+											<th scope="col" class="size"><span>크기</span></th>
+											<th scope="col" class="add"><span>첨부방식</span></th>
+											<th scope="col" class="del"><span>삭제</span></th>
+										</tr>								
+										</thead>
+										<tbody>
+											<tr >
+												<td colspan="5">파일을 이 곳으로 끌어오세요.</td>
+											</tr>
+										</tbody>
+									</table>						
+								</td>
+							</tr>	
+							<tr class="upload upload2" >
+								<td>
+								파일 : 0/10  |  일반 : <span class="txt red" >0KB</span>/10MB
+								</td>
+							</tr>						
+							</tbody>
+						</table>			
+					</div>
+					<!-- composer area end -->					
+					
+				</div>
+				<!-- content end -->
+
+			</div>
+			<!-- section end -->	  
+		</div>
+
+	</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,405 @@
+﻿<!DOCTYPE HTML>
+<html lang="ko-KR">
+<head>
+    <title>SensEMS 8.0</title>
+    <link rel="stylesheet" href="../../sens-static/css/style.css">
+    <link rel="stylesheet" href="../../sens-static/css/skin.css">
+</head>
+
+<body class="skin1">
+<div class="wrap">
+
+    <div class="left_menu ">
+        <div class="left_logo ">
+            <a href=""><img src="../../sens-static/images/left_logo.png" alt="로고"></a>
+        </div>
+
+        <div class="profile ">
+            <div class="info">
+                <div class="info_box ">
+                    <a href="" class="user_name">아이모션</a>
+                    <a href="" class="user_membership">내정보</a>
+                    <a href="" class="user_email over_text">imoxion@sensmail.com</a>
+                </div>
+                <a href="/account/logout.do" class="btn_logout pd_r20"><img src="../../sens-static/images/logout.png" alt=""></a>
+            </div>
+            <p></p>
+            <ul class="info_box2">
+                <div class="help"><a href=""><span class="icon_public"></span>HELP</a></div>
+                <p></p>
+                <div class="language">
+                    <span class="icon_public"></span>
+                    <select class="lang_list2" onclick="">
+                        <option selected="" value="ko">KOR</option>
+                        <option value="en">ENG</option>
+                        <option value="ja">JPN</option>
+                        <option value="zh">CHN</option>
+                    </select>
+                </div>
+            </ul>
+        </div>
+
+        <div class="nav">
+            <ul>
+                <li class="menu_1depth "><a href="/mail/write/form.do">메일쓰기</a></li>
+                <li class="menu_1depth "><a href="">메일발송 결과</a></li>
+                <li class="menu_1depth "><a href="">발송일정관리</a></li>
+                <li class="menu_1depth on">
+                    <a href="/receiver/group/list.do">수신자 관리</a>
+                    <ul>
+                        <li class="menu_2depth on"><a href="/receiver/group/list.do">수신그룹 관리</a></li>
+                        <li class="menu_2depth "><a href="">개인 주소록</a></li>
+                    </ul>
+                </li>
+                <li class="menu_1depth ">
+                    <a href="/send/category/list.do">발송 관리</a>
+                    <ul>
+                        <li class="menu_2depth "><a href="/send/category/list.do">발송분류 관리</a></li>
+                        <li class="menu_2depth "><a href="/send/image/list.do">이미지 관리</a></li>
+                        <li class="menu_2depth "><a href="/send/template/list.do">템플릿 관리</a></li>
+                        <li class="menu_2depth "><a href="">테스트 계정관리</a></li>
+                        <li class="menu_2depth "><a href="/send/reserve/list.do">정기예약발송 관리</a></li>
+                        <li class="menu_2depth "><a href="/send/reject/list.do">수신거부 관리</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu_1depth ">
+                    <a href="/sysman/user/list.do">시스템 관리자</a>
+                    <ul>
+                        <li class="menu_2depth "><a href="/sysman/user/list.do">사용자 관리</a></li>
+                        <li class="menu_2depth "><a href="/sysman/sendfilter/list.do">발송차단 설정</a></li>
+                        <li class="menu_2depth "><a href="/sysman/database/list.do">데이터베이스 관리</a></li>
+                        <li class="menu_2depth "><a href="">첨부파일 확장자 관리</a></li>
+                        <li class="menu_2depth "><a href="">사용자 활동로그 조회</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+
+    </div>
+    <!-- left area end -->
+
+    <div class="receivergroup_add_field">
+        <!-- section start -->
+        <!-- top area start -->
+        <div class="title_box fixed">
+            <div class="article top_area">
+                <div class="title">
+                    <h1>수신그룹 관리</h1>
+                    <p>수신그룹을 추가할 수 있습니다.</p>
+                </div>
+            </div>
+        </div>
+        <!-- top area end -->
+
+        <!-- content top start -->
+        <div class="content_top fixed">
+            <ul class="content_top_btn">
+                <li><a class="btn1" href="#" onclick="groupAdd.add()">추가</a></li>
+                <li><a class="btn2" href="#" onclick="groupAdd.receiverList()">목록</a></li>
+            </ul>
+        </div>
+        <!-- content top end -->
+
+
+        <div class="section pd_l30">
+            <!-- content start -->
+
+            <div class="article content">
+                <form id="ReceiverGroupForm" name="ReceiverGroupForm" action="add.do" method="post">
+                    <!-- composer area start -->
+                    <div class="composer_area">
+                        <table width="100%" border="0" cellpadding="0" cellspacing="1">
+							<tbody>
+								<tr  >
+									<th >수신그룹명</th>
+									<td>
+										<input id="recv_name" name="recv_name"  type="text"  maxlength="50">
+									</td>
+								</tr>
+								<tr class="table_database">
+									<th>데이터베이스 선택</th>
+									<td >
+										<select id="dbkey" name="dbkey">
+											<option value="">선택</option>
+											<option value="603dd7e73fde2915ce686bec">sensmail3</option>
+											<option value="603ddd7a3fe88df1b824464f">sensmail22</option>
+										</select>
+									</td>
+								</tr>
+								</tbody>
+							</table>
+							
+							<table  class="queryBox" border="0"  cellpadding="0" cellspacing="0" >							
+								<tbody>								
+								<tr>
+									<th>필드선택</th>
+									<th>조건선택</th>
+								</tr>
+								<tr class="table_field">
+									<td >
+										<select id="field" name="field" size="3" >
+											<option>test</option>
+											<option>test1</option>
+											<option>test2</option>
+											<option>test3</option>
+											<option>test4</option>
+											<option>test5</option>
+											<option>test6</option>
+											<option>test7</option>
+											<option>test8</option>
+										</select>
+									</td>
+									<td>
+										<select id="condition" name="condition" size="3" ></select>
+									</td>
+								</tr>								
+								<tr class="table_field_btn">
+									<td  >
+										<button type="button" id="addField" name="addField" class="button2">필드추가</button>
+										<button type="button" id="delField" name="delField" class="button2">필드삭제</button>
+									</td>								
+									<td  style="">
+										<button type="button" id="addCondition" name="addCondition" class="button2">조건추가</button>
+										<button type="button" id="delCondition" name="delCondition" class="button2">조건삭제</button>
+									</td>
+								</tr>
+								<tr class="queryBox_btn">
+									<td colspan="2" align="center" >
+										<button type="button" id="createQuery" class="btn1" >쿼리 생성하기</button>
+									</td>
+								</tr>
+								<tr>
+								
+								</tr>								
+							</tbody>
+							</table>	
+							
+							<table class="query_view"  width="100%" border="0" cellpadding="0" cellspacing="1">
+								<tbody>
+								<tr>
+									<th  >
+									생성쿼리<button type="button" id="previewQuery" >미리보기</button>									
+									</th>
+									<td >
+										<textarea id="query" cols="110" rows="9" name="query" ></textarea>										
+									</td>
+								</tr>
+								</tbody>
+							</table>
+                    </div>
+                    <!-- composer area end -->
+                </form>
+            </div>
+            <!-- content end -->
+
+            <div class="popup" id="addFieldPopup" style="display: block;">
+                <div class="popup_content">
+                    <div class="popup_title">
+                        <span class="close_button" onclick="receiverAdd.closeFieldPopup();"></span>
+                        <h3 class="title">추출 필드 선택</h3>
+                    </div>
+                    <div class="popup_body_wrap">
+                        <div class="popup_body">
+                            <!-- <p> 설명 텍스트 </p> -->
+                            <table width="100%" border="0" cellpadding="0" cellspacing="1">
+                                <colgroup>
+                                    <col style="width:150px;">
+                                    <col style="width:auto;">
+                                </colgroup>
+                                <tbody>
+                                <tr >
+                                    <th >
+                                        테이블 선택
+                                    </th>
+                                    <td>
+                                        <select id="chooseTable" onchange="receiverAdd.getFields(this.value,'');">
+                                            <option>--선택--</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr >
+                                    <th >
+                                        필드 선택
+                                    </th>
+                                    <td class="table_field pd_t10 pd_b10">
+											<span class="block care_txt mg_b10">필드 선택시에 이메일주소에 해당하는 필드를 선택하세요.</span>
+                                        <select id="chooseField" multiple="multiple">
+												<option value="">--선택--</option>										
+												<option value="">1</option>										
+												<option value="">2</option>										
+												</select>                                       
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="pop_footer">
+                        <div class="btn_div">
+                            <button type="button" class="btn2" onclick="receiverAdd.fieldSelect()">확인</button>
+                            <button type="button" class="btn2" onclick="receiverAdd.closeFieldPopup()">취소</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="popup" id="addConditionPopup" style="display: none;">
+                <div class="popup_content">
+                    <div class="popup_title">
+                        <span class="close_button" onclick="receiverAdd.closeConditionPopup();"></span>
+                        <h3 class="title">조건 선택</h3>
+                    </div>
+                    <div class="popup_body_wrap">
+                        <div class="popup_body">
+                            <!-- <p> 설명 텍스트 </p> -->
+                            <table width="100%" border="0" cellpadding="0" cellspacing="1">
+                                <tbody>
+                                <tr >
+                                    <th >
+                                        테이블 선택
+                                    </th>
+                                    <td>
+                                        <select id="chooseTableConditionA" onchange="receiverAdd.getFields(this.value,'ConditionA');">
+                                            <option value="">--선택--</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr >
+                                    <th >
+                                        필드 선택
+                                    </th>
+                                    <td>
+                                        <select id="chooseFieldConditionA">
+                                            <option value="">--선택--</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr >
+                                    <th >
+                                        선택
+                                    </th>
+                                    <td>
+                                        <select id="sel_opt" onchange="receiverAdd.selOptionChange(this.value)">
+                                            <option value="0">같은 테이블에서 비교 </option>
+                                            <option value="1">다른 테이블에서 비교</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <table id="same_table" style="display:block">
+                                <tbody>
+                                <tr >
+                                    <th >
+                                        비교값1
+                                    </th>
+                                    <td>
+                                        <input type="text" class="input">
+                                    </td>
+                                </tr>
+                                <tr >
+                                    <th >
+                                        조건
+                                    </th>
+                                    <td>
+                                        <select id="sel_same_opt">
+                                            <option value="">--선택--</option>
+                                            <option value="0">같다(=)</option>
+                                            <option value="1">같지않다(&lt;&gt;)</option>
+                                            <option value="2">초과(&gt;)</option>
+                                            <option value="3">미만(&lt;)</option>
+                                            <option value="4">이상(&gt;=)</option>
+                                            <option value="5">이하(&lt;=)</option>
+                                            <option value="6">뒤에포함(LIKE '%A')</option>
+                                            <option value="7">중간에포함(LIKE '%A%')</option>
+                                            <option value="8">앞에포함(LIKE 'A%')</option>
+                                            <option value="9">범위의숫자(BETWEEN)</option>
+                                            <option value="10">사이의문자열(IN)</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr >
+                                    <th >
+                                        비교값2
+                                    </th>
+                                    <td>
+                                        <input type="text" class="input">
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <table id="another_table" style="display: none">
+                                <tbody>
+                                <tr >
+                                    <th >
+                                        테이블 선택
+                                    </th>
+                                    <td>
+                                        <select id="chooseTableConditionB" onchange="receiverAdd.getFields(this.value,'ConditionB');">
+                                            <option value="">--선택--</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr >
+                                    <th >
+                                        필드 선택
+                                    </th>
+                                    <td>
+                                        <select id="chooseFieldConditionB">
+                                            <option value="">--선택--</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr >
+                                    <th >
+                                        선택
+                                    </th>
+                                    <td>
+                                        <select id="sel_another_opt">
+                                            <option value="">--선택--</option>
+                                            <option value="0">같다(=)</option>
+                                            <option value="1">같지않다(&lt; &gt;)</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                            <table>
+                                <tbody>
+                                <tr>
+                                    <td colspan="2" align="center"><button type="button" class="btn1">적용</button></td>
+                                </tr>
+                                <tr>
+                                    <th >
+                                        쿼리
+                                    </th>
+                                    <td style="padding: 5px;">
+                                        <textarea id="query" name="query" rows="9" cols="110"></textarea>
+
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="btn_div">
+                                <button type="button" class="btn2" onclick="receiverEvent.fieldSelect()">확인</button>
+                                <button type="button" class="btn2" onclick="receiverAdd.closeFieldPopup()">취소</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- section end -->
+        <div>
+            <input type="hidden" name="_csrf" value="071b51e4-1474-47f7-ad8b-893701ef4608">
+        </div>
+
+    </div>
+
+
+</div>
+
+</body>
+</html>

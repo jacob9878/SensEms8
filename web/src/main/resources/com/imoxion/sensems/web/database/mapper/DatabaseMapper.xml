@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imoxion.sensems.web.database.mapper.DatabaseMapper">
+
+    <!-- 페이징을 위한 총 갯수 -->
+    <select id="getListCount" resultType="int">
+        select count(*) from imb_dbinfo
+    </select>
+
+    <!-- 페이징 및 초기화면 목록 조회 -->
+    <select id="getDBInfoListForPaging" resultType="dbinfo">
+        <choose>
+            <when test="_databaseId == 'oracle'">
+                SELECT * FROM (
+                SELECT ROWNUM AS RNUM,a.* FROM(
+                SELECT * FROM imb_dbinfo) a
+                ) WHERE RNUM between #{start} and #{end}
+            </when>
+            <otherwise>
+                select * from imb_dbinfo
+                order by regdate desc
+                limit #{start},#{end}
+            </otherwise>
+        </choose>
+
+    </select>
+
+    <!-- 데이터베이스 리스트 가져오기 -->
+    <select id="getDBInfoList" resultType="dbinfo">
+        select * from imb_dbinfo
+    </select>
+
+    <!-- 데이터베이스 이름 중복 확인 -->
+    <select id="getCheckDBExist" resultType="int">
+        select count(*) from imb_dbinfo
+        where userid=#{userid} and dbname=#{dbname}
+    </select>
+
+    <!-- 데이터베이스 정보 추가 -->
+    <insert id="insertDBInfo" parameterType="dbinfo">
+        INSERT INTO imb_dbinfo
+        (ukey,dbname,dbtype,userid,dbhost,dbuser,dbpasswd,regdate,dbcharset,datacharset,address,dbport)
+        VALUES
+        (#{ukey},#{dbname},#{dbtype},#{userid},#{dbhost},#{dbuser},#{dbpasswd},#{regdate},#{dbcharset},#{datacharset},#{address},#{dbport})
+    </insert>
+
+    <!-- 특정 ukey 에 해당하는 데이터베이스 정보 가져오기 -->
+    <select id="getDBInfoByUkey" resultType="dbinfo">
+        select * from imb_dbinfo where ukey=#{ukey}
+    </select>
+
+    <!-- 데이터베이스 정보 수정-->
+    <update id="updateDBInfo" parameterType="dbinfo">
+        update imb_dbinfo
+        set
+            dbname = #{dbname},
+            dbtype = #{dbtype},
+            dbhost = #{dbhost},
+            userid = #{userid},
+            dbport = #{dbport},
+            dbuser = #{dbuser},
+            dbpasswd = #{dbpasswd},
+            dbcharset = #{dbcharset},
+            datacharset = #{datacharset},
+            address = #{address}
+        where ukey=#{ukey}
+    </update>
+
+    <!-- 삭제 -->
+    <delete id="deleteDBInfo">
+        delete from imb_dbinfo where ukey=#{ukey}
+    </delete>
+
+</mapper>

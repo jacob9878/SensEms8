@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.imoxion.sensems.server.repository.mapper.ReceiverMapper">
+
+    <select id="getReceiverList" resultType="com.imoxion.sensems.server.domain.ImbReceiver">
+       select * from imb_receiver
+    </select>
+
+    <select id="getReceiverInfo" resultType="com.imoxion.sensems.server.domain.ImbReceiver">
+        select * from imb_receiver where ukey=#{ukey}
+    </select>
+
+</mapper>

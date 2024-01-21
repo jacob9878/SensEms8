@@ -1,0 +1,594 @@
+﻿<!DOCTYPE HTML>
+<html lang="ko-KR">
+<head>
+	<meta charset="UTF-8">
+	<title>SensEMS</title>
+	<link rel="stylesheet" href="../../sens-static/css/style.css" />
+	<link rel="stylesheet" href="../../sens-static/css/skin.css" />
+	
+</head>
+<body class="skin1">
+<div class="w_pop wrap">
+	<meta http-equiv="X-UA-Compatible" content="IE=10">
+	<script>
+		am4core.ready(function() {
+			var errDate = '{이메일주소 공백=30, 서버연결 에러=20, 서버 에러=10, 수신거부=10, userunknown=10, 네트워크 에러=10}';
+
+			if(errDate != null && errDate != ''){
+
+				// Themes begin
+				am4core.useTheme(am4themes_material);
+				am4core.useTheme(am4themes_animated);
+				// Themes end
+
+				// Create chart instance
+				var chart = am4core.create("chartdiv", am4charts.PieChart);
+
+				var list = new Array() ;
+				var i= 0;
+
+				// 객체 생성
+				var data = {
+					"err_name" : "이메일주소 공백",
+					"value" : "30"
+				};
+				// 리스트에 생성된 객체 삽입
+				list.push(data) ;
+
+				// 객체 생성
+				var data = {
+					"err_name" : "서버연결 에러",
+					"value" : "20"
+				};
+				// 리스트에 생성된 객체 삽입
+				list.push(data) ;
+
+				// 객체 생성
+				var data = {
+					"err_name" : "서버 에러",
+					"value" : "10"
+				};
+				// 리스트에 생성된 객체 삽입
+				list.push(data) ;
+
+				// 객체 생성
+				var data = {
+					"err_name" : "수신거부",
+					"value" : "10"
+				};
+				// 리스트에 생성된 객체 삽입
+				list.push(data) ;
+
+				// 객체 생성
+				var data = {
+					"err_name" : "userunknown",
+					"value" : "10"
+				};
+				// 리스트에 생성된 객체 삽입
+				list.push(data) ;
+
+				// 객체 생성
+				var data = {
+					"err_name" : "네트워크 에러",
+					"value" : "10"
+				};
+				// 리스트에 생성된 객체 삽입
+				list.push(data) ;
+
+
+				chart.data = [{
+					"error_type": list[0].err_name,
+					"litres": list[0].value
+				}, {
+					"error_type": list[1].err_name,
+					"litres": list[1].value
+				}, {
+					"error_type": list[2].err_name,
+					"litres": list[2].value
+				}, {
+					"error_type": list[3].err_name,
+					"litres": list[3].value
+				}, {
+					"error_type": list[4].err_name,
+					"litres": list[4].value
+				}, {
+					"error_type": list[5].err_name,
+					"litres": list[5].value
+				}];
+
+				// Add and configure Series
+				var pieSeries = chart.series.push(new am4charts.PieSeries());
+				pieSeries.dataFields.value = "litres";
+				pieSeries.dataFields.category = "error_type";
+				pieSeries.slices.template.stroke = am4core.color("#fff");
+				pieSeries.slices.template.strokeWidth = 2;
+				pieSeries.slices.template.strokeOpacity = 1;
+
+				// This creates initial animation
+				pieSeries.hiddenState.properties.opacity = 1;
+				pieSeries.hiddenState.properties.endAngle = -90;
+				pieSeries.hiddenState.properties.startAngle = -90;
+
+			}
+		}); // end am4core.ready()
+
+	</script>
+
+
+	<div class="w_content">
+		<div class="popup_title over_text">
+			<div>
+				<h3 class="title">메일 리포팅</h3>
+			</div>
+		</div>
+		<div class="section graph" id="printBody">
+			<!-- content start -->
+			<div class="article content">
+				<!-- content area start -->
+				<div class="composer_area ">
+					<p class="top_explain">상단 설명글 들어가는 경우</p>
+					<table width="100%" border="0" cellpadding="0" cellspacing="1" class="b_b2">
+						<colgroup>
+							<col style="width: 115px">
+							<col style="width: 160px">
+							<col style="width: 115px">
+							<col style="width: auto">
+						</colgroup>
+						<tbody>
+						<tr>
+							<th>제목</th>
+							<td colspan="3" class="over_text"><span>[뉴스레터] 12월 아이모션 소식을 전달 드립니다~ (*퀴즈 이벤트_모바일 쿠폰 증정!)</span></td>
+						</tr>
+						<tr>
+							<th>발송분류</th>
+							<td colspan="3"><span>[분류없음]</span></td>
+						</tr>
+						<tr>
+							<th>발송자 계정</th>
+							<td><span>admin</span></td>
+							<th>수신자</th>
+							<td>
+								<span class="ver_middle">주소록</span>
+								<button title="수신자 상세보기" class="btn3" onclick="window.open('02002_statisticsSend_address.html','에러통계 목록','width=1000px,height=550px,location=no,status=no,scrollbars=yes,menubar=no,resizable=yes');" type="button">
+									<span>상세보기</span>
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<th>보낸사람</th>
+							<td><span>아이모션<marketing@imoxion.com></marketing@imoxion.com></span></td>
+							<th>발송일자</th>
+							<td><span>2020-12-29 12:53</span></td>
+						</tr>
+						</tbody>
+					</table>
+					<div class="">
+						<div class="graph_area mg_t30">
+							<h3>발송결과</h3>
+							<table>
+								<tbody><tr>
+									<td class="mini_table">
+										<table width="100%" height="auto" border="0" cellpadding="0" cellspacing="1" class="t_br2 b_br2">
+											<colgroup>
+												<col style="width:115px">
+												<col style="width:120px">
+												<col style="width:115px">
+												<col style="width:auto">
+											</colgroup>
+											<tbody>
+											<tr>
+												<th colspan="1">발송메일수</th>
+												<td colspan="3">
+                                                <span>
+                                                        200건
+                                                </span></td>
+											</tr>
+											<tr>
+												<th>성 공</th>
+												<td><span>3건</span></td>
+												<th>실 패</th>
+												<td><span>18건</span></td>
+											</tr>
+											<tr>
+												<th colspan="1">성공율</th>
+												<td colspan="3"><span>
+
+                                                    <!--성공율 임시계산-->
+                                                1.5%
+                                            </span></td>
+											</tr>
+											<tr>
+												<th colspan="1">시작시간</th>
+												<td colspan="3"><span>2022-03-04 11:49</span></td>
+											</tr>
+											<tr>
+												<th>종료시간</th>
+												<td><span>2022-03-04 11:50</span></td>
+												<th>소요시간</th>
+												<td><span>
+
+                                                    1분
+
+                                            </span></td>
+											</tr>
+
+
+											</tbody>
+										</table>
+									</td>
+									<td class="mini_table pd_l10">
+										<table width="100%" height="auto" border="0" cellpadding="0" cellspacing="1" class="t_br2 b_br2">
+											<colgroup>
+												<col style="width:115px">
+												<col style="width:auto">
+											</colgroup>
+											<tbody>
+
+
+
+											<tr>
+												<th>전체메일발송 수</th>
+												<td><span>21건</span></td>
+											</tr>
+											<tr>
+												<th>수신확인자 수</th>
+												<td><span>
+
+                                                    9
+
+                                                명</span></td>
+											</tr>
+											<tr>
+												<th>개봉율</th>
+												<td>
+                                                <span>
+
+                                                        9%
+
+                                                </span>
+												</td>
+											</tr>
+											<tr>
+												<th>링크클릭 수</th>
+												<td><span>3명</span></td>
+											</tr>
+											<tr>
+												<th>클릭율</th>
+												<td>
+                                                <span>
+
+                                                    3%
+
+                                                </span>
+												</td>
+											</tr>
+											</tbody>
+										</table>
+									</td>
+								</tr>
+								</tbody></table>
+						</div>
+						<!-- content area end -->
+					</div>
+					<!-- graph end -->
+
+					<div class="graph_area">
+						<div class="graph_area mg_t30">
+							<h3>주요에러</h3>
+							<table width="100%" height="auto">
+								<tbody>
+								<tr>
+									<td class="graph_lft ">
+										<table width="100%" border="0" cellpadding="0" cellspacing="1">
+											<tbody>
+											<tr>
+												<td>
+
+													<div id="chartdiv"><div style="width: 100%; height: 100%; position: relative;"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="group" style="width: 100%; height: 100%; overflow: visible;"><defs><clipPath id="id-46"><rect width="315" height="153"></rect></clipPath><linearGradient id="gradient-id-69" x1="1%" x2="99%" y1="59%" y2="41%"><stop stop-color="#474758" offset="0"></stop><stop stop-color="#474758" stop-opacity="1" offset="0.75"></stop><stop stop-color="#3cabff" stop-opacity="1" offset="0.755"></stop></linearGradient><clipPath id="id-78"></clipPath><filter id="filter-id-51" filterUnits="objectBoundingBox" width="200%" height="200%" x="-50%" y="-50%"><feGaussianBlur result="blurOut" in="SourceGraphic" stdDeviation="1.5"></feGaussianBlur><feOffset result="offsetBlur" dx="1" dy="1"></feOffset><feFlood flood-color="#000000" flood-opacity="0.5"></feFlood><feComposite in2="offsetBlur" operator="in"></feComposite><feMerge><feMergeNode></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge></filter><filter id="filter-id-66" filterUnits="objectBoundingBox" width="120%" height="120%" x="-10%" y="-10%"><feColorMatrix type="saturate" values="0"></feColorMatrix></filter><filter id="filter-id-83" filterUnits="objectBoundingBox" width="200%" height="200%" x="-50%" y="-50%"><feGaussianBlur result="blurOut" in="SourceGraphic" stdDeviation="1.5"></feGaussianBlur><feOffset result="offsetBlur" dx="1" dy="1"></feOffset><feFlood flood-color="#000000" flood-opacity="0.5"></feFlood><feComposite in2="offsetBlur" operator="in"></feComposite><feMerge><feMergeNode></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge></filter></defs><g><g fill="#ffffff" fill-opacity="0"><rect width="315" height="153"></rect></g><g><g role="region" clip-path="url(&quot;#id-46&quot;)" opacity="1" aria-label="Chart"><g><g><g><g><g><g transform="translate(157.5,76.5)"><g><g role="group" aria-label="Series"><g><g clip-path="url(&quot;#id-78&quot;)"><g></g></g><g></g><g><g><g stroke-opacity="1" stroke="#ffffff" stroke-width="2" role="menuitem" focusable="true" tabindex="0" fill="#f44336"><g><g><path d=" M0,0  L0,-61.2  a61.2,61.2,0,0,1,53.0008,91.8 L0,0 "></path></g><g></g></g></g><g stroke-opacity="1" stroke="#ffffff" stroke-width="2" role="menuitem" focusable="true" tabindex="0" fill="#e91e63"><g><g><path d=" M0,0  L53.0008,30.6  a61.2,61.2,0,0,1,-73.9324,26.9092 L0,0 "></path></g><g></g></g></g><g stroke-opacity="1" stroke="#ffffff" stroke-width="2" role="menuitem" focusable="true" tabindex="0" fill="#9c27b0"><g><g><path d=" M0,0  L-20.9316,57.5092  a61.2,61.2,0,0,1,-32.0691,-26.9092 L0,0 "></path></g><g></g></g></g><g stroke-opacity="1" stroke="#ffffff" stroke-width="2" role="menuitem" focusable="true" tabindex="0" fill="#673ab7"><g><g><path d=" M0,0  L-53.0008,30.6  a61.2,61.2,0,0,1,-7.2695,-41.2273 L0,0 "></path></g><g></g></g></g><g stroke-opacity="1" stroke="#ffffff" stroke-width="2" role="menuitem" focusable="true" tabindex="0" fill="#3f51b5"><g><g><path d=" M0,0  L-60.2702,-10.6273  a61.2,61.2,0,0,1,20.9316,-36.2547 L0,0 "></path></g><g></g></g></g><g stroke-opacity="1" stroke="#ffffff" stroke-width="2" role="menuitem" focusable="true" tabindex="0" fill="#2196f3"><g><g><path d=" M0,0  L-39.3386,-46.8819  a61.2,61.2,0,0,1,39.3386,-14.3181 L0,0 "></path></g><g></g></g></g></g></g><g><g><g fill-opacity="0" stroke-opacity="0.2" stroke="#000000" stroke-width="1"><polyline points="53.00075471256,-30.6,64.26,-35.13,70.26,-35.13"></polyline></g><g fill-opacity="0" stroke-opacity="0.2" stroke="#000000" stroke-width="1"><polyline points="20.931632769960004,57.509188392960006,64.26,63.5,70.26,63.5"></polyline></g><g fill-opacity="0" stroke-opacity="0.2" stroke="#000000" stroke-width="1"><polyline points="-39.33860171364,46.88191991772,-64.26,53.822,-70.26,53.822"></polyline></g><g fill-opacity="0" stroke-opacity="0.2" stroke="#000000" stroke-width="1"><polyline points="-60.27023448360001,10.62726847524,-64.26,12.201,-70.26,12.201"></polyline></g><g fill-opacity="0" stroke-opacity="0.2" stroke="#000000" stroke-width="1"><polyline points="-53.00075471256,-30.6,-64.26,-35.13,-70.26,-35.13"></polyline></g><g fill-opacity="0" stroke-opacity="0.2" stroke="#000000" stroke-width="1"><polyline points="-20.931632769960004,-57.509188392960006,-64.26,-63.5,-70.26,-63.5"></polyline></g></g></g><g><g><g fill="#000000" aria-label="이메일주소 공백: 33.3%" transform="translate(70.26,-35.13)"><g transform="translate(5,-8)" style="user-select: none;"><text x="0" y="16" dy="-4.32"><tspan>이메일주소 공백: 33.3%</tspan></text></g></g><g fill="#000000" aria-label="서버연결 에러: 22.2%" transform="translate(70.26,63.5)"><g transform="translate(5,-8)" style="user-select: none;"><text x="0" y="16" dy="-4.32"><tspan>서버연결 에러: 22.2%</tspan></text></g></g><g fill="#000000" aria-label="서버 에러: 11.1%" transform="translate(-70.26,53.822)"><g transform="translate(-97,-8)" style="user-select: none;"><text x="0" y="16" dy="-4.32"><tspan>서버 에러: 11.1%</tspan></text></g></g><g fill="#000000" aria-label="수신거부: 11.1%" transform="translate(-70.26,12.201)"><g transform="translate(-93,-8)" style="user-select: none;"><text x="0" y="16" dy="-4.32"><tspan>수신거부: 11.1%</tspan></text></g></g><g fill="#000000" aria-label="userunknown: 11.1%" transform="translate(-70.26,-35.13)"><g transform="translate(-117,-8)" style="user-select: none;"><text x="0" y="16" dy="-4.32"><tspan>userunknown: 11.1%</tspan></text></g></g><g fill="#000000" aria-label="네트워크 에러: 11.1%" transform="translate(-70.26,-63.5)"><g transform="translate(-121,-8)" style="user-select: none;"><text x="0" y="16" dy="-4.32"><tspan>네트워크 에러: 11.1%</tspan></text></g></g></g></g></g></g></g></g><g transform="translate(157.5,76.5)"><g><g><g></g></g></g></g></g></g></g></g></g></g><g><g><g role="tooltip" visibility="hidden" opacity="0"><g fill="#ffffff" fill-opacity="0.9" stroke-width="1" stroke-opacity="1" stroke="#ffffff" filter="url(&quot;#filter-id-51&quot;)" style="pointer-events: none;" transform="translate(0,6)"><path d="M3,0 L3,0 L0,-6 L13,0 L21,0 a3,3 0 0 1 3,3 L24,8 a3,3 0 0 1 -3,3 L3,11 a3,3 0 0 1 -3,-3 L0,3 a3,3 0 0 1 3,-3"></path></g><g><g fill="#ffffff" style="pointer-events: none;" transform="translate(12,6)"><g transform="translate(0,7)" display="none"></g></g></g></g><g visibility="hidden" display="none" style="pointer-events: none;"><g fill="#ffffff" opacity="1"><rect width="315" height="153"></rect></g><g><g transform="translate(157.5,76.5)"><g><g stroke-opacity="1" fill="#f3f3f3" fill-opacity="0.8"><g><g><path d=" M53,0  a53,53,0,0,1,-106,0 a53,53,0,0,1,106,0 M42,0  a42,42,0,0,0,-84,0 a42,42,0,0,0,84,0 L42,0 "></path></g></g></g><g stroke-opacity="1" fill="#000000" fill-opacity="0.2"><g><g><path d=" M50,0  a50,50,0,0,1,-100,0 a50,50,0,0,1,100,0 M45,0  a45,45,0,0,0,-90,0 a45,45,0,0,0,90,0 L45,0 "></path></g></g></g><g fill="#000000" fill-opacity="0.4"><g transform="translate(-15,-8)" style="user-select: none;"><text x="15px" y="16" dy="-4.32" text-anchor="middle"><tspan>100%</tspan></text></g></g></g></g></g></g><g opacity="0.3" aria-labelledby="id-66-title" filter="url(&quot;#filter-id-66&quot;)" style="cursor: pointer;" transform="translate(0,132)"><g fill="#ffffff" opacity="0"><rect width="66" height="21"></rect></g><g><g shape-rendering="auto" fill="none" stroke-opacity="1" stroke-width="1.7999999999999998" stroke="#3cabff"><path d=" M15,15  C17.4001,15 22.7998,15.0001 27,15 C31.2002,14.9999 33.2999,6 36,6 C38.7001,6 38.6999,10.5 40.5,10.5 C42.3001,10.5 42.2999,6 45,6 C47.7001,6 50.9999,14.9999 54,15 C57.0002,15.0001 58.7999,15 60,15"></path></g><g shape-rendering="auto" fill="none" stroke-opacity="1" stroke-width="1.7999999999999998" stroke="url(&quot;#gradient-id-69&quot;)"><path d=" M6,15  C8.2501,15 9.7498,15.0001 15,15 C20.2502,14.9999 20.7748,3.6 27,3.6 C33.2252,3.6 33.8998,14.9999 39.9,15 C45.9002,15.0001 45.9748,15 51,15 C56.0252,15 57.7499,15 60,15"></path></g></g><title id="id-66-title">Chart created using amCharts library</title></g><g role="tooltip" visibility="hidden" opacity="0"><g fill="#ffffff" fill-opacity="0.9" stroke-width="1" stroke-opacity="1" stroke="#ffffff" filter="url(&quot;#filter-id-83&quot;)" style="pointer-events: none;" transform="translate(0,6)"><path d="M3,0 L3,0 L0,-6 L13,0 L21,0 a3,3 0 0 1 3,3 L24,8 a3,3 0 0 1 -3,3 L3,11 a3,3 0 0 1 -3,-3 L0,3 a3,3 0 0 1 3,-3"></path></g><g><g fill="#ffffff" style="pointer-events: none;" transform="translate(12,6)"><g transform="translate(0,7)" display="none"></g></g></g></g></g></g></g></g></svg></div></div>
+												</td>
+											</tr>
+											</tbody>
+										</table>
+									</td>
+									<td class="mini_table pd_l10">
+										<table width="100%" height="auto">
+											<colgroup>
+												<col style="width:115px">
+												<col style="width:auto">
+											</colgroup>
+											<tbody>
+
+											<tr>
+												<th>이메일주소 공백</th>
+												<td><span>30건</span> / <span>
+
+
+                                                        17.65%
+
+
+
+                                            </span></td>
+											</tr>
+
+											<tr>
+												<th>
+
+
+
+													서버연결 에러
+
+
+
+
+
+
+
+
+
+
+
+
+
+												</th>
+												<td><span>20건</span> / <span>
+
+
+                                                        11.76%
+
+
+
+                                            </span></td>
+											</tr>
+
+											<tr>
+												<th>
+
+
+
+
+
+
+
+
+
+
+
+
+													서버 에러
+
+
+
+
+												</th>
+												<td><span>10건</span> / <span>
+
+
+                                                        5.88%
+
+
+
+                                            </span></td>
+											</tr>
+
+											<tr>
+												<th>
+
+
+
+
+
+
+
+
+
+
+													수신거부
+
+
+
+
+
+
+												</th>
+												<td><span>10건</span> / <span>
+
+
+                                                        5.88%
+
+
+
+                                            </span></td>
+											</tr>
+
+											<tr>
+												<th>User</br>Unknown Error</th>
+												<td><span>10건</span> / <span>
+
+
+                                                        5.88%
+
+
+
+                                            </span></td>
+											</tr>
+
+											<tr>
+												<th>
+
+
+
+
+
+
+
+
+
+													네트워크 에러
+
+
+
+
+
+
+
+												</th>
+												<td><span>10건</span> / <span>
+
+
+                                                        5.88%
+
+
+
+                                            </span></td>
+											</tr>
+
+
+
+											</tbody>
+										</table>
+									</td>
+								</tr></tbody>
+							</table>
+						</div>
+					</div>
+					<div class="mg_t30 graph">
+						<!-- content area start -->
+						<div class="mini_table mg_t30">
+							<h3 class="f_lft">도메인 결과분석</h3>
+							<p class="care_txt mg_t5 f_lft">기타도메인: 0개</p>
+							<table width="100%" height="auto" class="t_br2 b_br2">
+								<colgroup>
+									<col style="width:auto">
+									<col style="width:80px">
+									<col style="width:80px">
+									<col style="width:80px">
+								</colgroup>
+								<thead>
+								<tr>
+									<th class="txt">도메인명</th>
+									<th class="">발송건수</th>
+									<th class="">실패건수</th>
+									<th class="">성공율</th>
+								</tr>
+								</thead>
+								<tbody>
+
+								<tr>
+									<td class="over_text"><span>www.naver.com</span></td>
+									<td class=""><span>100</span>건</td>
+									<td class=""><span>50</span>건</td>
+									<td class=""><span>
+
+
+                                            <!--성공율 임시 퍼센트 -->
+                                            50%
+
+                                </span></td>
+								</tr>
+
+								<tr>
+									<td class="over_text"><span>www.imoxion.com</span></td>
+									<td class=""><span>100</span>건</td>
+									<td class=""><span>20</span>건</td>
+									<td class=""><span>
+
+
+                                            <!--성공율 임시 퍼센트 -->
+                                            80%
+
+                                </span></td>
+								</tr>
+
+								<tr>
+									<td class="over_text"><span>www.test.com</span></td>
+									<td class=""><span>20</span>건</td>
+									<td class=""><span>6</span>건</td>
+									<td class=""><span>
+
+
+                                            <!--성공율 임시 퍼센트 -->
+                                            70%
+
+                                </span></td>
+								</tr>
+
+
+								</tbody>
+							</table>
+						</div>
+						<!-- content area end -->
+					</div>
+				</div>
+				<!-- content area end -->
+			</div>
+		</div>
+		<div class="pop_footer">
+			<div class="btn_div">
+				<button class="close_btn btn2">닫기</button>
+			</div>
+		</div>
+	</div>
+	<form id="saveForm" name="saveForm" action="htmlDownload.json" method="post">
+		<input type="hidden" name="html" id="html">
+		<input type="hidden" name="msgid" value="164636218883331911303928">
+		<div>
+			<input type="hidden" name="_csrf" value="3f03eb66-7be5-4b75-84d0-2a287a235c60">
+		</div></form>
+</div>
+
+<div hidden="" style="width: 1px; height: 1px; position: absolute; z-index: -1000000;"><div style="width: 100%; height: 100%; position: relative;"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="group" style="width: 100%; height: 100%; overflow: visible;"><defs><clipPath id="id-35"></clipPath><filter id="filter-id-40" filterUnits="objectBoundingBox" width="200%" height="200%" x="-50%" y="-50%"><feGaussianBlur result="blurOut" in="SourceGraphic" stdDeviation="1.5"></feGaussianBlur><feOffset result="offsetBlur" dx="1" dy="1"></feOffset><feFlood flood-color="#000000" flood-opacity="0.5"></feFlood><feComposite in2="offsetBlur" operator="in"></feComposite><feMerge><feMergeNode></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge></filter></defs></svg></div></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

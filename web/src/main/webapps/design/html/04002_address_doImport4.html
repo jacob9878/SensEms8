@@ -1,0 +1,163 @@
+<html lang="" event-clipboard-installed="true"><head><script>Function.prototype.clone=function(){var a=this,c=function(){return a.apply(this,arguments)},b;for(b in this)this.hasOwnProperty(b)&&(c[b]=this[b]);return c};Event.prototype.oldPreventDefault=Event.prototype.preventDefault.clone();Event.prototype.preventDefault=function(){window.detectedPreventDefault=!0;window.enablePreventDefault&&this.oldPreventDefault()};Event.prototype.oldStopPropagation=Event.prototype.stopPropagation.clone();Event.prototype.stopPropagation=
+function(){window.detectedStopPropagation=!0;window.enableStopPropagation&&this.oldStopPropagation()};Event.prototype.oldStopImmediatePropagation=Event.prototype.stopImmediatePropagation.clone();Event.prototype.stopImmediatePropagation=function(){window.detectedImmediateStopPropagation=!0;window.enableImmediateStopPropagation&&this.oldStopImmediatePropagation()};window.addEventListener("message",function(a){void 0!==a.data&&null!==a.data&&void 0!==a.data.enablePreventDefault&&(a=a.data,window.enablePreventDefault=
+a.enablePreventDefault,window.enableStopPropagation=a.enableStopPropagation,window.enableImmediateStopPropagation=a.enableStopImmediatePropagation)},!1)</script>
+    <title>SensEMS 8.0</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta id="_csrf" name="_csrf" content="21a71b4b-6505-40b8-ab39-98ef31feedac">
+    <meta id="_csrf_header" name="_csrf_header" content="X-CSRF-TOKEN">
+
+    <link rel="stylesheet" type="text/css" href="../../sens-static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../../sens-static/css/skin.css">
+     <link rel="stylesheet" type="text/css" href="../../sens-static/plugin/jquery/ui/theme/black/jquery.ui.all.css">
+
+    <script type="text/javascript" src="/sens-static/js/bundle/ko.js"></script>
+    <script type="text/javascript" src="/sens-static/plugin/jquery/jquery-2.2.2.min.js"></script>
+    <script type="text/javascript" src="/sens-static/plugin/jquery/jquery.json-2.4.js"></script>
+    <script type="text/javascript" src="/sens-static/plugin/jquery/ui/jquery-ui-1.9.1.custom.min.js"></script>
+    <script type="text/javascript" src="/sens-static/plugin/jquery/jquery.fileDownload.js"></script>
+    <script type="text/javascript" src="/sens-static/plugin/jquery/jquery.formatdate.js"></script>
+    <script type="text/javascript" src="/sens-static/js/common/common.js"></script>
+    <script type="text/javascript" src="/sens-static/js/common/browsercheck.js"></script>
+    <script type="text/javascript" src="/sens-static/js/common/imutil.js"></script>
+    <script type="text/javascript" src="/sens-static/js/common/imoxion.js"></script>
+    
+
+<script type="text/javascript" src="/sens-static/js/messages/sendmanage_ko.js"></script>
+<script type="text/javascript" src="/sens-static/js/messages/group_ko.js"></script>
+<script type="text/javascript" src="/sens-static/js/reserve/reserve.js"></script>
+<script type="text/javascript" src="/sens-static/js/util/page.js"></script>
+
+<link rel="stylesheet" type="text/css" href="chrome-extension://ikebmfjkmpkaacjablfdfdkonamgijdg/css/contents.css"></head>
+<body class="skin1">
+    <div class="w_pop wrap">
+        <div class="w_content">
+            <meta http-equiv="X-UA-Compatible" content="IE=10">
+
+
+<script type="text/javascript" src="/sens-static/js/receiver/address.js"></script>
+<script>
+    $(document).ready(function(){
+        window.resizeTo( 900 , 650 );
+    });
+</script>
+
+<!-- popup start-->
+<div class="popup_title over_text">
+    <div>
+        <h3 class="title">주소록 가져오기 결과</h3>
+    </div>
+</div>
+
+
+<div class="section">
+    <!-- content start -->
+    <div class="article content">
+        <!-- content area start -->
+		<div class="result_msg">
+			<p>총 29개의 주소록 중 29개를 저장하였습니다.</p>
+		</div>
+        <div class="composer_area">
+		   <table width="100%" height="auto">
+			<colgroup>
+				<col style="width:200px">
+				<col style="width:auto">
+			</colgroup>
+			<tbody>
+					<tr>
+						<th>
+							필드 개수 불일치
+						</th>
+						<td>
+								2
+						</td>
+					</tr>
+					<tr>
+						<th>
+							시도 횟수
+						</th>
+						<td>
+								48
+						</td>
+					</tr>
+					<tr>
+						<th>
+							이름 누락 오류 횟수
+						</th>
+						<td>
+								1
+						</td>
+					</tr>
+					<tr>
+						<th>
+							이메일 누락/형식 오류 횟수
+						</th>
+						<td>
+								47
+						</td>
+					</tr>
+					<tr>
+						<th>
+							번호 형식 오류 횟수
+						</th>
+						<td>
+								0
+						</td>
+					</tr>
+			</tbody>
+		</table>
+        </div>
+        <!-- content area end -->
+		<div class="mg_t20 composer_area graph ">
+			<div class="mini_table">
+				<table width="100%" height="auto">
+				<tr>
+					<td >박준현 / 서울시마포구</td>
+				</tr>
+				<tr>
+					<td >박준현 / 서울시마포구</td>
+				</tr>
+				<tr>
+					<td >박준현 / 서울시마포구</td>
+				</tr>
+				<tr>
+					<td >박준현 / 서울시마포구</td>
+				</tr>
+				<tr>
+					<td >박준현 / 서울시마포구</td>
+				</tr>
+				<tr>
+					<td >박준현 / 서울시마포구</td>
+				</tr>
+				<tr>
+					<td >박준현 / 서울시마포구</td>
+				</tr>
+				<tr>
+					<td >박준현 / 서울시마포구</td>
+				</tr>
+				<tr>
+					<td >박준현 / 서울시마포구</td>
+				</tr>
+				<tr>
+					<td >박준현 / 서울시마포구</td>
+				</tr>
+				<tr>
+					<td >박준현 / 서울시마포구</td>
+				</tr>
+				
+			</table>
+			</div>
+		</div>
+    </div>
+    <!-- content end -->
+
+</div>
+<!-- popup end-->
+        </div>
+		<div class="pop_footer">
+			<div class="btn_div">
+				<button class="close_btn btn2">닫기</button>
+			</div>
+		</div>
+    </div>
+</body></html>

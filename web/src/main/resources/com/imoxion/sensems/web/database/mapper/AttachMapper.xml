@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imoxion.sensems.web.database.mapper.AttachMapper">
+
+
+    <!-- 파일 정보를 가져온다. -->
+<!--    <select id="getFileInfo"  resultType="com.imoxion.sensems.web.database.domain.EmsAttach">
+        select * from imb_emsattach where ekey = #{ekey}
+    </select>-->
+
+    <!-- 파일 정보를 가져온다. -->
+        <select id="getAttachList"  resultType="com.imoxion.sensems.web.beans.AttachBean">
+            select * from imb_emsattach where msgid = #{msgid}
+        </select>
+
+    <!-- 모든 첨부파일 조회 -->
+    <select id="getAttachInfoList" resultType="com.imoxion.sensems.web.beans.AttachBean">
+                select * from imb_emsattach
+                <where>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(searchText)">
+                        <!-- and a.filename like '%#{searchText}%' -->
+                        file_name LIKE CONCAT('%', #{searchText}, '%')
+                    </if>
+                </where>
+                order by regdate desc
+                limit #{start},#{end}
+    </select>
+
+    <select id="getAttachCount" resultType="int">
+        select count(*) from imb_emsattach
+        <where>
+            <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(searchText)">
+                file_name LIKE CONCAT('%', #{searchText}, '%')
+            </if>
+        </where>
+    </select>
+
+    <!-- 파일 정보를 가져온다. -->
+    <select id="getFileInfo"  resultType="com.imoxion.sensems.web.beans.AttachBean">
+        select * from imb_emsattach where ekey = #{ekey}
+    </select>
+
+    <delete id="deleteFileInfo">
+        DELETE FROM imb_emsattach WHERE ekey = #{ekey}
+    </delete>
+
+    <update id="expireDateUpdate">
+        update imb_emsattach set expire_date =#{expireDate} where ekey = #{ekey}
+    </update>
+
+</mapper>

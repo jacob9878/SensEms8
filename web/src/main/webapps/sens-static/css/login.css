@@ -1,0 +1,121 @@
+﻿
+body {background: #f7f7f7;}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+
+}
+.login_form{
+    position:absolute;
+    left: 50%;
+    top: 25%;
+    margin: 0 0 0 -225px;
+    background: #ffffff;
+    border-radius: 20px;
+}
+.login_form label{margin-right: 0;}
+.login_form .pw_error span{line-height: 1.4;}
+legend.screen_out{
+    position: absolute;
+    top: -85px;
+    z-index: 999;
+    left: 50%;
+    margin-left: -25%;
+}
+fieldset {padding: 55px 50px 50px 50px;}
+
+label.screen_out{
+    color: #a9a8a8;
+    font-size:15px;
+    display: none;
+}
+
+input.loginId,input.loginPw{
+    width: 100%;
+    height: 50px;
+    margin: 0 0 5px 0;
+    outline: none;
+    padding: 0 20px;
+    border: 0;
+    box-sizing: border-box;
+    background: #f7f7f7;
+    border-radius: 0;
+}
+input.loginPw{margin: 0 0 15px 0;}
+.inp_chk {margin-bottom: 5px;}
+.login_append {margin: 5px 0 0 0;}
+.login_append input[type="checkbox"]{width: 16px; height: 16px; cursor: pointer}
+.login_append .txt_lab{	color: #a9a8a8; font-size:15px;}
+.login_append label{vertical-align: middle; cursor: pointer}
+.login_append.help_list {width: 350px}
+.btn1.btn_login{
+    width: 100%;
+    height: 50px;
+    padding: 10px 11px 10px;
+    font-size:15px;
+    border-radius: 0;
+    min-width: 350px;
+}
+.btn1.btn_login + .btn1.btn_login {margin-top: 5px;background: #454545;border-color: #454545;}
+.right_menu{
+    width: 450px;
+    padding: 20px 0 0;
+    margin: 0 auto;
+    float: none;
+    position: relative;
+}
+
+.right_menu .icon_public{
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    background-position: -42px 0;
+    vertical-align: middle;
+    margin: 4px 55px 0 0;
+    float: right;
+}
+
+.right_menu > select {float: right;
+    background: url(../../sens-static/images/select_btn.png) no-repeat 95% 55%;}
+.right_menu > select:focus{
+    outline:none;
+}
+.right_menu .lang_list2{
+    position: absolute;
+    top: 20px;
+    right: 0;
+    height: auto;
+    z-index: 999;
+    border: 0;
+    width: auto;
+    padding: 0 21px 0 8px;
+}
+
+.copyright {position: absolute;
+    width: 450px;
+    bottom: -40px;
+    text-align: center;
+}
+
+/* 캡챠 */
+.captcha_wrap{margin-bottom: 15px}
+.captcha_wrap input{border-radius: 0;width: 100%;height: 50px;}
+.captcha_wrap .captcha_area {display: inline-block;}
+.captcha_wrap .captcha_area img{float: left}
+.captcha_wrap .captcha_area button{float: left;background: #bbbbbb;color: #fff;border: 0;border-radius: 0;width: 100px;height: 49px;}
+.captcha_wrap .captcha_area button:hover{background: #aaaaaa}
+
+
+
+
+
+
+
+

@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imoxion.sensems.web.database.mapper.UserMapper">
+    <insert id="insertUser" parameterType="userInfo">
+		<choose>
+			<when test="_databaseId == 'oracle'">
+				insert into imb_userinfo(userid,passwd,uname,dept,grade,email,mobile,tel,permission,regdate,isstop,use_smtp,approve_email,
+				access_ip,pwd_type, pwd_date,st_data)
+				values(#{userid},#{passwd},#{uname},#{dept},#{grade},#{email},#{mobile},#{tel},#{permission},sysdate,#{isstop},#{use_smtp},#{approve_email},
+				#{access_ip},#{pwd_type},sysdate,#{st_data})
+			</when>
+			<otherwise>
+				insert into imb_userinfo(userid,passwd,uname,dept,grade,email,mobile,tel,permission,regdate,isstop,use_smtp,approve_email,
+				access_ip,pwd_type, pwd_date,st_data)
+				values(#{userid},#{passwd},#{uname},#{dept},#{grade},#{email},#{mobile},#{tel},#{permission},now(),#{isstop},#{use_smtp},#{approve_email},
+				#{access_ip},#{pwd_type},now(),#{st_data})
+			</otherwise>
+		</choose>
+	</insert>
+    <update id="updateFailLoginCount">
+		update imb_userinfo
+    	set fail_login = #{fail_login},fail_login_time = #{fail_login_time}
+    	where userid = #{userid}
+    </update>
+
+	<update id="updateFailLoginReset">
+		update imb_userinfo
+    	set fail_login = #{fail_login}
+    	where userid = #{userid}
+	</update>
+
+	<update id="updateUser" parameterType="userInfo">
+		update imb_userinfo
+		<set>
+			<if test="uname != null">
+				uname=#{uname},
+			</if>
+			<if test="passwd != null">
+				passwd=#{passwd},
+			</if>
+			<if test="email != null">
+				email=#{email},
+			</if>
+			<if test="approve_email != null">
+				approve_email=#{approve_email},
+			</if>
+			<if test="dept != null">
+				dept=#{dept},
+			</if>
+			<if test="grade != null">
+				grade=#{grade},
+			</if>
+			<if test="tel != null">
+				tel=#{tel},
+			</if>
+			<if test="mobile != null">
+				mobile=#{mobile},
+			</if>
+			<if test="permission != null">
+				permission=#{permission},
+			</if>
+			<if test="pwd_date != null">
+				pwd_date=#{pwd_date},
+			</if>
+			<if test="access_ip != null">
+				access_ip=#{access_ip},
+			</if>
+			<if test="isstop != null">
+				isstop=#{isstop},
+			</if>
+			<if test="use_smtp != null">
+				use_smtp=#{use_smtp},
+			</if>
+			<if test="st_data != null">
+				st_data=#{st_data},
+			</if>
+			<if test="fail_login != null">
+				fail_login=#{fail_login},
+			</if>
+		</set>
+		where userid = #{userid}
+	</update>
+	<update id="updateInfo" parameterType="userInfo">
+		update imb_userinfo
+		<set>
+			<if test="uname != null">
+				uname=#{uname},
+			</if>
+			<if test="passwd != null">
+				passwd=#{passwd},
+			</if>
+			<if test="email != null">
+				email=#{email},
+			</if>
+			<if test="dept != null">
+				dept=#{dept},
+			</if>
+			<if test="grade != null">
+				grade=#{grade},
+			</if>
+			<if test="tel != null">
+				tel=#{tel},
+			</if>
+			<if test="mobile != null">
+				mobile=#{mobile},
+			</if>
+			<if test="pwd_date != null">
+				pwd_date=#{pwd_date},
+			</if>
+		</set>
+		where userid = #{userid}
+	</update>
+	<update id="updatePassword">
+		update imb_userinfo
+		set passwd = #{newPassword}, pwd_date = #{pwd_date}
+		where userid= #{userid}
+	</update>
+
+
+	<delete id="deleteUser">
+		delete from imb_userinfo where userid=#{userid}
+	</delete>
+
+	<select id="getUserInfo" resultType="userInfo">
+    select * from imb_userinfo where userid = #{userid}
+  	</select>
+
+
+	<select id="getinfoList" resultType="userInfo">
+    select * from imb_userinfo where userid = #{userid}
+  	</select>
+
+	<!-- 사용자 목록 count 구함 -->
+	<select id="getUserCount" resultType="int">
+		select count(*) from imb_userinfo
+		<choose>
+			<when test="_databaseId == 'oracle'">
+				<where>
+					<if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+						<choose>
+							<when test="srch_type == 'userid'">
+								${srch_type} like '%'||#{srch_keyword}||'%'
+							</when>
+							<when test="srch_type == 'uname'">
+								${srch_type} like '%'||#{srch_keyword}||'%'
+							</when>
+						</choose>
+					</if>
+					<if test="@org.apache.commons.lang.StringUtils@isNotEmpty( permission )">
+						and permission = #{permission}
+					</if>
+					<if test="@org.apache.commons.lang.StringUtils@isNotEmpty( isStop )">
+						and isstop = #{isStop}
+					</if>
+					<if test="@org.apache.commons.lang.StringUtils@isNotEmpty( use_smtp )">
+						and use_smtp = #{use_smtp}
+					</if>
+
+				</where>
+			</when>
+			<otherwise>
+				<where>
+					<if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+						<choose>
+							<when test="srch_type == 'userid'">
+								${srch_type} like concat('%',#{srch_keyword},'%')
+							</when>
+							<when test="srch_type == 'uname'">
+								${srch_type} like concat('%',#{srch_keyword},'%')
+							</when>
+						</choose>
+					</if>
+					<if test="@org.apache.commons.lang.StringUtils@isNotEmpty( permission )">
+						and permission = #{permission}
+					</if>
+					<if test="@org.apache.commons.lang.StringUtils@isNotEmpty( isStop )">
+						and isstop = #{isStop}
+					</if>
+					<if test="@org.apache.commons.lang.StringUtils@isNotEmpty( use_smtp )">
+						and use_smtp = #{use_smtp}
+					</if>
+
+				</where>
+			</otherwise>
+		</choose>
+	</select>
+
+	<select id="getUserListForPageing" resultType="userInfo" >
+        <choose>
+            <when test="_databaseId == 'oracle'">
+				SELECT * FROM (
+				SELECT ROWNUM AS RNUM,a.* FROM(
+				select * from imb_userinfo
+                <where>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+						<choose>
+							<when test="srch_type == 'userid'">
+								${srch_type} like '%'||#{srch_keyword}||'%'
+							</when>
+							<when test="srch_type == 'uname'">
+								${srch_type} like '%'||#{srch_keyword}||'%'
+							</when>
+						</choose>
+                    </if>
+					<if test="@org.apache.commons.lang.StringUtils@isNotEmpty( permission )">
+						and permission = #{permission}
+					</if>
+					<if test="@org.apache.commons.lang.StringUtils@isNotEmpty( isStop )">
+						and isstop = #{isStop}
+					</if>
+					<if test="@org.apache.commons.lang.StringUtils@isNotEmpty( use_smtp )">
+						and use_smtp = #{use_smtp}
+					</if>
+
+                </where>
+				order by regdate desc
+				) a
+				) WHERE RNUM between #{start} and #{end}
+            </when>
+            <otherwise>
+				select * from imb_userinfo
+                <where>
+					<if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+						<choose>
+							<when test="srch_type == 'userid'">
+								${srch_type} like concat('%',#{srch_keyword},'%')
+							</when>
+							<when test="srch_type == 'uname'">
+								${srch_type} like concat('%',#{srch_keyword},'%')
+							</when>
+						</choose>
+					</if>
+					<if test="@org.apache.commons.lang.StringUtils@isNotEmpty( permission )">
+						and permission = #{permission}
+					</if>
+					<if test="@org.apache.commons.lang.StringUtils@isNotEmpty( isStop )">
+						and isstop = #{isStop}
+					</if>
+					<if test="@org.apache.commons.lang.StringUtils@isNotEmpty( use_smtp )">
+						and use_smtp = #{use_smtp}
+					</if>
+                </where>
+				order by userid asc
+				limit #{start},#{end}
+            </otherwise>
+        </choose>
+	</select>
+    <select id="isExistUser" resultType="int">
+		select count(*) from imb_userinfo where userid=#{userid}
+	</select>
+
+	<update id="updateUseSMTP">
+        update imb_userinfo
+        set
+        <if test="use_smtp == 1">
+            use_smtp = '0'
+		</if>
+		<if test="use_smtp == 0">
+			use_smtp = '1'
+		</if>
+        where userid = #{userid}
+    </update>
+</mapper>

@@ -1,0 +1,404 @@
+﻿<!DOCTYPE HTML>
+<html lang="ko-KR">
+<head>
+	<meta charset="UTF-8">
+	<title>SensEMS</title>
+	<link rel="stylesheet" href="../../sens-static/css/style.css" />
+	<link rel="stylesheet" href="../../sens-static/css/skin.css" />
+	
+</head>
+<body class="skin1">
+	<div class="wrap">
+		<!-- left area start -->
+		<div class="left_menu ">
+			<div class="left_logo ">
+				<a href=""><img src="../../sens-static/images/left_logo.png" alt="로고"></a>
+			</div>
+			<div class="profile ">
+				<div class="info">
+					<div class="info_box  ">
+						<a href="" class="user_name">김효민</a>
+						<a href="" class="user_membership">내정보</a>
+					</div>
+				</div>
+				<div class="info_box2">
+					<div class="help"><a href="">HELP</a></div>
+					<p></p>
+					<div class="logout"><a href="">LOGOUT</a></div>
+				</div>
+			</div>
+
+			<div class="nav">
+				<ul>
+					<li class="menu_1depth">
+						<a href="01001_composer.html"><span class="icon_public depth1_01"></span>메일쓰기</a>
+					</li>
+					<li class="menu_1depth">
+						<a href="02001_statistics.html"><span class="icon_public depth1_02"></span>메일발송 결과</a>
+					</li>
+					<li class="menu_1depth">
+						<a href="03001_schedule.html"><span class="icon_public depth1_03"></span>발송일정관리</a>
+					</li>
+					<li class="menu_1depth">
+						<a href="" class="folder_off"><span class="icon_public depth1_04"></span>수신그룹 관리</a>
+						<ul>
+							<li class="menu_2depth"><a href="">수신그룹 관리</a></li>
+							<li class="menu_2depth"><a href="address">개인 주소록</a></li>
+						</ul>
+					</li>
+					<li class="menu_1depth on">
+						<a href="" class="folder_off"><span class="icon_public depth1_05"></span>발송 관리</a>
+						<ul style="">
+							<li class="menu_2depth"><a href="">발송분류 관리</a></li>
+							<li class="menu_2depth"><a href="">이미지 관리</a></li>
+							<li class="menu_2depth"><a href="">템플릿 관리</a></li>
+							<li class="menu_2depth"><a href="">테스트 계정관리</a></li>
+							<li class="menu_2depth"><a href="">수신거부 관리</a></li>
+						</ul>
+					</li>
+					<li class="menu_1depth">
+						<a href="" class="folder_off"><span class="icon_public depth1_06"></span>시스템 관리자</a>
+						<ul style="">
+							<li class="menu_2depth"><a href="">사용자 관리</a></li>
+							<li class="menu_2depth"><a href="">정기예약발송 설정</a></li>
+							<li class="menu_2depth"><a href="">발송차단 설정</a></li>
+							<li class="menu_2depth"><a href="">데이터베이스 관리</a></li>
+							<li class="menu_2depth"><a href="06005_attach.html">첨부파일 확장자 관리</a></li>
+							<li class="menu_2depth"><a href="">사용자 활동로그 조회</a></li>
+						</ul>
+
+					</li>
+				</ul>
+			</div>
+
+		</div>	
+		<!-- left area end -->
+
+	
+	<meta http-equiv="X-UA-Compatible" content="IE=10"/>
+
+	<script type="text/javascript" src="/sens-static/js/sysman/actionlog.js"></script>
+	<script type="text/javascript" src="/sens-static/js/messages/calendar_ko.js"></script><!--calendar, page 꼭 적어야 하는지-->
+	<script type="text/javascript" src="/sens-static/js/util/page.js"></script>
+	<script type="text/javascript" src="/sens-static/plugin/jquery/jquery.json-2.4.js"></script>
+	<script type="text/javascript" src="/sens-static/plugin/jquery/ui/jquery-ui.min.js"></script>
+	
+	<div class="actionlog">
+	<!-- section start -->
+	<!-- top area start -->
+	<form id="actionLogListForm" name="actionLogListForm" action="/sysman/actionlog/list.do" method="post">
+    <input id="cpage" name="cpage" type="hidden" value="1"/>
+    <div class="title_box fixed">
+        <div class="article top_area">
+            <div class="title">
+                <h1>사용자 활동로그 조회</h1>
+                <p>사용자의 활동로그를 조회합니다.</p>
+            </div>
+        </div>
+    </div>
+    <!-- top area end -->
+		<!-- content top start -->
+		<div class="content_top fixed">
+			<ul class="content_top_btn">
+				<li >
+					<button type="button" onclick="actionlog.listDown();" class="btn2" >
+						<span>검색결과 목록 다운로드</span>
+					</button>
+				</li>
+				<li class="count">
+					<span >검색결과 :</span>
+					<span class="txt strong red" id="result_count" >0건</span>
+				</li>
+			</ul>
+		</div>
+		<!-- content top end -->
+    <div class="section  ">
+		<!-- content start -->
+    <div class="article content ">
+            <!-- content area start -->
+            <div class="composer_area">
+                <!-- search parameter select start-->
+                <table width="100%" border="0" cellpadding="0" cellspacing="1" >
+							<colgroup>
+								<col style="width:150px" />
+								<col style="width:300px" />
+								<col style="width:150px" />
+								<col style="width:auto" />							
+							</colgroup>					
+                    <tbody>
+                    <tr>
+                        <th >검색기간</th>
+                        <td colspan="3">
+                            <input id="start_date" name="start_date" class="hide_x_button w200" title="검색시작일" type="text" value=""/> ~
+                            <input id="end_date" name="end_date" class="hide_x_button w200" title="검색종료일" type="text" value=""/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>메뉴</th>
+                        <td colspan="3">
+                            <select id="menu" name="menu">
+                                <option selected="selected" value="" selected="selected">분류없음</option>
+                                
+                                    <option value="로그인">로그인</option>
+                                
+                                    <option value="로그아웃">로그아웃</option>
+                                
+                                    <option value="발송 관리&gt;테스트 계정 관리&gt;목록">발송 관리>테스트 계정 관리>목록</option>
+                                
+                                    <option value="시스템 관리자&gt;사용자 활동로그 조회&gt;목록 다운로드">시스템 관리자>사용자 활동로그 조회>목록 다운로드</option>
+                                
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+							<th >아이디</th>							
+							<td>
+								<input id="userid" name="userid" title="아이디" type="text" value=""/>
+							</td>
+							<th >내용</th>
+							<td>
+								<input id="srch_keyword" class="w400" name="srch_keyword" title="내용" type="text" value=""/>
+							</td>						
+                    </tr>
+                    </tbody>
+                </table>
+                <!-- search parameter select end-->
+				<ul class="txt center mg_t10">
+					<li><button type="button" class="btn1 tbl_ft_btn" onclick="actionlog.search();">검색</button> </li>
+				</ul>
+            </div>
+            <!-- content area end -->
+
+    </div>
+    <!-- content end -->
+			<div class="article content ">
+				<!-- content area start -->
+
+				<div class="content_area">
+					<table  width ="100%" height="auto">
+						<colgroup>
+							<col style="width:150px" />
+							<col style="width:130px" />
+							<col style="width:130px" />
+							<col style="width:auto" />
+							<col style="width:120px" />
+							<col style="width:auto" />
+						</colgroup>
+						<thead class="fixed">
+							<tr>
+								<th>로그시간</th>
+								<th>IP</th>
+								<th>아이디</th>
+								<th>메뉴</th>
+								<th>활동내역</th>
+								<th>상세내용</th>
+							</tr>
+						</thead>
+						<tbody id="log_result">
+							<tr>
+								<td >2021-03-19 <span>13:16:12</span></td>
+								<td >127.0.0.1</td>
+								<td >imoxion</td>
+								<td >시스템 관리자>사용자 활동로그 조회>목록 다운로드</td>
+								<td >다운로드</td>
+								<td class="over_text">검색기간 : 2021-03-10~2021-03-19 / 메뉴 : / 아이디 : / 내용 :</td>
+							</tr>
+							<tr>
+								<td >2021-03-19 <span>13:16:12</span></td>
+								<td >127.0.0.1</td>
+								<td >imoxion</td>
+								<td >시스템 관리자>사용자 활동로그 조회>목록 다운로드</td>
+								<td >다운로드</td>
+								<td class="over_text">검색기간 : 2021-03-10~2021-03-19 / 메뉴 : / 아이디 : / 내용 :</td>
+							</tr>
+							<tr>
+								<td >2021-03-19 <span>13:16:12</span></td>
+								<td >127.0.0.1</td>
+								<td >imoxion</td>
+								<td >시스템 관리자>사용자 활동로그 조회>목록 다운로드</td>
+								<td >다운로드</td>
+								<td class="over_text">검색기간 : 2021-03-10~2021-03-19 / 메뉴 : / 아이디 : / 내용 :</td>
+							</tr>
+							<tr>
+								<td >2021-03-19 <span>13:16:12</span></td>
+								<td >127.0.0.1</td>
+								<td >imoxion</td>
+								<td >시스템 관리자>사용자 활동로그 조회>목록 다운로드</td>
+								<td >다운로드</td>
+								<td class="over_text">검색기간 : 2021-03-10~2021-03-19 / 메뉴 : / 아이디 : / 내용 :</td>
+							</tr>
+							<tr>
+								<td >2021-03-19 <span>13:16:12</span></td>
+								<td >127.0.0.1</td>
+								<td >imoxion</td>
+								<td >시스템 관리자>사용자 활동로그 조회>목록 다운로드</td>
+								<td >다운로드</td>
+								<td class="over_text">검색기간 : 2021-03-10~2021-03-19 / 메뉴 : / 아이디 : / 내용 :</td>
+							</tr>
+							<tr>
+								<td >2021-03-19 <span>13:16:12</span></td>
+								<td >127.0.0.1</td>
+								<td >imoxion</td>
+								<td >시스템 관리자>사용자 활동로그 조회>목록 다운로드</td>
+								<td >다운로드</td>
+								<td class="over_text">검색기간 : 2021-03-10~2021-03-19 / 메뉴 : / 아이디 : / 내용 :</td>
+							</tr>
+							<tr>
+								<td >2021-03-19 <span>13:16:12</span></td>
+								<td >127.0.0.1</td>
+								<td >imoxion</td>
+								<td >시스템 관리자>사용자 활동로그 조회>목록 다운로드</td>
+								<td >다운로드</td>
+								<td class="over_text">검색기간 : 2021-03-10~2021-03-19 / 메뉴 : / 아이디 : / 내용 :</td>
+							</tr>
+							<tr>
+								<td >2021-03-19 <span>13:16:12</span></td>
+								<td >127.0.0.1</td>
+								<td >imoxion</td>
+								<td >시스템 관리자>사용자 활동로그 조회>목록 다운로드</td>
+								<td >다운로드</td>
+								<td class="over_text">검색기간 : 2021-03-10~2021-03-19 / 메뉴 : / 아이디 : / 내용 :</td>
+							</tr>
+							<tr>
+								<td >2021-03-19 <span>13:16:12</span></td>
+								<td >127.0.0.1</td>
+								<td >imoxion</td>
+								<td >시스템 관리자>사용자 활동로그 조회>목록 다운로드</td>
+								<td >다운로드</td>
+								<td class="over_text">검색기간 : 2021-03-10~2021-03-19 / 메뉴 : / 아이디 : / 내용 :</td>
+							</tr>
+							<tr>
+								<td >2021-03-19 <span>13:16:12</span></td>
+								<td >127.0.0.1</td>
+								<td >imoxion</td>
+								<td >시스템 관리자>사용자 활동로그 조회>목록 다운로드</td>
+								<td >다운로드</td>
+								<td class="over_text">검색기간 : 2021-03-10~2021-03-19 / 메뉴 : / 아이디 : / 내용 :</td>
+							</tr>
+							<tr>
+								<td >2021-03-19 <span>13:16:12</span></td>
+								<td >127.0.0.1</td>
+								<td >imoxion</td>
+								<td >시스템 관리자>사용자 활동로그 조회>목록 다운로드</td>
+								<td >다운로드</td>
+								<td class="over_text">검색기간 : 2021-03-10~2021-03-19 / 메뉴 : / 아이디 : / 내용 :</td>
+							</tr>
+							<tr>
+								<td >2021-03-19 <span>13:16:12</span></td>
+								<td >127.0.0.1</td>
+								<td >imoxion</td>
+								<td >시스템 관리자>사용자 활동로그 조회>목록 다운로드</td>
+								<td >다운로드</td>
+								<td class="over_text">검색기간 : 2021-03-10~2021-03-19 / 메뉴 : / 아이디 : / 내용 :</td>
+							</tr>
+							<tr>
+								<td >2021-03-19 <span>13:16:12</span></td>
+								<td >127.0.0.1</td>
+								<td >imoxion</td>
+								<td >시스템 관리자>사용자 활동로그 조회>목록 다운로드</td>
+								<td >다운로드</td>
+								<td class="over_text">검색기간 : 2021-03-10~2021-03-19 / 메뉴 : / 아이디 : / 내용 :</td>
+							</tr>
+							<tr>
+								<td >2021-03-19 <span>13:16:12</span></td>
+								<td >127.0.0.1</td>
+								<td >imoxion</td>
+								<td >시스템 관리자>사용자 활동로그 조회>목록 다운로드</td>
+								<td >다운로드</td>
+								<td class="over_text">검색기간 : 2021-03-10~2021-03-19 / 메뉴 : / 아이디 : / 내용 :</td>
+							</tr>
+							<tr>
+								<td >2021-03-19 <span>13:16:12</span></td>
+								<td >127.0.0.1</td>
+								<td >imoxion</td>
+								<td >시스템 관리자>사용자 활동로그 조회>목록 다운로드</td>
+								<td >다운로드</td>
+								<td class="over_text">검색기간 : 2021-03-10~2021-03-19 / 메뉴 : / 아이디 : / 내용 :</td>
+							</tr>
+							<tr>
+								<td >2021-03-19 <span>13:16:12</span></td>
+								<td >127.0.0.1</td>
+								<td >imoxion</td>
+								<td >시스템 관리자>사용자 활동로그 조회>목록 다운로드</td>
+								<td >다운로드</td>
+								<td class="over_text">검색기간 : 2021-03-10~2021-03-19 / 메뉴 : / 아이디 : / 내용 :</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- content area end -->
+				<!-- nav start -->
+				<div class="page_nav">
+					<ul>
+						<li>
+							<a href="" class="page_first icon_public" alt="첫 페이지로 이동">
+								<span>맨앞으로</span></a>
+						</li>
+						<li>
+							<a href="" class="page_prev icon_public" alt="이전첫 페이지로 이동">
+								<span>이전으로</span></a>
+						</li>
+						<li class="on">
+							<a>1</a>
+						</li>
+						<li>
+							<a href="">2</a>
+						</li>
+						<li><a href="">3</a></li>
+						<li><a href="">4</a></li>
+						<li><a href="">5</a></li>
+						<li><a href="" class="page_next icon_public" alt="다음 페이지로 이동">
+							<span>다음으로</span>
+						</a>
+						</li>
+						<li>
+							<a href="" class="page_last icon_public" alt="마지막 페이지로 이동">
+								<span>맨뒤로</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<!-- nav end -->
+			</div>
+
+		</div>
+
+		<div>
+		<input type="hidden" name="_csrf" value="768bffd0-cc52-41ff-a2be-c2228b33e3bb" />
+		</div>
+	</form>
+
+	</div>
+	<!-- section end -->
+	</div>
+
+
+	</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

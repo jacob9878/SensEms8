@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="./static/images/favicon.ico">
+
+  <title>Starter Template for Bootstrap</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="./static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!--<link href="./static/bootstrap/css/extra/floating-labels.css" rel="stylesheet">-->
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="./static/js/common/html5shiv.min.js"></script>
+  <script src="./static/js/common/respond.min.js"></script>
+  <![endif]-->
+  <style type="text/css">
+    body {
+      padding-top: 40px;
+      padding-bottom: 40px;
+      background-color: #f5f5f5;
+    }
+
+    .form-signin input[type="text"],
+    .form-signin input[type="password"] {
+      font-size: 16px;
+      height: auto;
+      /*margin-bottom: 5px;*/
+      padding: 7px 9px;
+    }
+
+  </style>
+
+</head>
+
+<body>
+<div class="container">
+  <form class="form-signin">
+
+    <div class="text-left mb-4">
+      <img class="mb-4" src="http://hdemo.sensems.com/images/common/logo_login.gif" alt="">
+
+    </div>
+
+    <div class="clearfix">
+        <h1 class="float-left h3 font-weight-normal text-left ml-2">로그인</h1>
+        <select class="select_list float-right align-bottom">
+          <option value="ko">Korean</option>
+          <option value="en">English</option>
+        </select>
+
+    </div>
+
+
+    <div class="form-group form-row">
+      <input type="text" id="userid" class="form-control mb-2" placeholder="아이디" required autofocus>
+      <input type="password" id="passwd" class="form-control mb-2" placeholder="비밀번호" required>
+     <label>
+          <input type="checkbox" value="remember-me" class="mb-2"> Remember me
+      </label>
+    </div>
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2018</p>
+  </form>
+</div>
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="./static/plugin/jquery/jquery-2.2.2.min.js"></script>
+<script src="./static/bootstrap/js/bootstrap.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="./static/js/common/ie-emulation-modes-warning.js"></script>
+</body>
+</html>

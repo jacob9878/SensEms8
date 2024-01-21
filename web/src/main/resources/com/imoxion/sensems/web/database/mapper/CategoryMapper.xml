@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imoxion.sensems.web.database.mapper.CategoryMapper">
+
+	<select id="getCategoryListCount" resultType="int">
+		select count(*) from imb_category
+		<choose>
+			<when test="_databaseId == 'oracle'">
+				<where>
+					userid = #{userid}
+					<if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+						<choose>
+							<when test="srch_type == 'name'">
+								and ${srch_type} like '%'||#{srch_keyword}||'%'
+							</when>
+							<when test="srch_type == 'userid'">
+								and ${srch_type} like '%'||#{srch_keyword}||'%'
+							</when>
+						</choose>
+					</if>
+				</where>
+			</when>
+			<otherwise>
+				<where>
+					userid = #{userid}
+					<if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+						<choose>
+							<when test="srch_type == 'name'">
+								and ${srch_type} like concat('%',#{srch_keyword},'%')
+							</when>
+							<when test="srch_type == 'userid'">
+								and ${srch_type} like concat('%',#{srch_keyword},'%')
+							</when>
+						</choose>
+					</if>
+				</where>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="getCategoryListCountByAdmin" resultType="int">
+		select count(*) from imb_category
+		<choose>
+			<when test="_databaseId == 'oracle'">
+				<where>
+					<if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+						<choose>
+							<when test="srch_type == 'name'">
+								and ${srch_type} like '%'||#{srch_keyword}||'%'
+							</when>
+							<when test="srch_type == 'userid'">
+								and ${srch_type} like '%'||#{srch_keyword}||'%'
+							</when>
+						</choose>
+					</if>
+				</where>
+			</when>
+			<otherwise>
+				<where>
+					<if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+						<choose>
+							<when test="srch_type == 'name'">
+								and ${srch_type} like concat('%',#{srch_keyword},'%')
+							</when>
+							<when test="srch_type == 'userid'">
+								and ${srch_type} like concat('%',#{srch_keyword},'%')
+							</when>
+						</choose>
+					</if>
+				</where>
+			</otherwise>
+		</choose>
+	</select>
+	
+	            
+    <select id="getCategoryListForPageing" resultType="categoryInfo">
+		<choose>
+			<when test="_databaseId == 'oracle'">
+				SELECT * FROM (
+					SELECT ROWNUM AS RNUM,a.* FROM(
+						select * from imb_category
+						<where>
+							userid = #{userid}
+							<if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+								<choose>
+									<when test="srch_type == 'name'">
+										and ${srch_type} like '%'||#{srch_keyword}||'%'
+									</when>
+									<when test="srch_type == 'userid'">
+										and ${srch_type} like '%'||#{srch_keyword}||'%'
+									</when>
+								</choose>
+							</if>
+						</where>
+						order by regdate desc
+					) a
+				) WHERE RNUM between #{start} and #{end}
+			</when>
+			<otherwise>
+				select * from imb_category
+				<where>
+					userid = #{userid}
+					<if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+						<choose>
+							<when test="srch_type == 'name'">
+								and ${srch_type} like concat('%',#{srch_keyword},'%')
+							</when>
+							<when test="srch_type == 'userid'">
+								and ${srch_type} like concat('%',#{srch_keyword},'%')
+							</when>
+						</choose>
+					</if>
+				</where>
+				order by regdate desc
+				limit #{start},#{end}
+			</otherwise>
+		</choose>
+	</select>
+	            
+    <select id="getCategoryListForPageingByAdmin" resultType="categoryInfo">
+		<choose>
+			<when test="_databaseId == 'oracle'">
+				SELECT * FROM (
+					SELECT ROWNUM AS RNUM,a.* FROM(
+						select * from imb_category
+						<where>
+							<if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+								<choose>
+									<when test="srch_type == 'name'">
+										and ${srch_type} like '%'||#{srch_keyword}||'%'
+									</when>
+									<when test="srch_type == 'userid'">
+										and ${srch_type} like '%'||#{srch_keyword}||'%'
+									</when>
+								</choose>
+							</if>
+						</where>
+						order by regdate desc
+					) a
+				) WHERE RNUM between #{start} and #{end}
+			</when>
+			<otherwise>
+				select * from imb_category
+				<where>
+					<if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+						<choose>
+							<when test="srch_type == 'name'">
+								and ${srch_type} like concat('%',#{srch_keyword},'%')
+							</when>
+							<when test="srch_type == 'userid'">
+								and ${srch_type} like concat('%',#{srch_keyword},'%')
+							</when>
+						</choose>
+					</if>
+				</where>
+				order by regdate desc
+				limit #{start},#{end}
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="checkExistCategory" resultType="int">
+		select count(*) from imb_category where name=#{name} and userid=#{userid}
+	</select>
+
+	<select id="checkDuplicateCategory" resultType="String">
+		select name from imb_category where ukey=#{ukey} and userid=#{userid}
+	</select>
+
+
+
+	<insert id="addCategory" parameterType="categoryInfo">
+		INSERT INTO imb_category(ukey,name,userid,regdate) VALUES(#{ukey},#{name},#{userid},#{regdate});
+	</insert>
+	
+	<update id="editCategory">
+		update imb_category set name=#{name} where ukey=#{ukey}
+	</update>
+	
+	<delete id="deleteCategory">
+		delete from imb_category where ukey=#{ukey}
+	</delete>
+
+	<select id="getUserCategory" resultType="categoryInfo">
+		select * from imb_category
+		<where>
+			<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(userid)">
+			userid = #{userid}
+			</if>
+		</where>
+	</select>
+
+	<select id="getCategoryForgetCategoryId" resultType="com.imoxion.sensems.web.beans.CategoryBean">
+		SELECT * FROM imb_category WHERE ukey = #{categoryid}
+	</select>
+
+
+
+
+
+
+
+</mapper>

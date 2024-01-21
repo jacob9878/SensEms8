@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imoxion.sensems.web.database.mapper.TemplateMapper">
+    <insert id="insertTemplate" parameterType="templateInfo">
+		insert into imb_template(ukey,userid,temp_name,regdate,contents,image_path,flag,extended)
+		values (#{ukey},#{userid},#{temp_name},#{regdate},#{contents},#{image_path},#{flag},#{extended})
+	</insert>
+	<update id="updateTemplate" parameterType="templateInfo">
+		update imb_template
+		<set>
+			<if test="userid != null">
+				userid = #{userid},
+			</if>
+			<if test="temp_name != null">
+				temp_name = #{temp_name},
+			</if>
+			<if test="contents != null">
+				contents = #{contents},
+			</if>
+			<if test="image_path != null">
+				image_path = #{image_path},
+			</if>
+			<if test="flag != null">
+				flag = #{flag},
+			</if>
+			<if test="extended != null">
+				extended = #{extended},
+			</if>
+		</set>
+		where ukey = #{ukey}
+	</update>
+
+	<select id="getTemplateCount" resultType="int">
+		select count(*) from imb_template
+		<choose>
+			<when test="_databaseId == 'oracle'">
+				<where>
+					<if test="srch_type == 01">
+						and flag=#{srch_type}
+					</if>
+					<if test="srch_type == 02">
+						and flag=#{srch_type} and userid=#{userid}
+					</if>
+					<if test="srch_type == 0">
+						and userid= #{userid} or flag ='01'
+					</if>
+					<if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+						and (temp_name like '%'||#{srch_keyword}||'%' or userid like '%'||#{srch_keyword}||'%')
+					</if>
+				</where>
+			</when>
+			<otherwise>
+				<where>
+					<if test="srch_type == 01">
+						and flag=#{srch_type}
+					</if>
+					<if test="srch_type == 02">
+						and flag=#{srch_type} and userid=#{userid}
+					</if>
+					<if test="srch_type == 0">
+						and userid= #{userid} or flag ='01'
+					</if>
+					<if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+						and (temp_name like concat('%',#{srch_keyword},'%') or userid like concat('%',#{srch_keyword},'%'))
+					</if>
+				</where>
+			</otherwise>
+		</choose>
+	</select>
+	<select id="getTemplateListForPageing" resultType="com.imoxion.sensems.web.database.domain.ImbTemplate">
+		<choose>
+			<when test="_databaseId == 'oracle'">
+				SELECT * FROM (
+				SELECT ROWNUM AS RNUM,a.* FROM(
+				select * from imb_template
+				<where>
+					<if test="srch_type == 01">
+						and flag=#{srch_type}
+					</if>
+					<if test="srch_type == 02">
+						and flag=#{srch_type}	and userid=#{userid}
+					</if>
+					<if test="srch_type == 0">
+						and userid= #{userid} or flag ='01'
+					</if>
+					<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(srch_keyword )">
+						and (temp_name like '%'||#{srch_keyword}||'%' or userid like '%'||#{srch_keyword}||'%')
+					</if>
+				</where>
+				order by regdate desc
+				) a
+				) WHERE RNUM between #{start} and #{end}
+			</when>
+			<otherwise>
+				select * from imb_template
+				<where>
+					<if test="srch_type == 01">
+						and flag=#{srch_type}
+					</if>
+					<if test="srch_type == 02">
+						and flag=#{srch_type} and userid=#{userid}
+					</if>
+					<if test="srch_type == 0">
+						and userid= #{userid} or flag ='01'
+					</if>
+					<if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+						and (temp_name like concat('%',#{srch_keyword},'%') or userid like concat('%',#{srch_keyword},'%'))
+					</if>
+				</where>
+				order by regdate desc
+				limit #{start},#{end}
+			</otherwise>
+		</choose>
+	</select>
+
+    <select id="getTemplate" resultType="com.imoxion.sensems.web.database.domain.ImbTemplate">
+		select * from imb_template where ukey = #{ukey}
+	</select>
+
+    <delete id="deleteTemplate">
+		delete from imb_template where ukey=#{ukey}
+	</delete>
+
+	<select id="getTemplateList" resultType="com.imoxion.sensems.web.database.domain.ImbTemplate" parameterType="string">
+		SELECT * FROM imb_template where userid= #{userid} or flag ='01'
+	</select>
+</mapper>

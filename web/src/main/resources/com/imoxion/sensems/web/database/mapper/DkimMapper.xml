@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imoxion.sensems.web.database.mapper.DkimMapper">
+
+	<select id="getDKIMList" resultType="com.imoxion.sensems.web.database.domain.ImbDkimInfo">
+		select * from imb_dkim
+	</select>
+	
+	<select id="getDKIM" resultType="com.imoxion.sensems.web.database.domain.ImbDkimInfo">
+		select * from imb_dkim where domain=#{domain}
+	</select>
+	
+	 <insert id="insertDKIM">
+      insert into imb_dkim(domain,selector,filename,public_key,regdate,private_key)
+        values(#{domain},#{selector},#{filename},#{public_key},#{regdate}, #{private_key})
+    </insert>
+    <update id="updateDKIM">
+        update imb_dkim
+        set
+            selector = #{selector},
+            filename = #{filename},
+            public_key = #{public_key}, private_key = #{private_key}
+        where domain = #{domain}
+    </update>
+    <update id="updateUseDKIM">
+        update imb_dkim set use_sign = #{use_sign} where domain = #{domain}
+    </update>
+
+    <delete id="deleteDkimByKey">
+		DELETE FROM imb_dkim where domain = #{dki}
+	</delete>
+
+    <delete id="deleteDKIM">
+        delete from imb_dkim where domain = #{domain}
+    </delete>
+    <select id="selectDkimCount" resultType="int">
+        select count(*) from imb_dkim
+        <choose>
+            <when test="_databaseId == 'oracle'">
+                <where>
+                    <if test="srch_keyword != null">
+                        ip like '%'||#{srch_keyword}||'%'
+                    </if>
+                </where>
+            </when>
+            <otherwise>
+                <where>
+                    <if test="srch_keyword != null">
+                        domain like concat('%',#{srch_keyword},'%')
+                    </if>
+                </where>
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="selectDkimList" resultType="imbDkimInfo">
+        <choose>
+            <when test="_databaseId == 'oracle'">
+                SELECT * FROM (
+                SELECT  ROWNUM AS RNUM,a.* FROM(
+                select * from imb_dkim
+
+                <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(srch_keyword)">
+                    where domain like '%'||#{srch_keyword}||'%'
+                </if>
+
+                ORDER BY regdate DESC
+                ) a
+                ) WHERE RNUM between #{start} and #{end}
+            </when>
+            <otherwise>
+                SELECT * from imb_dkim
+                <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(srch_keyword)">
+                    where domain like concat('%',#{srch_keyword},'%')
+                </if>
+                ORDER BY regdate DESC
+                limit #{start}, #{end}
+            </otherwise>
+        </choose>
+    </select>
+
+</mapper>

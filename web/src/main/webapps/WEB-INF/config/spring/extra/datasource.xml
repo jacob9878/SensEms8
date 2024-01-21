@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 	
+		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+	<!-- JNDI SETTING -->
+	<bean id="vendorProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="properties">
+			<props>
+				<prop key="SQL Server">sqlserver</prop>
+				<prop key="DB2">db2</prop>
+				<prop key="Oracle">oracle</prop>
+				<prop key="MySQL">mysql</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="databaseIdProvider" class="org.apache.ibatis.mapping.VendorDatabaseIdProvider">
+		<property name="properties" ref="vendorProperties"/>
+	</bean>
+
+
+	<!--<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">-->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="${sensems.driverClass}"/>
+		<property name="url" value="${sensems.url}"/>
+		<property name="username" value="${sensems.username}"/>
+		<property name="password" value="${sensems.password}"/>
+		<!--
+            커넥션 사용이 많아져서 커넥션 풀이 비었을때 사용할수 있는 커넥션을 반환받기까지 기다릴수 있는 최대시간 (ms) (기본값: -1, 무한대기)
+        -->
+		<property name="maxWait" value="600000"/>
+		<property name="initialSize" value="10"/>
+		<!--
+            서비스에서 동시에 사용될수 있는 최대 커넥션 개수. (기본값 : 8)
+            (maxAcive - maxIdle ) 개의 커넥션은 pool 에 반환되지 않고 제거(real destory) 된다.
+        -->
+		<property name="maxActive" value="20"/>
+		<!-- 커넥션 풀에서 유지될수 있는 idle 상태 커넥션의 최대 개수. (기본값 : 8) -->
+		<property name="maxIdle" value="10"/>
+		<!-- 커넥션 풀에 유지되수 있는 idle 상태 커넥션의 최소 개수. (기본값 : 0) -->
+		<property name="minIdle" value="5"/>
+		<!-- 커넥션 풀에서 커넥션을 가져올때 해당 커넥션의 유효성 검증에 사용할 SQL Query (반드시 하나 이상의 row 가 반환될 SELECT 구분이어야 함.) -->
+
+		<property name="validationQuery" value="select 1"/>
+		<!--<property name="validationInterval" value="30"/>-->
+		<!-- 커넥션 유효성 검사를 풀에 idle 상태에 존재할때 실시할것인지 여부 (기본값 : false, 반드시 validationQuery 가 설정되어 있어야 함.) -->
+		<property name="testWhileIdle" value="true"/>
+
+		<property name="testOnBorrow" value="true"/>
+
+		<!-- 설정된 시간 간격마다 놀고 있는 커넥션을 풀에서 제거하는 evictor thread 가 실행된다. minIdle 로 커넥션을 유지한다. -->
+		<property name="timeBetweenEvictionRunsMillis" value="600000"/>
+		<!-- minEvictableIdleTimeMillis 값은 Mysql에 설정된 wait_timeout 또는 방화벽에 설정된 session timeout 값보다 작아야 한다 -->
+		<property name="minEvictableIdleTimeMillis" value="14400000"/>
+
+		<!-- removeAbandoned : connection 을 사용한 후 removeAbandonedTimeout(초,기본값 60)반환되지 않으면 connection pool 에서 제거하고 close 한다 -->
+		<property name="removeAbandoned" value="true"/>
+		<property name="removeAbandonedTimeout" value="600"/>
+	</bean>
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="/WEB-INF/config/mybatis/mybatis-config.xml" />
+		<property name="databaseIdProvider" ref="databaseIdProvider" />
+		<property name="mapperLocations">
+			<list>
+				<value>classpath:com/imoxion/sensems/web/database/mapper/*.xml</value>
+			</list>
+		</property>
+		<property name="typeAliasesPackage" value="com.imoxion.sensems.web.database.domain"/>
+	</bean>
+
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory" />
+		<constructor-arg index="1" value="REUSE" />
+	</bean>
+
+	<bean id="transactionManager"
+		  class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.imoxion.sensems.web.database.mapper"/>
+		<property name="sqlSessionTemplateBeanName" value="sqlSession"/>
+	</bean>
+</beans>

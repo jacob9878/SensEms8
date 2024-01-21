@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imoxion.sensems.web.database.mapper.ActionLogMapper">
+
+    <resultMap id="actionLogResult" type="actionLog" autoMapping="true">
+        <id column="log_key" property="log_key"/>
+        <result column="log_date" property="log_date"/>
+        <result column="ip" property="ip"/>
+        <result column="userid" property="userid"/>
+        <result column="menu_key" property="menu_key"/>
+        <result column="param" property="param"/>
+        <association property="imbActionMenu" javaType="com.imoxion.sensems.web.database.domain.ImbActionMenu" autoMapping="true">
+            <id column="menu_key" property="menu_key"/>
+            <result column="menu" property="menu"/>
+        </association>
+    </resultMap>
+
+    <insert id="insertActionLog" parameterType="actionLog">
+        insert into imb_user_action_log (log_key,log_date,ip,userid,menu_key,param)
+        values(#{log_key},#{log_date},#{ip},#{userid},#{menu_key},#{param})
+    </insert>
+
+    <select id="selectActionMenu" resultType="actionMenu">
+        select * from imb_user_action_menu
+    </select>
+
+    <select id="selectActionLogCount" parameterType="com.imoxion.sensems.web.beans.ActionLogBean" resultType="int">
+        select count(*) from imb_user_action_log
+        <choose>
+            <when test="_databaseId == 'oracle'">
+                <where>
+                    log_date between to_date(#{start_date}) and to_date(#{end_date})
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(userid)">
+                        and userid like '%'||#{userid}||'%'
+                    </if>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(menu_key)">
+                        and menu_key = #{menu_key}
+                    </if>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(srch_keyword)">
+                        and param like '%'||#{srch_keyword}||'%'
+                    </if>
+                </where>
+            </when>
+            <otherwise>
+                <where>
+                    DATE(log_date) between #{start_date} and #{end_date}
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(userid)">
+                        and userid like concat('%',#{userid},'%')
+                    </if>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(menu_key)">
+                        and menu_key = #{menu_key}
+                    </if>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(srch_keyword)">
+                        and param like concat('%',#{srch_keyword},'%')
+                    </if>
+                </where>
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="selectActionLogList" parameterType="com.imoxion.sensems.web.beans.ActionLogBean" resultMap="actionLogResult">
+        <choose>
+            <when test="_databaseId == 'oracle'">
+                SELECT * FROM (
+                SELECT  ROWNUM AS RNUM,c.* FROM(
+                select a.*, b.menu from imb_user_action_log a
+                left join imb_user_action_menu b
+                on a.menu_key = b.menu_key
+                where
+                log_date between to_date(#{start_date}) and to_date(#{end_date})
+                <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(userid)">
+                    and userid like concat('%',#{userid},'%')
+                </if>
+                <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(menu_key)">
+                    and a.menu_key = #{menu_key}
+                </if>
+                <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(srch_keyword)">
+                    and param like concat('%',#{srch_keyword},'%')
+                </if>
+                order by log_date desc
+                ) c
+                ) WHERE RNUM between #{start} and #{end}
+            </when>
+            <otherwise>
+                select a.*, b.menu from imb_user_action_log a
+                left join imb_user_action_menu b
+                on a.menu_key = b.menu_key
+                where
+                DATE(log_date) between #{start_date} and #{end_date}
+                <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(userid)">
+                    and userid like concat('%',#{userid},'%')
+                </if>
+                <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(menu_key)">
+                    and a.menu_key = #{menu_key}
+                </if>
+                <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(srch_keyword)">
+                    and param like concat('%',#{srch_keyword},'%')
+                </if>
+                order by log_date desc
+                limit #{start}, #{end}
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="selectAllActionLogList" parameterType="com.imoxion.sensems.web.beans.ActionLogBean" resultMap="actionLogResult">
+        <choose>
+            <when test="_databaseId == 'oracle'">
+                SELECT * FROM (
+                SELECT  ROWNUM AS RNUM,c.* FROM(
+                select a.*, b.menu from imb_user_action_log a
+                left join imb_user_action_menu b
+                on a.menu_key = b.menu_key
+                where
+                log_date between to_date(#{start_date}) and to_date(#{end_date})
+                <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(userid)">
+                    and userid like concat('%',#{userid},'%')
+                </if>
+                <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(menu_key)">
+                    and a.menu_key = #{menu_key}
+                </if>
+                <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(srch_keyword)">
+                    and param like concat('%',#{srch_keyword},'%')
+                </if>
+                order by log_date desc
+                ) c
+                )
+            </when>
+            <otherwise>
+                select a.*, b.menu from imb_user_action_log a
+                left join imb_user_action_menu b
+                on a.menu_key = b.menu_key
+                where
+                DATE(log_date) between #{start_date} and #{end_date}
+                <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(userid)">
+                    and userid like concat('%',#{userid},'%')
+                </if>
+                <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(menu_key)">
+                    and a.menu_key = #{menu_key}
+                </if>
+                <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(srch_keyword)">
+                    and param like concat('%',#{srch_keyword},'%')
+                </if>
+                order by log_date desc
+            </otherwise>
+        </choose>
+    </select>
+
+</mapper>

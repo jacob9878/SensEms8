@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imoxion.sensems.web.database.mapper.RelayMapper">
+
+
+    <select id="selectRelayCount" resultType="int">
+        select count(*) from imb_relay_ip
+        <choose>
+            <when test="_databaseId == 'oracle'">
+                <where>
+                    <if test="srch_keyword != null">
+                        ip like '%'||#{srch_keyword}||'%'
+                    </if>
+                </where>
+            </when>
+            <otherwise>
+                <where>
+                    <if test="srch_keyword != null">
+                        ip like concat('%',#{srch_keyword},'%')
+
+                    </if>
+                </where>
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="selectAllRelay" resultType="relayInfo">
+        select * from imb_relay_ip order by regdate
+    </select>
+
+
+
+    <select id="selectRelayList" resultType="relayInfo">
+        <choose>
+            <when test="_databaseId == 'oracle'">
+                SELECT * FROM (
+                SELECT  ROWNUM AS RNUM,a.* FROM(
+                select * from imb_relay_ip
+
+                <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(srch_keyword)">
+                    where ip like '%'||#{srch_keyword}||'%'
+                </if>
+
+                ORDER BY regdate DESC
+                ) a
+                ) WHERE RNUM between #{start} and #{end}
+            </when>
+            <otherwise>
+                SELECT * from imb_relay_ip
+                <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(srch_keyword)">
+                    where ip like concat('%',#{srch_keyword},'%') or memo like concat('%',#{srch_keyword},'%')
+                </if>
+                ORDER BY regdate DESC
+                limit #{start}, #{end}
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="selectRelayByKey" resultType="relayInfo">
+    SELECT * FROM imb_relay_ip WHERE ip = #{ip}
+    </select>
+
+    <select id="getRelayListForPageing" resultType="relayInfo">
+        <choose>
+            <when test="_databaseId == 'oracle'">
+                SELECT * FROM (
+                SELECT ROWNUM AS RNUM,a.* FROM(
+                select * from imb_relay_ip
+                <where>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+                        <choose>
+                            <when test="srch_type == 'ip'">
+                                ${srch_type} like '%'||#{srch_keyword}||'%'
+                            </when>
+                            <when test="srch_type == 'memo'">
+                                ${srch_type} like '%'||#{srch_keyword}||'%'
+                            </when>
+                        </choose>
+                    </if>
+                </where>
+                order by regdate desc
+                ) a
+                ) WHERE RNUM between #{start} and #{end}
+            </when>
+            <otherwise>
+                select * from imb_relay_ip
+                <where>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+                        <choose>
+                            <when test="srch_type == 'ip'">
+                                ${srch_type} like concat('%',#{srch_keyword},'%')
+                            </when>
+                            <when test="srch_type == 'memo'">
+                                ${srch_type} like concat('%',#{srch_keyword},'%')
+                            </when>
+                        </choose>
+                    </if>
+                </where>
+                order by regdate desc
+                limit #{start},#{end}
+            </otherwise>
+        </choose>
+    </select>
+
+
+
+    <select id="isExistRelay" resultType="int">
+		SELECT COUNT(*)
+		FROM imb_relay_ip
+		WHERE ip = #{ip}
+	</select>
+
+
+    <insert id="insertRelay" parameterType="relayInfo" >
+        <choose>
+            <when test="_databaseId == 'oracle'">
+                INSERT INTO imb_relay_ip(ip, memo, regdate)
+                VALUES ( #{ip}, #{memo}, sysdate )
+            </when>
+            <otherwise>
+                INSERT INTO imb_relay_ip(ip, memo, regdate)
+                VALUES ( #{ip}, #{memo}, now() )
+            </otherwise>
+        </choose>
+    </insert>
+
+
+    <delete id="deleteRelayByKey">
+		DELETE FROM imb_relay_ip where ip = #{ip}
+	</delete>
+
+    <select id="selectEditRelay" resultType="int">
+        select count(*) from imb_relay_ip where ip=#{ip}
+    </select>
+
+    <update id="editRelay" parameterType="string">
+        update imb_relay_ip set ip=#{ip}, memo=#{memo}  where ip=#{ori_ip}
+    </update>
+
+
+    <select id="getSearchRelayCount" resultType="int">
+        select count(*) from imb_relay_ip
+        <choose>
+            <when test="_databaseId == 'oracle'">
+                <where>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+                        <choose>
+                            <when test="srch_type == 'ip'">
+                                ${srch_type} like '%'||#{srch_keyword}||'%'
+                            </when>
+                            <when test="srch_type == 'memo'">
+                                ${srch_type} like '%'||#{srch_keyword}||'%'
+                            </when>
+                        </choose>
+                    </if>
+                </where>
+            </when>
+            <otherwise>
+                <where>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+                        <choose>
+                            <when test="srch_type == 'ip'">
+                                ${srch_type} like concat('%',#{srch_keyword},'%')
+                            </when>
+                            <when test="srch_type == 'memo'">
+                                ${srch_type} like concat('%',#{srch_keyword},'%')
+                            </when>
+                        </choose>
+                    </if>
+                </where>
+            </otherwise>
+        </choose>
+    </select>
+
+</mapper>

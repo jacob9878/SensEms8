@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+	version="2.0">
+
+	<description>JSTL 1.1 functions library</description>
+	<display-name>JSTL functions</display-name>
+	<tlib-version>1.1</tlib-version>
+	<short-name>f</short-name>
+
+	<function>
+		<description>String Cutting</description>
+		<name>strCut</name>
+		<function-class>com.imoxion.common.util.ImStringUtil</function-class>
+		<function-signature>java.lang.String strCut(java.lang.String , int)</function-signature>
+		<example>
+    	str = "abcdefghijklmn";
+      Name: ${fn.cut( str , 10) }
+      => Name : abcdefghij...
+    </example>
+	</function>
+
+	<function>
+		<description>byte Format</description>
+		<name>myByteFormat</name>
+		<function-class>com.imoxion.common.util.ImUtils</function-class>
+		<function-signature>java.lang.String myByteFormat( long , int )</function-signature>
+		<example>    
+    </example>
+	</function>
+	
+	<function>
+		<description>byte Format2</description>
+		<name>myByteFormat2</name>
+		<function-class>com.imoxion.common.util.ImUtils</function-class>
+		<function-signature>java.lang.String myByteFormat2(long , int)</function-signature>
+		<example></example>
+	</function>
+
+	<function>
+		<description>check today</description>
+		<name>isToday</name>
+		<function-class>com.imoxion.common.util.ImTimeUtil</function-class>
+		<function-signature>boolean isToday(java.util.Date)</function-signature>
+		<example>    
+    </example>
+	</function>
+
+	<function>
+		<description>displayDir</description>
+		<name>displayDir</name>
+		<function-class>com.imoxion.common.util.ImHtmlUtil</function-class>
+		<function-signature>java.lang.String displayDir(java.lang.String ,
+			java.lang.String)</function-signature>
+		<example>    
+  	</example>
+	</function>
+
+	<function>
+		<description>getSort</description>
+		<name>getSort</name>
+		<function-class>com.imoxion.sensmail.web.app.mail.MailUtil</function-class>
+		<function-signature>java.lang.String getSR( java.lang.String ,
+			java.lang.String , java.lang.String )</function-signature>
+		<example>    
+	  </example>
+	</function>
+
+	<function>
+		<description>hiddenPassword</description>
+		<name>hiddenPassword</name>
+		<function-class>com.imoxion.sensmail.web.app.config.ConfigUtil</function-class>
+		<function-signature>java.lang.String hiddenPassword( java.lang.String
+			)</function-signature>
+		<example>    
+	  </example>
+	</function>
+
+	<function>
+		<description>doCrypt</description>
+		<name>doCrypt</name>
+		<function-class>com.imoxion.common.util.ImCrypt</function-class>
+		<function-signature>java.lang.String doCrypt( java.lang.String )</function-signature>
+		<example>    
+	  </example>
+	</function>
+
+	<function>
+		<description>doDecrypt</description>
+		<name>doDecrypt</name>
+		<function-class>com.imoxion.common.util.ImCrypt</function-class>
+		<function-signature>java.lang.String doDecrypt( java.lang.String )</function-signature>
+		<example>    
+	  </example>
+	</function>
+
+	<function>
+		<description>getUserCountByCapgroupid</description>
+		<name>getUserCountByCapgroupid</name>
+		<function-class>com.imoxion.sensmail.web.app.admin.AdminUtil</function-class>
+		<function-signature>int getUserCountByCapgroupid( java.lang.String )</function-signature>
+		<example>    
+	  </example>
+	</function>
+
+	<function>
+		<description>sprintf</description>
+		<name>sprintf</name>
+		<function-class>com.imoxion.common.util.ImStringUtil</function-class>
+		<function-signature>java.lang.String sprintf( java.lang.String ,
+			java.lang.String )</function-signature>
+		<example>    
+	  </example>
+	</function>
+
+	<function>
+		<description>Html repair</description>
+		<name>tidyHtml</name>
+		<function-class>com.imoxion.common.util.ImHtmlUtil</function-class>
+		<function-signature>java.lang.String getTidyHtml( java.lang.String )</function-signature>
+		<example>    
+	  </example>
+	</function>
+
+	<function>
+		<description>A 와 B 가 동일할 경우 selected 문자열을 반환한다.</description>
+		<name>isSelected</name>
+		<function-class>com.imoxion.common.util.ImHtmlUtil</function-class>
+		<function-signature>java.lang.String isSelected( java.lang.String ,
+			java.lang.String )</function-signature>
+		<example>
+        	&lt;option value="15" ${f:isSelected( 15 , 15 ) &gt;15&lt;option&gt;
+		</example>
+	</function>
+	
+  	<function>
+		<description>A 와 B 가 동일할 경우 checked 문자열을 반환한다.</description>
+		<name>isChecked</name>
+		<function-class>com.imoxion.common.util.ImHtmlUtil</function-class>
+		<function-signature>java.lang.String isChecked( java.lang.String ,
+			java.lang.String )</function-signature>
+		<example>
+        	&lt;option value="15" ${f:isChecked( 15 , 15 ) &gt;15&lt;option&gt;
+	</example>
+	</function>  	
+	
+	<function>
+		<description>long형 사이즈 단위 </description>
+		<name>numberFormat</name>
+		<function-class>com.imoxion.common.util.ImUtils</function-class>
+		<function-signature>java.lang.String number_format(long)</function-signature>
+		<example></example>
+	</function>
+	<function>
+		<description>number Format2</description>
+		<name>numberFormat2</name>
+		<function-class>com.imoxion.common.util.ImUtils</function-class>
+		<function-signature>java.lang.String number_format(long , int)</function-signature>
+		<example></example>
+	</function>
+</taglib>

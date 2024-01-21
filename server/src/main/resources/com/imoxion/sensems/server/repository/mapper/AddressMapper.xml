@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.imoxion.sensems.server.repository.mapper.AddressMapper">
+
+    <select id="getAddrSelInfo" resultType="com.imoxion.sensems.server.domain.ImbAddrSel" fetchSize="100">
+       select * from imb_addrsel where userid=#{userid} and msgid=#{msgid}
+    </select>
+
+
+</mapper>

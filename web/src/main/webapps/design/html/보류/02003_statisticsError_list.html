@@ -1,0 +1,400 @@
+﻿<!DOCTYPE HTML>
+<html lang="ko-KR">
+<head>
+	<meta charset="UTF-8">
+	<title>SensEMS</title>
+	<link rel="stylesheet" href="../../sens-static/css/style.css" />
+	<link rel="stylesheet" href="../../sens-static/css/skin.css" />
+	
+</head>
+<body class="skin1">
+	<div class="wrap">
+		<!-- left area start -->
+		<div class="left_menu ">
+			<div class="left_logo ">
+				<a href=""><img src="../../sens-static/images/left_logo.png" alt="로고" /></a>
+			</div>			
+			<div class="profile ">
+				<div class="info">
+					<div class="info_box  ">
+						<a href="" class="user_name" >김효민</a> 
+						<a href="" class="user_membership">내정보</a>
+						<a href="" class="user_email over_text">khm@imoxion.com</a>
+					</div>
+					<a href="" class="btn_logout pd_r20"><img src="../../sens-static/images/logout.png" alt="" /></a>				
+				</div>
+				<p></p>
+				<div class="info_box2">
+					<div class="help"><a href="" ><span class="icon_public"></span>HELP</a></div>
+					<p></p>
+					<div class="language" >
+					
+						<span class="icon_public"></span>
+						<select id="languageList"  onchange="change_language()">
+							<option value="ko">KOR</option>
+							<option value="en">ENG</option>
+							<option value="ja">JPN</option>
+						<!-- 	<option value="zh">CHN</option> -->
+						</select>			
+					</div>					
+				</div>				
+			</div>
+		
+			<div class="nav">
+				<ul>
+					<li class="menu_1depth">						
+						<a href="01001_composer.html"><span class="icon_public depth1_01"></span>메일쓰기</a>
+					</li>
+					<li class="menu_1depth">
+						<a href="02001_statistics.html"><span class="icon_public depth1_02"></span>메일발송 결과</a>
+					</li>
+					<li class="menu_1depth">
+						<a href=""><span class="icon_public depth1_03"></span>발송일정관리</a>
+					</li>
+					<li class="menu_1depth">
+						<a href="" class="folder_off"><span class="icon_public depth1_04"></span>수신그룹 관리</a>
+						<ul >
+							<li class="menu_2depth"><a href="">수신그룹 관리</a></li>
+							<li class="menu_2depth"><a href="">개인 주소록</a></li>
+						</ul>
+					</li>
+					<li class="menu_1depth">
+						<a href="" class="folder_off"><span class="icon_public depth1_05"></span>발송 관리</a>
+						<ul style="">
+							<li class="menu_2depth"><a href="">발송분류 관리</a></li>
+							<li class="menu_2depth"><a href="">이미지 관리</a></li>
+							<li class="menu_2depth"><a href="">템플릿 관리</a></li>
+							<li class="menu_2depth"><a href="">테스트 계정관리</a></li>
+							<li class="menu_2depth"><a href="">수신거부 관리</a></li>
+						</ul>
+					</li>
+					<li class="menu_1depth">
+						<a href="" class="folder_off"><span class="icon_public depth1_06"></span>시스템 관리자</a>
+						<ul style="">
+							<li class="menu_2depth"><a href="">사용자 관리</a></li>
+							<li class="menu_2depth"><a href="">정기예약발송 설정</a></li>
+							<li class="menu_2depth"><a href="">발송차단 설정</a></li>
+							<li class="menu_2depth"><a href="">데이터베이스 관리</a></li>
+							<li class="menu_2depth"><a href="">첨부파일 확장자 관리</a></li>
+							<li class="menu_2depth"><a href="">사용자 활동로그 조회</a></li>
+						</ul>
+					
+					</li>
+				</ul>
+			</div>
+			
+		</div>	
+		<!-- left area end -->
+
+		<div class="statistics">
+		<!-- section start -->
+			<!-- top area start -->
+			<div class="title_box fixed">
+				<div class="article top_area">
+					<div class="title">
+						<h1>메일발송 결과</h1>
+						<p>메일발송 결과나 통계를 볼 수 있습니다.</p>
+					</div>									
+				</div>
+			</div>
+			<!-- top area end -->	
+		
+	
+			<!-- content top start -->	
+				<div class="content_top fixed">
+					<ul class="content_top_btn">
+						<li><a class="btn2" href="02001_statistics.html">목록으로</a></li>
+					</ul>			
+				</div>
+			<!-- content top end -->
+				
+
+		
+		<div class="section pd_l30">
+			<!-- content start -->
+
+			<div class="article content mg_b30">
+				<!-- content area start -->				
+				<div class="composer_area">
+					<table width="100%" border="0" cellpadding="0" cellspacing="1" >
+						<tbody>	
+							<tr>
+								<th>제목</th>						
+								<td><span>[뉴스레터] 12월 아이모션 소식을 전달 드립니다~ (*퀴즈 이벤트_모바일 쿠폰 증정!)</span></td>
+							</tr>	
+							<tr>
+								<th>발송분류</th>						
+								<td><span>[분류없음]</span></td>
+							</tr>
+							<tr>
+								<th>발송자 계정</th>						
+								<td><span>admin</span></td>
+							</tr>
+							<tr>
+								<th>보낸사람</th>						
+								<td><span>아이모션<marketing@imoxion.com></span></td>
+							</tr>
+							<tr>
+								<th>수신자</th>						
+								<td><span>[사용자주소록]</span></td>
+							</tr>
+							<tr>
+								<th>발송일자</th>						
+								<td><span>2020-12-29 12:53</span></td>
+							</tr>	
+						</tbody>
+					</table>
+				</div>
+				<!-- content area end -->					
+			</div>
+			
+			<!-- tab wrap start -->		
+			<div class="tab_area02">
+				<ul>
+					<li class=""><a href="02002_statisticsSend.html">발송 통계</a></li>
+					<li class="on"><a href="02003_statisticsError.html">에러 통계</a></li>
+					<li class=""><a href="">수신확인 통계</a></li>
+					<li class=""><a href="">링크 통계</a></li>
+					<li class=""><a href="">페이지 보기</a></li>
+				</ul>
+				<div class="search_box">
+					<div class="inner">
+						<div class="select_box">
+							<select class="search_opt" id="" name="search_opt">
+								<option value="">field1(E-mail)</option>
+							</select>
+						</div>
+						<input type="text" id="searchWord" name="searchWord" value="" placeholder="검색어를 입력하세요.">
+						<button class="search_btn btn1"><span>검색</span></button>
+					</div>
+				</div>					
+			</div>
+			<!-- tab wrap end -->
+			
+			<!-- content top start -->	
+				<div class="content02_top">
+					<ul class="content_top_btn">
+						<li><button class="btn2" onClick="location.href='02003_statisticsError.html'">이전으로</button></li>
+					</ul>
+					<div class="content_top_opt">
+						<button ><img src="../../sens-static/images/top_opt_btn.png" alt="" /></button>
+						<div class="drop_menu" style="display:none;" >		
+							<table summary="목록화면입니다">
+								<caption>목록화면입니다</caption>
+								<tbody>
+									<tr>
+										<th scope="row"><span>목록 개수</span></th>
+										<td>
+											<select >
+												<option selected value="">10</option>
+												<option value="">15</option>
+												<option value="">20</option>
+												<option value="">30</option>
+												<option value="">50</option>
+											</select>
+										</td>
+									</tr>									
+									<tr>
+										<th scope="row"><span>목록 간격</span></th>
+										<td>
+											<select >
+												<option selected value="">보통</option>
+												<option value="">좁게</option>
+												<option value="">보통</option>
+												<option value="">넓게</option>
+											</select>
+										</td>
+									</tr>									
+								</tbody>
+							</table>
+						</div>
+					</div>						
+					<div class="select_box">
+						<select class="errorcode w200" >
+							<option selected value="">전체</option>
+							<option value="">Host Unknown</option>
+							<option value="">서버연결 에러</option>
+							<option value="">DNS 에러</option>
+							<option value="">>네트워크 에러</option>
+							<option value="">SMTP 서버에러</option>
+							<option value="">명령어 에러</option>
+							<option value="">User Unknown</option>
+							<option value="">MailBox Full</option>
+							<option value="">기타</option>
+							<option value="">이메일형식 에러</option>
+							<option value="">수신거부</option>
+							<option value="">중복에러</option>
+							<option value="">발송차단</option>
+							<option value="">메일주소 미입력</option>
+						</select>
+					</div>			
+				</div>
+			<!-- content top end -->
+			
+			<!-- content start -->
+
+			<div class="article content content02">
+				<!-- content area start -->				
+				<div class="content_area">
+					<table  width ="100%" height="auto" >
+						<colgroup>
+							<col style="width:25px" />
+							<col style="width:50px" />
+							<col style="width:300px" />
+							<col style="width:150px" />
+							<col style="width:150px" />
+							<col style="width:150px" />							
+							<col style="width:auto" />							
+						</colgroup>
+						<thead class="fixed">
+							<tr>
+								<th class="txt center">
+									<input type="checkbox" title="전체선택">				
+								</th>
+								<th class="txt center">No</th>
+								<th>field1(E-mail)</th>
+								<th>field2</th>
+								<th>field3</th>
+								<th>field4</th>
+								<th>에러원인</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="txt center">
+									<input type="checkbox" title="선택">				
+								</td>
+								<td class="txt center">5</td>
+								<td class="over_text">
+									<a href="">bskyung@candlee.co.kr</a>
+								</td>
+								<td >경병순</td>
+								<td >씨엔리</td>
+								<td >씨엔리</td>
+								<td >Host unknown</td>
+							</tr>
+							<tr>
+								<td class="txt center">
+									<input type="checkbox" title="선택">				
+								</td>
+								<td class="txt center">4</td>
+								<td class="over_text">
+									<a href="">bskyung@candlee.co.kr</a>
+								</td>
+								<td >경병순</td>
+								<td >씨엔리</td>
+								<td >씨엔리</td>
+								<td >Host unknown</td>
+							</tr>
+							<tr>
+								<td class="txt center">
+									<input type="checkbox" title="선택">				
+								</td>
+								<td class="txt center">3</td>
+								<td class="over_text">
+									<a href="">bskyung@candlee.co.kr</a>
+								</td>
+								<td >경병순</td>
+								<td >씨엔리</td>
+								<td >씨엔리</td>
+								<td >Host unknown</td>
+							</tr>
+							<tr>
+								<td class="txt center">
+									<input type="checkbox" title="선택">				
+								</td>
+								<td class="txt center">2</td>
+								<td class="over_text">
+									<a href="">bskyung@candlee.co.kr</a>
+								</td>
+								<td >경병순</td>
+								<td >씨엔리</td>
+								<td >씨엔리</td>
+								<td >Host unknown</td>
+							</tr>
+							<tr>
+								<td class="txt center">
+									<input type="checkbox" title="선택">				
+								</td>
+								<td class="txt center">1</td>
+								<td class="over_text">
+									<a href="">bskyung@candlee.co.kr</a>
+								</td>
+								<td >경병순</td>
+								<td >씨엔리</td>
+								<td >씨엔리</td>
+								<td >Host unknown</td>
+							</tr>
+							
+						</tbody>													
+					</table>
+				</div>
+				<!-- content area end -->					
+			</div>
+			<!-- content end -->	
+			
+			<!-- nav start -->
+					<div class="page_nav">
+						<ul>
+							<li>
+								<a href="" class="page_first icon_public" alt="첫 페이지로 이동">
+								<span>맨앞으로</span></a>
+							</li>
+							<li>
+								<a href="" class="page_prev icon_public" alt="이전첫 페이지로 이동">
+								<span>이전으로</span></a>
+							</li>	
+							<li class="on">
+								<a>1</a>
+							</li>  
+							<li>
+								<a href="">2</a>
+							</li>  
+							<li><a href="">3</a></li>  
+							<li><a href="">4</a></li>  
+							<li><a href="">5</a></li>  
+							<li><a href="" class="page_next icon_public" alt="다음 페이지로 이동">
+								<span>다음으로</span>
+								</a>
+							</li>
+							<li>
+								<a href="" class="page_last icon_public" alt="마지막 페이지로 이동">
+								<span>맨뒤로</span>
+								</a>
+							</li>		  
+						</ul>
+					</div>	
+			<!-- nav end -->
+			
+		</div>	
+		<!-- section end -->
+		</div>
+	</div>	
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imoxion.sensems.web.database.mapper.MailMapper">
+
+	<insert id="insertMsgInfo">
+		INSERT INTO imb_msg_info (msgid, contents) VALUES (#{msgid}, #{contents})
+	</insert>
+	
+	<insert id="insertUploadFile" parameterType="com.imoxion.sensems.web.beans.UploadFileBean">
+		INSERT INTO imb_upload_file (fkey,filename,filepath,regdate,filesize) VALUES (#{fkey},#{filename},#{filepath},#{regdate},#{filesize})
+	</insert>
+	
+	<select id="getUploadFileInfo" resultType="com.imoxion.sensems.web.beans.UploadFileBean">
+		select * from imb_upload_file where fkey=#{fkey}
+	</select>
+	
+	<delete id="deleteUploadFile">
+		delete from imb_upload_file where fkey=#{fkey}	
+	</delete>
+	
+	<insert id="insertAttachInfo" parameterType="com.imoxion.sensems.web.beans.AttachBean">
+		INSERT INTO imb_emsattach (ekey,msgid,file_name,file_size,file_path,expire_date,regdate)
+		VALUES (#{ekey},#{msgid},#{file_name},#{file_size},#{file_path},#{expire_date},#{regdate})
+	</insert>
+	
+	<insert id="insertMailData" parameterType="com.imoxion.sensems.web.beans.EmsBean">
+		INSERT INTO imb_emsmain (categoryid,msgid,userid,mail_from,replyto,rectype,dbkey,recid,recname,query,msg_name,regdate,
+								reserv_time,resp_time,charset,ishtml,is_same_email,islink,state,parentid,resend_num,resend_step,isattach,msg_path)
+					VALUES (#{categoryid},#{msgid},#{userid},#{mail_from},#{replyto},#{rectype},#{dbkey},#{recid},#{recname},#{query},#{msg_name},
+							#{regdate},#{reserv_time},#{resp_time},#{charset},#{ishtml},#{is_same_email},#{islink},#{state},#{parentid},#{resend_num},#{resend_step},#{isattach},#{msg_path})
+	</insert>
+	
+	<update id="updateMsgInfo">
+		update imb_msg_info
+		set contents = #{contents}
+		where msgid = #{msgid}
+	</update>
+	
+	<update id="updateMailData" parameterType="com.imoxion.sensems.web.beans.EmsBean">
+		update imb_emsmain
+		<set>
+			<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(mail_from)">
+				mail_from = #{mail_from},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(replyto)">
+				replyto = #{replyto},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(rectype)">
+				rectype = #{rectype},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(dbkey)">
+				dbkey = #{dbkey},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(recid)">
+				recid = #{recid},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(recname)">
+				recname = #{recname},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(msg_name)">
+				msg_name = #{msg_name},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(regdate)">
+				regdate = #{regdate},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(reserv_time)">
+				reserv_time = #{reserv_time},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(resp_time)">
+				resp_time = #{resp_time},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(charset)">
+				charset = #{charset},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(ishtml)">
+				ishtml = #{ishtml},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(is_same_email)">
+				is_same_email = #{is_same_email},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(islink)">
+				islink = #{islink},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(state)">
+				state = #{state},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(isattach)">
+				isattach = #{isattach},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(msg_path)">
+				msg_path = #{msg_path},
+			</if>
+		</set>
+		where msgid=#{msgid} and userid=#{userid}
+	</update>
+	
+	<select id="getMailData" resultType="com.imoxion.sensems.web.beans.EmsBean">
+		SELECT a.*, b.contents AS contents FROM imb_emsmain a LEFT JOIN imb_msg_info b ON a.msgid=b.msgid
+		WHERE a.msgid=#{msgid} and a.userid=#{userid}
+	</select>
+
+	<select id="noUseridGetMailData" resultType="com.imoxion.sensems.web.beans.EmsBean">
+		SELECT a.*, b.contents AS contents FROM imb_emsmain a LEFT JOIN imb_msg_info b ON a.msgid=b.msgid
+		WHERE a.msgid=#{msgid}
+	</select>
+
+	<select id="getMailcontentData" resultType="com.imoxion.sensems.web.beans.EmsBean">
+		SELECT a.*, b.contents AS contents FROM imb_emsmain a LEFT JOIN imb_msg_info b ON a.msgid=b.msgid
+		WHERE a.msgid=#{msgid}
+	</select>
+
+	
+	<select id="getAttachInfo" resultType="com.imoxion.sensems.web.beans.AttachBean">
+		SELECT * FROM imb_emsattach where ekey=#{ekey} and msgid=#{msgid}
+	</select>
+
+	<select id="getAllAttachInfo" resultType="com.imoxion.sensems.web.beans.AttachBean">
+		SELECT * FROM imb_emsattach where msgid=#{msgid}
+	</select>
+	
+	<select id="getRespTime" resultType="String">
+		SELECT resp_time FROM imb_emsmain where msgid=#{msgid}
+	</select>
+	
+	<update id="updateReceiptCount">
+		UPDATE imb_receipt_count
+		SET recv_count = recv_count+1
+		WHERE msgid=#{msgid}
+	</update>
+	
+	<insert id="insertReceiptCountInfo">
+		INSERT INTO imb_receipt_count(msgid,recv_count) VALUES(#{msgid},0)
+	</insert>
+
+	<update id="updateMailResend">
+		update imb_emsmain set extended='999' where msgid = #{msgid}
+	</update>
+
+	<update id="updateMailResendNum">
+		update imb_emsmain set resend_num = resend_num+1 where parentid = #{msgid} and resend_num > #{resend_num}
+	</update>
+
+	<insert id="insertResendMailData" parameterType="com.imoxion.sensems.web.beans.EmsBean">
+		INSERT INTO imb_emsmain (categoryid,msgid,userid,mail_from,replyto,rectype,dbkey,recid,recname,query,msg_name,regdate,
+								reserv_time,resp_time,charset,ishtml,is_same_email,islink,state,parentid,resend_num,resend_step,isattach,msg_path)
+					VALUES (#{categoryid},#{msgid},#{userid},#{mail_from},#{replyto},#{rectype},#{dbkey},#{recid},#{recname},#{query},#{msg_name},
+							#{regdate},#{reserv_time},#{resp_time},#{charset},#{ishtml},#{is_same_email},#{islink},#{state},#{parentid},#{resend_num},#{resend_step},#{isattach},#{msg_path})
+	</insert>
+
+</mapper>

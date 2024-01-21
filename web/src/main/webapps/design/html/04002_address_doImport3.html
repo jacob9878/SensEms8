@@ -1,0 +1,347 @@
+<html lang="" event-clipboard-installed="true"><head><script>Function.prototype.clone=function(){var a=this,c=function(){return a.apply(this,arguments)},b;for(b in this)this.hasOwnProperty(b)&&(c[b]=this[b]);return c};Event.prototype.oldPreventDefault=Event.prototype.preventDefault.clone();Event.prototype.preventDefault=function(){window.detectedPreventDefault=!0;window.enablePreventDefault&&this.oldPreventDefault()};Event.prototype.oldStopPropagation=Event.prototype.stopPropagation.clone();Event.prototype.stopPropagation=
+function(){window.detectedStopPropagation=!0;window.enableStopPropagation&&this.oldStopPropagation()};Event.prototype.oldStopImmediatePropagation=Event.prototype.stopImmediatePropagation.clone();Event.prototype.stopImmediatePropagation=function(){window.detectedImmediateStopPropagation=!0;window.enableImmediateStopPropagation&&this.oldStopImmediatePropagation()};window.addEventListener("message",function(a){void 0!==a.data&&null!==a.data&&void 0!==a.data.enablePreventDefault&&(a=a.data,window.enablePreventDefault=
+a.enablePreventDefault,window.enableStopPropagation=a.enableStopPropagation,window.enableImmediateStopPropagation=a.enableStopImmediatePropagation)},!1)</script>
+    <title>SensEMS 8.0</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta id="_csrf" name="_csrf" content="21a71b4b-6505-40b8-ab39-98ef31feedac">
+    <meta id="_csrf_header" name="_csrf_header" content="X-CSRF-TOKEN">
+
+    <link rel="stylesheet" type="text/css" href="../../sens-static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../../sens-static/css/skin.css">
+     <link rel="stylesheet" type="text/css" href="../../sens-static/plugin/jquery/ui/theme/black/jquery.ui.all.css">
+
+    <script type="text/javascript" src="/sens-static/js/bundle/ko.js"></script>
+    <script type="text/javascript" src="/sens-static/plugin/jquery/jquery-2.2.2.min.js"></script>
+    <script type="text/javascript" src="/sens-static/plugin/jquery/jquery.json-2.4.js"></script>
+    <script type="text/javascript" src="/sens-static/plugin/jquery/ui/jquery-ui-1.9.1.custom.min.js"></script>
+    <script type="text/javascript" src="/sens-static/plugin/jquery/jquery.fileDownload.js"></script>
+    <script type="text/javascript" src="/sens-static/plugin/jquery/jquery.formatdate.js"></script>
+    <script type="text/javascript" src="/sens-static/js/common/common.js"></script>
+    <script type="text/javascript" src="/sens-static/js/common/browsercheck.js"></script>
+    <script type="text/javascript" src="/sens-static/js/common/imutil.js"></script>
+    <script type="text/javascript" src="/sens-static/js/common/imoxion.js"></script>
+    
+
+<script type="text/javascript" src="/sens-static/js/messages/sendmanage_ko.js"></script>
+<script type="text/javascript" src="/sens-static/js/messages/group_ko.js"></script>
+<script type="text/javascript" src="/sens-static/js/reserve/reserve.js"></script>
+<script type="text/javascript" src="/sens-static/js/util/page.js"></script>
+
+<link rel="stylesheet" type="text/css" href="chrome-extension://ikebmfjkmpkaacjablfdfdkonamgijdg/css/contents.css"></head>
+<body class="skin1">
+	<div class="w_pop wrap">
+        <div class="w_content">
+            <meta http-equiv="X-UA-Compatible" content="IE=10">
+
+
+<script type="text/javascript" src="/sens-static/js/receiver/address.js"></script>
+<script>
+    $(document).ready(function(){
+        window.resizeTo( 900 , 750 );
+    });
+    addressList.doSelect();
+</script>
+
+<!-- popup start-->
+<div class="popup_title over_text">
+    <div>
+        <h3 class="title">주소록 가져오기 3단계</h3>
+    </div>
+</div>
+
+	<!-- content top start -->	
+	<div class="content_top fixed">
+		<ul class="content_top_btn">
+			<li><a class="btn2" href="" onclick="addressList.doPrev();">이전</a></li>
+			<li><a class="btn2" href="" onclick="addressList.doInsertAddr()">다음</a></li>
+		</ul>					
+	</div>
+	<!-- content top end -->
+
+<div class="section add_btn">
+    <!-- content start -->
+    <div class="article content">
+        <!-- content area start -->
+        <div class="composer_area graph">
+            <form id="importForm" name="importForm" action="doImportFinish.do" method="post">
+                <input id="fileKey" name="fileKey" type="hidden" value="6057ee0a3fd648b68ec73952">
+                <input id="header" name="header" type="hidden" value="1">
+                <input id="divMethod" name="divMethod" type="hidden" value="0">
+                <table width="100%" height="auto" >
+                    <colgroup>
+                        <col style="width:150px">
+                        <col style="width:300px">
+                        <col style="width:150px">
+                        <col style="width:auto">
+                    </colgroup>
+                    <tbody>
+                    <tr>
+                        <th>
+                            주소록 그룹명
+                        </th>
+                        <td colspan="3">
+                            <select id="gkey" name="gkey" class="w200" onchange="addressList.doSelect();">
+                                <option value="0">미분류</option>
+
+                                <option value="1">(재)광주구천주교회유지재단</option>
+
+                                <option value="8">테스트ㅎㅎ</option>
+
+                                <option value="9">test</option>
+
+                                <option value="10">개발기테스트1</option>
+
+                                <option value="11">개발기테스트234543122</option>
+
+                                <option value="12">가져오기그룹</option>
+
+                                <option value="13">a</option>
+
+                                <option value="14">b</option>
+
+                                <option value="15">c</option>
+
+                                <option value="16">d</option>
+
+                                <option value="17">e</option>
+
+                                <option value="18">f</option>
+
+                                <option value="19">g</option>
+
+                                <option value="20">h</option>
+
+                                <option value="21">z</option>
+
+                                <option value="22">z</option>
+
+                                <option value="23">z</option>
+
+                                <option value="24">z</option>
+
+                                <option value="25">z</option>
+
+                                <option value="26">z</option>
+
+                                <option value="27">z</option>
+
+                                <option value="28">z</option>
+
+                                <option value="29">z</option>
+
+                                <option value="30">z</option>
+
+                                <option value="31">z</option>
+
+                                <option value="32">z</option>
+
+                                <option value="33">z</option>
+
+                                <option value="34">z</option>
+
+                                <option value="35">z</option>
+
+                                <option value="36">z</option>
+
+                                <option value="37">z</option>
+
+                                <option value="-1">[새그룹]</option>
+                            </select>
+                            <input type="text" name="gname" id="gname" maxlength="50" readonly="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <span class="txt strong red">*</span>이름
+                        </th>
+                        <td>
+                            <select id="name" name="name" class="w200">
+                                <option value="-1">없음</option>
+                                <option value="0">이름</option><option value="1">이메일</option><option value="2">주소</option><option value="3">전화번호</option>
+                            </select>
+                        </td>
+                        <th>
+                            우편번호
+                        </th>
+                        <td>
+                            <select id="zipcode" name="zipcode" class="w200">
+                                <option value="-1">없음</option>
+                                <option value="0">이름</option><option value="1">이메일</option><option value="2">주소</option><option value="3">전화번호</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <span class="txt strong red">*</span>E-MAIL
+                        </th>
+                        <td>
+                            <select id="email" name="email" class="w200">
+                                <option value="-1">없음</option>
+                                <option value="0">이름</option><option value="1">이메일</option><option value="2">주소</option><option value="3">전화번호</option>
+                            </select>
+                        </td>
+                        <th>
+                            주소1
+                        </th>
+                        <td>
+                            <select id="addr1" name="addr1" class="w200">
+                                <option value="-1">없음</option>
+                                <option value="0">이름</option><option value="1">이메일</option><option value="2">주소</option><option value="3">전화번호</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            회사
+                        </th>
+                        <td>
+                            <select id="company" name="company" class="w200">
+                                <option value="-1">없음</option>
+                                <option value="0">이름</option><option value="1">이메일</option><option value="2">주소</option><option value="3">전화번호</option>
+                            </select>
+                        </td>
+                        <th>
+                            주소2
+                        </th>
+                        <td>
+                            <select id="addr2" name="addr2" class="w200">
+                                <option value="-1">없음</option>
+                                <option value="0">이름</option><option value="1">이메일</option><option value="2">주소</option><option value="3">전화번호</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            부서
+                        </th>
+                        <td>
+                            <select id="dept" name="dept" class="w200">
+                                <option value="-1">없음</option>
+                                <option value="0">이름</option><option value="1">이메일</option><option value="2">주소</option><option value="3">전화번호</option>
+                            </select>
+                        </td>
+                        <th>
+                            기타정보1
+                        </th>
+                        <td>
+                            <select id="etc1" name="etc1" class="w200">
+                                <option value="-1">없음</option>
+                                <option value="0">이름</option><option value="1">이메일</option><option value="2">주소</option><option value="3">전화번호</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            직책
+                        </th>
+                        <td>
+                            <select id="grade" name="grade" class="w200">
+                                <option value="-1">없음</option>
+                                <option value="0">이름</option><option value="1">이메일</option><option value="2">주소</option><option value="3">전화번호</option>
+                            </select>
+                        </td>
+                        <th>
+                            기타정보2
+                        </th>
+                        <td>
+                            <select id="etc2" name="etc2" class="w200">
+                                <option value="-1">없음</option>
+                                <option value="0">이름</option><option value="1">이메일</option><option value="2">주소</option><option value="3">전화번호</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            집전화번호
+                        </th>
+                        <td>
+                            <select id="home_tel" name="home_tel" class="w200">
+                                <option value="-1">없음</option>
+                                <option value="0">이름</option><option value="1">이메일</option><option value="2">주소</option><option value="3">전화번호</option>
+                            </select>
+                        </td>
+                        <th>
+                            기타정보3
+                        </th>
+                        <td>
+                            <select id="etc3" name="etc3" class="w200">
+                                <option value="-1">없음</option>
+                                <option value="0">이름</option><option value="1">이메일</option><option value="2">주소</option><option value="3">전화번호</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            회사전화
+                        </th>
+                        <td>
+                            <select id="office_tel" name="office_tel" class="w200">
+                                <option value="-1">없음</option>
+                                <option value="0">이름</option><option value="1">이메일</option><option value="2">주소</option><option value="3">전화번호</option>
+                            </select>
+                        </td>
+                        <th>
+                            기타정보4
+                        </th>
+                        <td>
+                            <select id="etc4" name="etc4" class="w200">
+                                <option value="-1">없음</option>
+                                <option value="0">이름</option><option value="1">이메일</option><option value="2">주소</option><option value="3">전화번호</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            휴대폰번호
+                        </th>
+                        <td>
+                            <select id="mobile" name="mobile" class="w200">
+                                <option value="-1">없음</option>
+                                <option value="0">이름</option><option value="1">이메일</option><option value="2">주소</option><option value="3">전화번호</option>
+                            </select>
+                        </td>
+                        <th>
+                            기타정보5
+                        </th>
+                        <td>
+                            <select id="etc5" name="etc5" class="w200">
+                                <option value="-1">없음</option>
+                                <option value="0">이름</option><option value="1">이메일</option><option value="2">주소</option><option value="3">전화번호</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            FAX
+                        </th>
+                        <td>
+                            <select id="fax" name="fax" class="w200">
+                                <option value="-1">없음</option>
+                                <option value="0">이름</option><option value="1">이메일</option><option value="2">주소</option><option value="3">전화번호</option>
+                            </select>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <span class="bottom_explain">*표시는 필수 입력 사항입니다.</span>
+            <div>
+<input type="hidden" name="_csrf" value="21a71b4b-6505-40b8-ab39-98ef31feedac">
+</div></form>
+
+        </div>
+        <!-- content area end -->
+    </div>
+    <!-- content end -->
+
+</div>
+<!-- popup end-->
+        </div>
+        <div class="pop_footer">
+            <div class="btn_div">
+                <button class="close_btn btn2">닫기</button>
+            </div>
+        </div>
+ 	</div>
+
+</body></html>

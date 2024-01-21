@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+	    http://www.springframework.org/schema/tx
+	    http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/util
+      	http://www.springframework.org/schema/util/spring-util.xsd">
+
+
+	<context:annotation-config />
+
+
+	<context:component-scan base-package="com.imoxion.sensems.web">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+
+
+
+	<bean
+		class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
+		<property name="systemPropertiesMode" value="2" />
+		<property name="properties">
+			<bean
+				class="org.springmodules.commons.configuration.CommonsConfigurationFactoryBean">
+				<property name="configurations">
+					<list>
+						<ref bean="configuration" />
+					</list>
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="configuration" class="org.apache.commons.configuration.CompositeConfiguration">
+		<constructor-arg>
+			<list>
+				<bean class="org.apache.commons.configuration.XMLConfiguration">
+					<constructor-arg type="java.lang.String">
+						<value>#{systemProperties['sensems.home']}/conf/sensems.xml</value>
+					</constructor-arg>
+				</bean>
+				<bean class="org.apache.commons.configuration.PropertiesConfiguration">
+					<constructor-arg type="java.lang.String">
+						<value>#{systemProperties['sensems.home']}/conf/db.properties</value>
+					</constructor-arg>
+				</bean>
+			</list>
+		</constructor-arg>
+	</bean>
+
+
+	<!-- velocityEngine -->
+<!--	<bean id="velocityConfig"-->
+<!--		class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">-->
+
+<!--		<property name="resourceLoaderPath" value="file:${sensdata.path}/template" />-->
+<!--		<property name="velocityProperties">-->
+<!--			<props>-->
+<!--				<prop key="file.resource.loader.cache">true</prop>-->
+<!--				<prop key="file.resource.loader.modificationCheckInterval">10</prop>-->
+<!--			</props>-->
+<!--		</property>-->
+<!--	</bean>-->
+
+	<!-- JSON 데이터 VIEW -->
+	<bean id="jsonObjectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"/>
+	<bean id="jsonView" name="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
+		<property name="contentType" value="application/json;charset=UTF-8" />
+		<property name="objectMapper" ref="jsonObjectMapper"/>
+	</bean>
+
+	<!-- 다운로드 View -->
+	<bean id="download" class="com.imoxion.sensems.web.common.DownloadView"/>
+
+	<!-- View Resolver 설정 : START -->
+	<!-- Tiles ViewResolver -->
+	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<property name="order" value="0" />
+	</bean>
+
+	<bean id="tilesViewResolver"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.tiles3.TilesView" />
+		<property name="order" value="1" />
+	</bean>
+
+	<!-- JSP ViewResolver -->
+	<bean id="jspViewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/" />
+		<property name="suffix" value=".jsp" />
+		<property name="order" value="2" />
+		
+	</bean>
+	<!-- View Resolver 설정 : END -->
+
+	<!-- JSON 한글 깨지는 현상 방지 : start -->
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="messageConverters">
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter" >
+				<property name="supportedMediaTypes">
+					<value>text/plain;charset=UTF-8</value>
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="messageSourceAccessor"
+		class="org.springframework.context.support.MessageSourceAccessor">
+		<constructor-arg ref="messageSource" />
+	</bean>
+
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.SessionLocaleResolver" />
+
+	<!-- Message Setting : start -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>/WEB-INF/messages/message</value>
+				<value>/WEB-INF/messages/title</value>
+			</list>
+		</property>
+		<property name="cacheSeconds" value="60000" /> <!-- 웹페이지 동작 오류 확인을 위하여 임시 주석 -->
+	</bean>
+
+	<!-- 멀티파트 리졸버 -->
+
+	<bean id="multipartResolver"  class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 최대업로드 가능한 바이트크기 -->
+		<property name="maxUploadSize" value="52428800" />
+
+		<!-- defaultEncoding -->
+		<property name="defaultEncoding" value="utf-8" />
+	</bean>
+
+    <!-- Tiles Config -->
+    <bean id="tilesConfigurer"
+          class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+        <property name="definitions">
+            <list>
+                <value>/WEB-INF/config/tiles/base-layout.xml</value>
+            </list>
+        </property>
+        <property name="preparerFactoryClass" value="org.springframework.web.servlet.view.tiles3.SpringBeanPreparerFactory" />
+    </bean>
+    	<!-- DB DataSource 설정 -->
+	<import resource="extra/datasource.xml"/>
+
+	<import resource="extra/web-security.xml"/>
+
+	
+</beans>

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         id="WebApp_ID" version="3.1">
+    <display-name>SensEMS</display-name>
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+	<listener>
+		<listener-class>com.imoxion.sensems.web.listener.LoggerLoaderListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+		/WEB-INF/config/spring/applicationContext.xml
+	</param-value>
+	</context-param>
+	<context-param>
+		<param-name>logbackConfigLocation</param-name>
+		<param-value>/WEB-INF/config/logback/logback.xml</param-value>
+	</context-param>
+	<context-param>
+		<param-name>logbackExposeWebAppRoot</param-name>
+		<param-value>WEBMAIL</param-value>
+	</context-param>
+    <context-param>
+        <param-name>webAppRootKey</param-name>
+        <param-value>sensems.web</param-value>
+    </context-param>
+    <context-param>
+        <param-name>log4jRefreshInterval</param-name>
+        <param-value>60000</param-value>
+    </context-param>
+
+    <filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+    <!--<error-page>
+        <error-code>600</error-code>
+        <location>/error/expire.jsp</location>
+    </error-page>-->
+
+    <error-page>
+        <error-code>403</error-code>
+        <location>/WEB-INF/jsp/error/noauth.jsp</location>
+    </error-page>
+    
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/jsp/error/404.jsp</location>
+    </error-page>
+
+    <!--XSS FILTER -->
+    <!--테스트 위하여 임시 주석처리 -->
+    <filter>
+        <filter-name>xssFilter</filter-name>
+        <filter-class>com.imoxion.sensems.web.security.xss.XSSFilter</filter-class>
+        <init-param>
+            <param-name>config-file</param-name>
+            <param-value>/WEB-INF/config/security/security-xss-config.xml</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>xssFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    	<servlet>
+		<servlet-name>sensems</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>
+				/WEB-INF/config/spring/sensems-servlet.xml
+			</param-value>
+		</init-param>
+		<init-param>
+			<param-name>dispatchOptionRequest</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+    <servlet-mapping>
+        <servlet-name>sensems</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+	<!--<servlet-mapping>
+		<servlet-name>sensems</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+        <servlet-name>sensems</servlet-name>
+        <url-pattern>*.json</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>sensems</servlet-name>
+        <url-pattern>*.xml</url-pattern>
+    </servlet-mapping>-->
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Protected Context</web-resource-name>
+            <url-pattern>/*</url-pattern>
+            <http-method>OPTIONS</http-method>
+            <http-method>HEAD</http-method>
+            <http-method>PUT</http-method>
+            <http-method>DELETE</http-method>
+            <http-method>TRACE</http-method>
+            <http-method>CONNECT</http-method>
+            <http-method>PROPFIND</http-method>
+            <http-method>PROPPATCH</http-method>
+            <http-method>MKCOL</http-method>
+            <http-method>COPY</http-method>
+            <http-method>MOVE</http-method>
+            <http-method>LOCK</http-method>
+            <http-method>UNLOCK</http-method>
+            <http-method>PATCH</http-method>
+        </web-resource-collection>
+        <auth-constraint/>
+    </security-constraint>
+</web-app>

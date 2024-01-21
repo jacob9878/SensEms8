@@ -1,0 +1,642 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imoxion.sensems.web.database.mapper.SendResultMapper">
+    <delete id="resultDelete">
+    DELETE FROM imb_emsmain WHERE msgid = #{msgid}
+    </delete>
+
+    <delete id="msginfoDelete">
+        DELETE FROM imb_msg_info WHERE msgid = #{msgid}
+    </delete>
+
+    <select id="getEmsForMsgid" resultType="com.imoxion.sensems.web.beans.EmsBean">
+     SELECT * FROM imb_emsmain WHERE msgid = #{msgid}
+    </select>
+
+    <update id="categoryMove">
+        UPDATE imb_emsmain SET categoryid = #{categoryid}
+        WHERE msgid = #{msgid}
+    </update>
+
+    <update id="doResend">
+        UPDATE imb_emsmain SET state='010', isstop='0' WHERE msgid = #{msgid}
+    </update>
+
+    <update id="doStop">
+        UPDATE imb_emsmain SET state='100', isstop='2' WHERE msgid = #{msgid}
+    </update>
+
+    <select id="getSendResultList" resultType="com.imoxion.sensems.web.beans.EmsBean">
+        <choose>
+            <when test="_databaseId == 'oracle'">
+                SELECT * FROM (
+                SELECT ROWNUM AS RNUM,a.* FROM(
+                SELECT * FROM imb_emsmain
+                <where>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+                        AND (msg_name like '%'||#{srch_keyword}||'%' OR userid like '%'||#{srch_keyword}||'%')
+                    </if>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(userid)">
+                        AND userid = #{userid}
+                    </if>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(categoryid)">
+                        AND categoryid =#{categoryid}
+                    </if>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(state)">
+                        AND state =#{state}
+                    </if>
+                </where>
+                order by regdate desc
+                ) a
+                ) WHERE RNUM between #{start} and #{end}
+            </when>
+            <otherwise>
+                SELECT * FROM imb_emsmain
+                <where>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+                        AND (msg_name LIKE concat('%',#{srch_keyword},'%') OR userid LIKE concat('%',#{srch_keyword},'%'))
+                    </if>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(userid)">
+                        AND userid = #{userid}
+                    </if>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(categoryid)">
+                        AND categoryid =#{categoryid}
+                    </if>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(state)">
+                        AND state =#{state}
+                    </if>
+                </where>
+                order by parentid desc, resend_num asc, regdate desc
+                limit #{start},#{end}
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="getsendResultCount" resultType="int">
+        select count(*) from imb_emsmain
+        <choose>
+            <when test="_databaseId == 'oracle'">
+                <where>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+                        AND msg_name like '%'||#{srch_keyword}||'%' OR userid like '%'||#{srch_keyword}||'%'
+                    </if>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(userid)">
+                        AND userid = #{userid}
+                    </if>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(categoryid)">
+                        AND categoryid =#{categoryid}
+                    </if>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(state)">
+                        AND state =#{state}
+                    </if>
+                </where>
+            </when>
+            <otherwise>
+                <where>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+                        AND (msg_name LIKE concat('%',#{srch_keyword},'%') OR userid LIKE concat('%',#{srch_keyword},'%'))
+                    </if>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(userid)">
+                        AND userid = #{userid}
+                    </if>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(categoryid)">
+                        AND categoryid =#{categoryid}
+                    </if>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(state)">
+                        AND state =#{state}
+                    </if>
+                </where>
+            </otherwise>
+        </choose>
+    </select>
+
+
+    <select id="getReceiptCountBean" resultType="integer">
+        SELECT count(*) FROM recv_${msgid} WHERE success = 1 and recv_count != 0;
+    </select>
+
+    <select id="getRecvMessageIDForMsgid" resultType="com.imoxion.sensems.web.beans.RecvMessageIDBean">
+        SELECT * FROM recv_${msgid}
+    </select>
+
+    <select id="getRecvListForMsgid" resultType="com.imoxion.sensems.web.beans.RecvMessageIDBean">
+        SELECT * from recv_${msgid} where recv_date = #{recv_date}
+    </select>
+
+    <select id="getRecvForMsgid" resultType="com.imoxion.sensems.web.beans.RecvMessageIDBean">
+        SELECT * from recv_${msgid} where id = #{id}
+    </select>
+
+    <select id="getRecvListPageingForMsgid" resultType="com.imoxion.sensems.web.beans.RecvMessageIDBean">
+        <choose>
+            <when test="_databaseId == 'oracle'">
+                SELECT * FROM (
+                SELECT ROWNUM AS RNUM,a.* FROM(
+                SELECT * FROM recv_${msgid}
+                <where>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+                        <if test="srch_type == 01">
+                            AND field1 LIKE '%'||#{srch_keyword}||'%'
+                        </if>
+                        <if test="srch_type == 02">
+                            AND field2 LIKE '%'||#{srch_keyword}||'%'
+                        </if>
+                    </if>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty( recv_date )">
+                        AND recv_date = #{recv_date}
+                    </if>
+                    <choose>
+                        <when test="@org.apache.commons.lang.StringUtils@isNotEmpty( recv_count )">
+                            <if test="recv_count == 0">
+                                AND recv_count = 0 AND success = 1
+                            </if>
+                            <if test="recv_count >= 1">
+                                AND recv_count >= #{recv_count}
+                            </if>
+                        </when>
+                        <otherwise>
+                            AND success = 1
+                        </otherwise>
+                    </choose>
+                </where>
+                order by id desc
+                ) a
+                ) WHERE RNUM between #{start} and #{end}
+            </when>
+            <otherwise>
+                SELECT * FROM recv_${msgid}
+                <where>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+                        <if test="srch_type == 01">
+                            AND field1 LIKE concat('%',#{srch_keyword},'%')
+                        </if>
+                        <if test="srch_type == 02">
+                            AND field2 LIKE concat('%',#{srch_keyword},'%')
+                        </if>
+                    </if>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty( recv_date )">
+                        AND recv_date = #{recv_date}
+                    </if>
+                    <choose>
+                        <when test="@org.apache.commons.lang.StringUtils@isNotEmpty( recv_count )">
+                            <if test="recv_count == 0">
+                                AND recv_count = 0 AND success = 1
+                            </if>
+                            <if test="recv_count >= 1">
+                                AND recv_count >= #{recv_count}
+                            </if>
+                        </when>
+                        <otherwise>
+                                AND success = 1
+                        </otherwise>
+                    </choose>
+                </where>
+                order by id desc
+                limit #{start},#{end}
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="getRecvListPageingForMsgid2" resultType="com.imoxion.sensems.web.beans.RecvMessageIDBean">
+        <choose>
+            <when test="_databaseId == 'oracle'">
+                SELECT * FROM (
+                SELECT ROWNUM AS RNUM,a.* FROM(
+                SELECT * FROM recv_${msgid}
+
+                order by id desc
+                ) a
+                ) WHERE RNUM between #{start} and #{end}
+            </when>
+            <otherwise>
+                SELECT * FROM recv_${msgid}
+                order by id desc
+                limit #{start},#{end}
+            </otherwise>
+        </choose>
+    </select>
+
+
+
+
+
+
+    <select id="getLinkLogMessageIDForMsgid" resultType="com.imoxion.sensems.web.beans.LinkLogMessageIDBean">
+        SELECT * FROM linklog_${msgid}
+    </select>
+
+    <select id="getLinkLogCheck" resultType="int">
+        select count(*) from information_schema.TABLES where TABLE_NAME = #{tableName};
+    </select>
+
+    <select id="getClickCount" resultType="int">
+        SELECT count(distinct userid) FROM linklog_${msgid} ;
+    </select>
+
+    <select id="getLinkLogMessageForMsgid" resultType="com.imoxion.sensems.web.beans.LinkLogMessageIDBean">
+        SELECT adid, userid, count(click_count)as click_count , click_date as link_date FROM linklog_${msgid} where adid = #{linkid} group by click_date;
+    </select>
+
+    <select id="getLinkClickDate" resultType="String">
+        SELECT click_date FROM linklog_${msgid} where adid = #{linkid} group by click_date;
+    </select>
+
+
+    <select id="getErrorCountForMsgid" resultType="com.imoxion.sensems.web.beans.ImbErrorCount">
+        SELECT * FROM imb_error_count WHERE msgid = #{msgid}
+    </select>
+
+    <select id="getHC_MessageIDForMsgid" resultType="com.imoxion.sensems.web.beans.HC_MessageIDBean">
+        SELECT * FROM hc_${msgid} order by scount desc
+    </select>
+    <select id="getHC_MessageIDForMsgidCount" resultType="int">
+        SELECT count(*) FROM hc_${msgid}
+    </select>
+
+    <select id="getHC_MessageIDPagingForMsgid" resultType="com.imoxion.sensems.web.beans.HC_MessageIDBean">
+        <choose>
+            <when test="_databaseId == 'oracle'">
+                SELECT * FROM (
+                SELECT ROWNUM AS RNUM,a.* FROM(
+                SELECT * FROM hc_${msgid}
+                order by scount desc
+                ) a
+                ) WHERE RNUM between #{start} and #{end}
+            </when>
+            <otherwise>
+                SELECT * FROM hc_${msgid}
+                order by scount desc
+                limit #{start},#{end}
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="getRecvMessageIDSuccessAndFailCount" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM recv_${msgid}
+        <where>
+                errcode in ('902','903','904','906','910')
+            <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(flag)">
+                and success = #{flag}
+            </if>
+        </where>
+    </select>
+
+    <select id="getRecvMessageIDSendSuccessAndFailCount" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM recv_${msgid}
+        <where>
+            <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(flag)">
+                and success = #{flag}
+            </if>
+        </where>
+    </select>
+
+    <select id="getErrorCountForMsgidCount" resultType="java.lang.Integer">
+        SELECT ifnull(sum(unknownhost+ connect_error+dns_error+network_error+syntax_error+server_error+syntax_error+userunknown+mboxfull+etc_error+emailaddr_error+reject_error+repeat_error+domain_error+blankemail_error), 0) as errorcount
+        FROM imb_error_count WHERE msgid = #{msgid}
+    </select>
+
+    <select id="getReciverListPageingForMsgid" resultType="com.imoxion.sensems.web.beans.RecvMessageIDBean">
+        <choose>
+            <when test="_databaseId == 'oracle'">
+                SELECT * FROM (
+                SELECT ROWNUM AS RNUM,a.* FROM(
+                SELECT * FROM recv_${msgid}
+                <where>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+                        <if test="srch_type == 01">
+                            AND field1 LIKE '%'||#{srch_keyword}||'%'
+                        </if>
+                        <if test="srch_type == 02">
+                            AND field2 LIKE '%'||#{srch_keyword}||'%'
+                        </if>
+                    </if>
+                </where>
+                order by id desc
+                ) a
+                ) WHERE RNUM between #{start} and #{end}
+            </when>
+            <otherwise>
+                SELECT * FROM recv_${msgid}
+                <where>
+                <if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+                        <if test="srch_type == 01">
+                            AND field1 LIKE concat('%',#{srch_keyword},'%')
+                        </if>
+                        <if test="srch_type == 02">
+                            AND field2 LIKE concat('%',#{srch_keyword},'%')
+                        </if>
+                </if>
+                </where>
+                order by id desc
+                limit #{start},#{end}
+            </otherwise>
+        </choose>
+    </select>
+    <select id="getRecvTotalCountForMsgid" resultType="java.lang.Integer">
+         SELECT count(*) FROM recv_${msgid} where success = 1
+    </select>
+
+    <select id="getRecvTotalCountForMsgid2" resultType="java.lang.Integer">
+        SELECT count(*) FROM recv_${msgid}
+        <choose>
+            <when test="_databaseId == 'oracle'">
+                <where>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+                        <if test="srch_type == 01">
+                             field1 = #{srch_keyword}
+                        </if>
+                        <if test="srch_type == 02">
+                             field2 LIKE '%'||#{srch_keyword}||'%'
+                        </if>
+                    </if>
+                </where>
+            </when>
+            <otherwise>
+                <where>
+                    <if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+                        <if test="srch_type == 01">
+                             field1 = #{srch_keyword}
+                        </if>
+                        <if test="srch_type == 02">
+                             field2 LIKE concat('%',#{srch_keyword},'%')
+                        </if>
+                    </if>
+                </where>
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="getRecvCountForDate" resultType="java.lang.Integer">
+        SELECT count(*) FROM recv_${msgid}
+        <where>
+            recv_date = #{recv_date}
+            <if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+                <if test="srch_type == 01">
+                    AND field1 LIKE concat('%',#{srch_keyword},'%')
+                </if>
+                <if test="srch_type == 02">
+                    AND field2 LIKE concat('%',#{srch_keyword},'%')
+                </if>
+            </if>
+            <if test="@org.apache.commons.lang.StringUtils@isNotEmpty( recv_count )">
+                AND recv_count >= #{recv_count}
+            </if>
+        </where>
+    </select>
+
+    <select id="getRecvCountForMsgid" resultType="java.lang.Integer">
+        SELECT count(*) from recv_${msgid}
+        <where>
+            <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(flag)">
+                <if test="flag == 0 ">
+                    recv_count = #{flag} AND success = 1
+                </if>
+                <if test="flag == 1">
+                    recv_count > 0
+                </if>
+            </if>
+        </where>
+    </select>
+
+    <select id="getRecvCountFlagForMsgid" resultType="java.lang.Integer">
+        SELECT count(*) from recv_${msgid}
+        <where>
+            <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(recv_count)">
+                <if test="recv_count == 0 ">
+                    recv_count = 0 AND success = 1
+                </if>
+                <if test="recv_count == 1">
+                    recv_count > 0 AND success = 1
+                </if>
+            </if>
+            <if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+                <if test="srch_type == 01">
+                    AND field1 LIKE concat('%',#{srch_keyword},'%')
+                </if>
+                <if test="srch_type == 02">
+                    AND field2 LIKE concat('%',#{srch_keyword},'%')
+                </if>
+            </if>
+        </where>
+    </select>
+
+    <select id="getRecvMessageIDForMsgidFlag" resultType="com.imoxion.sensems.web.beans.RecvMessageIDBean">
+        SELECT * from recv_${msgid}
+        <where>
+            <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(flag)">
+                <if test="flag == 0">
+                    recv_count = #{flag} AND success=1
+                </if>
+                <if test="flag == 1">
+                    recv_count > 0
+                </if>
+            </if>
+        </where>
+    </select>
+
+    <select id="getRecvCountIDForMsgid" resultType="com.imoxion.sensems.web.beans.RecvMessageIDBean">
+        select recv_date, count(*) as recv_count from recv_${msgid} where recv_date is not null group by recv_date;
+    </select>
+
+    <select id="getRecvCount" resultType="java.lang.Integer">
+    	SELECT recv_count FROM recv_${msgid} where id=#{id};
+    </select>
+
+    <select id="getLinkMessageIDForMsgid" resultType="com.imoxion.sensems.web.beans.LinkBean">
+        SELECT a.*, b.userid, b.click_date, sum(b.click_count) as count FROM imb_link_info a left JOIN linklog_${msgid} b on a.linkid = b.adid
+         WHERE a.msgid=#{msgid} group by linkid;
+    </select>
+
+    <select id="getLinkMessageIDForMsgid2" resultType="com.imoxion.sensems.web.beans.LinkBean">
+        SELECT a.*, b.userid, b.click_date, sum(b.click_count) as count FROM imb_link_info a left JOIN linklog_${msgid} b on a.linkid = b.adid
+         WHERE a.msgid=#{msgid} group by linkid
+         limit #{start},#{end};
+    </select>
+
+    <select id="getLinkMessageUserForMsgid" resultType="com.imoxion.sensems.web.beans.LinkLogMessageIDBean">
+        select a.id, a.field1, a.field2, a.field3, a.field4, b.click_time, sum(b.click_count) as click_count
+          from recv_${msgid} a inner join linklog_${msgid} b on a.id = b.userid
+        <where>
+            b.adid =#{linkid}
+            <if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+                <if test="srch_type == 01">
+                    AND a.field1 LIKE concat('%',#{srch_keyword},'%')
+                </if>
+                <if test="srch_type == 02">
+                    AND a.field2 LIKE concat('%',#{srch_keyword},'%')
+                </if>
+            </if>
+        </where>
+        group by a.id;
+    </select>
+
+    <select id="getLinkMessageUserForMsgid2" resultType="com.imoxion.sensems.web.beans.LinkLogMessageIDBean">
+        select b.userid, a.field1, a.field2, a.field3, a.field4, b.click_time, sum(b.click_count) as click_count
+        from recv_${msgid} a inner join linklog_${msgid} b on a.id = b.userid
+        <where>
+            b.adid =#{linkid}
+            <if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+                <if test="srch_type == 01">
+                    AND a.field1 LIKE concat('%',#{srch_keyword},'%')
+                </if>
+                <if test="srch_type == 02">
+                    AND a.field2 LIKE concat('%',#{srch_keyword},'%')
+                </if>
+            </if>
+        </where>
+        group by a.id
+        limit #{start},#{end};
+    </select>
+
+    <select id="getLinkListForMsgid" resultType="com.imoxion.sensems.web.beans.LinkLogMessageIDBean">
+        select click_date, click_hour as link_hour from linklog_${msgid} where click_date = #{click_date} and adid = #{linkid};
+    </select>
+
+    <select id="getLinkListDetail" resultType="com.imoxion.sensems.web.beans.LinkLogMessageIDBean">
+        select click_date as link_date, count(*) as click_count from linklog_${msgid} group by click_date = #{click_date} ;
+    </select>
+
+    <select id="getLinkMessageCountForMsgid" resultType="java.lang.Integer">
+        select count(*) from recv_${msgid} a inner join linklog_${msgid} b on a.id = b.userid
+        <where>
+            b.adid =#{linkid}
+        <if test="@org.apache.commons.lang.StringUtils@isNotEmpty( srch_keyword )">
+            <if test="srch_type == 01">
+                AND a.field1 LIKE concat('%',#{srch_keyword},'%')
+            </if>
+            <if test="srch_type == 02">
+                AND a.field2 LIKE concat('%',#{srch_keyword},'%')
+            </if>
+        </if>
+        </where>
+    </select>
+
+    <select id="getLinkClickUser" resultType="java.lang.Integer">
+        SELECT count(*) FROM recv_${msgid} a INNER JOIN linklog_${msgid} b
+                                                        ON a.id = b.userid;
+    </select>
+
+    <select id="getClickUser" resultType="java.lang.Integer">
+        SELECT count(*) FROM linklog_${msgid} where adid = #{linkid} group by click_date;
+    </select>
+
+
+    <update id="addRecvCount">
+    	UPDATE recv_${msgid}
+    	SET recv_count = recv_count + 1
+    	WHERE id=#{id}
+    </update>
+
+    <update id="updateRecvCountInfo" parameterType="String">
+    	UPDATE recv_${msgid}
+    	<set>
+    		recv_count = recv_count + 1,
+    		<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(recv_time)">
+                recv_time = #{recv_time},
+            </if>
+            <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(recv_date)">
+                recv_date = #{recv_date},
+            </if>
+            <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(recv_hour)">
+                recv_hour = #{recv_hour},
+            </if>
+    	</set>
+		WHERE id=#{rcode}
+    </update>
+
+    <update id="updateRespTime" parameterType="String">
+        UPDATE imb_emsmain SET resp_time=#{resp_time}  WHERE msgid = #{msgid}
+    </update>
+
+    <select id="getDownloadStatErrorList" resultType="com.imoxion.sensems.web.beans.RecvMessageIDBean">
+        select * from recv_${msgid}
+        <where>
+            <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(errcode) and !errcode.equals('undefined')">
+                errcode = #{errcode}
+            </if>
+        </where>
+    </select>
+
+    <select id="getStatErrorList" resultType="com.imoxion.sensems.web.beans.RecvMessageIDBean">
+        select id, err_exp, field1 from recv_${msgid}
+        <where>
+            <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(errcode)">
+                errcode = #{errcode}
+            </if>
+            <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(srch_keyword)">
+                <if test="srch_type == 01">
+                    AND field1 LIKE concat('%',#{srch_keyword},'%')
+                </if>
+                <if test="srch_type == 02">
+                    AND err_exp LIKE concat('%',#{srch_keyword},'%')
+                </if>
+            </if>
+        </where>
+        order by send_time desc limit #{start}, #{end}
+    </select>
+
+    <select id="getStatErrorListCount" resultType="int">
+        select count(*) from recv_${msgid}
+        <where>
+            <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(errcode)">
+                errcode = #{errcode}
+            </if>
+            <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(srch_keyword)">
+                <if test="srch_type == 01">
+                    AND field1 LIKE concat('%',#{srch_keyword},'%')
+                </if>
+                <if test="srch_type == 02">
+                    AND err_exp LIKE concat('%',#{srch_keyword},'%')
+                </if>
+            </if>
+        </where>
+    </select>
+
+    <select id="getLinkCount" resultType="int">
+        select count(*) from imb_link_info where msgid= ${msgid}
+    </select>
+
+    <select id="getLinkCountForLinkid" resultType="int">
+        select count(*) from imb_link_info where msgid= ${msgid} and linkid=${linkid}
+    </select>
+
+    <select id="getLinkClickCount" resultType="int">
+        select sum(link_count) from imb_link_count where msgid= ${msgid}
+    </select>
+
+    <select id="getLinkClickCountForLinkid" resultType="int">
+        select sum(link_count) from imb_link_count where msgid= ${msgid} and linkid=${linkid}
+    </select>
+
+    <delete id="errorCountDelete">
+        DELETE FROM imb_error_count WHERE msgid = #{msgid}
+    </delete>
+
+    <delete id="linkCountDelete">
+        DELETE FROM imb_link_count WHERE msgid = #{msgid}
+    </delete>
+
+    <delete id="linkInfoDelete">
+        DELETE FROM imb_link_info WHERE msgid = #{msgid}
+    </delete>
+
+    <delete id="receiptCountDelete">
+        DELETE FROM imb_receipt_count WHERE msgid = #{msgid}
+    </delete>
+
+    <delete id="addrselDelete">
+        DELETE FROM imb_addrsel WHERE msgid = #{msgid}
+    </delete>
+    <delete id="recvDropTable">
+        DROP TABLE IF EXISTS recv_${msgid}
+    </delete>
+    <delete id="hcDropTable">
+        DROP TABLE IF EXISTS hc_${msgid}
+    </delete>
+    <delete id="linklogDropTable">
+        DROP TABLE IF EXISTS linklog_${msgid}
+    </delete>
+  <!--  <select id="getSendType" resultType="com.imoxion.sensems.web.database.domain.ImbTransmitData">
+        select send_type from imb_transmit_data where subject=#{subject}
+    </select>-->
+</mapper>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.imoxion.sensems.server.repository.mapper.ErrorCountMapper">
+
+    <delete id="delete">
+        delete from imb_error_count where msgid=#{msgid}
+    </delete>
+
+    <insert id="insertErrorCountInit">
+        insert into imb_error_count (msgid) values (#{msgid})
+        on duplicate key update msgid=#{msgid}
+    </insert>
+
+    <update id="updateErrorCount">
+        update imb_error_count set unknownhost=#{unknownhost},connect_error=#{connect_error},dns_error=#{dns_error},
+            network_error=#{network_error},system_error=#{system_error},server_error=#{server_error},
+            syntax_error=#{syntax_error},userunknown=#{userunknown},mboxfull=#{mboxfull},etc_error=#{etc_error},
+            emailaddr_error=#{emailaddr_error},reject_error=#{reject_error},repeat_error=#{repeat_error},
+            domain_error=#{domain_error},blankemail_error=#{blankemail_error}
+            where msgid=#{msgid}
+    </update>
+
+    <update id="updateBasicErrorCount">
+        UPDATE imb_error_count SET emailaddr_error=emailaddr_error+#{nEmailAddr},
+               reject_error=reject_error+#{nReject}, repeat_error=repeat_error+#{nRepeat},
+               domain_error=domain_error+#{nDomain}, blankemail_error=blankemail_error+#{nBlank}
+               WHERE msgid=#{msgid}
+    </update>
+
+</mapper>

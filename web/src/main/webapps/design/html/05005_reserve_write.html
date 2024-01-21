@@ -1,0 +1,386 @@
+﻿<!DOCTYPE HTML>
+<html lang="ko-KR">
+<head>
+	<meta charset="UTF-8">
+	<title>SensEMS</title>
+	<link rel="stylesheet" href="../../sens-static/css/style.css" />
+	<link rel="stylesheet" href="../../sens-static/css/skin.css" />
+	
+</head>
+<body class="skin1">
+	<div class="wrap">
+		<div class="left_menu ">
+			<div class="left_logo ">
+				<a href=""><img src="../../sens-static/images/left_logo.png" alt="로고"></a>
+			</div>
+
+			<div class="profile ">
+				<div class="info">
+					<div class="info_box ">
+						<a href="" class="user_name">아이모션</a>
+						<a href="" class="user_membership">내정보</a>
+						<a href="" class="user_email over_text">imoxion@sensmail.com</a>
+					</div>
+					<a href="/account/logout.do" class="btn_logout pd_r20"><img src="/sens-static/images/logout.png" alt=""></a>
+				</div>
+				<p></p>
+				<ul class="info_box2">
+					<div class="help"><a href=""><span class="icon_public"></span>HELP</a></div>
+						<p></p>
+					<div class="language">
+						<span class="icon_public"></span>
+						<select class="languageList" onclick="">
+							<option selected="" value="ko">KOR</option>
+							<option value="en">ENG</option>
+							<option value="ja">JPN</option>
+							<option value="zh">CHN</option>
+						</select>
+					</div>
+				</ul>
+			</div>
+
+			<div class="nav">
+				<ul>
+					<li class="menu_1depth "><a href="/mail/write/form.do"><span class="icon_public depth1_01"></span>메일쓰기</a></li>
+					<li class="menu_1depth "><a href=""><span class="icon_public depth1_02"></span>메일발송 결과</a></li>
+					<li class="menu_1depth "><a href=""><span class="icon_public depth1_03"></span>발송일정관리</a></li>
+					<li class="menu_1depth ">
+						<a href="/receiver/group/list.do"><span class="icon_public depth1_04"></span>수신자 관리</a>
+						<ul>
+							<li class="menu_2depth "><a href="/receiver/group/list.do">수신그룹 관리</a></li>
+							<li class="menu_2depth "><a href="/receiver/address/list.do">개인 주소록</a></li>
+						</ul>
+					</li>
+					<li class="menu_1depth on">
+						<a href="/send/category/list.do"><span class="icon_public depth1_05"></span>발송 관리</a>
+						<ul>
+							<li class="menu_2depth "><a href="/send/category/list.do">발송분류 관리</a></li>
+							<li class="menu_2depth "><a href="/send/image/list.do">이미지 관리</a></li>
+							<li class="menu_2depth "><a href="/send/template/list.do">템플릿 관리</a></li>
+							<li class="menu_2depth "><a href="/send/demoaccount/list.do">테스트 계정관리</a></li>
+							<li class="menu_2depth on"><a href="/send/reserve/list.do">정기예약발송 관리</a></li>
+							<li class="menu_2depth "><a href="/send/reject/list.do">수신거부 관리</a></li>
+						</ul>
+					</li>
+					
+						<li class="menu_1depth ">
+							<a href="/sysman/user/list.do"><span class="icon_public depth1_06"></span>시스템 관리자</a>
+							<ul>
+								<li class="menu_2depth "><a href="/sysman/user/list.do">사용자 관리</a></li>
+								<li class="menu_2depth "><a href="/sysman/sendfilter/list.do">발송차단 설정</a></li>
+								<li class="menu_2depth "><a href="/sysman/database/list.do">데이터베이스 관리</a></li>
+								<li class="menu_2depth "><a href="/sysman/attach/restrict.do">첨부파일 확장자 관리</a></li>
+								<li class="menu_2depth "><a href="">사용자 활동로그 조회</a></li>
+							</ul>
+						</li>
+					
+				</ul>
+			</div>
+
+		</div>
+		<!-- left area end -->
+        
+        
+
+<meta http-equiv="X-UA-Compatible" content="IE=10">
+	<!-- section start -->
+	<!-- top area start -->
+	<form id="reserveSendListForm" name="reserveSendListForm" action="list.do" method="get">
+	<input id="cpage" name="cpage" value="1" type="hidden">
+	<div class="title_box fixed">
+		<div class="article top_area">
+			<div class="title">
+				<h1>정기예약발송 관리</h1>
+				<p>정기예약발송관리를 관리 할 수 있습니다.</p>
+			</div>
+		</div>
+	</div>
+	<!-- top area end -->
+	<!-- content top start -->
+	<div class="content_top fixed">
+		<ul class="content_top_btn">
+			<li><a class="btn1" href="#" onclick="location.href='/send/reserve/write.do'">추가</a></li>
+			<li><a class="btn2" href="#" onclick="reserveList.reserveDel();">삭제</a></li>
+		</ul>
+	</div>
+	<!-- content top end -->
+
+
+
+<div class="section pd_l30">
+<!-- content start -->
+			
+	<div class="article content">				
+    	 <form id="reserveSendForm" name="reserveSendForm" action="/send/reserve/write.do" method="post">
+			 <input id="send_time" name="send_time" type="hidden" value="">
+			 <input id="content" name="content" type="hidden" value="">
+			 <input id="recid" name="recid" type="hidden" value="">
+			 <input id="rot_point" name="rot_point" type="hidden" value="">
+			 <input id="update_flag" name="update_flag" type="hidden" value="">
+			 <input id="msgid" name="msgid" type="hidden" value="">
+
+				<!-- composer area start -->				
+				<div class="composer_area">
+					<table width="100%" border="0" cellpadding="0" cellspacing="1">
+						<colgroup>
+							<col style="width: 150px">
+							<col style="width: auto">
+						</colgroup>
+							<tbody>
+							<tr>
+								<th  >발송분류</th>
+								<td width="auto">
+									<select id="categoryid" name="categoryid">
+										<option value="0">분류없음</option>
+
+										
+											<option value="602229543fe92248819be829">카테고리</option>
+										
+											<option value="602229683fcfeab0a6b3dc94">카퉤고리</option>
+										
+											<option value="6022296f3fe90928f64a786e">카테고리</option>
+										
+											<option value="602229833feab7ae9a0b252a">카테고리</option>
+										
+											<option value="6022298d3fe289d6757db8f9">카테고리ㅋㅋㅋㅋ</option>
+										
+											<option value="602229a13fd2ce4fec1c3f16">언</option>
+										
+											<option value="602229b03fa7a093c0251f00">띄 어 쓰 기 </option>
+										
+											<option value="60222da23fcfb37c85ead9fc">1</option>
+										
+											<option value="602b4ca53feaca82d225bae6">23423</option>
+										
+											<option value="604584c83fa7e364bc7b4190">123</option>
+										
+											<option value="604584cf3fe166f118f6cc81">sdfas</option>
+										
+											<option value="604584d73fed09ab5a279087">가가</option>
+										
+											<option value="604584e13feb3b44a64f2b3a">가가ㅁ</option>
+										
+											<option value="604584e93fbe6cf495fafd48">나다라</option>
+										
+											<option value="604585033fe2f6d473afc78d">네네</option>
+										
+											<option value="6045850b3fe7d236b2a4205f">넵넵</option>
+										
+									</select>
+								</td>
+							</tr>
+
+							<tr>
+								<th >보내는 사람</th>
+								<td><input id="mail_from" name="mail_from" type="text" value="아이모션<imoxion@sensmail.com>" size="30" maxlength="100">
+									<span style="font-size:12px;">
+										<strong class="txt red">(주의)</strong>
+										<strong>홍길동&lt;master@mydomain.com&gt;</strong>과 같은 형식으로 입력해주세요.
+									</span>
+								</td>
+							</tr>
+							<tr>
+								<th > 회신 주소</th>
+								<td><input id="replyto" name="replyto" type="text" value="imoxion@sensmail.com" size="30" maxlength="100"></td>
+							</tr>
+							
+							<tr>
+								<th >수신그룹</th>
+								<td>
+									
+									<label onclick="receiverEvent.getReceiverList('1');">
+										
+										<input type="text" name="receiverGroupText" id="receiverGroupText"></label>
+								
+								</td>
+							</tr>
+							
+							<tr>
+								<th >제 목</th>
+								<td><input id="msg_name" name="msg_name" type="text" value="" size="50" maxlength="100" class="f_lft ">
+									<select class="reserveFieldSelect f_lft " id="titleFieldSelect">
+										<option selected="">필드삽입</option>
+									</select>
+									<button type="button" onclick="EditorUtil.fieldCodeInsert('','title')" class="btn3 f_lft mg_l5">삽입</button>
+								</td>
+							</tr>
+							
+							
+							<tr>
+								<th >Charset</th>
+								<td>
+									<select id="charset" name="charset">
+										<option value="euc-kr">Korean (EUC)</option>
+										<option value="ks_c_5601-1987">Korean (KS_C_5601-1987)</option>
+										<option value="utf-8">Unicode(UTF-8)</option>
+									&nbsp;</select>
+
+									&nbsp;Mail Type :  &nbsp;
+									<label for="ishtml"><input id="ishtml1" name="ishtml" type="radio" value="0">TEXT</label>
+									<label for="ishtml"><input id="ishtml2" name="ishtml" type="radio" value="1" checked="checked">HTML</label>
+								</td>
+							</tr>
+
+							<tr class="b_none bg_gray">
+								<td colspan="2">
+										<select class="reserveFieldSelect f_lft" onchange="EditorUtil.fieldCodeInsert(this.value,'editor')"><option>필드삽입</option></select>
+										<button type="button" class="btn2 mg_l5" onclick="EditorUtil.rejectCodeInsert();">수신거부코드삽입</button>
+									
+								</td>
+							</tr>
+
+
+					<!-- 에디터 start-->
+						<tr class="composer_edit">
+							<td colspan="2">
+                      
+							</td>
+						</tr>
+					<!-- 에디터 end-->
+							<tr>
+								<th >반복일정</th>
+
+								<td class="">
+									<label><input id="rot_flag1" name="rot_flag" onclick="reserveEvent.viewRepeat(this.value)" type="radio" value="0"> 매일</label>
+									<label><input id="rot_flag2" name="rot_flag" onclick="reserveEvent.viewRepeat(this.value)" type="radio" value="1"> 매주</label>
+									<label><input id="rot_flag3" name="rot_flag" onclick="reserveEvent.viewRepeat(this.value)" type="radio" value="2"> 매월</label>
+								</td>
+							</tr>
+
+								
+							<tr id="repeat_day" style="display: none;">
+								<th >발송요일</th>
+
+								<td class="">
+											<label><input type="checkbox" name="send_week[]" value="1">일</label>
+											<label><input type="checkbox" name="send_week[]" value="2">월</label>
+											<label><input type="checkbox" name="send_week[]" value="3">화</label>
+											<label><input type="checkbox" name="send_week[]" value="4">수</label>
+											<label><input type="checkbox" name="send_week[]" value="5">목</label>
+											<label><input type="checkbox" name="send_week[]" value="6">금</label>
+											<label><input type="checkbox" name="send_week[]" value="7">토</label>
+								</td>
+							</tr>
+								
+
+								
+							<tr id="repeat_month" style="display: none;">
+								<th >발송일</th>
+
+
+								<td>
+									<table class="repeat_schedule">
+										<tbody><tr>
+											<td><label><input type="checkbox" name="send_date[]" value="1">1일</label></td>
+											<td><label><input type="checkbox" name="send_date[]" value="2">2일</label></td>
+											<td><label><input type="checkbox" name="send_date[]" value="3">3일</label></td>
+											<td><label><input type="checkbox" name="send_date[]" value="4">4일</label></td>
+											<td><label><input type="checkbox" name="send_date[]" value="5">5일</label></td>
+											<td><label><input type="checkbox" name="send_date[]" value="6">6일</label></td>
+											<td><label><input type="checkbox" name="send_date[]" value="7">7일</label></td>
+											<td><label><input type="checkbox" name="send_date[]" value="8">8일</label></td>
+											<td><label><input type="checkbox" name="send_date[]" value="9">9일</label></td>
+											<td><label><input type="checkbox" name="send_date[]" value="10">1010일</label></td>
+										</tr>
+										<tr>
+											<td><label><input type="checkbox" name="send_date[]" value="12">12일</label></td>
+											<td><label><input type="checkbox" name="send_date[]" value="11">11일</label></td>
+											<td><label><input type="checkbox" name="send_date[]" value="13">13일</label></td>
+											<td><label><input type="checkbox" name="send_date[]" value="14">14일</label></td>
+											<td><label><input type="checkbox" name="send_date[]" value="15">15일</label></td>
+											<td><label><input type="checkbox" name="send_date[]" value="16">16일</label></td>
+											<td><label><input type="checkbox" name="send_date[]" value="17">17일</label></td>
+											<td><label><input type="checkbox" name="send_date[]" value="18">18일</label></td>
+											<td><label><input type="checkbox" name="send_date[]" value="19">19일</label></td>
+											<td><label><input type="checkbox" name="send_date[]" value="20">20일</label></td>
+										</tr>
+										<tr>
+											<td><label><input type="checkbox" name="send_date[]" value="21">21일</label></td>
+											<td><label><input type="checkbox" name="send_date[]" value="22">22일</label></td>
+											<td><label><input type="checkbox" name="send_date[]" value="23">23일</label></td>
+											<td><label><input type="checkbox" name="send_date[]" value="24">24일</label></td>
+											<td><label><input type="checkbox" name="send_date[]" value="25">25일</label></td>
+											<td><label><input type="checkbox" name="send_date[]" value="26">26일</label></td>
+											<td><label><input type="checkbox" name="send_date[]" value="27">27일</label></td>
+											<td><label><input type="checkbox" name="send_date[]" value="28">28일</label></td>
+											<td><label><input type="checkbox" name="send_date[]" value="29">29일</label></td>
+											<td><label><input type="checkbox" name="send_date[]" value="30">30일</label></td>
+										</tr>
+										<tr>
+											<td colspan="10"><label><input type="checkbox" name="send_date[]" value="31">31일</label></td>
+										</tr>
+									</tbody></table>
+
+								</td>
+							</tr>
+								
+
+							
+							<tr>
+								<th >발송기간</th>
+
+								<td>
+									<input id="start_time" name="start_time" class="hide_x_button hasDatepicker w200" title="예약시작일" type="text" value=""> ~
+									<input id="end_time" name="end_time" class="hide_x_button hasDatepicker w200" title="예약종료일" type="text" value="">
+								</td>
+
+							</tr>
+							
+
+								
+							<tr>
+								<th >발송시간</th>
+
+								<td>
+									<select id="reserve_hour" name="reserve_hour" class="w100" title="시"><option value="00">00시</option><option value="01">01시</option><option value="02">02시</option><option value="03">03시</option><option value="04">04시</option><option value="05">05시</option><option value="06">06시</option><option value="07">07시</option><option value="08">08시</option><option value="09">09시</option><option value="10">10시</option><option value="11">11시</option><option value="12">12시</option><option value="13">13시</option><option value="14">14시</option><option value="15">15시</option><option value="16">16시</option><option value="17">17시</option><option value="18">18시</option><option value="19">19시</option><option value="20">20시</option><option value="21">21시</option><option value="22">22시</option><option value="23">23시</option></select>
+									<select id="reserve_minute" name="reserve_minute"  class="w100"  title="분"><option value="00">00분</option><option value="05">05분</option><option value="10">10분</option><option value="15">15분</option><option value="20">20분</option><option value="25">25분</option><option value="30">30분</option><option value="35">35분</option><option value="40">40분</option><option value="45">45분</option><option value="50">50분</option><option value="55">55분</option></select>
+								</td>
+
+							</tr>
+								
+
+							</tbody>
+						</table>
+					</div>
+				<!-- composer area end -->
+				 <div>
+<input type="hidden" name="_csrf" value="2ad25154-309c-437c-b91d-3eca392f2dd1">
+</div></form>
+			</div>
+			<!-- content end -->
+
+		</div>
+	
+	</form>
+	<!-- section end -->
+         
+       
+ 	</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

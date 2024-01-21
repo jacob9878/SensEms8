@@ -1,0 +1,720 @@
+﻿<!DOCTYPE HTML>
+<html lang="ko-KR">
+<head>
+	<meta charset="UTF-8">
+	<title>SensEMS</title>
+	<link rel="stylesheet" href="../../sens-static/css/style.css" />
+	<link rel="stylesheet" href="../../sens-static/css/skin.css" />
+	
+</head>
+<body class="skin1">
+<div class="wrap">
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<div class="wrap">
+		<div class="left_menu">
+			<div class="left_logo">
+				<a href="/mail/result/list.do"><img src="/sens-static/images/left_logo.png" alt="로고"></a>
+			</div>
+
+			<div class="profile ">
+				<div class="info">
+					<div class="info_box ">
+						<a href="" class="user_name">아이모션</a>
+						<a href="#" class="user_membership" onclick="common.myinfo();">내정보</a>
+
+					</div>
+
+				</div>
+				<div class="info_box2">
+					<div class="help"><a href="">HELP</a></div>
+					<p></p>
+					<div class="logout"><a href="/account/logout.do">LOGOUT</a></div>
+
+
+
+
+
+
+
+
+
+
+				</div>
+			</div>
+
+			<div class="nav">
+				<ul>
+					<li class="menu_1depth on"><a href="/mail/write/form.do"><span class="icon_public depth1_01"></span>메일 쓰기</a></li>
+
+					<li class="menu_1depth ">
+						<a href="/mail/result/list.do" class="folder_off"><span class="icon_public depth1_02"></span>메일발송 결과</a>
+						<ul>
+							<li class="menu_2depth "><a href="/mail/result/list.do">메일발송 결과</a></li>
+							<li class="menu_2depth "><a href="/mail/result/sendList.do">개별발송 결과</a></li>
+						</ul>
+					</li>
+
+					<li class="menu_1depth ">
+						<a href="/receiver/group/list.do" class="folder_off"><span class="icon_public depth1_04"></span>수신자 관리</a>
+						<ul>
+							<li class="menu_2depth "><a href="/receiver/group/list.do">수신그룹 관리</a></li>
+							<li class="menu_2depth "><a href="/receiver/address/list.do">개인주소록 관리</a></li>
+						</ul>
+					</li>
+					<li class="menu_1depth ">
+						<a href="/send/category/list.do" class="folder_off"><span class="icon_public depth1_05"></span>발송 관리</a>
+						<ul>
+							<li class="menu_2depth "><a href="/send/category/list.do">발송분류 관리</a></li>
+							<li class="menu_2depth "><a href="/send/image/list.do">이미지 관리</a></li>
+							<li class="menu_2depth "><a href="/send/template/list.do">템플릿 관리</a></li>
+							<li class="menu_2depth "><a href="/send/demoaccount/list.do">테스트 계정관리</a></li>
+
+							<li class="menu_2depth "><a href="/send/reject/list.do">수신거부 관리</a></li>
+						</ul>
+					</li>
+
+					<li class="menu_1depth ">
+						<a href="/sysman/user/list.do" class="folder_off"><span class="icon_public depth1_06"></span>시스템 관리자</a>
+						<ul>
+							<li class="menu_2depth "><a href="/sysman/user/list.do">사용자 관리</a></li>
+							<li class="menu_2depth "><a href="/sysman/sendfilter/list.do">발송차단 설정</a></li>
+							<li class="menu_2depth "><a href="/sysman/database/list.do">데이터베이스 관리</a></li>
+							<li class="menu_2depth "><a href="/sysman/attach/restrict.do">첨부파일 확장자 관리</a></li>
+							<li class="menu_2depth "><a href="/sysman/actionlog/list.do">사용자 활동로그 조회</a></li>
+							<li class="menu_2depth "><a href="/sysman/relay/list.do">연동 IP 관리</a></li>
+							<li class="menu_2depth "><a href="/sysman/attach/list.do">첨부파일 관리</a></li>
+							<li class="menu_2depth "><a href="/sysman/receipt/list.do"><span class="">수신확인 코드 조회</span></a></li>
+
+						</ul>
+					</li>
+
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<!-- left area end -->
+
+
+
+	<meta http-equiv="X-UA-Compatible" content="IE=10">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<script type="text/javascript" src="/sens-static/js/messages/sendmanage_ko.js"></script>
+	<script type="text/javascript" src="/sens-static/js/messages/mail_ko.js"></script>
+	<script type="text/javascript" src="/sens-static/js/messages/group_ko.js"></script>
+	<script type="text/javascript" src="/sens-static/js/editor/editor.js"></script>
+	<script type="text/javascript" src="/sens-static/plugin/ckeditor/ckeditor.js"></script>
+	<script type="text/javascript" src="/sens-static/js/editor/editor_ck.js"></script>
+	<script type="text/javascript" src="/sens-static/js/receiver/receiver.js"></script>
+	<script type="text/javascript" src="/sens-static/js/util/NumberFormat154.js"></script>
+	<script type="text/javascript">
+		//주소록, 수신그룹 선택 시 필드 데이터 집어넣는 배열변수
+		var receiverFieldArray = new Array();
+
+		var max_nfile_size = 1024*1024*10;
+		var max_nfile_count = 5;
+
+		$(document).ready(function(){
+			if("0" == "1"){
+				EditorUtil.setContent();
+				if("0" == "1"){
+					$("#reserv_time_area").css("display","inline-block");
+				}
+			}
+		});
+	</script>
+
+	<!-- top area start -->
+	<div class="title_box fixed">
+		<div class="article top_area">
+			<div class="title">
+				<h1>메일쓰기</h1>
+				<p>보내실 메일을 작성해주세요.</p>
+			</div>
+
+		</div>
+	</div>
+	<!-- top area end -->
+
+	<!-- content top start -->
+	<div class="content_top fixed">
+		<ul class="content_top_btn">
+			<li><a class="btn1" href="#" onclick="writeform.sendProcess('0');">발송</a></li>
+			<li><a class="btn2" href="#" onclick="EditorUtil.preview();">미리보기</a></li>
+			<li><a class="btn2" href="#" onclick="writeform.sendProcess('1');">임시보관</a></li>
+			<li><a class="btn2" href="#" onclick="writeform.testPopupShow()" ;="">테스트발송</a></li>
+			<li><a class="btn2" href="#" onclick="writeform.templateAddShow()" ;="">템플릿으로 저장</a></li>
+
+		</ul>
+	</div>
+	<!-- content top end -->v
+
+	<div class="section pd_l30">
+		<!-- content start -->
+
+		<div class="article content">
+			<div class="composer_area">
+				<form id="MailWriteForm" name="MailWriteForm" action="/mail/write/form.do" method="post" enctype="multipart/form-data">
+					<input id="msgid" name="msgid" type="hidden" value="">
+					<input id="recid" name="recid" type="hidden" value="164575556200607810569522">
+					<input id="state" name="state" type="hidden" value="">
+					<input id="content" name="content" type="hidden" value="">
+					<input id="att_keys" name="att_keys" type="hidden" value="">
+					<!-- composer area start -->
+					<table width="100%" border="0" cellpadding="0" cellspacing="1">
+						<colgroup>
+							<col style="width: 150px">
+							<col style="width: auto">
+						</colgroup>
+						<tbody>
+						<tr>
+							<th>발송분류</th>
+							<td width="auto">
+								<select id="categoryid" name="categoryid">
+									<option value="0">분류없음</option>
+
+									<option value="164421227340293141654158">창의적인 무대기술 아이디어 발굴을 위한 컨퍼런스 참가자</option>
+
+									<option value="164636022822276919219360">발송테스트카테고리</option>
+
+									<option value="165336741898432111101699">1111</option>
+
+									<option value="165336742673681060570814">카테고리ㅋㅋㅋㅋ</option>
+
+									<option value="602229543fe92248819be829">카테고리</option>
+
+									<option value="602229683fcfeab0a6b3dc94">카퉤고리</option>
+
+									<option value="6022296f3fe90928f64a786e">카테고리</option>
+
+									<option value="602229833feab7ae9a0b252a">카테고리</option>
+
+									<option value="6022298d3fe289d6757db8f9">카테고리ㅋㅋㅋㅋ</option>
+
+									<option value="602229a13fd2ce4fec1c3f16">언</option>
+
+									<option value="602229b03fa7a093c0251f00">띄 어 쓰 기 </option>
+
+									<option value="602b4ca53feaca82d225bae6">23423</option>
+
+									<option value="604584c83fa7e364bc7b4190">123</option>
+
+									<option value="604584cf3fe166f118f6cc81">sdfas</option>
+
+									<option value="604584d73fed09ab5a279087">가가</option>
+
+									<option value="604584e13feb3b44a64f2b3a">가가ㅁ1</option>
+
+									<option value="604584e93fbe6cf495fafd48">나다라</option>
+
+									<option value="604585033fe2f6d473afc78d">네네</option>
+
+									<option value="6045850b3fe7d236b2a4205f">넵넵넵</option>
+
+								</select>
+							</td>
+						</tr>
+
+						<tr class="table_sender">
+							<th>보내는 사람</th>
+							<td><input id="mail_from" name="mail_from" class="w400" type="text" value="아이모션<imoxion@imoxion.com>" size="30" maxlength="100">
+								<span class="care_txt" style="font-size:12px;">
+									<strong class="txt red">(주의)</strong>
+									<strong>홍길동&lt;master@mydomain.com&gt;</strong>과 같은 형식으로 입력해주세요.
+								</span>
+							</td>
+						</tr>
+						<tr>
+							<th>회신주소</th>
+							<td><input id="replyto" name="replyto" class="w400" type="text" value="imoxion@imoxion.com" size="30" maxlength="100"></td>
+						</tr>
+
+						<tr class="table_recipient">
+							<th height="46px" align="left">수신그룹</th>
+							<td>
+								<label onclick="receiverEvent.getAddrGroupList();"><input id="rectype1" name="rectype" type="radio" value="1">주소록</label>
+								<label onclick="receiverEvent.getReceiverList('0');"><input id="rectype2" name="rectype" type="radio" value="3">수신그룹</label>
+								<label><input id="recname" name="recname" readonly="readonly" type="text" value=""></label>
+							</td>
+						</tr>
+
+						<tr>
+							<th height="46px" align="left">제목</th>
+							<td><input id="msg_name" name="msg_name" class="w400" type="text" value="" size="50" maxlength="100">
+								<select class="send_fieldSelect" id="titleFieldSelect"><option value="">필드 삽입</option><option value="[#FIELD1#]">masterid</option></select>
+								<button type="button" class="btn3" onclick="EditorUtil.fieldCodeInsert('','title')">삽입</button>
+							</td>
+						</tr>
+
+						<tr>
+							<th height="46px" align="left">Charset</th>
+							<td>
+								<select id="charset" name="charset">
+									<option value="euc-kr">Korean (EUC)</option>
+									<option value="ks_c_5601-1987">Korean (KS_C_5601-1987)</option>
+									<option value="utf-8" selected="selected">Unicode(UTF-8)</option>
+									&nbsp;
+								</select>
+								&nbsp;Mail Type :  &nbsp;
+								<input id="ishtml1" name="ishtml" type="radio" value="0">TEXT
+								<input id="ishtml2" name="ishtml" type="radio" value="1" checked="checked">HTML
+							</td>
+						</tr>
+
+
+
+						<!-- 에디터 start-->
+						<tr class="composer_edit">
+							<td colspan="2">
+								<div id="editor">
+									<div id="div_Html" style="position:relative;margin:0;padding:10px 10px 0px 10px;height:100%;">
+										<textarea id="editHtml" name="editHtml" wrap="hard" style="width: 100%; height: 100%; margin: 0px; box-sizing: border-box; visibility: hidden; display: none;"></textarea><div id="cke_editHtml" class="cke_1 cke cke_reset cke_chrome cke_editor_editHtml cke_ltr cke_browser_webkit" dir="ltr" lang="ko" role="application" aria-labelledby="cke_editHtml_arialbl" style="width: 100%;"><span id="cke_editHtml_arialbl" class="cke_voice_label">리치 텍스트 편집기, editHtml</span><div class="cke_inner cke_reset" role="presentation"><span id="cke_1_top" class="cke_top cke_reset_all" role="presentation" style="height: auto; user-select: none;"><span id="cke_11" class="cke_voice_label">에디터 툴바</span><span id="cke_1_toolbox" class="cke_toolbox" role="group" aria-labelledby="cke_11" onmousedown="return false;"><span id="cke_16" class="cke_toolbar" role="toolbar"><span class="cke_toolbar_start"></span><span class="cke_toolgroup" role="presentation"><a id="cke_17" class="cke_button cke_button__rejectcode cke_button_off" href="javascript:void('수신거부 코드삽입')" title="수신거부 코드삽입" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_17_label" aria-describedby="cke_17_description" aria-haspopup="false" aria-disabled="false" onkeydown="return CKEDITOR.tools.callFunction(3,event);" onfocus="return CKEDITOR.tools.callFunction(4,event);" onclick="CKEDITOR.tools.callFunction(5,this);return false;"><span class="cke_button_icon cke_button__rejectcode_icon" style="background-image:url('http://localhost:8080/sens-static/plugin/ckeditor/plugins/rejectcode/icons/rejectcode.png?t=KA9B');background-position:0 0px;background-size:16px;">&nbsp;</span><span id="cke_17_label" class="cke_button_label cke_button__rejectcode_label" aria-hidden="false">수신거부 코드삽입</span><span id="cke_17_description" class="cke_button_label" aria-hidden="false"></span></a></span><span id="cke_12" class="cke_combo cke_combo__insertfield cke_combo_off" role="presentation"><span id="cke_12_label" class="cke_combo_label">필드 삽입</span><a class="cke_combo_button" title="필드 삽입" tabindex="-1" href="javascript:void('필드 삽입')" hidefocus="true" role="button" aria-labelledby="cke_12_label" aria-haspopup="listbox" onkeydown="return CKEDITOR.tools.callFunction(7,event,this);" onfocus="return CKEDITOR.tools.callFunction(8,event);" onclick="CKEDITOR.tools.callFunction(6,this);return false;" aria-expanded="false"><span id="cke_12_text" class="cke_combo_text cke_combo_inlinelabel">필드 삽입</span><span class="cke_combo_open"><span class="cke_combo_arrow"></span></span></a></span><span class="cke_toolgroup" role="presentation"><a id="cke_18" class="cke_button cke_button__undo cke_button_off" href="javascript:void('실행 취소')" title="실행 취소 (컨트롤+Z)" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_18_label" aria-describedby="cke_18_description" aria-haspopup="false" aria-disabled="false" onkeydown="return CKEDITOR.tools.callFunction(9,event);" onfocus="return CKEDITOR.tools.callFunction(10,event);" onclick="CKEDITOR.tools.callFunction(11,this);return false;"><span class="cke_button_icon cke_button__undo_icon" style="background-image:url('http://localhost:8080/sens-static/plugin/ckeditor/plugins/icons.png?t=KA9B');background-position:0 -11136px;background-size:auto;">&nbsp;</span><span id="cke_18_label" class="cke_button_label cke_button__undo_label" aria-hidden="false">실행 취소</span><span id="cke_18_description" class="cke_button_label" aria-hidden="false">키보드 단축키 컨트롤+Z</span></a><a id="cke_19" class="cke_button cke_button__redo cke_button_disabled " href="javascript:void('다시 실행')" title="다시 실행 (컨트롤+Y)" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_19_label" aria-describedby="cke_19_description" aria-haspopup="false" aria-disabled="true" onkeydown="return CKEDITOR.tools.callFunction(12,event);" onfocus="return CKEDITOR.tools.callFunction(13,event);" onclick="CKEDITOR.tools.callFunction(14,this);return false;"><span class="cke_button_icon cke_button__redo_icon" style="background-image:url('http://localhost:8080/sens-static/plugin/ckeditor/plugins/icons.png?t=KA9B');background-position:0 -10880px;background-size:auto;">&nbsp;</span><span id="cke_19_label" class="cke_button_label cke_button__redo_label" aria-hidden="false">다시 실행</span><span id="cke_19_description" class="cke_button_label" aria-hidden="false">키보드 단축키 컨트롤+Y</span></a></span><span class="cke_toolbar_end"></span></span><span id="cke_20" class="cke_toolbar" role="toolbar"><span class="cke_toolbar_start"></span><span id="cke_13" class="cke_combo cke_combo__font cke_combo_off" role="presentation"><span id="cke_13_label" class="cke_combo_label">글꼴</span><a class="cke_combo_button" title="글꼴" tabindex="-1" href="javascript:void('글꼴')" hidefocus="true" role="button" aria-labelledby="cke_13_label" aria-haspopup="listbox" onkeydown="return CKEDITOR.tools.callFunction(16,event,this);" onfocus="return CKEDITOR.tools.callFunction(17,event);" onclick="CKEDITOR.tools.callFunction(15,this);return false;" aria-expanded="false"><span id="cke_13_text" class="cke_combo_text">돋음</span><span class="cke_combo_open"><span class="cke_combo_arrow"></span></span></a></span><span id="cke_14" class="cke_combo cke_combo__fontsize cke_combo_off" role="presentation"><span id="cke_14_label" class="cke_combo_label">크기</span><a class="cke_combo_button" title="글자 크기" tabindex="-1" href="javascript:void('글자 크기')" hidefocus="true" role="button" aria-labelledby="cke_14_label" aria-haspopup="listbox" onkeydown="return CKEDITOR.tools.callFunction(19,event,this);" onfocus="return CKEDITOR.tools.callFunction(20,event);" onclick="CKEDITOR.tools.callFunction(18,this);return false;" aria-expanded="false"><span id="cke_14_text" class="cke_combo_text">10pt</span><span class="cke_combo_open"><span class="cke_combo_arrow"></span></span></a></span><span id="cke_15" class="cke_combo cke_combo__lineheight cke_combo_off" role="presentation"><span id="cke_15_label" class="cke_combo_label">줄 간격</span><a class="cke_combo_button" title="줄 간격" tabindex="-1" href="javascript:void('줄 간격')" hidefocus="true" role="button" aria-labelledby="cke_15_label" aria-haspopup="listbox" onkeydown="return CKEDITOR.tools.callFunction(22,event,this);" onfocus="return CKEDITOR.tools.callFunction(23,event);" onclick="CKEDITOR.tools.callFunction(21,this);return false;" aria-expanded="false"><span id="cke_15_text" class="cke_combo_text">줄 간격</span><span class="cke_combo_open"><span class="cke_combo_arrow"></span></span></a></span><span class="cke_toolbar_end"></span></span><span id="cke_21" class="cke_toolbar" role="toolbar"><span class="cke_toolbar_start"></span><span class="cke_toolgroup" role="presentation"><a id="cke_22" class="cke_button cke_button__cut cke_button_disabled " href="javascript:void('잘라내기')" title="잘라내기 (컨트롤+X)" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_22_label" aria-describedby="cke_22_description" aria-haspopup="false" aria-disabled="true" onkeydown="return CKEDITOR.tools.callFunction(24,event);" onfocus="return CKEDITOR.tools.callFunction(25,event);" onclick="CKEDITOR.tools.callFunction(26,this);return false;"><span class="cke_button_icon cke_button__cut_icon" style="background-image:url('http://localhost:8080/sens-static/plugin/ckeditor/plugins/icons.png?t=KA9B');background-position:0 -512px;background-size:auto;">&nbsp;</span><span id="cke_22_label" class="cke_button_label cke_button__cut_label" aria-hidden="false">잘라내기</span><span id="cke_22_description" class="cke_button_label" aria-hidden="false">키보드 단축키 컨트롤+X</span></a><a id="cke_23" class="cke_button cke_button__copy cke_button_disabled " href="javascript:void('복사')" title="복사 (컨트롤+C)" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_23_label" aria-describedby="cke_23_description" aria-haspopup="false" aria-disabled="true" onkeydown="return CKEDITOR.tools.callFunction(27,event);" onfocus="return CKEDITOR.tools.callFunction(28,event);" onclick="CKEDITOR.tools.callFunction(29,this);return false;"><span class="cke_button_icon cke_button__copy_icon" style="background-image:url('http://localhost:8080/sens-static/plugin/ckeditor/plugins/icons.png?t=KA9B');background-position:0 -256px;background-size:auto;">&nbsp;</span><span id="cke_23_label" class="cke_button_label cke_button__copy_label" aria-hidden="false">복사</span><span id="cke_23_description" class="cke_button_label" aria-hidden="false">키보드 단축키 컨트롤+C</span></a><a id="cke_24" class="cke_button cke_button__paste cke_button_off" href="javascript:void('붙여넣기')" title="붙여넣기 (컨트롤+V)" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_24_label" aria-describedby="cke_24_description" aria-haspopup="false" aria-disabled="false" onkeydown="return CKEDITOR.tools.callFunction(30,event);" onfocus="return CKEDITOR.tools.callFunction(31,event);" onclick="CKEDITOR.tools.callFunction(32,this);return false;"><span class="cke_button_icon cke_button__paste_icon" style="background-image:url('http://localhost:8080/sens-static/plugin/ckeditor/plugins/icons.png?t=KA9B');background-position:0 -768px;background-size:auto;">&nbsp;</span><span id="cke_24_label" class="cke_button_label cke_button__paste_label" aria-hidden="false">붙여넣기</span><span id="cke_24_description" class="cke_button_label" aria-hidden="false">키보드 단축키 컨트롤+V</span></a><a id="cke_25" class="cke_button cke_button__pastetext cke_button_off" href="javascript:void('텍스트로 붙여넣기')" title="텍스트로 붙여넣기 (컨트롤+시프트+V)" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_25_label" aria-describedby="cke_25_description" aria-haspopup="false" aria-disabled="false" onkeydown="return CKEDITOR.tools.callFunction(33,event);" onfocus="return CKEDITOR.tools.callFunction(34,event);" onclick="CKEDITOR.tools.callFunction(35,this);return false;"><span class="cke_button_icon cke_button__pastetext_icon" style="background-image:url('http://localhost:8080/sens-static/plugin/ckeditor/plugins/icons.png?t=KA9B');background-position:0 -8832px;background-size:auto;">&nbsp;</span><span id="cke_25_label" class="cke_button_label cke_button__pastetext_label" aria-hidden="false">텍스트로 붙여넣기</span><span id="cke_25_description" class="cke_button_label" aria-hidden="false">키보드 단축키 컨트롤+시프트+V</span></a></span><span class="cke_toolbar_end"></span></span><span id="cke_26" class="cke_toolbar" role="toolbar"><span class="cke_toolbar_start"></span><span class="cke_toolgroup" role="presentation"><a id="cke_27" class="cke_button cke_button__bold cke_button_off" href="javascript:void('굵게')" title="굵게 (컨트롤+B)" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_27_label" aria-describedby="cke_27_description" aria-haspopup="false" aria-disabled="false" onkeydown="return CKEDITOR.tools.callFunction(36,event);" onfocus="return CKEDITOR.tools.callFunction(37,event);" onclick="CKEDITOR.tools.callFunction(38,this);return false;"><span class="cke_button_icon cke_button__bold_icon" style="background-image:url('http://localhost:8080/sens-static/plugin/ckeditor/plugins/icons.png?t=KA9B');background-position:0 -896px;background-size:auto;">&nbsp;</span><span id="cke_27_label" class="cke_button_label cke_button__bold_label" aria-hidden="false">굵게</span><span id="cke_27_description" class="cke_button_label" aria-hidden="false">키보드 단축키 컨트롤+B</span></a><a id="cke_28" class="cke_button cke_button__italic cke_button_off" href="javascript:void('기울임꼴')" title="기울임꼴 (컨트롤+I)" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_28_label" aria-describedby="cke_28_description" aria-haspopup="false" aria-disabled="false" onkeydown="return CKEDITOR.tools.callFunction(39,event);" onfocus="return CKEDITOR.tools.callFunction(40,event);" onclick="CKEDITOR.tools.callFunction(41,this);return false;"><span class="cke_button_icon cke_button__italic_icon" style="background-image:url('http://localhost:8080/sens-static/plugin/ckeditor/plugins/icons.png?t=KA9B');background-position:0 -1024px;background-size:auto;">&nbsp;</span><span id="cke_28_label" class="cke_button_label cke_button__italic_label" aria-hidden="false">기울임꼴</span><span id="cke_28_description" class="cke_button_label" aria-hidden="false">키보드 단축키 컨트롤+I</span></a><a id="cke_29" class="cke_button cke_button__underline cke_button_off" href="javascript:void('밑줄')" title="밑줄 (컨트롤+U)" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_29_label" aria-describedby="cke_29_description" aria-haspopup="false" aria-disabled="false" onkeydown="return CKEDITOR.tools.callFunction(42,event);" onfocus="return CKEDITOR.tools.callFunction(43,event);" onclick="CKEDITOR.tools.callFunction(44,this);return false;"><span class="cke_button_icon cke_button__underline_icon" style="background-image:url('http://localhost:8080/sens-static/plugin/ckeditor/plugins/icons.png?t=KA9B');background-position:0 -1536px;background-size:auto;">&nbsp;</span><span id="cke_29_label" class="cke_button_label cke_button__underline_label" aria-hidden="false">밑줄</span><span id="cke_29_description" class="cke_button_label" aria-hidden="false">키보드 단축키 컨트롤+U</span></a><a id="cke_30" class="cke_button cke_button__strike cke_button_off" href="javascript:void('취소선')" title="취소선" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_30_label" aria-describedby="cke_30_description" aria-haspopup="false" aria-disabled="false" onkeydown="return CKEDITOR.tools.callFunction(45,event);" onfocus="return CKEDITOR.tools.callFunction(46,event);" onclick="CKEDITOR.tools.callFunction(47,this);return false;"><span class="cke_button_icon cke_button__strike_icon" style="background-image:url('http://localhost:8080/sens-static/plugin/ckeditor/plugins/icons.png?t=KA9B');background-position:0 -1152px;background-size:auto;">&nbsp;</span><span id="cke_30_label" class="cke_button_label cke_button__strike_label" aria-hidden="false">취소선</span><span id="cke_30_description" class="cke_button_label" aria-hidden="false"></span></a><span class="cke_toolbar_separator" role="separator"></span><a id="cke_31" class="cke_button cke_button__textcolor cke_button_expandable cke_button_off" href="javascript:void('글자 색상')" title="글자 색상" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_31_label" aria-describedby="cke_31_description" aria-haspopup="listbox" aria-disabled="false" onkeydown="return CKEDITOR.tools.callFunction(48,event);" onfocus="return CKEDITOR.tools.callFunction(49,event);" onclick="CKEDITOR.tools.callFunction(50,this);return false;" aria-expanded="false"><span class="cke_button_icon cke_button__textcolor_icon" style="background-image:url('http://localhost:8080/sens-static/plugin/ckeditor/plugins/icons.png?t=KA9B');background-position:0 -2176px;background-size:auto;">&nbsp;</span><span id="cke_31_label" class="cke_button_label cke_button__textcolor_label" aria-hidden="false">글자 색상</span><span id="cke_31_description" class="cke_button_label" aria-hidden="false"></span><span class="cke_button_arrow"></span></a><a id="cke_32" class="cke_button cke_button__bgcolor cke_button_expandable cke_button_off" href="javascript:void('배경 색상')" title="배경 색상" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_32_label" aria-describedby="cke_32_description" aria-haspopup="listbox" aria-disabled="false" onkeydown="return CKEDITOR.tools.callFunction(51,event);" onfocus="return CKEDITOR.tools.callFunction(52,event);" onclick="CKEDITOR.tools.callFunction(53,this);return false;" aria-expanded="false"><span class="cke_button_icon cke_button__bgcolor_icon" style="background-image:url('http://localhost:8080/sens-static/plugin/ckeditor/plugins/icons.png?t=KA9B');background-position:0 -2048px;background-size:auto;">&nbsp;</span><span id="cke_32_label" class="cke_button_label cke_button__bgcolor_label" aria-hidden="false">배경 색상</span><span id="cke_32_description" class="cke_button_label" aria-hidden="false"></span><span class="cke_button_arrow"></span></a></span><span class="cke_toolbar_end"></span></span><span id="cke_33" class="cke_toolbar" role="toolbar"><span class="cke_toolbar_start"></span><span class="cke_toolgroup" role="presentation"><a id="cke_34" class="cke_button cke_button__numberedlist cke_button_off" href="javascript:void('순서 있는 목록')" title="순서 있는 목록" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_34_label" aria-describedby="cke_34_description" aria-haspopup="false" aria-disabled="false" onkeydown="return CKEDITOR.tools.callFunction(54,event);" onfocus="return CKEDITOR.tools.callFunction(55,event);" onclick="CKEDITOR.tools.callFunction(56,this);return false;"><span class="cke_button_icon cke_button__numberedlist_icon" style="background-image:url('http://localhost:8080/sens-static/plugin/ckeditor/plugins/icons.png?t=KA9B');background-position:0 -7680px;background-size:auto;">&nbsp;</span><span id="cke_34_label" class="cke_button_label cke_button__numberedlist_label" aria-hidden="false">순서 있는 목록</span><span id="cke_34_description" class="cke_button_label" aria-hidden="false"></span></a><a id="cke_35" class="cke_button cke_button__bulletedlist cke_button_off" href="javascript:void('순서 없는 목록')" title="순서 없는 목록" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_35_label" aria-describedby="cke_35_description" aria-haspopup="false" aria-disabled="false" onkeydown="return CKEDITOR.tools.callFunction(57,event);" onfocus="return CKEDITOR.tools.callFunction(58,event);" onclick="CKEDITOR.tools.callFunction(59,this);return false;"><span class="cke_button_icon cke_button__bulletedlist_icon" style="background-image:url('http://localhost:8080/sens-static/plugin/ckeditor/plugins/icons.png?t=KA9B');background-position:0 -7424px;background-size:auto;">&nbsp;</span><span id="cke_35_label" class="cke_button_label cke_button__bulletedlist_label" aria-hidden="false">순서 없는 목록</span><span id="cke_35_description" class="cke_button_label" aria-hidden="false"></span></a><span class="cke_toolbar_separator" role="separator"></span><a id="cke_36" class="cke_button cke_button__outdent cke_button_disabled " href="javascript:void('내어쓰기')" title="내어쓰기" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_36_label" aria-describedby="cke_36_description" aria-haspopup="false" aria-disabled="true" onkeydown="return CKEDITOR.tools.callFunction(60,event);" onfocus="return CKEDITOR.tools.callFunction(61,event);" onclick="CKEDITOR.tools.callFunction(62,this);return false;"><span class="cke_button_icon cke_button__outdent_icon" style="background-image:url('http://localhost:8080/sens-static/plugin/ckeditor/plugins/icons.png?t=KA9B');background-position:0 -5760px;background-size:auto;">&nbsp;</span><span id="cke_36_label" class="cke_button_label cke_button__outdent_label" aria-hidden="false">내어쓰기</span><span id="cke_36_description" class="cke_button_label" aria-hidden="false"></span></a><a id="cke_37" class="cke_button cke_button__indent cke_button_disabled" href="javascript:void('들여쓰기')" title="들여쓰기" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_37_label" aria-describedby="cke_37_description" aria-haspopup="false" aria-disabled="true" onkeydown="return CKEDITOR.tools.callFunction(63,event);" onfocus="return CKEDITOR.tools.callFunction(64,event);" onclick="CKEDITOR.tools.callFunction(65,this);return false;"><span class="cke_button_icon cke_button__indent_icon" style="background-image:url('http://localhost:8080/sens-static/plugin/ckeditor/plugins/icons.png?t=KA9B');background-position:0 -5504px;background-size:auto;">&nbsp;</span><span id="cke_37_label" class="cke_button_label cke_button__indent_label" aria-hidden="false">들여쓰기</span><span id="cke_37_description" class="cke_button_label" aria-hidden="false"></span></a><span class="cke_toolbar_separator" role="separator"></span><a id="cke_38" class="cke_button cke_button__horizontalrule cke_button_off" href="javascript:void('가로 줄 삽입')" title="가로 줄 삽입" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_38_label" aria-describedby="cke_38_description" aria-haspopup="false" aria-disabled="false" onkeydown="return CKEDITOR.tools.callFunction(66,event);" onfocus="return CKEDITOR.tools.callFunction(67,event);" onclick="CKEDITOR.tools.callFunction(68,this);return false;"><span class="cke_button_icon cke_button__horizontalrule_icon" style="background-image:url('http://localhost:8080/sens-static/plugin/ckeditor/plugins/icons.png?t=KA9B');background-position:0 -4864px;background-size:auto;">&nbsp;</span><span id="cke_38_label" class="cke_button_label cke_button__horizontalrule_label" aria-hidden="false">가로 줄 삽입</span><span id="cke_38_description" class="cke_button_label" aria-hidden="false"></span></a><a id="cke_39" class="cke_button cke_button__specialchar cke_button_off" href="javascript:void('특수문자 삽입')" title="특수문자 삽입" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_39_label" aria-describedby="cke_39_description" aria-haspopup="false" aria-disabled="false" onkeydown="return CKEDITOR.tools.callFunction(69,event);" onfocus="return CKEDITOR.tools.callFunction(70,event);" onclick="CKEDITOR.tools.callFunction(71,this);return false;"><span class="cke_button_icon cke_button__specialchar_icon" style="background-image:url('http://localhost:8080/sens-static/plugin/ckeditor/plugins/icons.png?t=KA9B');background-position:0 -10624px;background-size:auto;">&nbsp;</span><span id="cke_39_label" class="cke_button_label cke_button__specialchar_label" aria-hidden="false">특수문자 삽입</span><span id="cke_39_description" class="cke_button_label" aria-hidden="false"></span></a></span><span class="cke_toolbar_end"></span></span><span id="cke_40" class="cke_toolbar" role="toolbar"><span class="cke_toolbar_start"></span><span class="cke_toolgroup" role="presentation"><a id="cke_41" class="cke_button cke_button__justifyleft cke_button_off" href="javascript:void('왼쪽 정렬')" title="왼쪽 정렬" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_41_label" aria-describedby="cke_41_description" aria-haspopup="false" aria-disabled="false" onkeydown="return CKEDITOR.tools.callFunction(72,event);" onfocus="return CKEDITOR.tools.callFunction(73,event);" onclick="CKEDITOR.tools.callFunction(74,this);return false;"><span class="cke_button_icon cke_button__justifyleft_icon" style="background-image:url('http://localhost:8080/sens-static/plugin/ckeditor/plugins/icons.png?t=KA9B');background-position:0 -6400px;background-size:auto;">&nbsp;</span><span id="cke_41_label" class="cke_button_label cke_button__justifyleft_label" aria-hidden="false">왼쪽 정렬</span><span id="cke_41_description" class="cke_button_label" aria-hidden="false"></span></a><a id="cke_42" class="cke_button cke_button__justifycenter cke_button_off" href="javascript:void('중앙')" title="중앙" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_42_label" aria-describedby="cke_42_description" aria-haspopup="false" aria-disabled="false" onkeydown="return CKEDITOR.tools.callFunction(75,event);" onfocus="return CKEDITOR.tools.callFunction(76,event);" onclick="CKEDITOR.tools.callFunction(77,this);return false;"><span class="cke_button_icon cke_button__justifycenter_icon" style="background-image:url('http://localhost:8080/sens-static/plugin/ckeditor/plugins/icons.png?t=KA9B');background-position:0 -6272px;background-size:auto;">&nbsp;</span><span id="cke_42_label" class="cke_button_label cke_button__justifycenter_label" aria-hidden="false">중앙</span><span id="cke_42_description" class="cke_button_label" aria-hidden="false"></span></a><a id="cke_43" class="cke_button cke_button__justifyright cke_button_off" href="javascript:void('오른쪽 정렬')" title="오른쪽 정렬" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_43_label" aria-describedby="cke_43_description" aria-haspopup="false" aria-disabled="false" onkeydown="return CKEDITOR.tools.callFunction(78,event);" onfocus="return CKEDITOR.tools.callFunction(79,event);" onclick="CKEDITOR.tools.callFunction(80,this);return false;"><span class="cke_button_icon cke_button__justifyright_icon" style="background-image:url('http://localhost:8080/sens-static/plugin/ckeditor/plugins/icons.png?t=KA9B');background-position:0 -6528px;background-size:auto;">&nbsp;</span><span id="cke_43_label" class="cke_button_label cke_button__justifyright_label" aria-hidden="false">오른쪽 정렬</span><span id="cke_43_description" class="cke_button_label" aria-hidden="false"></span></a><a id="cke_44" class="cke_button cke_button__justifyblock cke_button_off" href="javascript:void('양쪽 정렬')" title="양쪽 정렬" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_44_label" aria-describedby="cke_44_description" aria-haspopup="false" aria-disabled="false" onkeydown="return CKEDITOR.tools.callFunction(81,event);" onfocus="return CKEDITOR.tools.callFunction(82,event);" onclick="CKEDITOR.tools.callFunction(83,this);return false;"><span class="cke_button_icon cke_button__justifyblock_icon" style="background-image:url('http://localhost:8080/sens-static/plugin/ckeditor/plugins/icons.png?t=KA9B');background-position:0 -6144px;background-size:auto;">&nbsp;</span><span id="cke_44_label" class="cke_button_label cke_button__justifyblock_label" aria-hidden="false">양쪽 정렬</span><span id="cke_44_description" class="cke_button_label" aria-hidden="false"></span></a></span><span class="cke_toolbar_end"></span></span><span id="cke_45" class="cke_toolbar" role="toolbar"><span class="cke_toolbar_start"></span><span class="cke_toolgroup" role="presentation"><a id="cke_46" class="cke_button cke_button__link cke_button_off" href="javascript:void('링크 삽입/변경')" title="링크 삽입/변경 (컨트롤+K)" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_46_label" aria-describedby="cke_46_description" aria-haspopup="false" aria-disabled="false" onkeydown="return CKEDITOR.tools.callFunction(84,event);" onfocus="return CKEDITOR.tools.callFunction(85,event);" onclick="CKEDITOR.tools.callFunction(86,this);return false;"><span class="cke_button_icon cke_button__link_icon" style="background-image:url('http://localhost:8080/sens-static/plugin/ckeditor/plugins/icons.png?t=KA9B');background-position:0 -7040px;background-size:auto;">&nbsp;</span><span id="cke_46_label" class="cke_button_label cke_button__link_label" aria-hidden="false">링크 삽입/변경</span><span id="cke_46_description" class="cke_button_label" aria-hidden="false">키보드 단축키 컨트롤+K</span></a><a id="cke_47" class="cke_button cke_button__unlink cke_button_disabled " href="javascript:void('링크 지우기')" title="링크 지우기" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_47_label" aria-describedby="cke_47_description" aria-haspopup="false" aria-disabled="true" onkeydown="return CKEDITOR.tools.callFunction(87,event);" onfocus="return CKEDITOR.tools.callFunction(88,event);" onclick="CKEDITOR.tools.callFunction(89,this);return false;"><span class="cke_button_icon cke_button__unlink_icon" style="background-image:url('http://localhost:8080/sens-static/plugin/ckeditor/plugins/icons.png?t=KA9B');background-position:0 -7168px;background-size:auto;">&nbsp;</span><span id="cke_47_label" class="cke_button_label cke_button__unlink_label" aria-hidden="false">링크 지우기</span><span id="cke_47_description" class="cke_button_label" aria-hidden="false"></span></a><a id="cke_48" class="cke_button cke_button__image cke_button_off" href="javascript:void('이미지')" title="이미지" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_48_label" aria-describedby="cke_48_description" aria-haspopup="false" aria-disabled="false" onkeydown="return CKEDITOR.tools.callFunction(90,event);" onfocus="return CKEDITOR.tools.callFunction(91,event);" onclick="CKEDITOR.tools.callFunction(92,this);return false;"><span class="cke_button_icon cke_button__image_icon" style="background-image:url('http://localhost:8080/sens-static/plugin/ckeditor/plugins/icons.png?t=KA9B');background-position:0 -5248px;background-size:auto;">&nbsp;</span><span id="cke_48_label" class="cke_button_label cke_button__image_label" aria-hidden="false">이미지</span><span id="cke_48_description" class="cke_button_label" aria-hidden="false"></span></a><a id="cke_49" class="cke_button cke_button__smiley cke_button_off" href="javascript:void('이모티콘')" title="이모티콘" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_49_label" aria-describedby="cke_49_description" aria-haspopup="false" aria-disabled="false" onkeydown="return CKEDITOR.tools.callFunction(93,event);" onfocus="return CKEDITOR.tools.callFunction(94,event);" onclick="CKEDITOR.tools.callFunction(95,this);return false;"><span class="cke_button_icon cke_button__smiley_icon" style="background-image:url('http://localhost:8080/sens-static/plugin/ckeditor/plugins/icons.png?t=KA9B');background-position:0 -10240px;background-size:auto;">&nbsp;</span><span id="cke_49_label" class="cke_button_label cke_button__smiley_label" aria-hidden="false">이모티콘</span><span id="cke_49_description" class="cke_button_label" aria-hidden="false"></span></a><a id="cke_50" class="cke_button cke_button__table cke_button_ cke_button_expandable cke_button_off" href="javascript:void('표')" title="표" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_50_label" aria-describedby="cke_50_description" aria-haspopup="listbox" aria-disabled="false" onkeydown="return CKEDITOR.tools.callFunction(96,event);" onfocus="return CKEDITOR.tools.callFunction(97,event);" onclick="CKEDITOR.tools.callFunction(98,this);return false;" aria-expanded="false"><span class="cke_button_icon cke_button__table_icon" style="background-image:url('http://localhost:8080/sens-static/plugin/ckeditor/plugins/icons.png?t=KA9B');background-position:0 -9344px;background-size:auto;">&nbsp;</span><span id="cke_50_label" class="cke_button_label cke_button__table_label" aria-hidden="false">표</span><span id="cke_50_description" class="cke_button_label" aria-hidden="false"></span><span class="cke_button_arrow"></span></a><a id="cke_51" class="cke_button cke_button__maximize cke_button_off" href="javascript:void('최대화')" title="최대화" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_51_label" aria-describedby="cke_51_description" aria-haspopup="false" aria-disabled="false" onkeydown="return CKEDITOR.tools.callFunction(99,event);" onfocus="return CKEDITOR.tools.callFunction(100,event);" onclick="CKEDITOR.tools.callFunction(101,this);return false;"><span class="cke_button_icon cke_button__maximize_icon" style="background-image:url('http://localhost:8080/sens-static/plugin/ckeditor/plugins/icons.png?t=KA9B');background-position:0 -7808px;background-size:auto;">&nbsp;</span><span id="cke_51_label" class="cke_button_label cke_button__maximize_label" aria-hidden="false">최대화</span><span id="cke_51_description" class="cke_button_label" aria-hidden="false"></span></a></span><span class="cke_toolbar_end"></span></span><span id="cke_52" class="cke_toolbar cke_toolbar_last" role="toolbar"><span class="cke_toolbar_start"></span><span class="cke_toolgroup" role="presentation"><a id="cke_53" class="cke_button cke_button__showblocks cke_button_off" href="javascript:void('블록 보기')" title="블록 보기" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_53_label" aria-describedby="cke_53_description" aria-haspopup="false" aria-disabled="false" onkeydown="return CKEDITOR.tools.callFunction(102,event);" onfocus="return CKEDITOR.tools.callFunction(103,event);" onclick="CKEDITOR.tools.callFunction(104,this);return false;"><span class="cke_button_icon cke_button__showblocks_icon" style="background-image:url('http://localhost:8080/sens-static/plugin/ckeditor/plugins/icons.png?t=KA9B');background-position:0 -10112px;background-size:auto;">&nbsp;</span><span id="cke_53_label" class="cke_button_label cke_button__showblocks_label" aria-hidden="false">블록 보기</span><span id="cke_53_description" class="cke_button_label" aria-hidden="false"></span></a><a id="cke_54" class="cke_button cke_button__insertpre cke_button_off" href="javascript:void('Insert code snippet')" title="Insert code snippet" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_54_label" aria-describedby="cke_54_description" aria-haspopup="false" aria-disabled="false" onkeydown="return CKEDITOR.tools.callFunction(105,event);" onfocus="return CKEDITOR.tools.callFunction(106,event);" onclick="CKEDITOR.tools.callFunction(107,this);return false;"><span class="cke_button_icon cke_button__insertpre_icon" style="background-image:url('http://localhost:8080/sens-static/plugin/ckeditor/plugins/insertpre/icons/insertpre.png?t=KA9B');background-position:0 0px;background-size:16px;">&nbsp;</span><span id="cke_54_label" class="cke_button_label cke_button__insertpre_label" aria-hidden="false">Insert code snippet</span><span id="cke_54_description" class="cke_button_label" aria-hidden="false"></span></a><a id="cke_55" class="cke_button cke_button__source cke_button_off" href="javascript:void('소스')" title="소스" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_55_label" aria-describedby="cke_55_description" aria-haspopup="false" aria-disabled="false" onkeydown="return CKEDITOR.tools.callFunction(108,event);" onfocus="return CKEDITOR.tools.callFunction(109,event);" onclick="CKEDITOR.tools.callFunction(110,this);return false;"><span class="cke_button_icon cke_button__source_icon" style="background-image:url('http://localhost:8080/sens-static/plugin/ckeditor/plugins/icons.png?t=KA9B');background-position:0 -10496px;background-size:auto;">&nbsp;</span><span id="cke_55_label" class="cke_button_label cke_button__source_label" aria-hidden="false">소스</span><span id="cke_55_description" class="cke_button_label" aria-hidden="false"></span></a><span class="cke_toolbar_separator" role="separator"></span><a id="cke_56" class="cke_button cke_button__template cke_button_off" href="javascript:void('템플릿')" title="템플릿" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_56_label" aria-describedby="cke_56_description" aria-haspopup="false" aria-disabled="false" onkeydown="return CKEDITOR.tools.callFunction(111,event);" onfocus="return CKEDITOR.tools.callFunction(112,event);" onclick="CKEDITOR.tools.callFunction(113,this);return false;"><span class="cke_button_icon cke_button__template_icon" style="background-image:url('http://localhost:8080/sens-static/plugin/ckeditor/plugins/template/icons/template.png?t=KA9B');background-position:0 0px;background-size:16px;">&nbsp;</span><span id="cke_56_label" class="cke_button_label cke_button__template_label" aria-hidden="false">템플릿</span><span id="cke_56_description" class="cke_button_label" aria-hidden="false"></span></a><a id="cke_57" class="cke_button cke_button__images cke_button_off" href="javascript:void('이미지 삽입')" title="이미지 삽입" tabindex="-1" hidefocus="true" role="button" aria-labelledby="cke_57_label" aria-describedby="cke_57_description" aria-haspopup="false" aria-disabled="false" onkeydown="return CKEDITOR.tools.callFunction(114,event);" onfocus="return CKEDITOR.tools.callFunction(115,event);" onclick="CKEDITOR.tools.callFunction(116,this);return false;"><span class="cke_button_icon cke_button__images_icon" style="background-image:url('http://localhost:8080/sens-static/plugin/ckeditor/plugins/images/icons/images.png?t=KA9B');background-position:0 0px;background-size:16px;">&nbsp;</span><span id="cke_57_label" class="cke_button_label cke_button__images_label" aria-hidden="false">이미지 삽입</span><span id="cke_57_description" class="cke_button_label" aria-hidden="false"></span></a></span><span class="cke_toolbar_end"></span></span></span></span><div id="cke_1_contents" class="cke_contents cke_reset" role="presentation" style="height: 490px;"><span id="cke_61" class="cke_voice_label">도움이 필요하면 ALT 0 을 누르세요</span><iframe src="" frameborder="0" class="cke_wysiwyg_frame cke_reset" style="width: 100%; height: 100%;" title="리치 텍스트 편집기, editHtml" aria-describedby="cke_61" tabindex="5" allowtransparency="true"></iframe></div></div></div>
+										<!--		<label for="editHtml" class="blind">editHtml</label>-->
+									</div>
+									<div id="div_Text" style="display:none;">
+										<textarea id="editText" name="editText" wrap="hard" style="width:100%;height:400px;margin:0;"></textarea>
+										<label for="editText" class="blind">editText</label>
+									</div>
+								</div>
+							</td>
+						</tr>
+
+						<!-- 에디터 end-->
+						<tr>
+							<th height="46px" align="left">반응분석 종료일</th>
+							<td>
+
+								<input id="resp_day" name="resp_day" class="w100 hasDatepicker" title="반응분석종료일" type="text" value="">
+								<select id="resp_hour" name="resp_hour" class="w100" style="vertical-align: middle;width:56px;" title="시"><option value="00">00시</option><option value="01">01시</option><option value="02">02시</option><option value="03">03시</option><option value="04">04시</option><option value="05">05시</option><option value="06">06시</option><option value="07">07시</option><option value="08">08시</option><option value="09">09시</option><option value="10">10시</option><option value="11">11시</option><option value="12">12시</option><option value="13">13시</option><option value="14">14시</option><option value="15">15시</option><option value="16">16시</option><option value="17">17시</option><option value="18">18시</option><option value="19">19시</option><option value="20">20시</option><option value="21">21시</option><option value="22">22시</option><option value="23">23시</option></select>
+							</td></tr>
+
+						<tr>
+							<th>발송시간</th>
+							<td>
+								<label><input id="is_reserve1" name="is_reserve" onclick="writeform.change_sendmode(this.value)" type="radio" value="0" checked="checked">즉시발송</label>
+								<label><input id="is_reserve2" name="is_reserve" onclick="writeform.change_sendmode(this.value)" type="radio" value="1">예약발송</label>
+
+								<div id="reserv_time_area" style="display: none;">
+
+									<input id="reserv_day" name="reserv_day" class="w100 hasDatepicker" title="예약시간" type="text" value="">
+									<select id="reserv_hour" name="reserv_hour" class="w100" style="vertical-align: middle;width:56px;" title="시"><option value="00">00시</option><option value="01">01시</option><option value="02">02시</option><option value="03">03시</option><option value="04">04시</option><option value="05">05시</option><option value="06">06시</option><option value="07">07시</option><option value="08">08시</option><option value="09">09시</option><option value="10">10시</option><option value="11">11시</option><option value="12">12시</option><option value="13">13시</option><option value="14">14시</option><option value="15">15시</option><option value="16">16시</option><option value="17">17시</option><option value="18">18시</option><option value="19">19시</option><option value="20">20시</option><option value="21">21시</option><option value="22">22시</option><option value="23">23시</option></select>
+									<select id="reserv_min" name="reserv_min" class="w100" style="vertical-align: middle;width:56px;" title="분"><option value="00">00분</option><option value="05">05분</option><option value="10">10분</option><option value="15">15분</option><option value="20">20분</option><option value="25">25분</option><option value="30">30분</option><option value="35">35분</option><option value="40">40분</option><option value="45">45분</option><option value="50">50분</option><option value="55">55분</option></select>
+								</div>
+							</td>
+						</tr>
+
+						<tr>
+							<th height="46px" align="left">링크 추적</th>
+							<td>
+								<label><input id="islink1" name="islink" type="radio" value="1" checked="checked">추적함</label>
+								<label><input id="islink2" name="islink" type="radio" value="0">추적안함</label>
+							</td>
+						</tr>
+
+						<tr>
+							<th height="46px" align="left">이메일 중복 허용여부</th>
+							<td>
+								<label><input id="is_same_email1" name="is_same_email" type="radio" value="1">중복허용</label><input id="is_same_email2" name="is_same_email" type="radio" value="0" checked="checked">중복허용 안함
+							</td>
+						</tr>
+						<tr>
+							<th height="46px" align="left">파일첨부</th>
+							<td>
+
+								<div class="uploadArea">
+									<ul class="btn_add_file">
+										<li class="f_lft">
+											<label for="file_upload" id="file_upload_">파일첨부</label><input type="file" multiple="multiple" name="attachment" id="file_upload" onchange="readFile();">
+											<input type="button" class="file_delete" value="삭제" onclick="chkDelFile();">
+										</li>
+										<li class="f_rt"><span>[파일 : <span id="curr_uploadfile_cnt">0</span> / <span id="max_uploadfile_cnt">5</span> ] [일반 : <span id="attach_size">0 KB</span> / <span id="max_attachfile_size">10 MB</span> ] </span></li>
+									</ul>
+									<div id="filelist" style="display: block;">
+										<table>
+											<colgroup>
+												<col style="width:35px">
+												<col style="width:auto">
+												<col style="width:100px">
+												<col style="width:100px">
+
+											</colgroup>
+											<thead>
+											<tr>
+												<th scope="col" class="check" style="text-align:center;"><input type="checkbox" id="chk_all" title="전체선택"></th>
+												<th scope="col" class="name"><span>파일이름</span></th>
+												<th scope="col" class="size"><span>크기</span></th>
+												<th scope="col" class="del"><span>삭제</span></th>
+											</tr>
+											</thead>
+											<tbody id="attach_file">
+											<tr id="attach_message"><td colspan="4">파일을 이곳으로 끌어오세요.</td></tr>
+											</tbody>
+										</table>
+
+									</div>
+								</div>
+								<div>
+									<input type="hidden" name="_csrf" value="0eb3612e-8d73-4dc2-b88c-dc0e34f7da39">
+								</div>
+							</td>
+						</tr>
+
+						<!-- <tr class="upload" >
+                            <th align="left" rowspan="3">첨부파일</th>
+                            <td  >
+                                <button type="button">내 PC</button>
+                                <button type="button">삭제</button>
+                                <button type="button">미리보기</button>
+                                <span style="font-size:12px;" class="txt">
+                                    수신메일 시스템에 따라 ‘제한 초과’로 거부 또는 스팸판정 될 수 있습니다.
+                                    <strong class="txt red">(10MB 이내 파일 권장)</strong>
+
+                                </span>
+                            </td>
+                        </tr> -->
+
+						</tbody>
+					</table>
+					<!-- composer area end -->
+					<div>
+						<input type="hidden" name="_csrf" value="0eb3612e-8d73-4dc2-b88c-dc0e34f7da39">
+					</div>
+				</form></div>
+		</div>
+		<!-- content end -->
+
+	</div>
+	<!-- section end -->
+
+	<!-- preview popup start-->
+	<div id="previewLayer" style="display:none;" title="미리보기">
+		<div class="popup">
+			<div class="popup_content" style="height: auto; width: 600px; overflow:auto;">
+				<div class="popup_title">
+					<span class="close_button" onclick="writeform.previewClose();"></span>
+					<h3 class="title">미리보기</h3>
+				</div>
+				<div class="popup_body_wrap">
+					<div class="popup_body">
+						<table width="100%" border="0" cellpadding="0" cellspacing="1">
+							<colgroup>
+								<col style="width:150px;">
+								<col style="width:auto;">
+							</colgroup>
+							<tbody>
+							<tr>
+								<th style="width:80px; min-width:80px;">제목</th>
+								<td id="previewArea">
+									<div id="preview_subject" class="prev_subject"></div>
+								</td>
+							</tr>
+							<tr>
+
+								<td colspan="2">
+									<div class="prev_content" id="preview_content"></div>
+								</td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="pop_footer">
+					<div class="btn_div">
+						<button type="button" class="btn2" onclick="writeform.previewClose();">닫기</button>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<!-- template add popup start-->
+	<div id="addTemplateLayer" style="display:none; " title="템플릿 추가">
+		<div class="popup">
+			<div class="popup_content" style="height: 270px; width: 600px;">
+				<div class="popup_title">
+					<span class="close_button" onclick="writeform.templateAddClose();"></span>
+					<h3 class="title">템플릿&nbsp;추가 </h3>
+				</div>
+				<div class="popup_body_wrap" style="height: 200px;">
+					<div class="popup_body">
+						<!-- <p> 설명 텍스트 </p> -->
+						<table width="100%" border="0" cellpadding="0" cellspacing="1">
+							<tbody>
+							<tr>
+								<th style="width:150px; min-width:150px;">분류</th>
+								<td>
+									<select id="flag" name="flag">
+										<option value="02">개인템플릿</option>
+										<option value="01">공용템플릿</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<th>템플릿 제목</th>
+								<td><input type="text" id="temp_name" name="temp_name" class="input"></td>
+							</tr>
+							</tbody>
+						</table>
+
+					</div>
+					<div class="pop_footer">
+						<div class="btn_div">
+							<button type="button" class="btn2" onclick="writeform.templateAdd();">추가</button>
+							<button type="button" class="btn2" onclick="writeform.templateAddClose();">닫기</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- popup end-->
+
+	<!-- Add Field popup start-->
+	<div class="popup" id="testSendPopup" style="">
+		<div class="popup_content" style="width: 900px; height: 585px;">
+			<div class="popup_title">
+				<span class="close_button" onclick="writeform.closeTestPopup();"></span>
+				<h3 class="title">테스트발송</h3>
+			</div>
+			<div class="popup_body_wrap">
+				<div class="popup_body">
+					<!-- <p> 설명 텍스트 </p> -->
+					<table class="queryBox" border="0" cellpadding="0" cellspacing="0">
+						<colgroup>
+							<col style="width: auto">
+							<col style="width: 90px">
+							<col style="width: auto">
+						</colgroup>
+						<tbody id="testlist">
+						<tr>
+							<th>테스트 계정</th>
+							<th></th>
+							<th>테스트 발송 명단</th>
+						</tr>
+						<tr class="table_field">
+							<td>
+								<select id="testAccount" name="testAccount" size="3" style="height: 320px;"><option value="testgddddgg@imoxion.com">testgddddgg@imoxion.com</option><option value="rudghxodid@naver.com">rudghxodid@naver.com</option><option value="rma7@naver.com">rma7@naver.com</option><option value="rma7@imoxion.com">rma7@imoxion.com</option><option value="test1010@imoxion.com">test1010@imoxion.com</option><option value="test4@edu.sensmail.com">test4@edu.sensmail.com</option><option value="zpqdnjs@imoxion.com">zpqdnjs@imoxion.com</option><option value="insert@imoxion.com">insert@imoxion.com</option><option value="test1@imoxion.com">test1@imoxion.com</option><option value="test10@imoxion.com">test10@imoxion.com</option><option value="test11@imoxion.com">test11@imoxion.com</option><option value="test12@imoxion.com">test12@imoxion.com</option><option value="test13@imoxion.com">test13@imoxion.com</option><option value="test14@imoxion.com">test14@imoxion.com</option><option value="test15@imoxion.com">test15@imoxion.com</option><option value="test16@imoxion.com">test16@imoxion.com</option><option value="test2@imoxion.com">test2@imoxion.com</option><option value="test3@imoxion.com">test3@imoxion.com</option><option value="test4@imoxion.com">test4@imoxion.com</option><option value="test5@imoxion.com">test5@imoxion.com</option><option value="test6@imoxion.com">test6@imoxion.com</option><option value="test7@imoxion.com">test7@imoxion.com</option><option value="test8@imoxion.com">test8@imoxion.com</option><option value="test9@imoxion.com">test9@imoxion.com</option></select>
+							</td>
+							<td>
+								<button type="button" class="shuttle_btn shuttle_rt" onclick="writeform.testAccountInsert();">추가</button>
+								<button type="button" class="shuttle_btn shuttle_let" onclick="writeform.testAccountDelete();">제거</button>
+							</td>
+							<td>
+								<select id="testSendAccount" name="testSendAccount" size="3" style="height: 320px;"><option value="chunsangu@naver.com">chunsangu@naver.com</option><option value="ttt@kk.com">ttt@kk.com</option></select>
+							</td>
+						</tr>
+						<tr class="queryBox_btn">
+							<td colspan="3" >
+								<strong>테스트 계정 </strong><input type="text" id="accountInsertText"><button type="button" class="btn1" onclick="writeform.demoAccountInsert();">등록</button>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+
+				</div>
+			</div>
+			<div class="pop_footer">
+				<div class="btn_div">
+					<button type="button" class="btn2" onclick="writeform.doTestSend()">테스트발송</button>
+					<button type="button" class="btn2" onclick="writeform.closeTestPopup()">취소</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- 개인주소록 모달레이어 팝업으로 변경 -->
+
+	<div id="addressListLayer" style="display:none;" title="주소록 그룹 인원">
+
+		<div class="popup">
+			<div class="popup_content">
+				<div class="popup_title">
+					<span class="close_button" onclick="receiverEvent.close();"></span>
+					<h3 class="title">주소록 그룹 인원</h3>
+				</div>
+				<div class="popup_body_wrap" style="overflow:auto;">
+					<div class="popup_body">
+
+						<table width="100%" border="0" cellpadding="0" cellspacing="1">
+							<colgroup>
+								<col style="width: 30px;">
+								<col style="width: auto;">
+								<col style="width: 80px;">
+							</colgroup>
+							<thead class="fixed">
+							<tr>
+								<th class="check_ico">
+									<input type="checkbox" id="all_check" onclick="common.select_all('gkeys')" title="전체선택">
+								</th>
+								<th>주소록 그룹명</th>
+								<th>인원</th>
+							</tr>
+							</thead>
+							<tbody id="addresslist" style="align:center;">
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="pop_footer">
+					<div class="btn_div">
+						<button class="btn2" onclick="receiverEvent.selAddrGroupList();">확인</button>
+						<button class="btn2" onclick="receiverEvent.close();">닫기</button>
+					</div>
+
+
+
+
+				</div>
+			</div>
+
+
+		</div>
+
+	</div>
+
+
+
+	<!-- 수신그룹 팝업을 모달레이어팝업으로 변경 -->
+	<div id="groupListLayer" style="display: none;" title="주소록 그룹 인원">
+		<div class="popup">
+			<div class="popup_content">
+				<div class="popup_title">
+					<span class="close_button" onclick="receiverEvent.close();"></span>
+					<h3 class="title">수신그룹 목록</h3>
+				</div>
+				<div class="popup_body_wrap" style="overflow:auto;">
+					<div class="popup_body">
+
+						<table width="100%" border="0" cellpadding="0" cellspacing="1">
+							<colgroup>
+								<col style="width:50px">
+								<col style="width:auto;">
+								<col style="width:150px">
+							</colgroup>
+							<thead class="fixed">
+							<tr>
+								<th>
+									선택
+								</th>
+								<th>수신그룹명</th>
+								<th>작성자</th>
+							</tr>
+							</thead>
+							<tbody id="grouplist"><tr><td><input type="radio" name="ukey" id="ukey" value="11" gname_value="11"></td><td class="over_text"><a href="#" onclick="receiverEvent.receiverGroupSel(11,11,undefined);">11</a></td><td><a href="#">11</a></td></tr><tr><td><input type="radio" name="ukey" id="ukey" value="164575556200607810569522" gname_value="ㅁㄴㅇ"></td><td class="over_text"><a href="#" onclick="receiverEvent.receiverGroupSel(164575556200607810569522,ㅁㄴㅇ,undefined);">ㅁㄴㅇ</a></td><td><a href="#">imoxion</a></td></tr><tr><td><input type="radio" name="ukey" id="ukey" value="164602361577867461148123" gname_value="test_test"></td><td class="over_text"><a href="#" onclick="receiverEvent.receiverGroupSel(164602361577867461148123,test_test,undefined);">test_test</a></td><td><a href="#">imoxion</a></td></tr><tr><td><input type="radio" name="ukey" id="ukey" value="164670375916814707159521" gname_value="zuyoungtest"></td><td class="over_text"><a href="#" onclick="receiverEvent.receiverGroupSel(164670375916814707159521,zuyoungtest,undefined);">zuyoungtest</a></td><td><a href="#">imoxion</a></td></tr><tr><td><input type="radio" name="ukey" id="ukey" value="164973141175937112441131" gname_value="개별발송 테스트용"></td><td class="over_text"><a href="#" onclick="receiverEvent.receiverGroupSel(164973141175937112441131,개별발송 테스트용,undefined);">개별발송 테스트용</a></td><td><a href="#">imoxion</a></td></tr><tr><td><input type="radio" name="ukey" id="ukey" value="165457584263691122151142" gname_value="수신자 확인용"></td><td class="over_text"><a href="#" onclick="receiverEvent.receiverGroupSel(165457584263691122151142,수신자 확인용,undefined);">수신자 확인용</a></td><td><a href="#">imoxion</a></td></tr><tr><td><input type="radio" name="ukey" id="ukey" value="22" gname_value="22"></td><td class="over_text"><a href="#" onclick="receiverEvent.receiverGroupSel(22,22,undefined);">22</a></td><td><a href="#">22</a></td></tr><tr><td><input type="radio" name="ukey" id="ukey" value="2345" gname_value="jacob@naver.com"></td><td class="over_text"><a href="#" onclick="receiverEvent.receiverGroupSel(2345,jacob@naver.com,undefined);">jacob@naver.com</a></td><td><a href="#">imoxion</a></td></tr><tr><td><input type="radio" name="ukey" id="ukey" value="33" gname_value="33"></td><td class="over_text"><a href="#" onclick="receiverEvent.receiverGroupSel(33,33,undefined);">33</a></td><td><a href="#">33</a></td></tr><tr><td><input type="radio" name="ukey" id="ukey" value="44" gname_value="44"></td><td class="over_text"><a href="#" onclick="receiverEvent.receiverGroupSel(44,44,undefined);">44</a></td><td><a href="#">44</a></td></tr><tr><td><input type="radio" name="ukey" id="ukey" value="55" gname_value="55"></td><td class="over_text"><a href="#" onclick="receiverEvent.receiverGroupSel(55,55,undefined);">55</a></td><td><a href="#">55</a></td></tr><tr><td><input type="radio" name="ukey" id="ukey" value="604732c53fc475d13ac0de3c" gname_value="준현s ORACLE"></td><td class="over_text"><a href="#" onclick="receiverEvent.receiverGroupSel(604732c53fc475d13ac0de3c,준현s ORACLE,undefined);">준현s ORACLE</a></td><td><a href="#">imoxion</a></td></tr><tr><td><input type="radio" name="ukey" id="ukey" value="604732fd3fe29487c37bb20b" gname_value="test"></td><td class="over_text"><a href="#" onclick="receiverEvent.receiverGroupSel(604732fd3fe29487c37bb20b,test,undefined);">test</a></td><td><a href="#">imoxion</a></td></tr><tr><td><input type="radio" name="ukey" id="ukey" value="604733383fd68bbf22caf62e" gname_value="ll"></td><td class="over_text"><a href="#" onclick="receiverEvent.receiverGroupSel(604733383fd68bbf22caf62e,ll,undefined);">ll</a></td><td><a href="#">imoxion</a></td></tr><tr><td><input type="radio" name="ukey" id="ukey" value="6047348f3f9f53a4d2083120" gname_value="12345"></td><td class="over_text"><a href="#" onclick="receiverEvent.receiverGroupSel(6047348f3f9f53a4d2083120,12345,undefined);">12345</a></td><td><a href="#">imoxion</a></td></tr><tr><td><input type="radio" name="ukey" id="ukey" value="604735283fee8d13a645be29" gname_value="1234"></td><td class="over_text"><a href="#" onclick="receiverEvent.receiverGroupSel(604735283fee8d13a645be29,1234,undefined);">1234</a></td><td><a href="#">imoxion</a></td></tr><tr><td><input type="radio" name="ukey" id="ukey" value="604978323fc748b22b985b68" gname_value="mysql 테스트"></td><td class="over_text"><a href="#" onclick="receiverEvent.receiverGroupSel(604978323fc748b22b985b68,mysql 테스트,undefined);">mysql 테스트</a></td><td><a href="#">imoxion</a></td></tr><tr><td><input type="radio" name="ukey" id="ukey" value="66" gname_value="66"></td><td class="over_text"><a href="#" onclick="receiverEvent.receiverGroupSel(66,66,undefined);">66</a></td><td><a href="#">66</a></td></tr><tr><td><input type="radio" name="ukey" id="ukey" value="77" gname_value="77"></td><td class="over_text"><a href="#" onclick="receiverEvent.receiverGroupSel(77,77,undefined);">77</a></td><td><a href="#">77</a></td></tr></tbody>
+						</table>
+					</div>
+
+					<div class="page_nav" name="page_nav" id="page_nav">
+
+
+
+
+
+
+
+
+
+
+
+
+					</div>
+
+
+
+
+
+
+
+
+
+
+
+				</div>
+				<div class="pop_footer">
+					<div class="btn_div">
+						<button class="btn2" onclick="receiverEvent.receiverGroupConfirm('');">확인</button>
+						<button class="btn2" onclick="receiverEvent.preview();">미리보기</button>
+					</div>
+				</div>
+
+			</div>
+			<!-- content end -->
+
+		</div>
+	</div>
+	<!-- popup end-->
+
+</div>
+
+
+
+
+
+<div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"><div class="ui-datepicker-header ui-widget-header ui-helper-clearfix ui-corner-all"><a class="ui-datepicker-prev ui-corner-all ui-state-disabled" title="Prev"><span class="ui-icon ui-icon-circle-triangle-w">Prev</span></a><a class="ui-datepicker-next ui-corner-all" data-handler="next" data-event="click" title="Next"><span class="ui-icon ui-icon-circle-triangle-e">Next</span></a><div class="ui-datepicker-title"><select class="ui-datepicker-month" data-handler="selectMonth" data-event="change"><option value="5" selected="selected">06</option><option value="6">07</option><option value="7">08</option><option value="8">09</option><option value="9">10</option><option value="10">11</option><option value="11">12</option></select><select class="ui-datepicker-year" data-handler="selectYear" data-event="change"><option value="2022" selected="selected">2022</option><option value="2023">2023</option></select></div></div><table class="ui-datepicker-calendar"><thead><tr><th scope="col" class="ui-datepicker-week-end"><span title="">일</span></th><th scope="col"><span title="">월</span></th><th scope="col"><span title="">화</span></th><th scope="col"><span title="">수</span></th><th scope="col"><span title="">목</span></th><th scope="col"><span title="">금</span></th><th scope="col" class="ui-datepicker-week-end"><span title="">토</span></th></tr></thead><tbody><tr><td class=" ui-datepicker-week-end ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-unselectable ui-state-disabled "><span class="ui-state-default">1</span></td><td class=" ui-datepicker-unselectable ui-state-disabled "><span class="ui-state-default">2</span></td><td class=" ui-datepicker-unselectable ui-state-disabled "><span class="ui-state-default">3</span></td><td class=" ui-datepicker-week-end ui-datepicker-unselectable ui-state-disabled "><span class="ui-state-default">4</span></td></tr><tr><td class=" ui-datepicker-week-end ui-datepicker-unselectable ui-state-disabled "><span class="ui-state-default">5</span></td><td class=" ui-datepicker-unselectable ui-state-disabled "><span class="ui-state-default">6</span></td><td class=" ui-datepicker-unselectable ui-state-disabled "><span class="ui-state-default">7</span></td><td class=" ui-datepicker-days-cell-over  ui-datepicker-current-day ui-datepicker-today" data-handler="selectDay" data-event="click" data-month="5" data-year="2022"><a class="ui-state-default ui-state-highlight ui-state-active ui-state-hover" href="#">8</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="5" data-year="2022"><a class="ui-state-default" href="#">9</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="5" data-year="2022"><a class="ui-state-default" href="#">10</a></td><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="5" data-year="2022"><a class="ui-state-default" href="#">11</a></td></tr><tr><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="5" data-year="2022"><a class="ui-state-default" href="#">12</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="5" data-year="2022"><a class="ui-state-default" href="#">13</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="5" data-year="2022"><a class="ui-state-default" href="#">14</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="5" data-year="2022"><a class="ui-state-default" href="#">15</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="5" data-year="2022"><a class="ui-state-default" href="#">16</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="5" data-year="2022"><a class="ui-state-default" href="#">17</a></td><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="5" data-year="2022"><a class="ui-state-default" href="#">18</a></td></tr><tr><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="5" data-year="2022"><a class="ui-state-default" href="#">19</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="5" data-year="2022"><a class="ui-state-default" href="#">20</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="5" data-year="2022"><a class="ui-state-default" href="#">21</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="5" data-year="2022"><a class="ui-state-default" href="#">22</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="5" data-year="2022"><a class="ui-state-default" href="#">23</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="5" data-year="2022"><a class="ui-state-default" href="#">24</a></td><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="5" data-year="2022"><a class="ui-state-default" href="#">25</a></td></tr><tr><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="5" data-year="2022"><a class="ui-state-default" href="#">26</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="5" data-year="2022"><a class="ui-state-default" href="#">27</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="5" data-year="2022"><a class="ui-state-default" href="#">28</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="5" data-year="2022"><a class="ui-state-default" href="#">29</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="5" data-year="2022"><a class="ui-state-default" href="#">30</a></td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-week-end ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td></tr></tbody></table></div><div class="cke_screen_reader_only cke_copyformatting_notification"><div aria-live="polite"></div></div></body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

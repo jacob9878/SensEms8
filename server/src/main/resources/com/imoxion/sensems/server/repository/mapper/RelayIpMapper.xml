@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.imoxion.sensems.server.repository.mapper.RelayIpMapper">
+    <select id="getRelayIpList" resultType="com.imoxion.sensems.server.domain.RelayIp">
+        select * from imb_relay_ip
+    </select>
+
+    <select id="getRelayIp" resultType="com.imoxion.sensems.server.domain.RelayIp">
+        select * from imb_relay_ip where ip = #{ip}
+    </select>
+</mapper>

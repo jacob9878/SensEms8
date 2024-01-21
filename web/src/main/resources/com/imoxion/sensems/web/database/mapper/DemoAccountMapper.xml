@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imoxion.sensems.web.database.mapper.DemoAccountMapper">
+    <select id="selectDemoAccountCount" resultType="int">
+        select count(*) from imb_test_account where userid=#{userid}
+        <choose>
+            <when test="_databaseId == 'oracle'">
+                <if test="srch_keyword != null">
+                    and email like '%'||#{srch_keyword}||'%'
+                </if>
+            </when>
+            <otherwise>
+                <if test="srch_keyword != null">
+                    and email like concat('%',#{srch_keyword},'%')
+                </if>
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="selectDemoAccountList" resultType="demoAccountInfo">
+        <choose>
+            <when test="_databaseId == 'oracle'">
+                SELECT * FROM (
+                SELECT  ROWNUM AS RNUM,a.* FROM(
+                select * from imb_test_account
+                where userid=#{userid}
+                <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(srch_keyword)">
+                    and email like '%'||#{srch_keyword}||'%'
+                </if>
+                order by regdate desc
+                ) a
+                ) WHERE RNUM between #{start} and #{end}
+            </when>
+            <otherwise>
+                SELECT * from imb_test_account
+                where userid=#{userid}
+                <if test="@org.apache.commons.lang.StringUtils@isNotEmpty(srch_keyword)">
+                    and email like concat('%',#{srch_keyword},'%')
+                </if>
+                order by regdate desc
+                limit #{start}, #{end}
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="selectDemoAccountByEmail" resultType="int">
+        select count(*) from imb_test_account WHERE email=#{email} and userid=#{userid}
+    </select>
+
+    <insert id="addDemoAccount" parameterType="demoAccountInfo">
+        insert into imb_test_account(ukey, email, flag, userid, regdate) values (#{ukey}, #{email}, #{flag}, #{userid}, now())
+    </insert>
+
+    <select id="selectEditDemoAccount" resultType="int">
+        select count(*) from imb_test_account where email=#{email} and ukey not in (#{ukey})
+    </select>
+
+    <update id="editDemoAccount" parameterType="demoAccountInfo">
+        update imb_test_account set email=#{email}, flag=#{flag} where ukey=#{ukey} and userid=#{userid}
+    </update>
+
+    <delete id="deleteDemoAccount">
+        delete from imb_test_account where ukey=#{ukey}
+    </delete>
+
+    <select id="getDemoAccountList" resultType="demoAccountInfo">
+                select * from imb_test_account
+                where userid=#{userid}
+    </select>
+</mapper>

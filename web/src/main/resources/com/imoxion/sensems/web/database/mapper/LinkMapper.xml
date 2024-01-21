@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imoxion.sensems.web.database.mapper.LinkMapper">
+
+	<insert id="insertLinkInfo">
+		INSERT INTO imb_link_info (msgid, linkid, link_name, link_url, link_img) 
+			VALUES (#{linkInfo.msgid}, #{linkInfo.linkid}, #{linkInfo.link_name}, #{linkInfo.link_url}, #{linkInfo.link_img})
+	</insert>
+	
+	<insert id="createLinkLogTable">
+		<choose>
+			<when test="_databaseId == 'oracle'">
+			</when>
+			<otherwise>
+				CREATE TABLE if not exists linklog_${msgid} (
+				adid INT COMMENT '링크아이디',
+				userid INT COMMENT 'recv_msgid의 id값',
+				click_count INT default 0 COMMENT '클릭 횟수',
+				click_time varchar(12) COMMENT '클릭 시간 yyyymmddhhmm',
+				extended varchar(100) COMMENT '기타',
+				click_date varchar(8) COMMENT '클릭일자 yyyymmdd',
+				click_hour varchar(2) COMMENT '클릭시간 hh',
+				click_week INT COMMENT '클릭 주차 (52주중 몇주차)',
+				PRIMARY KEY (adid, userid)
+				)ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='메세지별 링크 기록'
+			</otherwise>
+		</choose>
+	</insert>
+	
+	<select id="getLinkLogInfoCount" resultType="Integer">
+		SELECT click_count FROM linklog_${msgid} where adid=#{adid} and userid=#{userid}
+	</select>
+	
+	<update id="addLinkLogCount">
+		UPDATE linklog_${msgid}
+		SET click_count = click_count + 1
+		WHERE adid=#{adid} and userid=#{userid}
+	</update>
+	
+	<update id="updateLinkCount">
+		UPDATE imb_link_count
+		SET link_count = link_count + 1
+		WHERE linkid=#{linkid} and msgid=#{msgid}
+	</update>
+	
+	<update id="updateLinkLogInfo" parameterType="com.imoxion.sensems.web.beans.LinkLogMessageIDBean">
+		UPDATE linklog_${msgid}
+		<set>
+			click_count = click_count + 1,
+			<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(click_time)">
+				click_time = #{click_time},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(extended)">
+				extended = #{extended},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(link_date)">
+				click_date = #{link_date},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotEmpty(link_hour)">
+				click_hour = #{link_hour},
+			</if>
+			click_week = #{link_week}
+		</set>
+		where adid=#{adid} and userid=#{userid}
+	</update>
+
+	<insert id="insertLinkLogInfo" parameterType="com.imoxion.sensems.web.beans.LinkLogMessageIDBean">
+		INSERT INTO linklog_${msgid} (adid, userid, click_count, click_time, extended, click_date, click_hour, click_week)
+		values (#{adid}, #{userid}, #{click_count}, #{click_time}, #{extended}, #{link_date}, #{link_hour}, #{link_week})
+	</insert>
+
+	<insert id="insertLinkCountInfo">
+		INSERT INTO imb_link_count(msgid,linkid,link_count) VALUES (#{msgid},#{linkid},#{link_count})
+	</insert>
+
+	<update id="updateAttachCount" parameterType="String">
+		UPDATE imb_emsattach
+		SET down_count = down_count + 1
+		WHERE ekey=#{ekey} and msgid=#{msgid}
+	</update>
+
+	<select id="getLinkInfo" resultType="com.imoxion.sensems.web.beans.LinkBean">
+		select * from imb_link_info where msgid=#{msgid}
+	</select>
+</mapper>

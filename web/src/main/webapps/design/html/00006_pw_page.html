@@ -1,0 +1,86 @@
+﻿<!DOCTYPE HTML>
+<html lang="ko-KR"><head>
+	<meta charset="UTF-8">
+	<title>SensEMS</title>
+	<link rel="stylesheet" href="../../sens-static/css/style.css">
+	<link rel="stylesheet" href="../../sens-static/css/login.css">
+	<link rel="stylesheet" href="../../sens-static/css/skin.css">
+	<script type="text/javascript" src="../../sens-static/plugin/jquery/jquery-2.2.2.min.js"></script>
+	<script type="text/javascript" src="../../sens-static/plugin/jquery/jquery.json-2.4.js"></script>
+	<script type="text/javascript" src="../../sens-static/js/account/passwordUpdate.js"></script>
+	<script type="text/javascript" src="../../sens-static/js/messages/sysman_ko.js"></script>
+	<script type="text/javascript" src="../../sens-static/js/encrypt/gibberish-aes.js"></script>
+	<script type="text/javascript" src="../../sens-static/js/encrypt/jsbn.js"></script>
+	<script type="text/javascript" src="../../sens-static/js/encrypt/prng4.js"></script>
+	<script type="text/javascript" src="../../sens-static/js/encrypt/rng.js"></script>
+	<script type="text/javascript" src="../../sens-static/js/encrypt/rsa.js"></script>
+	<script type="text/javascript" src="../../sens-static/js/encrypt/base64.js"></script>
+	<script type="text/javascript" src="../../sens-static/js/encrypt/encrypt.js"></script>
+</head>
+<body class="skin1">
+<form id="UpdatePasswordForm" name="UpdatePasswordForm" action="updatePassword.do" method="post">
+	<div class="login_form">
+		<input id="encAESKey" name="encAESKey" type="hidden" value="">
+		<fieldset>
+			<legend class="screen_out"><img src="../../sens-static/images/login_logo.png" alt=""></legend>
+			<div class="box_login">
+				<div class="inp_text">
+					<label class="screen_out">기존 비밀번호</label>
+					<input id="password" name="password" class="loginId" placeholder="Password" type="password" value="" autocomplete="off">
+				</div>
+				<div class="inp_text">
+					<label class="screen_out">새로운 비밀번호</label>
+					<input id="newPassword" name="newPassword" class="loginId" placeholder="New Password" type="password" value="" autocomplete="off">
+				</div>
+				<div class="inp_text">
+					<label class="screen_out">비밀번호 확인</label>
+					<input id="confirmPassword" name="confirmPassword" class="loginPw" placeholder="Confirm Password" type="password" value="" autocomplete="off">
+				</div>
+			</div>
+			<ul class="login_append help_list">
+				<li class="">비밀번호는 영문(대,소문자)/숫자/특수문자 중 2종류 10자이상, 3종류 8자이상 이여야 합니다.</li>
+				<li class="">비밀번호는 자신의 계정이 포함되면 안됩니다.</li>
+				<li class="">이전 비밀번호는 사용할 수 없습니다.</li>
+				<li class="">하나의 문자가 4번 이상 반복되면 안됩니다.</li>
+				<li class="">암호는 공백 문자를 포함 할 수 없습니다.</li>
+			</ul>
+			<button type="button" class="btn1 btn_login" onclick="updatePassword.updatePassword()">변경하기</button>
+			<button type="button" class="btn1 btn_login" onclick="updatePassword.changeNext()">다음에 변경하기</button>
+		</fieldset>
+		<div>
+			<input type="hidden" name="_csrf" value="24620816-6f82-4816-9fbd-f3db50d53f75">
+		</div>
+		<div class="copyright">
+			<address>Copyright © IMOXION. All Rights Reserved.</address>
+		</div>
+	</div></form>
+
+
+
+
+
+</body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
