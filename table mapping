@@ -1,0 +1,36 @@
+테이블정의서- 테이블 목록				
+1	IMB_ADDR_사용자아이디	주소록		
+2	IMB_ADDRGRP_사용자아이디	주소록 그룹		
+3	IMB_ADDRSEL	발송 시 선택된 주소록 그룹		
+4	IMB_CATEGORY	발송분류		
+5	IMB_DBINFO	DB 정보 저장		
+6	IMB_EMSATTACH	첨부파일 정보		
+7	IMB_EMSMAIN	발송 메일 주요 정보		
+8	IMB_ERROR_COUNT	메일별 에러 카운트 통계		
+9	IMB_EXT_MAIL	시스템 연동/개별 발송 정보	기존에는 imb_recv_personal 테이블	
+10	IMB_EXT_MAIL_ATTACH	시스템 연동/개별 발송메일 첨부파일		
+11	IMB_EXT_MAIL_BODY	시스템 연동/개별 발송메일 본문		
+12	IMB_FILE_EXT_LIMIT	첨부파일 확장자 제한		
+13	IMB_FILTERDOMAIN	발송 차단 도메인 정보		
+14	IMB_HOST_INFO	발송 센더 서버 정보(아이피/포트)	웹에서는 사용안함	
+15	IMB_IMAGE	이미지 관리 정보		
+16	IMB_LINK_COUNT	본문 링크 클릭 정보	기존에는 imb_ad_count	
+17	IMB_LINK_INFO	본문 링크 정보	기존에는 imb_ad_info	
+18	IMB_MSG_INFO	발송 메일 본문		
+19	IMB_RECEIPT_COUNT	수신 확인 일자별 통계 정보		
+20	IMB_RECEIVER	수신 그룹 정보		
+21	IMB_REJECT	수신 거부 목록		
+22	IMB_RELAY_IP	SMTP 릴레이 허용 아이피		
+23	IMB_ROTMAIN	정기발송 메일 정보		
+24	IMB_TEMPLATE	템플릿 정보		
+25	IMB_TEST_ACCOUNT	테스트 발송 주소 관리		
+26	IMB_USERINFO	사용자 정보		
+27	IMB_USER_ACTION_MENU	사용자 활동로그 정의		
+28	IMB_USER_ACTION_LOG	사용자 활동 로그		
+29	HC_메시지아이디	발송 도메인 통계		
+30	RECV_메시지아이디	발송 결과 목록		
+31	LINKLOG_메시지아이디	링크 클릭 로그	기존에는 adlog_메시지아이디	
+				
+32	IMB_TEMP_MAIN	DB연동 임시 메일 저장 테이블	웹에서는 참조안함	
+33	IMB_TEMP_RCPT	DB연동 임시 수신자 저장 테이블	웹에서는 참조안함	
+34	IMB_TEMP_ATTACH	DB연동 임시 첨부파일 저장테이블(미사용)	웹에서는 참조안함	
