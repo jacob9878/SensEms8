@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<configuration>
+    <general>
+        <serverid>1</serverid>
+        <postmaster>postmaster@demo10.sensmail.com</postmaster>
+        <tempfile>D:\\eclipse\\workspace4\\sensems\\8.0\\trunk\\dist\\tempfile</tempfile>
+        <message_digest_algorithm>SHA-256</message_digest_algorithm>
+        <accept_ip>127.0.0.1</accept_ip>
+        <use_sellanguage>1</use_sellanguage>
+        <session><timeout>60</timeout></session>
+        <msg_path>D:\\eclipse\\workspace4\\sensems\\8.0\\trunk\\dist\\messages</msg_path>
+        <!-- 자동 에러 재발신 간격(분) -->
+        <error_resend_interval>60</error_resend_interval>
+        <nameserver>8.8.8.8</nameserver>
+        <!-- 개별발송결과 삭제 대기일 -->
+        <transmit_log_delete_day>30</transmit_log_delete_day>
+        <!-- action 로그 삭제 대기일 -->
+        <action_log_delete_day>30</action_log_delete_day>
+        <!-- ems 발송결과 삭제 대기일 -->
+        <ems_data_delete_day>365</ems_data_delete_day>
+        <cert_path />
+        <cert_pass />
+        <default_domain>demo10.sensmail.com</default_domain>
+        <lang>
+            <default>ko</default>
+            <!-- 1: USE, 0: NOT-->
+            <multiple>0</multiple>
+        </lang>
+    </general>
+    <system>
+        <user>imoxion</user>
+        <group>imoxion</group>
+        <permission>
+            <file>rwxrw-r--</file>
+            <dir>rwxrwxr-x</dir>
+        </permission>
+    </system>
+
+    <attach>
+        <path>D:\\eclipse\\workspace4\\sensems\\8.0\\trunk\\dist\\attach</path>
+        <max_count>5</max_count>
+        <!-- MB -->
+        <max_size>10</max_size>
+        <!-- 만료일 -->
+        <expire_day>14</expire_day>
+        <delete_delay_day>7</delete_delay_day>
+    </attach>
+    <geoip>
+        <path>D:\\eclipse\\workspace4\\sensems\\8.0\\trunk\\dist\\sensdata\\geoip</path>
+        <data>GeoLite2-Country.mmdb</data>
+    </geoip>
+    <emsd>
+        <thread>
+            <extract>3</extract>
+            <transfer>3</transfer>
+        </thread>
+        <max_recv>20</max_recv>
+    </emsd>
+
+    <timeout>
+        <conn>60</conn>
+        <read>60</read>
+    </timeout>
+
+    <sender>
+        <helo_domain>ems.localhost.com</helo_domain>
+        <thread_in>16</thread_in>
+        <port>
+            <inbound>9090</inbound>
+            <outbound>25</outbound>
+        </port>
+        <queue_path>D:\\eclipse\\workspace4\\sensems\\8.0\\trunk\\dist\\spool</queue_path>
+        <thread_out>32</thread_out>
+        <conntime>60</conntime>
+        <sotime>60</sotime>
+        <thread_out>8</thread_out>
+        <thread_in>8</thread_in>
+        <api_send>
+            <thread>5</thread>
+            <!-- seconds -->
+            <dbscan_interval>30</dbscan_interval>
+        </api_send>
+    </sender>
+
+    <smtp>
+        <connect>
+            <default>8</default>
+            <max>32</max>
+        </connect>
+        <send_host>localhost</send_host>
+        <helo_domain>ems.localhost.com</helo_domain>
+        <queue_size>1</queue_size>
+        <queue_path>D:\\eclipse\\workspace4\\sensems\\8.0\\trunk\\dist\\smtp\\spool</queue_path>
+        <port>
+            <inbound>25</inbound>
+            <outbound>25</outbound>sm
+        </port>
+        <ssl>
+            <use>0</use>
+            <port>465</port>
+        </ssl>
+        <use_smtp_auth>1</use_smtp_auth>
+        <use_isp_smtp>0</use_isp_smtp>
+        <use_isp_port>587</use_isp_port>
+        <use_isp_auth>1</use_isp_auth>
+        <sendthread>32</sendthread>
+        <resendthread>10</resendthread>
+        <retry>3</retry>
+        <retry_interval>2</retry_interval>
+        <!-- unit: seconds -->
+        <conntime>60</conntime>
+        <sotime>60</sotime>
+        <max_rcpt>100</max_rcpt>
+        <max_rset>100</max_rset>
+        <!-- size: MB -->
+        <max_size>20</max_size>
+        <total_max_size>1024</total_max_size>
+        <max_msgloop>10</max_msgloop>
+        <gateway>
+            <use>0</use>
+            <server>ip1\,ip2</server>
+        </gateway>
+        <ylmf_pc_block>1</ylmf_pc_block>
+        <max_concurrent_connect>20</max_concurrent_connect>
+        <no_concurrent_limit>127.0.0.1</no_concurrent_limit>
+        <use_tarpit>2</use_tarpit>
+        <use_dsn_send>0</use_dsn_send>
+        <checkfromdomain>0</checkfromdomain>
+        <!-- 외부로 발송할때 mail from을 id+rel=domain@default_domain 으로 처리 (id@domain) -->
+        <sendproxy>
+            <use>1</use>
+        </sendproxy>
+        <group_key_header>X-SPRXY-GRP-ID</group_key_header>
+        <rcpt_key_header>X-SPRXY-RCPT-KEY</rcpt_key_header>
+        <!-- 기본 smtp lang -->
+        <default_lang>ko</default_lang>
+        <dbsend_agent_interval>30</dbsend_agent_interval>
+        <dbsend_agent_thread>1</dbsend_agent_thread>
+        <receipt_notify><use>1</use></receipt_notify>
+    </smtp>
+
+    <database>
+        <dbtype>mysql</dbtype>
+
+        <!--
+        데이터 암호화(AES256) 사용여부 결정
+        -->
+        <encryption>
+            <use>1</use>
+            <aes_key>!ems!imoxion00000000000000000000</aes_key>
+        </encryption>
+    </database>
+
+
+    <account_deny>
+        <use>1</use>
+        <deny_count>15</deny_count>
+        <deny_time>10</deny_time>
+    </account_deny>
+
+    <password>
+        <use_salt>0</use_salt>
+        <type>SHA-256</type>
+
+        <!-- 패스워드 변경 주기 설정 -->
+        <use_change_day>1</use_change_day>
+        <change_day>90</change_day>
+    </password>
+
+    <template>
+        <path>D:\\eclipse\\workspace4\\sensems\\8.0\\trunk\\dist\\sensdata\\template</path>
+    </template>
+    <sensdata>
+        <path>D:\\eclipse\\workspace4\\sensems\\8.0\\trunk\\dist\\sensdata</path>
+    </sensdata>
+    <alarmMail>
+        <defaultLanguage>ko</defaultLanguage>
+    </alarmMail>
+
+    <!--
+        웹 SSL 설정
+        0 : 사용안함 , 1 : 모든 URL을 SSL 처리 , 2 : 특정 URL에 대해서 SSL 처리, 3 : 자체 암호화 방식
+    -->
+    <ssl>
+        <type>0</type>
+    </ssl>
+
+    <!-- XSS FILTER 사용여부 -->
+    <filter>
+        <xss>
+            <use>0</use>
+            <config>d:/apps/sensmail/conf/lucy-xss-superset.xml</config>
+        </xss>
+    </filter>
+
+    <url>
+        <web_url>http://ems.sensmail.com</web_url>
+        <aes_key>!ems!imoxion0000</aes_key>
+        <!-- 링크추적 -->
+        <ad_url>/check/link.do</ad_url>
+        <!-- 수신거부 -->
+        <reject_url>/check/reject.do</reject_url>
+        <!-- 수신확인: 개별발송은 parameter에  -->
+        <rcpt_url>/check/openmail.do</rcpt_url>
+        <rcpt_url_ex>/check/openmailex.do</rcpt_url_ex>
+        <!-- 첨부파일 다운로드 -->
+        <download>/check/attach.do</download>
+    </url>
+
+    <captcha>
+        <use>1</use>
+    </captcha>
+
+</configuration>
+

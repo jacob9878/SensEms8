@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<configuration>
+	<general>
+		<serverid>1</serverid>
+		<send_host>localhost</send_host>
+		<port_in>2525</port_in>
+		<port_out>25</port_out>
+
+		<conntime>60</conntime>
+		<retryinterval>1</retryinterval>
+		<retry>2</retry>
+		<sendthread>32</sendthread>
+		<bulkthread>16</bulkthread>
+		<resendthread>10</resendthread>
+		<nameserver>8.8.8.8:168.126.63.1</nameserver>
+		<helodomain>sensmail.com</helodomain>
+		<maxmsgloop>10</maxmsgloop>
+		<maxrset>100</maxrset>
+		<!-- MAX MESSAGE SIZE Unit:MB -->
+		<maxmsgsize>50</maxmsgsize>
+		<total_maxmsgsize>500</total_maxmsgsize>
+		<platform>unix</platform>
+		<erroradmin />
+		<sotime>90</sotime>
+		<blacklist />
+		<maxconnection>128</maxconnection>
+		<auth_count>5</auth_count>
+		<defaultconnection>16</defaultconnection>
+		<postmaster>postmaster@sensmail.com</postmaster>
+		<maxrcpt>100</maxrcpt>
+		<max_concurrent_connect>5</max_concurrent_connect>
+		<rootdomain>sensmail.com</rootdomain>
+		
+		<strict_from_user>0</strict_from_user>
+		<no_concurrent_limit>127.0.0.1</no_concurrent_limit>
+		<ylmf_pc_block>1</ylmf_pc_block>
+		<use_smtp_auth>1</use_smtp_auth>
+		<!-- 발송실패메일 리턴여부 Deliverry Status Notification -->
+		<use_dsn_send>0</use_dsn_send>
+		<transmit_log_delete_day>10</transmit_log_delete_day>
+		<group_key_header>X-SPRXY-GRP-ID</group_key_header>
+		<rcpt_key_header>X-SPRXY-RCPT-KEY</rcpt_key_header>
+		<!-- 기본 smtp lang -->
+		<default_lang>ko</default_lang>
+		<dbsend_agent_interval>30</dbsend_agent_interval>
+	</general>
+	<dmarc><check>0</check></dmarc>
+	<queue>
+		<path>/apps/sensems/smtp/spool</path>
+	</queue>
+	
+	<agent>
+		<check_smtp>
+			<check>1</check>
+			<check_host>localhost</check_host>
+			<check_port>25</check_port>
+		</check_smtp>
+	</agent>
+
+	<smtpgateway>
+		<!-- SMTP 게이트웨이 사용여부 -->
+		<use>0</use>
+		<!-- 게이트웨이 서버 IP - 여러대 등록 가능, 구분자(,)-->
+		<server></server>
+		<!-- 게이트웨이 서버로 발송되지 않을 서버 IP - 주로 스팸 서버를 등록한다 -->
+		<except></except>
+	</smtpgateway>
+	
+	<!-- 망연계 파일로 전달 방식 -->
+	<netlink>
+		<use>0</use>
+		<!-- 1: 망연계로 발송, 0: 망연계에서 수신 -->
+		<is_sender>0</is_sender>
+		<!-- sender인 경우 여기에 파일을 저장, receiver인 경우 여기에서 파일을 읽음 -->
+		<netlink_dir>/apps/</netlink_dir>
+		<netlink_dir2></netlink_dir2>
+	</netlink>
+	
+	<domain>
+		<default>sensmail.com</default>
+		<!-- 외부로 발송할때 mail from을 prx+id=domain@default_domain 으로 처리 (id@domain) -->
+		<sendproxy>
+			<use>0</use>
+		</sendproxy>
+	</domain>
+	<ssl>
+		<use>0</use>
+		<port>465</port>
+	</ssl>
+
+	<!-- haproxy, loadbalancer, L4 등 -->
+	<proxy>
+		<servers>
+			<server>192.168.123.197</server>
+		</servers>
+	</proxy>
+
+
+</configuration>

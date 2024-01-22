@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "./mybatis-3-config.dtd">
+<configuration>
+	
+	<settings>
+		<setting name="cacheEnabled" value="true" />
+		<setting name="defaultStatementTimeout" value="3000" />
+		<setting name="jdbcTypeForNull" value="VARCHAR"/>
+	</settings>
+
+	<!-- DB가 utf-8 이 아닌경우에 사용 -->
+	<!-- 
+	<typeHandlers>
+		<typeHandler
+			handler="com.imoxion.sensmail.server.dao.typehandler.StringTypeHandler"
+			javaType="String" jdbcType="String" />
+	</typeHandlers>
+ 	-->
+ 
+	<environments default="sensems">
+		<environment id="sensems">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="${sensems.driverClass}" />
+				<property name="url" value="${sensems.url}" />
+				<property name="username" value="${sensems.username}" />
+				<property name="password" value="${sensems.password}" />
+				<!--  
+				<property name="poolMaximumActiveConnections" value="16" />
+				<property name="poolMaximumIdleConnections" value="8" />
+				-->
+				<property name="poolMaximumCheckoutTime" value="20000" />
+				<property name="poolPingEnabled" value="true" />			
+				<property name="poolPingQuery" value="${sensems.validateQuery}" />
+				<property name="poolPingConnectionsNotUsedFor" value="7200" />
+				<property name="poolTimeToWait" value="30000" />
+			</dataSource>
+		</environment>
+		<!-- 아래처럼 id만 바꿔서 추가할 수 있다. -->
+		<!-- <environment id="ekp"> <transactionManager type="JDBC"/> <dataSource 
+			type="POOLED"> <property name="driver" value="oracle.jdbc.driver.OracleDriver"/> 
+			<property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:ora816"/> <property 
+			name="username" value="ekp"/> <property name="password" value="ekp"/> </dataSource> 
+			</environment> -->
+		<!-- End -->
+	</environments>
+
+    <databaseIdProvider type="org.apache.ibatis.mapping.VendorDatabaseIdProvider">
+        <property name="Oracle" value="oracle"/>
+        <property name="MySQL" value="mysql"/>
+		<property name="Maria" value="mysql"/>
+		<property name="Tibero" value="oracle"/>
+		<property name="DB2" value="db2"/>
+		<property name="SQL Server" value="sqlserver"/>
+    </databaseIdProvider>
+
+    <mappers>
+		<package name="com.imoxion.sensems.server.repository.mapper"/>
+    </mappers>
+</configuration>
